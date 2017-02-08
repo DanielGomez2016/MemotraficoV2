@@ -1,8 +1,6 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MemotraficoV2.Startup))]
-namespace MemotraficoV2
+namespace IdentitySample
 {
     public partial class Startup
     {
