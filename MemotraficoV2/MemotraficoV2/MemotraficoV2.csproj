@@ -238,6 +238,7 @@
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
+    <Content Include="Content\loader-style.css" />
     <Content Include="Content\pace\templates\pace-theme-barber-shop.tmpl.css" />
     <Content Include="Content\pace\templates\pace-theme-big-counter.tmpl.css" />
     <Content Include="Content\pace\templates\pace-theme-bounce.tmpl.css" />

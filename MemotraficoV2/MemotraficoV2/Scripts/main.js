@@ -1,4 +1,5 @@
-﻿var Alerta = function (mensaje, titulo, delay, tipo) {
+﻿
+var Alerta = function (mensaje, titulo, delay, tipo) {
     $.pnotify({
         title: titulo,
         text: mensaje,
@@ -218,18 +219,18 @@ $(function () {
 
 //------------------------------------------------------------- 
 //PAGE LOADER
-head.js("/Scripts/pace.js", function () {
+//head.js("/Scripts/pace.js", function () {
 
-    paceOptions = {
-        ajax: false, // disabled
-        document: false, // disabled
-        eventLag: false, // disabled
-        elements: {
-            selectors: ['.my-page']
-        }
-    };
+//    paceOptions = {
+//        ajax: false, // disabled
+//        document: false, // disabled
+//        eventLag: false, // disabled
+//        elements: {
+//            selectors: ['.my-page']
+//        }
+//    };
 
-});
+//});
 
-//Notificaciones
-head.js("/Scripts/jquery.pnotify.min.js");
+////Notificaciones
+//head.load("Scripts/jquery.pnotify.min.js");

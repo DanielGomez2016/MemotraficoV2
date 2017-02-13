@@ -9,7 +9,10 @@ namespace IdentitySample
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-{version}.min.js"));
+                        "~/Scripts/jquery-{version}.min.js",
+                        "~/Scripts/pace.js",
+                        "~/Scripts/main.js",
+                        "~/Scripts/head-1.0.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,36 +28,8 @@ namespace IdentitySample
 
             bundles.Add(new StyleBundle("~/Content/").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/fullcalendar.css",
-                      "~/Content/jquery.pnotify.css",
-                      "~/Content/alertifyjs/alertify.css",
-                      "~/Content/site.css"));
+                      "~/Content/loader-style.css"));
 
-            bundles.Add(new StyleBundle("~/Content/themes/base").Include(
-                        "~/Content/themes/base/core.css",
-                        "~/Content/themes/base/sortable.css",
-                        "~/Content/themes/base/selectable.css",
-                        "~/Content/themes/base/accordion.css",
-                        "~/Content/themes/base/autocomplete.css",
-                        "~/Content/themes/base/button.css",
-                        "~/Content/themes/base/dialog.css",
-                        "~/Content/themes/base/slider.css",
-                        "~/Content/themes/base/tabs.css",
-                        "~/Content/themes/base/datepicker.css",
-                        "~/Content/themes/base/progressbar.css",
-                        "~/Content/themes/base/theme.css",
-                        "~/Content/themes/base/resizable.css",
-                        "~/Content/themes/base/all.css",
-                        "~/Content/themes/base/base.css",
-                        "~/Content/themes/base/draggable.css",
-                        "~/Content/themes/base/jquery.ui.css",
-                        "~/Content/themes/base/menu.css",
-                        "~/Content/themes/base/selectmenu.css",
-                        "~/Content/themes/base/spinner.css",
-                        "~/Content/themes/base/tabs.css",
-                        "~/Content/themes/base/theme.css",
-                        "~/Content/themes/base/tooltip.css"));
         }
     }
 }
