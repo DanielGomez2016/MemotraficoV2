@@ -14,10 +14,10 @@
 <body class="nav-md footer_fixed">
     <div class="container body">
         <div class="main_container">
-            <div class="col-md-3 left_col">
+            <div class="col-md-3 left_col ">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-group"></i> <span>S.A.S</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu profile quick info -->
@@ -26,7 +26,7 @@
                             <img src="Content/Proyecto/images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            <span>Bienvenido,</span>
                             <h2>John Doe</h2>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 @RenderBody();
-
+            </div>
             <!-- /page content -->
             <!-- footer content -->
             <footer>
@@ -275,45 +275,7 @@
             <!-- /footer content -->
         </div>
     </div>
-    <!-- jQuery -->
-    <script src="Content/Proyecto/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="Content/Proyecto/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="Content/Proyecto/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="Content/Proyecto/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="Content/Proyecto/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="Content/Proyecto/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="Content/Proyecto/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="Content/Proyecto/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="Content/Proyecto/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="Content/Proyecto/Flot/jquery.flot.js"></script>
-    <script src="Content/Proyecto/Flot/jquery.flot.pie.js"></script>
-    <script src="Content/Proyecto/Flot/jquery.flot.time.js"></script>
-    <script src="Content/Proyecto/Flot/jquery.flot.stack.js"></script>
-    <script src="Content/Proyecto/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="Content/Proyecto/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="Content/Proyecto/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="Content/Proyecto/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="Content/Proyecto/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="Content/Proyecto/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="Content/Proyecto/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="Content/Proyecto/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="Content/Proyecto/moment/min/moment.min.js"></script>
-    <script src="Content/Proyecto/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="Content/Proyecto/build/js/custom.min.js"></script>
+    @Scripts.Render("~/bundles/custom")
 
 </body>
 </html>

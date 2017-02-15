@@ -22,10 +22,10 @@ namespace IdentitySample
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                         "~/Content/Proyecto/jquery/dist/jquery.min.js",
                         "~/Content/Proyecto/bootstrap/dist/js/bootstrap.min.js",
-                        "~/Content/Proyecto/vendors/fastclick/lib/fastclick.js",
-                        "~/Content/Proyecto/vendors/nprogress/nprogress.js",
-                        "~/Content/Proyecto/vendors/Chart.js/dist/Chart.min.js",
-                        "~/Content/Proyecto//gauge.js/dist/gauge.min.js",
+                        "~/Content/Proyecto/fastclick/lib/fastclick.js",
+                        "~/Content/Proyecto/nprogress/nprogress.js",
+                        "~/Content/Proyecto/Chart.js/dist/Chart.min.js",
+                        "~/Content/Proyecto/gauge.js/dist/gauge.min.js",
                         "~/Content/Proyecto/bootstrap-progressbar/bootstrap-progressbar.min.js",
                         "~/Content/Proyecto/iCheck/icheck.min.js",
                         "~/Content/Proyecto/skycons/skycons.js",
@@ -40,9 +40,9 @@ namespace IdentitySample
                         "~/Content/Proyecto/DateJS/build/date.js",
                         "~/Content/Proyecto/jqvmap/dist/jquery.vmap.js",
                         "~/Content/Proyecto/jqvmap/dist/maps/jquery.vmap.world.js",
-                        "~/Content/Proyecto/examples/js/jquery.vmap.sampledata.js",
+                        "~/Content/Proyecto/jqvmap/examples/js/jquery.vmap.sampledata.js",
                         "~/Content/Proyecto/moment/min/moment.min.js",
-                        "~/Content/Proyecto/vendors/bootstrap-daterangepicker/daterangepicker.js",
+                        "~/Content/Proyecto/bootstrap-daterangepicker/daterangepicker.js",
                         "~/Content/Proyecto/build/js/custom.min.js"));
 
 
