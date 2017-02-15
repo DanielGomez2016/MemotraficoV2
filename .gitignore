@@ -250,3 +250,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/MemotraficoV2/MemotraficoV2/Content/Proyecto/animate.css/.bower.json
