@@ -20,9 +20,7 @@ namespace IdentitySample
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                
                         "~/Content/Proyecto/jquery/dist/jquery.min.js",
-                        "~/Content/Proyecto/build/js/custom.min.js",
                         "~/Content/Proyecto/bootstrap/dist/js/bootstrap.min.js",
                         "~/Content/Proyecto/vendors/fastclick/lib/fastclick.js",
                         "~/Content/Proyecto/vendors/nprogress/nprogress.js",
@@ -44,8 +42,8 @@ namespace IdentitySample
                         "~/Content/Proyecto/jqvmap/dist/maps/jquery.vmap.world.js",
                         "~/Content/Proyecto/examples/js/jquery.vmap.sampledata.js",
                         "~/Content/Proyecto/moment/min/moment.min.js",
-                        "~/Content/Proyecto/vendors/bootstrap-daterangepicker/daterangepicker.js"
-                        ));
+                        "~/Content/Proyecto/vendors/bootstrap-daterangepicker/daterangepicker.js",
+                        "~/Content/Proyecto/build/js/custom.min.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
