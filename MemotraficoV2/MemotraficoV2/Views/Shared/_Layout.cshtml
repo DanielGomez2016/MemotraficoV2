@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gentelella Alela! | </title>
-    @*@RenderSection("styles", required: false)*@
+    @RenderSection("styles", required: false)
     @Styles.Render("~/view")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -19,7 +19,7 @@
             <div class="col-md-3 left_col ">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-group"></i> <span>S.A.S</span></a>
+                        <a href="/" class="site_title"><i class="fa fa-institution"></i> <span>S.A.S</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu profile quick info -->
@@ -42,9 +42,15 @@
                                 <li>
                                     <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="index.html">Dashboard</a></li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
+                                        <li><a href="">Acerca De</a></li>
+                                        <li><a href="">Contacto</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-group"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>@Html.ActionLink(" Usuarios", "Index", "UsersAdmin")</li>
+                                        <li>@Html.ActionLink(" Roles", "Index", "RolesAdmin")</li>
                                     </ul>
                                 </li>
                                 <li>
@@ -175,14 +181,14 @@
                         <div class="nav toggle">
                             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                         </div>
-                        @Html.Partial("_LoginPartial");
+                        @Html.Partial("_LoginPartial")
                     </nav>
                 </div>
             </div>
             <!-- /top navigation -->
             <!-- page content -->
             <div class="right_col" role="main">
-                @RenderBody();
+                @RenderBody()
             </div>
             <!-- /page content -->
             <!-- footer content -->
@@ -195,7 +201,9 @@
             <!-- /footer content -->
         </div>
     </div>
+    @RenderSection("Scripts", required: false)
     @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/tables")
 
 </body>
 </html>

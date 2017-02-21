@@ -1,41 +1,48 @@
 ﻿@model IdentitySample.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registro Usuarios";
 }
 
-<h2>Create.</h2>
 
+<div class="" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Nuevo Rol</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm("Create", "RolesAdmin", FormMethod.Post, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary("", new { @class = "text-error" })
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @placeholder = "Nombre(s) Ej. Jon Doe" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Descripcion, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Descripcion, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
 
-    <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-5">
+                                    @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
+                                    <button id="send" type="submit" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

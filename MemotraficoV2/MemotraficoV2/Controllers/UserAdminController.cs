@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()
@@ -71,7 +71,7 @@ namespace IdentitySample.Controllers
 
             ViewBag.RoleNames = await UserManager.GetRolesAsync(user.Id);
 
-            return View(user);
+            return PartialView(user);
         }
 
         //
@@ -91,6 +91,14 @@ namespace IdentitySample.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+
+                user.Nombre = userViewModel.Nombre;
+                user.ApellidoPaterno = userViewModel.ApellidoPaterno;
+                user.ApellidoMaterno = userViewModel.ApellidoMaterno;
+                user.IdInstitucion = userViewModel.IdInstitucion;
+                user.IdDepartamento = userViewModel.IdDepartamento;
+
+
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -140,6 +148,12 @@ namespace IdentitySample.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
+                Nombre = user.Nombre,
+                ApellidoPaterno = user.ApellidoPaterno,
+                ApellidoMaterno = user.ApellidoMaterno,
+                IdDepartamento = user.IdDepartamento,
+                IdInstitucion = user.IdInstitucion,
+
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -153,7 +167,7 @@ namespace IdentitySample.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Email,Id,Nombre,ApellidoPaterno,ApellidoMaterno,IdInstitucion,IdDepartamento")] EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -165,6 +179,11 @@ namespace IdentitySample.Controllers
 
                 user.UserName = editUser.Email;
                 user.Email = editUser.Email;
+                user.Nombre = editUser.Nombre;
+                user.ApellidoPaterno = editUser.ApellidoPaterno;
+                user.ApellidoMaterno = editUser.ApellidoMaterno;
+                user.IdInstitucion = editUser.IdInstitucion;
+                user.IdDepartamento = editUser.IdDepartamento;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 
@@ -186,7 +205,7 @@ namespace IdentitySample.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Something failed.");
+            ModelState.AddModelError("", "Se tuvo algun error.");
             return View();
         }
 

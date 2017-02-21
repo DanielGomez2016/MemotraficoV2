@@ -8,3 +8,9 @@
 @import url('Proyecto/jqvmap/dist/jqvmap.min.css');
 @import url('Proyecto/bootstrap-daterangepicker/daterangepicker.css');
 @import url('Proyecto/build/css/custom.min.css');
+@import url('Proyecto/switchery/dist/switchery.min.css');
+@import url('Proyecto/datatables.net-scroller-bs/css/scroller.bootstrap.min.css');
+@import url('Proyecto/datatables.net-responsive-bs/css/responsive.bootstrap.min.css');
+@import url('Proyecto/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css');
+@import url('Proyecto/datatables.net-buttons-bs/css/buttons.bootstrap.min.css');
+@import url('Proyecto/datatables.net-bs/css/dataTables.bootstrap.min.css');

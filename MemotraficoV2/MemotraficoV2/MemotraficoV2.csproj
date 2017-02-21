@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -269,6 +270,7 @@
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Content\Images\ajax-loading.gif" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\loader-style.css" />
@@ -4013,6 +4015,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\Controllers\Usuarios.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Content\Proyecto\bootstrap-daterangepicker\daterangepicker.scss" />
     <Content Include="Content\Proyecto\bootstrap-progressbar\less\bootstrap-progressbar-2.x.x.less" />

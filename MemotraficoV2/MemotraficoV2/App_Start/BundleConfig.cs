@@ -23,6 +23,11 @@ namespace IdentitySample
                         "~/Content/Proyecto/jquery/dist/jquery.min.js",
                         "~/Content/Proyecto/bootstrap/dist/js/bootstrap.min.js",
                         "~/Content/Proyecto/fastclick/lib/fastclick.js",
+                        "~/Content/Proyecto/switchery/dist/switchery.min.js",
+                        "~/Content/Proyecto/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js",
+                        "~/Content/Proyecto/jquery.hotkeys/jquery.hotkeys.js",
+                        "~/Content/Proyecto/select2/dist/js/select2.full.min.js",
+                        "~/Content/Proyecto/parsleyjs/dist/parsley.min.js",
                         "~/Content/Proyecto/nprogress/nprogress.js",
                         "~/Content/Proyecto/Chart.js/dist/Chart.min.js",
                         "~/Content/Proyecto/gauge.js/dist/gauge.min.js",
@@ -43,7 +48,25 @@ namespace IdentitySample
                         "~/Content/Proyecto/jqvmap/examples/js/jquery.vmap.sampledata.js",
                         "~/Content/Proyecto/moment/min/moment.min.js",
                         "~/Content/Proyecto/bootstrap-daterangepicker/daterangepicker.js",
-                        "~/Content/Proyecto/build/js/custom.min.js"));
+                        "~/Content/Proyecto/build/js/custom.min.js"
+                        /*"~/Scripts/main.js"*/));
+
+            bundles.Add(new ScriptBundle("~/bundles/tables").Include(
+                        "~/Content/Proyecto/datatables.net/js/jquery.dataTables.min.js",
+                        "~/Content/Proyecto/datatables.net-bs/js/dataTables.bootstrap.min.js",
+                        "~/Content/Proyecto/datatables.net-buttons/js/dataTables.buttons.min.js",
+                        "~/Content/Proyecto/datatables.net-buttons-bs/js/buttons.bootstrap.min.js",
+                        "~/Content/Proyecto/datatables.net-buttons/js/buttons.flash.min.js",
+                        "~/Content/Proyecto/datatables.net-buttons/js/buttons.html5.min.js",
+                        "~/Content/Proyecto/datatables.net-buttons/js/buttons.print.min.js",
+                        "~/Content/Proyecto/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js",
+                        "~/Content/Proyecto/datatables.net-keytable/js/dataTables.keyTable.min.js",
+                        "~/Content/Proyecto/datatables.net-responsive/js/dataTables.responsive.min.js",
+                        "~/Content/Proyecto/datatables.net-responsive-bs/js/responsive.bootstrap.js",
+                        "~/Content/Proyecto/datatables.net-scroller/js/dataTables.scroller.min.js",
+                        "~/Content/Proyecto/jszip/dist/jszip.min.js",
+                        "~/Content/Proyecto/pdfmake/build/pdfmake.min.js",
+                        "~/Content/Proyecto/pdfmake/build/vfs_fonts.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

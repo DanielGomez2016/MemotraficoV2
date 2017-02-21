@@ -67,6 +67,27 @@ namespace IdentitySample.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido Paterno")]
+        public string ApellidoPaterno { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido Materno")]
+        public string ApellidoMaterno { get; set; }
+
+        [Required]
+        [Display(Name = "Departamento")]
+        public int IdDepartamento { get; set; }
+
+        [Required]
+        [Display(Name = "Institucion")]
+        public int IdInstitucion { get; set; }
+
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

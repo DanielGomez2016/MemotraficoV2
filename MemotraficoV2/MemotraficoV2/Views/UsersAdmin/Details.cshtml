@@ -1,45 +1,62 @@
 ﻿@model IdentitySample.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Informacion Usuario";
 }
 
-<h2>Details.</h2>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-    </dl>
+<div class="col-sm-12">
+    <div class="col-sm-2 text-left">
+        <strong> @Html.DisplayNameFor(model => model.UserName):</strong>
+    </div>
+    <div class="col-sm-10 text-right">
+        <em>@Html.DisplayFor(model => model.UserName)</em>
+    </div>
+    <div class="col-sm-2 text-left">
+        <strong> @Html.DisplayNameFor(model => model.Email):</strong>
+    </div>
+    <div class="col-sm-10 text-right">
+        <em>@Html.DisplayFor(model => model.Email)</em>
+    </div>
+    <div class="col-sm-2 text-left">
+        <strong> @Html.DisplayNameFor(model => model.Nombre):</strong>
+    </div>
+    <div class="col-sm-10 text-right">
+        <em>@Html.DisplayFor(model => model.Nombre) @Html.DisplayFor(model => model.ApellidoPaterno) @Html.DisplayFor(model => model.ApellidoMaterno)</em>
+    </div>
+    <div class="col-sm-2 text-left">
+        <strong> @Html.DisplayNameFor(model => model.IdInstitucion):</strong>
+    </div>
+    <div class="col-sm-10 text-right">
+        <em>@Html.DisplayFor(model => model.IdInstitucion)</em>
+    </div>
+    <div class="col-sm-2 text-left">
+        <strong> @Html.DisplayNameFor(model => model.IdDepartamento):</strong>
+    </div>
+    <div class="col-sm-10 text-right">
+        <em>@Html.DisplayFor(model => model.IdDepartamento)</em>
+    </div>
+    <div class="col-sm-4 text-left">
+        <strong> Roles usuario:</strong>
+    </div>
 </div>
-<h4>List of roles for this user</h4>
-@if (ViewBag.RoleNames.Count == 0)
-{
-    <hr />
-    <p>No roles found for this user.</p>
-}
-
-<table class="table">
-
-    @foreach (var item in ViewBag.RoleNames)
+<hr />
+<div>
+    @if (ViewBag.RoleNames.Count == 0)
     {
-        <tr>
-            <td>
-                @item
-            </td>
-        </tr>
+        <hr />
+        <p>El usuario no tiene roles Asignados</p>
     }
-</table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <table class="table">
+        @foreach (var item in ViewBag.RoleNames)
+        {
+            <tr class="col-md-offset-2">
+                <td>
+                    <em><i class="glyphicon glyphicon-minus"></i> @item</em>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 
 
 

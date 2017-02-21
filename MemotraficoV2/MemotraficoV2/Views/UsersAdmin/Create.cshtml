@@ -1,53 +1,106 @@
 ﻿@model IdentitySample.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registro Usuarios";
 }
 
-<h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-error" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">
-            Select User Role
-        </label>
-        <div class="col-md-10">
-            @foreach (var item in (SelectList)ViewBag.RoleId)
-            {
-                <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
-                @Html.Label(item.Value, new { @class = "control-label" })
-            }
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create" />
-        </div>
-    </div>
-}
+<div class="" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Nuevo Usuario</h2>
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary("", new { @class = "text-error" })
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Nombre, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @placeholder = "Nombre(s) Ej. Jon Doe" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.ApellidoPaterno, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.ApellidoPaterno, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.ApellidoMaterno, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.ApellidoMaterno, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "email", @placeholder = "Ejemplo@UnidadEjecutiva.com.mx" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdInstitucion, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.IdInstitucion, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdDepartamento, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.IdDepartamento, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "control-label col-md-3" })
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-7 col-xs-12" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label col-md-3" })
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control col-md-7 col-xs-12" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Roles Usuario</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    @foreach (var item in (SelectList)ViewBag.RoleId)
+                                    {
+                                        <div class="">
+                                            @if (item.Selected)
+                                            {
+                                                <label>
+                                                    <input type="checkbox" name="SelectedRoles" value="@item.Value"  class="js-switch" checked /> @item.Text
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label>
+                                                    <input type="checkbox" name="SelectedRoles" value="@item.Value" class="js-switch" /> @item.Text
+                                                </label>
+                                            }
+                                        </div>               
+                                    }
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-5">
+                                    @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
+                                    <button id="send" type="submit" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
