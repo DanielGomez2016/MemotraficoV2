@@ -3962,6 +3962,13 @@
     <Content Include="Content\Proyecto\switchery\package.js" />
     <Content Include="Content\Proyecto\switchery\switchery.css" />
     <Content Include="Content\Proyecto\switchery\switchery.js" />
+    <Content Include="Content\Proyecto\toastmessage\css\jquery.toastmessage.css" />
+    <Content Include="Content\Proyecto\toastmessage\images\close.gif" />
+    <Content Include="Content\Proyecto\toastmessage\images\error.png" />
+    <Content Include="Content\Proyecto\toastmessage\images\notice.png" />
+    <Content Include="Content\Proyecto\toastmessage\images\success.png" />
+    <Content Include="Content\Proyecto\toastmessage\images\warning.png" />
+    <Content Include="Content\Proyecto\toastmessage\jquery.toastmessage.js" />
     <Content Include="Content\Proyecto\transitionize\dist\transitionize.js" />
     <Content Include="Content\Proyecto\transitionize\dist\transitionize.min.js" />
     <Content Include="Content\Proyecto\transitionize\examples\browserify.js" />
@@ -4787,6 +4794,8 @@
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery.pnotify.js" />
     <Content Include="Scripts\jquery.pnotify.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -4926,6 +4935,7 @@
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Scripts\pace.min.js.map" />
+    <Content Include="Views\Shared\_LoginPartialSecond.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

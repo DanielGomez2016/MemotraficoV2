@@ -2,6 +2,14 @@
 
 @{
     ViewBag.Title = "Edicion";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "AlertSuccess('El usuario se a actualizado Correctamente','/UsersAdmin/')",
+        OnFailure = "AlertError('El registro no se pudo actualizar, Intenta nuevamente','UsersAdmin/Edit')",
+        //Confirm = "seguro quieres hacer una prueba"
+    };
 }
 
 <div class="" role="main">
@@ -15,7 +23,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        @using (Html.BeginForm("Edit", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        @using (Ajax.BeginForm("Edit", "UsersAdmin", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
                         {
                                 @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
@@ -82,7 +90,7 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-5">
                                     @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
-                                    <button id="send" type="submit" class="btn btn-success">Guardar</button>
+                                    <button id="send" class="btn btn-success">Guardar</button>
                                 </div>
                             </div>
                         }

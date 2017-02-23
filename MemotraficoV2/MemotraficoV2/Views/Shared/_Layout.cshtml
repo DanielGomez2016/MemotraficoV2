@@ -8,10 +8,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gentelella Alela! | </title>
+    <title>Sistema de Atencion A Solicitudes! | </title>
     @RenderSection("styles", required: false)
     @Styles.Render("~/view")
-    @Scripts.Render("~/bundles/modernizr")
+    
+
 </head>
 <body class="nav-md footer_fixed">
     <div class="container body">
@@ -23,15 +24,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="Content/Proyecto/images/img.jpg" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Bienvenido,</span>
-                            <h2>John Doe</h2>
-                        </div>
-                    </div>
+                    @Html.Partial("_LoginPartialSecond")
                     <!-- /menu profile quick info -->
                     <br />
                     <!-- sidebar menu -->
@@ -204,6 +197,8 @@
     @RenderSection("Scripts", required: false)
     @Scripts.Render("~/bundles/custom")
     @Scripts.Render("~/bundles/tables")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 
 </body>
 </html>

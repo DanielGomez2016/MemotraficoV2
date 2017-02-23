@@ -1,6 +1,14 @@
 ﻿@model IdentitySample.Models.RegisterViewModel
 @{
     ViewBag.Title = "Registro Usuarios";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "AlertSuccess('El usuario se a registrado Correctamente','/UsersAdmin/')",
+        OnFailure = "AlertError('El registro no se pudo completar, Intenta nuevamente','UsersAdmin/Create')",
+        //Confirm = "seguro quieres hacer una prueba"
+    };
 }
 
 
@@ -15,7 +23,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        @using (Ajax.BeginForm("Create", "UsersAdmin", options , new { @class = "form-horizontal  form-label-left", role = "form" }))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary("", new { @class = "text-error" })
@@ -57,15 +65,15 @@
                             </div>
 
                             <div class="item form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "control-label col-md-3" })
+                                @Html.LabelFor(m => m.Password, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-7 col-xs-12" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "password" })
                                 </div>
                             </div>
                             <div class="item form-group">
-                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label col-md-3" })
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control col-md-7 col-xs-12" })
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "password" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,7 +102,7 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-5">
                                     @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
-                                    <button id="send" type="submit" class="btn btn-success">Guardar</button>
+                                    <button id="send" class="btn btn-success">Guardar</button>
                                 </div>
                             </div>
                         }
