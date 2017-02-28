@@ -86,6 +86,8 @@ namespace IdentitySample.Models
         [Display(Name = "Institucion")]
         public int IdInstitucion { get; set; }
 
+        [Display(Name = "Imagen Perfil")]
+        public byte[] Imagen { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

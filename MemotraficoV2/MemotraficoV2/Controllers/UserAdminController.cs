@@ -253,5 +253,40 @@ namespace IdentitySample.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public JsonResult ImagenPerfil(HttpPostedFileBase file)
+        {
+            try { 
+            var u = User.Identity.GetUserId();
+            var us = UserManager.FindById(u);
+
+            if (file != null)
+            {
+                int length = file.ContentLength;
+                byte[] buffer = new byte[length];
+                file.InputStream.Read(buffer, 0, length);
+                us.Imagen = buffer;
+            }
+            var result = UserManager.Update(us);
+
+                if (result.Succeeded)
+                {
+                    return Json(new { result = true, message = "Tu imagen de perfil se actualizo correctamente", upload = "/Manage" });
+                }
+                else
+                {
+                    return Json(new { result = true, message = "Tu imagen de perfil no se se pudo actualizar, intenta nuevamente", upload = "/Manage" });
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false
+                });
+            }
+        }
+
     }
 }

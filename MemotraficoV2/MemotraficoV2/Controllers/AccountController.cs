@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using IdentitySample.Controllers;
 
 namespace IdentitySample.Controllers
 {
@@ -65,6 +66,8 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            CookieUsuario(model.Email);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -399,6 +402,55 @@ namespace IdentitySample.Controllers
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+
+
+        public void CookieUsuario(string email)
+        {
+            var u = UserManager.FindByEmail(email);
+            var nu = (u.Nombre + " " + u.ApellidoPaterno).ToString();
+
+            var cookie = new HttpCookie("Usuario");
+            cookie["Imagen"] = "";//GetImagen(u.Id);
+            cookie["Nombre"] = nu;
+
+            Response.Cookies.Add(cookie);
+        }
+
+        //carga la imagen de perfil que tiene el usuario en ese momento
+        public FileContentResult GetImagen()
+        {
+            var u = User.Identity.GetUserId();
+            var user = UserManager.FindById(u);
+            if (user != null)
+            {
+
+                string type = string.Empty;
+                type = "image/jpeg";
+                var file = File(user.Imagen, type);
+                return file;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public FileContentResult GetImagenU(string id)
+        {
+            var user = UserManager.FindById(id);
+            if (user != null)
+            {
+
+                string type = string.Empty;
+                type = "image/jpeg";
+                var file = File(user.Imagen, type);
+                return file;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         private IAuthenticationManager AuthenticationManager
         {
