@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a240c4dcbc2c43a4b8be20451915a566" Name="Diagram1">
+      <Diagram DiagramId="bce8854c77f74d12bbb60d624a6d2d8c" Name="Diagram1">
         <EntityTypeShape EntityType="SASModel.Departamento" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SASModel.Email" Width="1.5" PointX="6.375" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SASModel.Email" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SASModel.Institucion" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="SASModel.FK_Inst_Depto" ManuallyRouted="false" />
       </Diagram>

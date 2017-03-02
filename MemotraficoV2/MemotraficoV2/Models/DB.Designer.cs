@@ -389,16 +389,22 @@ namespace MemotraficoV2.Models
         /// Crear un nuevo objeto Email.
         /// </summary>
         /// <param name="idEmail">Valor inicial de la propiedad IdEmail.</param>
-        /// <param name="to">Valor inicial de la propiedad To.</param>
+        /// <param name="emailTo">Valor inicial de la propiedad EmailTo.</param>
         /// <param name="subject">Valor inicial de la propiedad Subject.</param>
+        /// <param name="message">Valor inicial de la propiedad Message.</param>
         /// <param name="idUser">Valor inicial de la propiedad IdUser.</param>
-        public static Email CreateEmail(global::System.Int32 idEmail, global::System.String to, global::System.String subject, global::System.String idUser)
+        /// <param name="status">Valor inicial de la propiedad Status.</param>
+        /// <param name="tipoEmail">Valor inicial de la propiedad TipoEmail.</param>
+        public static Email CreateEmail(global::System.Int32 idEmail, global::System.String emailTo, global::System.String subject, global::System.String message, global::System.String idUser, global::System.String status, global::System.String tipoEmail)
         {
             Email email = new Email();
             email.IdEmail = idEmail;
-            email.To = to;
+            email.EmailTo = emailTo;
             email.Subject = subject;
+            email.Message = message;
             email.IdUser = idUser;
+            email.Status = status;
+            email.TipoEmail = tipoEmail;
             return email;
         }
 
@@ -438,24 +444,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String To
+        public global::System.String EmailTo
         {
             get
             {
-                return _To;
+                return _EmailTo;
             }
             set
             {
-                OnToChanging(value);
-                ReportPropertyChanging("To");
-                _To = StructuralObject.SetValidValue(value, false, "To");
-                ReportPropertyChanged("To");
-                OnToChanged();
+                OnEmailToChanging(value);
+                ReportPropertyChanging("EmailTo");
+                _EmailTo = StructuralObject.SetValidValue(value, false, "EmailTo");
+                ReportPropertyChanged("EmailTo");
+                OnEmailToChanged();
             }
         }
-        private global::System.String _To;
-        partial void OnToChanging(global::System.String value);
-        partial void OnToChanged();
+        private global::System.String _EmailTo;
+        partial void OnEmailToChanging(global::System.String value);
+        partial void OnEmailToChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -484,7 +490,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Message
         {
@@ -496,7 +502,7 @@ namespace MemotraficoV2.Models
             {
                 OnMessageChanging(value);
                 ReportPropertyChanging("Message");
-                _Message = StructuralObject.SetValidValue(value, true, "Message");
+                _Message = StructuralObject.SetValidValue(value, false, "Message");
                 ReportPropertyChanged("Message");
                 OnMessageChanged();
             }
@@ -528,6 +534,54 @@ namespace MemotraficoV2.Models
         private global::System.String _IdUser;
         partial void OnIdUserChanging(global::System.String value);
         partial void OnIdUserChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, false, "Status");
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String TipoEmail
+        {
+            get
+            {
+                return _TipoEmail;
+            }
+            set
+            {
+                OnTipoEmailChanging(value);
+                ReportPropertyChanging("TipoEmail");
+                _TipoEmail = StructuralObject.SetValidValue(value, false, "TipoEmail");
+                ReportPropertyChanged("TipoEmail");
+                OnTipoEmailChanged();
+            }
+        }
+        private global::System.String _TipoEmail;
+        partial void OnTipoEmailChanging(global::System.String value);
+        partial void OnTipoEmailChanged();
 
         #endregion
 

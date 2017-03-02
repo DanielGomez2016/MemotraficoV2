@@ -21,10 +21,12 @@
             <PropertyRef Name="IdEmail" />
           </Key>
           <Property Name="IdEmail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="To" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="EmailTo" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Subject" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="Message" Type="text" />
+          <Property Name="Message" Type="text" Nullable="false" />
           <Property Name="IdUser" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TipoEmail" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Institucion">
           <Key>
@@ -81,10 +83,12 @@
             <PropertyRef Name="IdEmail" />
           </Key>
           <Property Name="IdEmail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="To" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailTo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdUser" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="Institucion">
           <Key>
@@ -142,10 +146,12 @@
             <EntityTypeMapping TypeName="SASModel.Email">
               <MappingFragment StoreEntitySet="Email">
                 <ScalarProperty Name="IdEmail" ColumnName="IdEmail" />
-                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TipoEmail" ColumnName="TipoEmail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -180,6 +186,7 @@
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Predeterminado" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

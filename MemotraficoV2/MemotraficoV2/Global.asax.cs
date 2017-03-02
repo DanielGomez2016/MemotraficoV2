@@ -1,8 +1,10 @@
 ﻿using IdentitySample.Models;
+using MemotraficoV2.Models;
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using FluentScheduler;
 
 namespace IdentitySample
 {
@@ -16,6 +18,7 @@ namespace IdentitySample
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            JobManager.Initialize(new Notificaciones());
         }
     }
 }

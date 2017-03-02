@@ -46,6 +46,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentScheduler, Version=5.1.3.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.5.1.3\lib\net40\FluentScheduler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -234,7 +238,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
-    <Compile Include="Controllers\EmailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -245,16 +248,15 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
-    <Compile Include="Models\DB.Designer.cs">
+    <Compile Include="Models\Db.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB.edmx</DependentUpon>
+      <DependentUpon>Db.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Departamento.cs" />
-    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Institucion.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notificaciones.cs" />
+    <Compile Include="Models\Until.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -4860,12 +4862,12 @@
     <Content Include="Content\Proyecto\plupload-3.0-beta1\examples\jquery\s3.php" />
     <Content Include="Content\Proyecto\plupload-3.0-beta1\examples\upload.php" />
     <Content Include="Content\Proyecto\plupload-3.0-beta1\readme.md" />
-    <EntityDeploy Include="Models\DB.edmx">
+    <EntityDeploy Include="Models\Db.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+      <LastGenOutput>Db.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DB.edmx.diagram">
-      <DependentUpon>DB.edmx</DependentUpon>
+    <Content Include="Models\Db.edmx.diagram">
+      <DependentUpon>Db.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\alertify.js" />
