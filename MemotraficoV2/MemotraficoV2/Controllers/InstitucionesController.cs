@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MemotraficoV2.Models;
 
 namespace MemotraficoV2.Controllers
 {
@@ -11,7 +12,9 @@ namespace MemotraficoV2.Controllers
         // GET: Instituciones
         public ActionResult Index()
         {
-            return View();
+            SASEntities db = new SASEntities();
+            List<Institucion> i = db.Institucion.ToList();
+            return View(i);
         }
 
         // GET: Instituciones/Details/5
@@ -28,11 +31,13 @@ namespace MemotraficoV2.Controllers
 
         // POST: Instituciones/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Institucion inst)
         {
             try
             {
-                // TODO: Add insert logic here
+                SASEntities db = new SASEntities();
+                db.Institucion.AddObject(inst);
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -45,17 +50,19 @@ namespace MemotraficoV2.Controllers
         // GET: Instituciones/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            SASEntities db = new SASEntities();
+            Institucion ins = db.Institucion.FirstOrDefault(i => i.IdInstitucion == id);
+
+            return View(ins);
         }
 
         // POST: Instituciones/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Institucion inst)
         {
             try
             {
-                // TODO: Add update logic here
-
+                var i = inst.Editar();
                 return RedirectToAction("Index");
             }
             catch

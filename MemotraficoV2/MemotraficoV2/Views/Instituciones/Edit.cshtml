@@ -1,0 +1,89 @@
+﻿@model MemotraficoV2.Models.Institucion
+
+@{
+    ViewBag.Title = "Edicion";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "AlertSuccess('El usuario se a actualizado Correctamente','/Instituciones/')",
+        OnFailure = "AlertError('El registro no se pudo actualizar, Intenta nuevamente','Instituciones/Edit')",
+        //Confirm = "seguro quieres hacer una prueba"
+    };
+}
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                @*<h3>Nuevo Usuario</h3>*@
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Edicion de Institucion</h2>
+                        <div class="clearfix"></div>
+                        @* opciones modal cerrar encojer y opciones *@
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Ajax.BeginForm("Edit", "Instituciones", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.IdInstitucion)
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Nombre, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @placeholder = "Nombre(s) Ej. Jon Doe" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Siglas, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Siglas, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Titular, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Titular, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Descripcion, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Telefono, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Ext, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Ext, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-5">
+                                    @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
+                                    <button id="send" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

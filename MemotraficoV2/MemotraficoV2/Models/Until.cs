@@ -136,6 +136,7 @@ namespace MemotraficoV2.Models
             smtpClient.Port = port;
             smtpClient.Host = host;
             smtpClient.EnableSsl = true;
+            //smtpClient.Timeout = 300000;
 
             try
             {

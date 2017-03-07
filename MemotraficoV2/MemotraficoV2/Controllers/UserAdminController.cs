@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MemotraficoV2.Models;
 
 namespace IdentitySample.Controllers
 {
@@ -79,7 +80,10 @@ namespace IdentitySample.Controllers
         public async Task<ActionResult> Create()
         {
             //Get the list of Roles
+            SASEntities db = new SASEntities();
             ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
+            ViewBag.Institucion = db.Institucion.Select(i => new { id = i.IdInstitucion, nombre = i.Siglas }).ToList();
+            ViewBag.Departamento = db.Departamento.Select(i => new { id = i.IdDepartamento, nombre = i.Nombre }).ToList();
             return View();
         }
 

@@ -22,7 +22,7 @@ namespace MemotraficoV2.Models
                 IQueryable<Email> emails = db.Email.Where(i => i.Status == "Enviar");
                 foreach (var email in emails)
                 {
-                    var TipoCorreo = email.Message;
+                    var TipoCorreo = email.TipoEmail;
                     String Cuerpo = string.Format("Se notifica a la persona (nombre persona o institucion, que su solicitud a sido (cancelada,promovida,cerrada,atendida) por la persona a cargo de la solicitud siendo (nombre encargado) con telefono (telefono) Ext. (extencion), de la institucion correspondiente (nombre instutucion) con la siguiente descripcion de la solicitud: (descripcion))");
                     EnviarNotificaciones(TipoCorreo, Cuerpo, email.EmailTo, email.Subject ,email.IdEmail);
                 }
