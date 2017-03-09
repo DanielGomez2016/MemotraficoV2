@@ -1,35 +1,50 @@
 ﻿@model IdentitySample.Models.RoleViewModel
-
 @{
-    ViewBag.Title = "Registro Usuarios";
+    ViewBag.Title = "Registro Roles";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "AlertSuccess('El rol se a registrado Correctamente','/RolesAdmin/')",
+        OnFailure = "AlertError('El registro no se pudo completar, Intenta nuevamente','/RolesAdmin/Create')",
+        //Confirm = "seguro quieres hacer una prueba"
+    };
 }
 
 
 <div class="" role="main">
     <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                @*<h3>Nuevo Usuario</h3>*@
+            </div>
+        </div>
+        <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Nuevo Rol</h2>
-
+                        <div class="clearfix"></div>
+                        @* opciones modal cerrar encojer y opciones *@
+                        <ul class="nav navbar-right panel_toolbox"></ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        @using (Html.BeginForm("Create", "RolesAdmin", FormMethod.Post, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        @using (Ajax.BeginForm("Create", "RolesAdmin", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary("", new { @class = "text-error" })
                             <div class="item form-group">
                                 @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @placeholder = "Nombre(s) Ej. Jon Doe" })
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
                                 </div>
                             </div>
                             <div class="item form-group">
                                 @Html.LabelFor(m => m.Descripcion, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.TextBoxFor(m => m.Descripcion, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                    @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
                                 </div>
                             </div>
 

@@ -4,7 +4,69 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccesoSistema">
+          <Key>
+            <PropertyRef Name="IdAccesoSistema" />
+          </Key>
+          <Property Name="IdAccesoSistema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="controlador" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="accion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="AccesoSistemaRol">
+          <Key>
+            <PropertyRef Name="IdInstituto" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdAccesoSistema" />
+          </Key>
+          <Property Name="IdInstituto" Type="int" Nullable="false" />
+          <Property Name="IdRol" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IdAccesoSistema" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="ApellidoPaterno" Type="nvarchar(max)" />
+          <Property Name="ApellidoMaterno" Type="nvarchar(max)" />
+          <Property Name="IdInstitucion" Type="int" Nullable="false" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="IdDepartamento" />
@@ -40,6 +102,82 @@
           <Property Name="Telefono" Type="varchar" MaxLength="20" />
           <Property Name="Ext" Type="varchar" MaxLength="10" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_accesosistema">
+          <End Role="AccesoSistema" Type="Self.AccesoSistema" Multiplicity="1" />
+          <End Role="AccesoSistemaRol" Type="Self.AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccesoSistema">
+              <PropertyRef Name="IdAccesoSistema" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdAccesoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_institucion">
+          <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
+          <End Role="AccesoSistemaRol" Type="Self.AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdInstituto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_rol">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AccesoSistemaRol" Type="Self.AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idinst_institucion">
+          <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdInstitucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Inst_Depto">
           <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
@@ -53,16 +191,50 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SASModelStoreContainer">
+          <EntitySet Name="AccesoSistema" EntityType="Self.AccesoSistema" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institucion" EntityType="Self.Institucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccesoSistemaRol" EntityType="Self.AccesoSistemaRol" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AccesoSistemaRol].[IdInstituto] AS [IdInstituto], 
+    [AccesoSistemaRol].[IdRol] AS [IdRol], 
+    [AccesoSistemaRol].[IdAccesoSistema] AS [IdAccesoSistema]
+    FROM [dbo].[AccesoSistemaRol] AS [AccesoSistemaRol]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_accesosistema" Association="Self.fk_id_accesosistema">
+            <End Role="AccesoSistema" EntitySet="AccesoSistema" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_institucion" Association="Self.fk_id_institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_rol" Association="Self.fk_id_rol">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idinst_institucion" Association="Self.fk_idinst_institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Inst_Depto" Association="Self.FK_Inst_Depto">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -102,10 +274,12 @@
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Departamento" Relationship="Self.FK_Inst_Depto" FromRole="Institucion" ToRole="Departamento" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SASModel.fk_idinst_institucion" FromRole="Institucion" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="SASModel.fk_id_institucion" FromRole="Institucion" ToRole="AccesoSistemaRol" />
         </EntityType>
         <Association Name="FK_Inst_Depto">
-          <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <End Type="Self.Institucion" Multiplicity="1" Role="Institucion" />
+          <End Type="Self.Departamento" Multiplicity="*" Role="Departamento" />
           <ReferentialConstraint>
             <Principal Role="Institucion">
               <PropertyRef Name="IdInstitucion" />
@@ -120,10 +294,146 @@
           <EntitySet Name="Email" EntityType="Self.Email" />
           <EntitySet Name="Institucion" EntityType="Self.Institucion" />
           <AssociationSet Name="FK_Inst_Depto" Association="Self.FK_Inst_Depto">
+            <End EntitySet="Institucion" Role="Institucion" />
+            <End EntitySet="Departamento" Role="Departamento" />
+          </AssociationSet>
+          <EntitySet Name="AccesoSistema" EntityType="SASModel.AccesoSistema" />
+          <EntitySet Name="AspNetRoles" EntityType="SASModel.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="SASModel.AspNetUsers" />
+          <EntitySet Name="AccesoSistemaRol" EntityType="SASModel.AccesoSistemaRol" />
+          <AssociationSet Name="fk_id_accesosistema" Association="SASModel.fk_id_accesosistema">
+            <End EntitySet="AccesoSistema" Role="AccesoSistema" />
+            <End EntitySet="AccesoSistemaRol" Role="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_rol" Association="SASModel.fk_id_rol">
+            <End EntitySet="AspNetRoles" Role="AspNetRoles" />
+            <End EntitySet="AccesoSistemaRol" Role="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idinst_institucion" Association="SASModel.fk_idinst_institucion">
+            <End EntitySet="Institucion" Role="Institucion" />
+            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_institucion" Association="SASModel.fk_id_institucion">
             <End Role="Institucion" EntitySet="Institucion" />
-            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="SASModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AccesoSistema">
+          <Key>
+            <PropertyRef Name="IdAccesoSistema" />
+          </Key>
+          <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="controlador" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="accion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="SASModel.fk_id_accesosistema" FromRole="AccesoSistema" ToRole="AccesoSistemaRol" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="SASModel.fk_id_rol" FromRole="AspNetRoles" ToRole="AccesoSistemaRol" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SASModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdInstitucion" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Institucion" Relationship="SASModel.fk_idinst_institucion" FromRole="AspNetUsers" ToRole="Institucion" />
+          <NavigationProperty Name="AspNetRoles" Relationship="SASModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AccesoSistemaRol">
+          <Key>
+            <PropertyRef Name="IdInstituto" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdAccesoSistema" />
+          </Key>
+          <Property Name="IdInstituto" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccesoSistema" Relationship="SASModel.fk_id_accesosistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
+          <NavigationProperty Name="AspNetRoles" Relationship="SASModel.fk_id_rol" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Institucion" Relationship="SASModel.fk_id_institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
+        </EntityType>
+        <Association Name="fk_id_accesosistema">
+          <End Type="SASModel.AccesoSistema" Multiplicity="1" Role="AccesoSistema" />
+          <End Type="SASModel.AccesoSistemaRol" Multiplicity="*" Role="AccesoSistemaRol" />
+          <ReferentialConstraint>
+            <Principal Role="AccesoSistema">
+              <PropertyRef Name="IdAccesoSistema" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdAccesoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_rol">
+          <End Type="SASModel.AspNetRoles" Multiplicity="1" Role="AspNetRoles" />
+          <End Type="SASModel.AccesoSistemaRol" Multiplicity="*" Role="AccesoSistemaRol" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idinst_institucion">
+          <End Type="SASModel.Institucion" Multiplicity="1" Role="Institucion" />
+          <End Type="SASModel.AspNetUsers" Multiplicity="*" Role="AspNetUsers" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdInstitucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_institucion">
+          <End Type="SASModel.Institucion" Role="Institucion" Multiplicity="1" />
+          <End Type="SASModel.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdInstituto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="SASModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="SASModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -168,6 +478,68 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AccesoSistema">
+            <EntityTypeMapping TypeName="SASModel.AccesoSistema">
+              <MappingFragment StoreEntitySet="AccesoSistema">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="accion" ColumnName="accion" />
+                <ScalarProperty Name="controlador" ColumnName="controlador" />
+                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="SASModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SASModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccesoSistemaRol">
+            <EntityTypeMapping TypeName="SASModel.AccesoSistemaRol">
+              <MappingFragment StoreEntitySet="AccesoSistemaRol">
+                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SASModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

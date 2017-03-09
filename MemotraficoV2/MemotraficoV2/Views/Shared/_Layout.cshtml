@@ -1,5 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
 
+@{
+    HttpCookie cookie = Request.Cookies.Get("Usuario");
+    ViewBag.Institucion = cookie == null ? "" : cookie["Institucion"];
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +55,7 @@
                                     <a><i class="fa fa-institution"></i> Instituciones <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink(" Instituciones", "Index", "Instituciones")</li>
-                                        <li>@Html.ActionLink(" Departamentos", "Index", "Departamentos")</li>
+                                        <li>@Html.ActionLink(" Departamentos", "Index", "Departamentos", new { id = ViewBag.Institucion },null)</li>
                                     </ul>
                                 </li>
                                 <li>

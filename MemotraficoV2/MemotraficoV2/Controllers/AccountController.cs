@@ -410,8 +410,10 @@ namespace IdentitySample.Controllers
             var nu = (u.Nombre + " " + u.ApellidoPaterno).ToString();
 
             var cookie = new HttpCookie("Usuario");
+            cookie.Expires = DateTime.Now.AddHours(8);
             cookie["Nombre"] = nu;
             cookie["Perfil"] = Convert.ToString(u.Imagen.Length != 0 ? "" : "/Content/Proyecto/images/user.png");
+            cookie["Institucion"] = Convert.ToString(u.IdInstitucion);
 
             Response.Cookies.Add(cookie);
         }
