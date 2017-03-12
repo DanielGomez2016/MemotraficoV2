@@ -15,17 +15,14 @@
           <Property Name="descripcion" Type="varchar" MaxLength="250" />
           <Property Name="activo" Type="bit" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="AccesoSistemaRol">
           <Key>
-            <PropertyRef Name="IdInstituto" />
-            <PropertyRef Name="IdRol" />
-            <PropertyRef Name="IdAccesoSistema" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="IdInstituto" Type="int" Nullable="false" />
           <Property Name="IdRol" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IdAccesoSistema" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -192,19 +189,13 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
         </Association>
         <EntityContainer Name="SASModelStoreContainer">
           <EntitySet Name="AccesoSistema" EntityType="Self.AccesoSistema" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccesoSistemaRol" EntityType="Self.AccesoSistemaRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institucion" EntityType="Self.Institucion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccesoSistemaRol" EntityType="Self.AccesoSistemaRol" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AccesoSistemaRol].[IdInstituto] AS [IdInstituto], 
-    [AccesoSistemaRol].[IdRol] AS [IdRol], 
-    [AccesoSistemaRol].[IdAccesoSistema] AS [IdAccesoSistema]
-    FROM [dbo].[AccesoSistemaRol] AS [AccesoSistemaRol]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -300,26 +291,26 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
           <EntitySet Name="AccesoSistema" EntityType="SASModel.AccesoSistema" />
           <EntitySet Name="AspNetRoles" EntityType="SASModel.AspNetRoles" />
           <EntitySet Name="AspNetUsers" EntityType="SASModel.AspNetUsers" />
-          <EntitySet Name="AccesoSistemaRol" EntityType="SASModel.AccesoSistemaRol" />
-          <AssociationSet Name="fk_id_accesosistema" Association="SASModel.fk_id_accesosistema">
-            <End EntitySet="AccesoSistema" Role="AccesoSistema" />
-            <End EntitySet="AccesoSistemaRol" Role="AccesoSistemaRol" />
-          </AssociationSet>
-          <AssociationSet Name="fk_id_rol" Association="SASModel.fk_id_rol">
-            <End EntitySet="AspNetRoles" Role="AspNetRoles" />
-            <End EntitySet="AccesoSistemaRol" Role="AccesoSistemaRol" />
-          </AssociationSet>
           <AssociationSet Name="fk_idinst_institucion" Association="SASModel.fk_idinst_institucion">
             <End EntitySet="Institucion" Role="Institucion" />
             <End EntitySet="AspNetUsers" Role="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="SASModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="AccesoSistemaRol" EntityType="SASModel.AccesoSistemaRol" />
+          <AssociationSet Name="fk_id_accesosistema" Association="SASModel.fk_id_accesosistema">
+            <End Role="AccesoSistema" EntitySet="AccesoSistema" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
           </AssociationSet>
           <AssociationSet Name="fk_id_institucion" Association="SASModel.fk_id_institucion">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="SASModel.AspNetUserRoles">
+          <AssociationSet Name="fk_id_rol" Association="SASModel.fk_id_rol">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccesoSistema">
@@ -341,8 +332,8 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AccesoSistemaRol" Relationship="SASModel.fk_id_rol" FromRole="AspNetRoles" ToRole="AccesoSistemaRol" />
           <NavigationProperty Name="AspNetUsers" Relationship="SASModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="SASModel.fk_id_rol" FromRole="AspNetRoles" ToRole="AccesoSistemaRol" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -369,43 +360,6 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
           <NavigationProperty Name="Institucion" Relationship="SASModel.fk_idinst_institucion" FromRole="AspNetUsers" ToRole="Institucion" />
           <NavigationProperty Name="AspNetRoles" Relationship="SASModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="AccesoSistemaRol">
-          <Key>
-            <PropertyRef Name="IdInstituto" />
-            <PropertyRef Name="IdRol" />
-            <PropertyRef Name="IdAccesoSistema" />
-          </Key>
-          <Property Name="IdInstituto" Type="Int32" Nullable="false" />
-          <Property Name="IdRol" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccesoSistema" Relationship="SASModel.fk_id_accesosistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
-          <NavigationProperty Name="AspNetRoles" Relationship="SASModel.fk_id_rol" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Institucion" Relationship="SASModel.fk_id_institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
-        </EntityType>
-        <Association Name="fk_id_accesosistema">
-          <End Type="SASModel.AccesoSistema" Multiplicity="1" Role="AccesoSistema" />
-          <End Type="SASModel.AccesoSistemaRol" Multiplicity="*" Role="AccesoSistemaRol" />
-          <ReferentialConstraint>
-            <Principal Role="AccesoSistema">
-              <PropertyRef Name="IdAccesoSistema" />
-            </Principal>
-            <Dependent Role="AccesoSistemaRol">
-              <PropertyRef Name="IdAccesoSistema" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_id_rol">
-          <End Type="SASModel.AspNetRoles" Multiplicity="1" Role="AspNetRoles" />
-          <End Type="SASModel.AccesoSistemaRol" Multiplicity="*" Role="AccesoSistemaRol" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AccesoSistemaRol">
-              <PropertyRef Name="IdRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_idinst_institucion">
           <End Type="SASModel.Institucion" Multiplicity="1" Role="Institucion" />
           <End Type="SASModel.AspNetUsers" Multiplicity="*" Role="AspNetUsers" />
@@ -415,6 +369,34 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
             </Principal>
             <Dependent Role="AspNetUsers">
               <PropertyRef Name="IdInstitucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="SASModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="SASModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="AccesoSistemaRol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="IdInstituto" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AccesoSistema" Relationship="SASModel.fk_id_accesosistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
+          <NavigationProperty Name="Institucion" Relationship="SASModel.fk_id_institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
+          <NavigationProperty Name="AspNetRoles" Relationship="SASModel.fk_id_rol" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="fk_id_accesosistema">
+          <End Type="SASModel.AccesoSistema" Role="AccesoSistema" Multiplicity="1" />
+          <End Type="SASModel.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccesoSistema">
+              <PropertyRef Name="IdAccesoSistema" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdAccesoSistema" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -430,9 +412,17 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="SASModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="SASModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        <Association Name="fk_id_rol">
+          <End Type="SASModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="SASModel.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -523,15 +513,6 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AccesoSistemaRol">
-            <EntityTypeMapping TypeName="SASModel.AccesoSistemaRol">
-              <MappingFragment StoreEntitySet="AccesoSistemaRol">
-                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="SASModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -540,6 +521,16 @@ advertencia 6002: La tabla o vista 'DefaultConnection.dbo.AccesoSistemaRol' no t
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="AccesoSistemaRol">
+            <EntityTypeMapping TypeName="SASModel.AccesoSistemaRol">
+              <MappingFragment StoreEntitySet="AccesoSistemaRol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

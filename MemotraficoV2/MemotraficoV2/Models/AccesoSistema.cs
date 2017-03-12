@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using MemotraficoV2.Models.Colecciones;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,21 @@ namespace MemotraficoV2.Models
 {
     public partial class AccesoSistema
     {
+        public class roles
+        {
+            public string id { get; set; }
+            public string name { get; set; }
+        }
+
+        internal static bool Editar(int id, string descripcion)
+        {
+            SASEntities db = new SASEntities();
+            AccesoSistema acceso = db.AccesoSistema.FirstOrDefault(i => i.IdAccesoSistema == id);
+            acceso.descripcion = descripcion;
+            db.SaveChanges();
+            return true;
+        }
+
         /// <summary>
         /// Valida si el usuario actual tiene acceso a la URL solicitada
         /// </summary>
@@ -37,6 +53,87 @@ namespace MemotraficoV2.Models
                 else
                     return perm.AccesoSistemaRol.Any(i => rol.Contains(i.AspNetRoles.Name) && i.IdInstituto == institucion);
             
+        }
+
+        public static void activar(int idAccesoSistema, string idRol, int? instituciones = null)
+        {
+            SASEntities db = new SASEntities();
+            if (instituciones == null)
+                instituciones = Usuarios.GetInstitucion();
+
+            AccesoSistemaRol acceso = db.AccesoSistemaRol.FirstOrDefault(i => i.IdAccesoSistema == idAccesoSistema && i.IdRol == idRol && i.IdInstituto == instituciones);
+
+            if (acceso != null)
+                db.DeleteObject(acceso);
+            else
+            {
+                AccesoSistemaRol asr = new AccesoSistemaRol();
+                asr.IdAccesoSistema = idAccesoSistema;
+                asr.IdRol = idRol;
+                asr.IdInstituto = instituciones.Value;
+                db.AccesoSistemaRol.AddObject(asr);
+            }
+            db.SaveChanges();
+        }
+
+        public static List<AccesoSistema> Buscar(string controlador, string descripcion, bool? activo = true)
+        {
+            SASEntities db = new SASEntities();
+            IQueryable<AccesoSistema> query = db.AccesoSistema.Where(i => activo.HasValue ? i.activo == activo : true);
+
+            if (!string.IsNullOrEmpty(controlador))
+                query = query.Where(i => i.controlador == controlador);
+
+            if (!string.IsNullOrEmpty(descripcion))
+                query = query.Where(i => i.descripcion.Contains(descripcion));
+
+            return query
+                .OrderBy(i => new { i.controlador, i.accion })
+                .ToList();
+        }
+
+        public static List<string> GetAllControladores()
+        {
+            List<AccesoSistema> list = Buscar("", "", null);
+            return list.Select(l => l.controlador).Distinct().ToList();
+        }
+
+        public static List<AccesoSistema> listar()
+        {
+            SASEntities db = new SASEntities();
+            return db.AccesoSistema.OrderBy(i => new { i.controlador, i.accion }).ToList();
+        }
+
+        public static List<AccesoSistema> listarPorRoles(string[] roles, int? institucion = null)
+        {
+            SASEntities db = new SASEntities();
+            if (institucion == null)
+                institucion = Usuarios.GetInstitucion();
+
+            return db.AccesoSistema
+                     .Where(i => i.AccesoSistemaRol.Any(a => a.IdInstituto == institucion && roles.Contains(a.AspNetRoles.Name) || roles.Contains(ListaRoles.ADMINISTRATOR)))
+                     .OrderBy(i => new { i.controlador, i.accion })
+                     .Distinct()
+                     .ToList();
+        }
+
+        public static bool SistemaCambiarEstatusControlador(int idAccesoSistema, bool nuevoEstatus)
+        {
+            SASEntities db = new SASEntities();
+            AccesoSistema acceso = db.AccesoSistema.FirstOrDefault(i => i.IdAccesoSistema == idAccesoSistema);
+            acceso.activo = nuevoEstatus;
+            db.SaveChanges();
+            return true;
+        }
+
+        public static bool SistemaActivarControlador(int idAccesoSistema)
+        {
+            return SistemaCambiarEstatusControlador(idAccesoSistema, true);
+        }
+
+        public static bool SistemaDesactivarControlador(int idAccesoSistema)
+        {
+            return SistemaCambiarEstatusControlador(idAccesoSistema, false);
         }
     }
 }

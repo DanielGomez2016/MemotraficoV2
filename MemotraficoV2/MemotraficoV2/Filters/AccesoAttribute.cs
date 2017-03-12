@@ -1,13 +1,5 @@
 ﻿using MemotraficoV2.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
-using System.Web.Security;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Http;
-using IdentitySample.Models;
 
 namespace MemotraficoV2.Filters
 {

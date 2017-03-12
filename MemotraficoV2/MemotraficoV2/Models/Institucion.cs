@@ -39,5 +39,19 @@ namespace MemotraficoV2.Models
                 throw e;
             }
         }
+
+        public static List<Institucion> listarPorInstitucionActual()
+        {
+            SASEntities db = new SASEntities();
+            int ins = Usuarios.GetInstitucion();
+            return db.Institucion.Where(i => i.IdInstitucion == ins).OrderBy(i => i.Siglas).ToList();
+        }
+
+        public static string getnameInstitucion()
+        {
+            SASEntities db = new SASEntities();
+            int ins = Usuarios.GetInstitucion();
+            return db.Institucion.FirstOrDefault(i => i.IdInstitucion == ins).Siglas.ToString();
+        }
     }
 }

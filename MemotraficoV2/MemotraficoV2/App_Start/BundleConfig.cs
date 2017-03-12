@@ -22,6 +22,7 @@ namespace IdentitySample
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                        "~/Scripts/spin.min.js",
                         "~/Content/Proyecto/jquery/dist/jquery.min.js",
                         "~/Content/Proyecto/bootstrap/dist/js/bootstrap.min.js",
                         "~/Content/Proyecto/fastclick/lib/fastclick.js",

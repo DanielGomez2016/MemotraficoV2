@@ -240,6 +240,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccesosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -248,12 +249,14 @@
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Filters\AccesoAttribute.cs" />
+    <Compile Include="Filters\IgnoreAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccesoSistema.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Colecciones\ListaRoles.cs" />
     <Compile Include="Models\Db.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -5052,6 +5055,15 @@
     <Content Include="Views\Instituciones\Edit.cshtml" />
     <Content Include="Views\Departamentos\Index.cshtml" />
     <Content Include="Views\Departamentos\Create.cshtml" />
+    <Content Include="Views\Accesos\Index.cshtml" />
+    <Content Include="Views\Accesos\Sistema.cshtml" />
+    <Content Include="Views\Accesos\_Accesos.cshtml" />
+    <Content Include="Views\Accesos\_SistemaBC.cshtml" />
+    <Content Include="Views\Accesos\Editar.cshtml" />
+    <Content Include="Views\Accesos\SinAcceso.cshtml" />
+    <Content Include="Views\Accesos\Create.cshtml" />
+    <Content Include="Views\Accesos\Accesos.cshtml" />
+    <Content Include="Views\Accesos\AsignarPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

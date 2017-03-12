@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+    int? institucion = MemotraficoV2.Models.Usuarios.GetInstitucion();
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "AlertSuccess('La Institucion se a registrado Correctamente','/Instituciones/')",
+        OnFailure = "AlertError('El registro no se pudo completar, Intenta nuevamente','/Instituciones/Create')",
+        //Confirm = "seguro quieres hacer una prueba"
+    };
+}
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        @using (Ajax.BeginForm("Create", "Accesos", options , new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.Hidden("idRol", (string)ViewBag.Rol)
+                            @Html.AntiForgeryToken()
+                            <div class="item form-group">
+                                <div class="btn-group-sm">
+                                    <button id="btnAgregarTodos" type="button" class="btn btn-sm btn-success">Agregar todos</button>
+                                    <button id="btnQuitarTodos" type="button" class="btn btn-sm btn-danger">Quitar todos</button>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.Label("Nombre", new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.DropDownList("controlador", new SelectList(ViewBag.Controladores), "Todos los Controladores", new { @class = "form-control col-md-7 col-xs-12" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.Label("Descripcion", new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBox("descripcion", "", new { @class = "form-control col-md-7 col-xs-12" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.Label("Institucion", new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="clientes" name="clientes" class="form-control selectpicker" multiple data-selected-text-format="count > 3">
+                                        @foreach (MemotraficoV2.Models.Institucion c in ViewBag.Instituciones)
+                                        {
+                                            <option value="@(c.IdInstitucion)" @(institucion == c.IdInstitucion ? "selected=\"selected\"" : "")>@c.Siglas</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+
+                        }
+                        <table id="datatable" class="datatable2 table table-striped table-bordered dt-responsive nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Controlador</th>
+                                    <th>Acción</th>
+                                    <th>Descripción</th>
+                                    <th>Permiso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center">No se encontraron resultados</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

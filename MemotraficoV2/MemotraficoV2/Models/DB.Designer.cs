@@ -20,11 +20,11 @@ using System.Xml.Serialization;
 #region Metadatos de relaciones en EDM
 
 [assembly: EdmRelationshipAttribute("SASModel", "FK_Inst_Depto", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Departamento), true)]
-[assembly: EdmRelationshipAttribute("SASModel", "fk_id_accesosistema", "AccesoSistema", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AccesoSistema), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
-[assembly: EdmRelationshipAttribute("SASModel", "fk_id_rol", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetRoles), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
 [assembly: EdmRelationshipAttribute("SASModel", "fk_idinst_institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
-[assembly: EdmRelationshipAttribute("SASModel", "fk_id_institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
 [assembly: EdmRelationshipAttribute("SASModel", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
+[assembly: EdmRelationshipAttribute("SASModel", "fk_id_accesosistema", "AccesoSistema", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AccesoSistema), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
+[assembly: EdmRelationshipAttribute("SASModel", "fk_id_institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
+[assembly: EdmRelationshipAttribute("SASModel", "fk_id_rol", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetRoles), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
 
 #endregion
 
@@ -454,12 +454,14 @@ namespace MemotraficoV2.Models
         /// <param name="idInstituto">Valor inicial de la propiedad IdInstituto.</param>
         /// <param name="idRol">Valor inicial de la propiedad IdRol.</param>
         /// <param name="idAccesoSistema">Valor inicial de la propiedad IdAccesoSistema.</param>
-        public static AccesoSistemaRol CreateAccesoSistemaRol(global::System.Int32 idInstituto, global::System.String idRol, global::System.Int32 idAccesoSistema)
+        /// <param name="id">Valor inicial de la propiedad id.</param>
+        public static AccesoSistemaRol CreateAccesoSistemaRol(global::System.Int32 idInstituto, global::System.String idRol, global::System.Int32 idAccesoSistema, global::System.Int32 id)
         {
             AccesoSistemaRol accesoSistemaRol = new AccesoSistemaRol();
             accesoSistemaRol.IdInstituto = idInstituto;
             accesoSistemaRol.IdRol = idRol;
             accesoSistemaRol.IdAccesoSistema = idAccesoSistema;
+            accesoSistemaRol.id = id;
             return accesoSistemaRol;
         }
 
@@ -470,7 +472,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IdInstituto
         {
@@ -480,14 +482,11 @@ namespace MemotraficoV2.Models
             }
             set
             {
-                if (_IdInstituto != value)
-                {
-                    OnIdInstitutoChanging(value);
-                    ReportPropertyChanging("IdInstituto");
-                    _IdInstituto = StructuralObject.SetValidValue(value, "IdInstituto");
-                    ReportPropertyChanged("IdInstituto");
-                    OnIdInstitutoChanged();
-                }
+                OnIdInstitutoChanging(value);
+                ReportPropertyChanging("IdInstituto");
+                _IdInstituto = StructuralObject.SetValidValue(value, "IdInstituto");
+                ReportPropertyChanged("IdInstituto");
+                OnIdInstitutoChanged();
             }
         }
         private global::System.Int32 _IdInstituto;
@@ -497,7 +496,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String IdRol
         {
@@ -507,14 +506,11 @@ namespace MemotraficoV2.Models
             }
             set
             {
-                if (_IdRol != value)
-                {
-                    OnIdRolChanging(value);
-                    ReportPropertyChanging("IdRol");
-                    _IdRol = StructuralObject.SetValidValue(value, false, "IdRol");
-                    ReportPropertyChanged("IdRol");
-                    OnIdRolChanged();
-                }
+                OnIdRolChanging(value);
+                ReportPropertyChanging("IdRol");
+                _IdRol = StructuralObject.SetValidValue(value, false, "IdRol");
+                ReportPropertyChanged("IdRol");
+                OnIdRolChanged();
             }
         }
         private global::System.String _IdRol;
@@ -524,7 +520,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IdAccesoSistema
         {
@@ -534,19 +530,43 @@ namespace MemotraficoV2.Models
             }
             set
             {
-                if (_IdAccesoSistema != value)
-                {
-                    OnIdAccesoSistemaChanging(value);
-                    ReportPropertyChanging("IdAccesoSistema");
-                    _IdAccesoSistema = StructuralObject.SetValidValue(value, "IdAccesoSistema");
-                    ReportPropertyChanged("IdAccesoSistema");
-                    OnIdAccesoSistemaChanged();
-                }
+                OnIdAccesoSistemaChanging(value);
+                ReportPropertyChanging("IdAccesoSistema");
+                _IdAccesoSistema = StructuralObject.SetValidValue(value, "IdAccesoSistema");
+                ReportPropertyChanged("IdAccesoSistema");
+                OnIdAccesoSistemaChanged();
             }
         }
         private global::System.Int32 _IdAccesoSistema;
         partial void OnIdAccesoSistemaChanging(global::System.Int32 value);
         partial void OnIdAccesoSistemaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value, "id");
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
 
         #endregion
 
@@ -596,44 +616,6 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SASModel", "fk_id_rol", "AspNetRoles")]
-        public AspNetRoles AspNetRoles
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<AspNetRoles> AspNetRolesReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SASModel", "fk_id_institucion", "Institucion")]
         public Institucion Institucion
         {
@@ -662,6 +644,44 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institucion>("SASModel.fk_id_institucion", "Institucion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SASModel", "fk_id_rol", "AspNetRoles")]
+        public AspNetRoles AspNetRoles
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AspNetRoles> AspNetRolesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AspNetRoles>("SASModel.fk_id_rol", "AspNetRoles", value);
                 }
             }
         }
@@ -808,28 +828,6 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SASModel", "fk_id_rol", "AccesoSistemaRol")]
-        public EntityCollection<AccesoSistemaRol> AccesoSistemaRol
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AccesoSistemaRol>("SASModel.fk_id_rol", "AccesoSistemaRol");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccesoSistemaRol>("SASModel.fk_id_rol", "AccesoSistemaRol", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SASModel", "AspNetUserRoles", "AspNetUsers")]
         public EntityCollection<AspNetUsers> AspNetUsers
         {
@@ -842,6 +840,28 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AspNetUsers>("SASModel.AspNetUserRoles", "AspNetUsers", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SASModel", "fk_id_rol", "AccesoSistemaRol")]
+        public EntityCollection<AccesoSistemaRol> AccesoSistemaRol
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AccesoSistemaRol>("SASModel.fk_id_rol", "AccesoSistemaRol");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccesoSistemaRol>("SASModel.fk_id_rol", "AccesoSistemaRol", value);
                 }
             }
         }

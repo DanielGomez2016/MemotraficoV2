@@ -1,0 +1,39 @@
+﻿@model MemotraficoV2.Models.AccesoSistema
+@{
+    ViewBag.Title = "Sistema";
+    Layout = null;
+}
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        @* titulo *@
+                        <h2>Departamentos</h2>  @Html.ActionLink("Nuevo Departamento", "Create", new { id = ViewBag.Institucion }, new { @class = "col-md-offset-med btn btn-primary btn-sm" })
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm("", "", FormMethod.Post))
+                        {
+                            <div class="col-md-12 col-sm-12">
+                                @Html.HiddenFor(model => model.idAccesoSistema)
+                                <label>Descripción</label>
+                                @Html.TextBoxFor(model => model.descripcion, new { @class = "form-control", maxlength = 100 })
+                                @Html.ValidationMessageFor(i => i.descripcion)
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Sin Acceso";
+}
+
+@if (Request.IsAjaxRequest() == false)
+{
+    <div class="jumbotron">
+        <h1><span class="fontawesome-warning-sign"></span> No puedes acceder a esta sección porque no cuentas con los permisos necesarios</h1>
+        <p><a class="btn btn-primary btn-lg" id="btnRegresar" role="button">Regresar</a></p>
+    </div>
+
+    <script>
+        $('#btnRegresar').click(function () {
+            history.back();
+        });
+    </script>
+}
+else
+{
+    throw new Exception("No puedes acceder a esta sección porque no cuentas con los permisos necesarios");
+}

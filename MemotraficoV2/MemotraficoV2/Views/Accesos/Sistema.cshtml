@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Sistema";
+    var controladores = (SelectList)ViewBag.Controladores;
+}
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registro Nueva Institucion</h2>
+                        <div class="clearfix"></div>
+                        @* opciones modal cerrar encojer y opciones *@
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal  form-label-left", role = "form", id = "frmBusqueda" }))
+                        {
+                            <div class="col-md-2">
+                                <label>Controlador</label>
+                                @Html.DropDownList("controlador", controladores, "Todos", new { @class = "form-control" })
+                                <br />
+                            </div>
+                            <div class="col-md-2">
+                                <label>Descripcion</label>
+                                @Html.TextBox("descripcion", null, new { placeholder = "descripcion", @class = "form-control" })
+                                <br />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <input type="button" id="btnBuscar" class="btn btn-sm btn-primary" value="Buscar" />
+                            </div>
+                        }
+                        <div id="tabla"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalEditar" class="modal fade">
+    <div class="modal-dialog" style="width:40%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

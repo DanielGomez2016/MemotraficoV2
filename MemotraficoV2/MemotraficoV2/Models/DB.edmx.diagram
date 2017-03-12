@@ -12,12 +12,12 @@
         <EntityTypeShape EntityType="SASModel.AccesoSistema" Width="1.5" PointX="6.625" PointY="5.625" />
         <EntityTypeShape EntityType="SASModel.AspNetRoles" Width="1.5" PointX="10.125" PointY="5.625" />
         <EntityTypeShape EntityType="SASModel.AspNetUsers" Width="1.5" PointX="2" PointY="5.25" />
-        <EntityTypeShape EntityType="SASModel.AccesoSistemaRol" Width="1.5" PointX="7.875" PointY="0.75" />
-        <AssociationConnector Association="SASModel.fk_id_accesosistema" />
-        <AssociationConnector Association="SASModel.fk_id_rol" />
         <AssociationConnector Association="SASModel.fk_idinst_institucion" />
-        <AssociationConnector Association="SASModel.fk_id_institucion" />
         <AssociationConnector Association="SASModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="SASModel.AccesoSistemaRol" Width="1.5" PointX="12.375" PointY="3.25" />
+        <AssociationConnector Association="SASModel.fk_id_accesosistema" />
+        <AssociationConnector Association="SASModel.fk_id_institucion" />
+        <AssociationConnector Association="SASModel.fk_id_rol" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
