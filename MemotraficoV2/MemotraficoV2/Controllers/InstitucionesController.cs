@@ -75,26 +75,26 @@ namespace MemotraficoV2.Controllers
             }
         }
 
-        // GET: Instituciones/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Instituciones/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public JsonResult Elimina(int id = 0)
         {
             try
             {
-                // TODO: Add delete logic here
+                SASEntities db = new SASEntities();
+                var inst = db.Institucion.FirstOrDefault(i => i.IdInstitucion == id);
+                db.DeleteObject(inst);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    result = true
+                });
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                throw e;
             }
         }
     }
+    
 }

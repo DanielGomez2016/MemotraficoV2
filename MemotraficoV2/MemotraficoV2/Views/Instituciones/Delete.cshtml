@@ -1,11 +1,11 @@
-﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+﻿@model MemotraficoV2.Models.Departamento
 
 @{
     Layout = null;
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
-<h3>Estas seguro que deseas eliminar el rol <small> @Html.DisplayFor(model => model.Name)</small>?</h3>
+<h3>Estas seguro que deseas eliminar la institucion <small> @Html.DisplayFor(model => model.Nombre)</small>?</h3>
 
 @using (Html.BeginForm())
 {
@@ -16,5 +16,4 @@
         @*//@Html.ActionLink("Cancelar", "Index",null, new { @class="btn btn-dark" })*@
     </div>
 }
-
 

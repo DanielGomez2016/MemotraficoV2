@@ -41,11 +41,13 @@ namespace MemotraficoV2.Controllers
 
         // POST: Departamentos/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Departamento depto)
         {
             try
             {
-                // TODO: Add insert logic here
+                SASEntities db = new SASEntities();
+                db.Departamento.AddObject(depto);
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -58,17 +60,19 @@ namespace MemotraficoV2.Controllers
         // GET: Departamentos/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            SASEntities db = new SASEntities();
+            Departamento dep = db.Departamento.FirstOrDefault(i => i.IdDepartamento == id);
+
+            return View(dep);
         }
 
         // POST: Departamentos/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Departamento depto)
         {
             try
             {
-                // TODO: Add update logic here
-
+                var i = depto.Editar();
                 return RedirectToAction("Index");
             }
             catch
@@ -77,25 +81,23 @@ namespace MemotraficoV2.Controllers
             }
         }
 
-        // GET: Departamentos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Departamentos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public JsonResult Elimina(int id = 0)
         {
             try
             {
-                // TODO: Add delete logic here
+                SASEntities db = new SASEntities();
+                var depto = db.Departamento.FirstOrDefault(i => i.IdDepartamento == id);
+                db.DeleteObject(depto);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    result = true
+                });
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                throw e;
             }
         }
     }

@@ -112,24 +112,27 @@ namespace MemotraficoV2.Controllers
                 var tipo = "";
                 var icono = "";
                 var mensaje = "";
+                var btnmsj = "";
                 var m = x.AccesoSistemaRol.FirstOrDefault(j => j.IdInstituto == institucion && j.IdRol == idRol) != null;
                 if (m)
                 {
                     tipo = "success";
                     icono = "check-square-o";
-                    mensaje = "dasactivado";
+                    mensaje = "desactivado";
+                    btnmsj = "Permiso Activo";
                 }
                 else
                 {
                     tipo = "danger";
                     icono = "square-o";
-                    mensaje = "Activado";
+                    mensaje = "activado";
+                    btnmsj = "Sin Permiso";
                 }
 
                     string row = "<tr><td>"+x.controlador+
                     "</td><td>"+x.accion+
                     "</td><td>"+x.descripcion+
-                    "</td><td><button class=\"btn btn-"+tipo+ " pull-right\" data-rol=\""+idRol+"\" data-id=" + x.IdAccesoSistema+" data-msg="+mensaje+" data-activar=\"\"><i class=\"fa fa-"+icono+"\"></i> "+mensaje+"</button></td></tr>";
+                    "</td><td><button class=\"btn btn-"+tipo+ " pull-right\" data-rol=\""+idRol+"\" data-id=" + x.IdAccesoSistema+" data-msg="+mensaje+" data-activar=\"\"><i class=\"fa fa-"+icono+"\"></i> "+ btnmsj + "</button></td></tr>";
 
                 rows.Add(row);
             }
@@ -157,6 +160,103 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true
                 });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    message = e.InnerException != null ? e.InnerException.Message : e.Message
+                });
+            }
+        }
+
+        [HttpPost, Ignore]
+        public JsonResult AgregarTodos(string rol, string controlador, string descripcion)
+        {
+            try
+            {
+                using (SASEntities db = new SASEntities())
+                {
+                    int institucion = Usuarios.GetInstitucion();
+                    IQueryable<AccesoSistema> query = db.AccesoSistema.Where(i =>  i.activo == true);
+                    IQueryable<AccesoSistemaRol> qasr = db.AccesoSistemaRol.Where(i => i.IdInstituto == institucion && i.IdRol == rol);
+
+
+                    if (!string.IsNullOrEmpty(controlador))
+                        query = query.Where(i => i.controlador == controlador);
+
+                    if (!string.IsNullOrEmpty(descripcion))
+                        query = query.Where(i => i.descripcion.Contains(descripcion));
+
+                    foreach (var r in query.ToList())
+                    {
+                        if (!qasr.Any(i => i.IdAccesoSistema == r.IdAccesoSistema))
+                        {
+                            AccesoSistemaRol ar = new AccesoSistemaRol();
+
+                            ar.IdInstituto = institucion;
+                            ar.IdRol = rol;
+                            ar.IdAccesoSistema = r.IdAccesoSistema;
+
+                            db.AccesoSistemaRol.AddObject(ar);
+                        }
+
+                    }
+
+                    db.SaveChanges();
+
+                    return Json(new
+                    {
+                        result = true
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    message = e.InnerException != null ? e.InnerException.Message : e.Message
+                });
+            }
+        }
+
+        [HttpPost, Ignore]
+        public JsonResult QuitarTodos(string rol, string controlador, string descripcion)
+        {
+            try
+            {
+                using (SASEntities db = new SASEntities())
+                {
+                    int institucion = Usuarios.GetInstitucion();
+                    IQueryable<AccesoSistema> query = db.AccesoSistema.Where(i => i.activo == true);
+                    IQueryable<AccesoSistemaRol> qasr = db.AccesoSistemaRol.Where(i => i.IdInstituto == institucion && i.IdRol == rol);
+
+
+                    if (!string.IsNullOrEmpty(controlador))
+                        query = query.Where(i => i.controlador == controlador);
+
+                    if (!string.IsNullOrEmpty(descripcion))
+                        query = query.Where(i => i.descripcion.Contains(descripcion));
+
+                    foreach (var r in query.ToList())
+                    {
+
+                        AccesoSistemaRol ar = qasr.FirstOrDefault(i => i.IdAccesoSistema == r.IdAccesoSistema);
+                        if (ar != null)
+                        {
+                            db.AccesoSistemaRol.DeleteObject(ar);
+                        }
+                    }
+
+                    db.SaveChanges();
+
+                    return Json(new
+                    {
+                        result = true
+                    });
+                }
             }
             catch (Exception e)
             {
@@ -271,11 +371,39 @@ namespace MemotraficoV2.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize(Roles = ListaRoles.ADMINISTRATOR)]
-        public ActionResult SistemaBC(string controlador, string descripcion)
+        public ActionResult SistemaBuscarControlador(string controlador, string descripcion)
         {
             List<AccesoSistema> list = AccesoSistema.Buscar(controlador, descripcion, null);
 
-            return PartialView("_SistemaBC",list);
+            List<string> rows = new List<string>();
+
+            foreach (var x in list)
+            {
+                var title = x.activo == true ? "Desactivar" : "Activar";
+                var action = x.activo == true ? "SistemaDesactivarControlador" : "SistemaActivarControlador";
+                var clase = x.activo == true ? "btn btn-sm btn-danger" : "btn btn-sm btn-primary";
+                var ruta = x.controlador + "/" + x.accion;
+                var btn1 = "<button class=\"" + clase + "\" "+
+                           "data-title=\"" + title + "\" "+
+                           "data-url=\"/Accesos/\" " +
+                           "data-action=\"" + action + "\">" + title + "</button>";
+
+                var btn2 = "<button class=\"btn btn-sm btn-info\" data-editar=\"editar\" data-action data-url=\"/Accesos/Editar\">Editar</button>";
+
+                string row = "<tr><td>"+x.controlador+"</td>" +
+                             "<td>"+x.accion+"</td>" +
+                             "<td>"+x.descripcion+"</td>" +
+                             "<td class=\"pull-right\">"
+                                + "<div class=\"btn-group\" data-route=\""+ruta+"\" data-id=\""+x.IdAccesoSistema+"\">" + btn1 + btn2 +"</div></td></tr>";
+
+                rows.Add(row);
+            }
+
+            return Json(new
+            {
+                total = rows.Count(),
+                datos = rows.ToList()
+            }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion Edicion Acceso Controladores

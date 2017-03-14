@@ -67,7 +67,7 @@
                                             <div class="btn-group">
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                                                 <button name="idDetalle" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" value="@item.Id">Detalle</button>
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                                                <button name="idEliminar" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" value="@item.Id">Eliminar</button>
                                             </div>
                                         </td>
                                     </tr>

@@ -21,9 +21,24 @@ namespace MemotraficoV2.Models
 
         }
 
-        public void Editar()
+        public int Editar()
         {
-            SASEntities db = new SASEntities();
+            try
+            {
+                SASEntities db = new SASEntities();
+                Departamento i = db.Departamento.FirstOrDefault(x => x.IdDepartamento == this.IdDepartamento);
+                i.Nombre = this.Nombre;
+                i.Titular = this.Titular;
+                i.Descripcion = this.Descripcion;
+                i.Ext = this.Ext;
+
+                db.SaveChanges();
+                return i.IdDepartamento;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

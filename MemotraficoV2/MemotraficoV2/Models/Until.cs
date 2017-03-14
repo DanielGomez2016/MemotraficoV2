@@ -131,6 +131,7 @@ namespace MemotraficoV2.Models
 
             SmtpClient smtpClient = new SmtpClient();
 
+            smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new System.Net.NetworkCredential(userName, password);
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.Port = port;

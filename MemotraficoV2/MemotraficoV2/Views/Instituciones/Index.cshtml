@@ -46,7 +46,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.IdInstitucion }, new { @class = "btn btn-primary btn-sm" })
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdInstitucion }, new { @class = "btn btn-danger btn-sm" })
+                                                <button id="idEliminarIns" name="idEliminarIns" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" value="@item.IdInstitucion">Eliminar</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -56,6 +56,25 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Eliminar Institucion</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Estas seguro que deseas eliminar la institucion?</h3>
+            </div>
+            <div class="modal-footer">
+                    <button id="idEliminarI" type="button" class="btn btn-danger">Eliminar</button>
+                <a class="btn btn-dark  btn" data-dismiss="modal">Cancelar</a>
+                </div>
         </div>
     </div>
 </div>

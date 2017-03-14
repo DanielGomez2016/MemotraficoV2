@@ -82,10 +82,61 @@
         .done(function (data) {
             if (data.result) {
                 AlertSuccess('Se ha ' + t.data('msg') + ' el acceso exitosamente', null);
-                BuscarPermisos();
+                BuscarPermisos(rol);
             } else {
                 AlertError(data.message, null);
             }
         });
+    });
+
+    $('#btnAgregarTodos').click(function () {
+        if (confirm('¿Desea agregar todos los accesos de la búsqueda a este rol?')) {
+
+            var params = $('#formAcceso').serializeArray();
+            params.push({
+                name: 'rol',
+                value: $('#formAcceso #idRol').val()
+            });
+
+            $.ajax({
+                url: '/Accesos/AgregarTodos',
+                type: 'post',
+                data: params,
+                success: function (e) {
+                    if (e.result == true) {
+                        AlertSuccess('Se han asignado todos los accesos al rol', null);
+                        BuscarPermisos($('#formAcceso #idRol').val())
+                    } else {
+                        AlertError(e.message, '/Accesos/');
+
+                    }
+                }
+            });
+        }
+    });
+
+    $('#btnQuitarTodos').click(function () {
+        if (confirm('¿Desea quitar todos los accesos de la búsqueda a este rol?')) {
+
+            var params = $('#formAcceso').serializeArray();
+            params.push({
+                name: 'rol',
+                value: $('#formAcceso #idRol').val()
+            });
+            $.ajax({
+                url: '/Accesos/QuitarTodos',
+                type: 'post',
+                data: params,
+                success: function (e) {
+                    if (e.result == true) {
+                        AlertSuccess('Se han quitado todos los accesos al rol', null);
+                        BuscarPermisos($('#formAcceso #idRol').val());
+                    } else {
+                        AlertError(e.message, '/Accesos/');
+
+                    }
+                }
+            });
+        }
     });
 </script>

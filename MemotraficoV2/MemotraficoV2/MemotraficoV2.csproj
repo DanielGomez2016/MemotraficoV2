@@ -5064,6 +5064,8 @@
     <Content Include="Views\Accesos\Create.cshtml" />
     <Content Include="Views\Accesos\Accesos.cshtml" />
     <Content Include="Views\Accesos\AsignarPermisos.cshtml" />
+    <Content Include="Views\Instituciones\Delete.cshtml" />
+    <Content Include="Views\Departamentos\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,5 +53,11 @@ namespace MemotraficoV2.Models
             int ins = Usuarios.GetInstitucion();
             return db.Institucion.FirstOrDefault(i => i.IdInstitucion == ins).Siglas.ToString();
         }
+
+        public static Institucion getinstitucion(int id)
+        {
+            SASEntities db = new SASEntities();
+            return db.Institucion.FirstOrDefault(i => i.IdInstitucion == id);
+        }
     }
 }
