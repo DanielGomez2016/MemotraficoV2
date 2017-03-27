@@ -1,9 +1,7 @@
-﻿@model IEnumerable<MemotraficoV2.Models.Departamento>
+﻿@model IEnumerable<MemotraficoV2.Models.Municipios>
 
 @{
     ViewBag.Title = "Index";
-    HttpCookie cookie = Request.Cookies.Get("Usuario");
-    ViewBag.Institucion = cookie == null ? "" : cookie["Institucion"];
 }
 
 <div class="" role="main">
@@ -20,7 +18,7 @@
                 <div class="x_panel">
                     <div class="x_title">
                         @* titulo *@
-                        <h2>Departamentos</h2>   @Html.ActionLink("Nuevo Departamento", "Create", new { id = ViewBag.Institucion }, new { @class = "col-md-offset-med btn btn-primary btn-sm" })
+                        <h2>Municipios</h2>   @Html.ActionLink("Nuevo Municipio", "Create", null , new { @class = "col-md-offset-med btn btn-primary btn-sm" })
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -28,9 +26,6 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Titular</th>
-                                    <th>Descripcion</th>
-                                    <th>Ext telefonica</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -40,13 +35,10 @@
                                 {
                                     <tr>
                                         <td>@item.Nombre</td>
-                                        <td>@item.Titular</td>
-                                        <td>@item.Descripcion</td>
-                                        <td>@item.Ext</td>
                                         <td>
-                                            <div class="btn-group pull-right">
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdDepartamento }, new { @class = "btn btn-primary btn-sm" })
-                                                @*<button id="idEliminarDep" name="idEliminarDep" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" value="@item.IdDepartamento">Eliminar</button>*@
+                                            <div class="btn-group">
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdMunicipio }, new { @class = "btn btn-primary btn-sm" })
+                                                <button id="idEliminarEsc" name="idEliminarDep" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" value="@item.IdMunicipio">Eliminar</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -66,13 +58,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel2">Eliminar Institucion</h4>
+                <h4 class="modal-title" id="myModalLabel2">Eliminar Municipio</h4>
             </div>
             <div class="modal-body">
-                <h3>Estas seguro que deseas eliminar el departamento?</h3>
+                <h3>Estas seguro que deseas eliminar el departamento, tambien se eliminaran todas las localidades pertenecientes al municipio?</h3>
             </div>
             <div class="modal-footer">
-                <button id="idEliminarD" type="button" class="btn btn-danger">Eliminar</button>
+                <button id="idEliminarM" type="button" class="btn btn-danger">Eliminar</button>
                 <a class="btn btn-dark  btn" data-dismiss="modal">Cancelar</a>
             </div>
         </div>

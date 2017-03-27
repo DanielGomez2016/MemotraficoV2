@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MemotraficoV2.Models;
+using MemotraficoV2.Filters;
 
 namespace MemotraficoV2.Controllers
 {
+    [Authorize, Acceso]
     public class DepartamentosController : Controller
     {
         // GET: Departamentos
@@ -41,19 +43,30 @@ namespace MemotraficoV2.Controllers
 
         // POST: Departamentos/Create
         [HttpPost]
-        public ActionResult Create(Departamento depto)
+        public JsonResult Create(Departamento depto)
         {
             try
             {
                 SASEntities db = new SASEntities();
                 db.Departamento.AddObject(depto);
+
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Departamentos/Index/"+depto.IdInstitucionFk,
+                    msj = "El departamento se a registrado Correctamente"
+                });
             }
             catch
             {
-                return View();
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Departamentos/Create",
+                    msj = "El registro no se pudo completar, Intenta nuevamente"
+                });
             }
         }
 
@@ -68,16 +81,27 @@ namespace MemotraficoV2.Controllers
 
         // POST: Departamentos/Edit/5
         [HttpPost]
-        public ActionResult Edit(Departamento depto)
+        public JsonResult Edit(Departamento depto)
         {
             try
             {
                 var i = depto.Editar();
-                return RedirectToAction("Index");
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Departamentos",
+                    msj = "Se actualizo correctamente el registro"
+                });
             }
             catch
             {
-                return View();
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Departamentos/Edit/" + depto.IdDepartamento,
+                    msj = "El registro no se pudo actualizar, Intenta nuevamente"
+                });
             }
         }
 

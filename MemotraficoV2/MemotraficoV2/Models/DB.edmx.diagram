@@ -5,19 +5,85 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bce8854c77f74d12bbb60d624a6d2d8c" Name="Diagram1" ZoomLevel="57">
-        <EntityTypeShape EntityType="SASModel.Departamento" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SASModel.Email" Width="1.5" PointX="5" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SASModel.Institucion" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <AssociationConnector ManuallyRouted="false" Association="SASModel.FK_Inst_Depto" />
-        <EntityTypeShape EntityType="SASModel.AccesoSistema" Width="1.5" PointX="6.625" PointY="5.625" />
-        <EntityTypeShape EntityType="SASModel.AspNetRoles" Width="1.5" PointX="10.125" PointY="5.625" />
-        <EntityTypeShape EntityType="SASModel.AspNetUsers" Width="1.5" PointX="2" PointY="5.25" />
-        <AssociationConnector Association="SASModel.fk_idinst_institucion" />
+        <EntityTypeShape EntityType="SASModel.AccesoSistema" Width="1.5" PointX="10" PointY="0.5" />
+        <EntityTypeShape EntityType="SASModel.Departamento" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SASModel.Email" Width="1.5" PointX="9.5" PointY="3.5" />
+        <EntityTypeShape EntityType="SASModel.Institucion" Width="1.5" PointX="4.625" PointY="1.125" />
+        <EntityTypeShape EntityType="SASModel.AccesoSistemaRol" Width="1.5" PointX="7.75" PointY="1.25" />
+        <AssociationConnector Association="SASModel.FK_AccesoSistemaRol_AccesoSistema" />
+        <AssociationConnector Association="SASModel.FK_Departamento_Institucion" />
+        <AssociationConnector Association="SASModel.FK_AccesoSistemaRol_Institucion" />
+        <EntityTypeShape EntityType="SASModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SASModel.AspNetRoles" Width="1.5" PointX="0.625" PointY="0.5" />
+        <AssociationConnector Association="SASModel.FK_AccesoSistemaRol_AspNetRoles" />
         <AssociationConnector Association="SASModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="SASModel.AccesoSistemaRol" Width="1.5" PointX="12.375" PointY="3.25" />
-        <AssociationConnector Association="SASModel.fk_id_accesosistema" />
-        <AssociationConnector Association="SASModel.fk_id_institucion" />
-        <AssociationConnector Association="SASModel.fk_id_rol" />
+        <EntityTypeShape EntityType="SASModel.AlmacenamientoDren" Width="1.5" PointX="12.375" PointY="21.875" />
+        <EntityTypeShape EntityType="SASModel.Canalizacion" Width="1.5" PointX="15.375" PointY="19.875" />
+        <EntityTypeShape EntityType="SASModel.ComponenteI" Width="1.5" PointX="12.375" PointY="71.125" />
+        <EntityTypeShape EntityType="SASModel.ComponenteII" Width="1.5" PointX="12.375" PointY="57.625" />
+        <EntityTypeShape EntityType="SASModel.ComponenteIII" Width="1.5" PointX="12.375" PointY="65.25" />
+        <EntityTypeShape EntityType="SASModel.ComponenteIV" Width="1.5" PointX="12.375" PointY="68.125" />
+        <EntityTypeShape EntityType="SASModel.ComponenteV" Width="1.5" PointX="12.375" PointY="54.75" />
+        <EntityTypeShape EntityType="SASModel.ComponenteVI" Width="1.5" PointX="12.375" PointY="61.875" />
+        <EntityTypeShape EntityType="SASModel.ComponenteVII" Width="1.5" PointX="12.375" PointY="78.5" />
+        <EntityTypeShape EntityType="SASModel.ComponenteVIII" Width="1.5" PointX="12.375" PointY="74.375" />
+        <EntityTypeShape EntityType="SASModel.Contacto" Width="1.5" PointX="10.125" PointY="15" />
+        <EntityTypeShape EntityType="SASModel.Croquis" Width="1.5" PointX="12.375" PointY="25.625" />
+        <EntityTypeShape EntityType="SASModel.DetalleCanalizacion" Width="1.5" PointX="17.625" PointY="19.875" />
+        <EntityTypeShape EntityType="SASModel.Documentos" Width="1.5" PointX="19.875" PointY="20.125" />
+        <EntityTypeShape EntityType="SASModel.EnergiaElectrica" Width="1.5" PointX="12.375" PointY="18" />
+        <EntityTypeShape EntityType="SASModel.Entorno" Width="1.5" PointX="12.375" PointY="40" />
+        <EntityTypeShape EntityType="SASModel.EspacioEducativo" Width="1.5" PointX="12.375" PointY="29.375" />
+        <EntityTypeShape EntityType="SASModel.EspacioEducativoDet" Width="1.5" PointX="14.625" PointY="28.75" />
+        <EntityTypeShape EntityType="SASModel.EspacioMultiple" Width="1.5" PointX="12.375" PointY="44.625" />
+        <EntityTypeShape EntityType="SASModel.Estatus" Width="1.5" PointX="7.875" PointY="52.625" />
+        <EntityTypeShape EntityType="SASModel.Localidades" Width="1.5" PointX="5.625" PointY="44.5" />
+        <EntityTypeShape EntityType="SASModel.Matricula" Width="1.5" PointX="12.375" PointY="37.125" />
+        <EntityTypeShape EntityType="SASModel.Municipios" Width="1.5" PointX="3.375" PointY="44.625" />
+        <EntityTypeShape EntityType="SASModel.NivelEducativo" Width="1.5" PointX="5.625" PointY="41.625" />
+        <EntityTypeShape EntityType="SASModel.Procedencia" Width="1.5" PointX="7.875" PointY="49.125" />
+        <EntityTypeShape EntityType="SASModel.Requerimientos" Width="1.5" PointX="10.125" PointY="66.125" />
+        <EntityTypeShape EntityType="SASModel.ServicioMunicipal" Width="1.5" PointX="12.375" PointY="32.625" />
+        <EntityTypeShape EntityType="SASModel.Solicitudes" Width="1.5" PointX="10.125" PointY="43.5" />
+        <EntityTypeShape EntityType="SASModel.TipoAsunto" Width="1.5" PointX="7.875" PointY="40.75" />
+        <EntityTypeShape EntityType="SASModel.TipoProcedencia" Width="1.5" PointX="5.625" PointY="49.625" />
+        <EntityTypeShape EntityType="SASModel.Validacion" Width="1.5" PointX="10.125" PointY="32.125" />
+        <AssociationConnector Association="SASModel.FK_AlmacenamientoDren_Validacion" />
+        <AssociationConnector Association="SASModel.FK_Canalizacion_Departamento" />
+        <AssociationConnector Association="SASModel.FK_Canalizacion_Institucion" />
+        <AssociationConnector Association="SASModel.FK_Canalizacion_Solicitudes" />
+        <AssociationConnector Association="SASModel.FK_DetalleCanalizacion_Canalizacion" />
+        <AssociationConnector Association="SASModel.FK_ComponenteI_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteII_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteIII_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteIV_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteV_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteVI_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteVII_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_ComponenteVIII_Requerimientos" />
+        <AssociationConnector Association="SASModel.FK_Croquis_Validacion" />
+        <AssociationConnector Association="SASModel.FK_Documentos_DetalleCanalizacion" />
+        <AssociationConnector Association="SASModel.FK_EnergiaElectrica_Validacion" />
+        <AssociationConnector Association="SASModel.FK_Entorno_Validacion" />
+        <AssociationConnector Association="SASModel.FK_EspacioEducativo_Validacion" />
+        <AssociationConnector Association="SASModel.FK_EspacioEducativoDet_EspacioEducativo" />
+        <AssociationConnector Association="SASModel.FK_EspacioMultiple_Validacion" />
+        <AssociationConnector Association="SASModel.FK_Solicitudes_Estatus" />
+        <AssociationConnector Association="SASModel.FK_Localidades_Municipios" />
+        <AssociationConnector Association="SASModel.FK_Matricula_Validacion" />
+        <AssociationConnector Association="SASModel.FK_Procedencia_TipoProcedencia" />
+        <AssociationConnector Association="SASModel.FK_Solicitudes_Procedencia" />
+        <AssociationConnector Association="SASModel.FK_ServicioMunicipal_Validacion" />
+        <AssociationConnector Association="SASModel.FK_Solicitudes_TipoAsunto" />
+        <AssociationConnector Association="SASModel.FK_Solicitudes_TipoProcedencia" />
+        <EntityTypeShape EntityType="SASModel.Escuela" Width="1.5" PointX="7.875" PointY="43.875" />
+        <AssociationConnector Association="SASModel.FK_Contacto_Escuela" />
+        <AssociationConnector Association="SASModel.FK_Escuela_Localidades" />
+        <AssociationConnector Association="SASModel.FK_Escuela_Municipios" />
+        <AssociationConnector Association="SASModel.FK_Escuela_NivelEducativo" />
+        <AssociationConnector Association="SASModel.FK_Requerimientos_Escuela" />
+        <AssociationConnector Association="SASModel.FK_Solicitudes_Escuela" />
+        <AssociationConnector Association="SASModel.FK_Validacion_Escuela" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

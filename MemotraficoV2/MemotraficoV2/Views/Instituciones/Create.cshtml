@@ -5,9 +5,10 @@
     var options = new AjaxOptions()
     {
         HttpMethod = "POST",
-        OnSuccess = "AlertSuccess('La Institucion se a registrado Correctamente','/Instituciones/')",
-        OnFailure = "AlertError('El registro no se pudo completar, Intenta nuevamente','/Instituciones/Create')",
-        //Confirm = "seguro quieres hacer una prueba"
+        OnSuccess = "onSuccessMsj",
+        OnFailure = "onFailureMsj",
+        OnBegin = "Loading(true)",
+        OnComplete = "Loading(false)"
     };
 }
 

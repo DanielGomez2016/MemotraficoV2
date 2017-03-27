@@ -1,14 +1,14 @@
 ﻿@model MemotraficoV2.Models.Departamento
-
 @{
     ViewBag.Title = "Edicion";
 
     var options = new AjaxOptions()
     {
         HttpMethod = "POST",
-        OnSuccess = "AlertSuccess('El usuario se a actualizado Correctamente','/Instituciones/')",
-        OnFailure = "AlertError('El registro no se pudo actualizar, Intenta nuevamente','Instituciones/Edit')",
-        //Confirm = "seguro quieres hacer una prueba"
+        OnSuccess = "onSuccessMsj",
+        OnFailure = "onFailureMsj",
+        OnBegin = "Loading(true)",
+        OnComplete = "Loading(false)"
     };
 }
 

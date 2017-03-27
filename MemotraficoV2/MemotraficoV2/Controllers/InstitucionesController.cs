@@ -35,19 +35,30 @@ namespace MemotraficoV2.Controllers
 
         // POST: Instituciones/Create
         [HttpPost]
-        public ActionResult Create(Institucion inst)
+        public JsonResult Create(Institucion i)
         {
             try
             {
                 SASEntities db = new SASEntities();
-                db.Institucion.AddObject(inst);
+                db.Institucion.AddObject(i);
+
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Instituciones",
+                    msj = "La institucion se a registrado Correctamente"
+                });
             }
             catch
             {
-                return View();
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Instituciones/Create",
+                    msj = "El registro no se pudo completar, Intenta nuevamente"
+                });
             }
         }
 
@@ -62,16 +73,27 @@ namespace MemotraficoV2.Controllers
 
         // POST: Instituciones/Edit/5
         [HttpPost]
-        public ActionResult Edit(Institucion inst)
+        public JsonResult Edit(Institucion inst)
         {
             try
             {
                 var i = inst.Editar();
-                return RedirectToAction("Index");
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Instituciones",
+                    msj = "Se actualizo correctamente el registro"
+                });
             }
             catch
             {
-                return View();
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Instituciones/Edit/" + inst.IdInstitucion + "",
+                    msj = "El registro no se pudo actualizar, Intenta nuevamente"
+                });
             }
         }
 
