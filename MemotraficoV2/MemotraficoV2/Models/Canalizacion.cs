@@ -5,15 +5,15 @@ using System.Web;
 
 namespace MemotraficoV2.Models
 {
-    public partial class Municipios
+    public partial class Canalizacion
     {
-        public void Editar()
+        public int Crear()
         {
             SASEntities db = new SASEntities();
-            Municipios m = db.Municipios.FirstOrDefault(i => i.IdMunicipio == IdMunicipio);
-            m.Nombre = Nombre;
-
+            db.Canalizacion.AddObject(this);
             db.SaveChanges();
+
+            return IdCanalizacion;
         }
     }
 }

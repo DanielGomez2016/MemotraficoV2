@@ -39,5 +39,36 @@ namespace MemotraficoV2.Controllers
                 });
             }
         }
+
+        public JsonResult CargarProcedencia(int id)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                List<Procedencia> list = db.Procedencia.Where(i => i.IdTipoProcedenciaFk == id).ToList();
+
+                List<string> rows = new List<string>();
+                var rowfirst = "<option>Seleciona la procedencia</option>";
+                rows.Add(rowfirst);
+                foreach (var x in list)
+                {
+                    var option = "<option value=\"" + x.IdProcedencia + "\">" + x.Procedencia1 + "</option>";
+                    rows.Add(option);
+                }
+
+                return Json(new
+                {
+                    total = rows.Count(),
+                    datos = rows.ToList()
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new
+                {
+                    result = true
+                });
+            }
+        }
     }
 }

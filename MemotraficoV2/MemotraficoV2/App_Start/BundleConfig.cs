@@ -52,6 +52,7 @@ namespace IdentitySample
                         "~/Content/Proyecto/moment/min/moment.min.js",
                         "~/Content/Proyecto/bootstrap-daterangepicker/daterangepicker.js",
                         "~/Content/Proyecto/build/js/custom.min.js",
+                        "~/Content/Proyecto/EasyAutocomplete-1.3.5/easy-autocomplete.min.js",
                         "~/Content/Proyecto/toastmessage/jquery.toastmessage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/tables").Include(

@@ -1,0 +1,155 @@
+﻿@model MemotraficoV2.Models.Solicitudes
+@{
+    ViewBag.Title = "Registro de Solicitud";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "onSuccessMsj",
+        OnFailure = "onFailureMsj",
+        OnBegin = "Loading(true)",
+        OnComplete = "Loading(false)"
+    };
+}
+
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                @*<h3>Nuevo Usuario</h3>*@
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registro Nueva Solicitud</h2>
+                        <div class="clearfix"></div>
+                        @* opciones modal cerrar encojer y opciones *@
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Ajax.BeginForm("Registro", "Solicitudes", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("IdEscuelaFk")
+                            @Html.ValidationSummary("", new { @class = "text-error" })
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Asunto, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextAreaFor(m => m.Asunto, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @style = "height:100px;" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdTipoAsuntoFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.DropDownList("IdTipoAsuntoFk", new SelectList(ViewBag.TipoAsunto, "id", "nombre"), "Selecciona tipo de asunto", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.FechaEntrega, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.FechaEntrega, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "date"})
+                                </div>
+                            </div>
+                            
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdTipoProcedenciaFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.DropDownList("IdTipoProcedenciaFk", new SelectList(ViewBag.TipoProcedencia, "id", "nombre"), "Selecciona tipo procedencia", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdProcedenciaFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="IdProcedenciaFk" name="IdProcedenciaFk" class="form-control col-md-7 col-xs-12"></select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdEscuelaFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBox("EscuelaElegida",null, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-5">
+                                    @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
+                                    <button id="send" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm model-documento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">Documento de Solicitud</h4>
+            </div>
+            <form id="formularioDoc">
+                <input hidden id="" name="iddetcanalizacion"/>
+                <div class="modal-body">
+                    <input type="file" name="file" accept="image/*" class="form-control" />
+                </div>
+                <div class="modal-footer">
+                    <button id="btnDocumento" type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+<script src="~/Content/Proyecto/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
+<script>
+var options = {
+
+    url: function (term) {
+        return "/Solicitudes/Autocomplete";
+    },
+
+    getValue: function (element) {
+        $("#IdEscuelaFk").val(element.value);
+        return element.name;
+    },
+
+    ajaxSettings: {
+        dataType: "json",
+        method: "POST",
+        data: {
+            dataType: "json"
+        }
+    },
+
+    preparePostData: function (data) {
+        data.term = $("#EscuelaElegida").val();
+        return data;
+    },
+
+    list: {
+        showAnimation: {
+            type: "fade", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        },
+
+        hideAnimation: {
+            type: "slide", //normal|slide|fade
+            time: 400,
+            callback: function() {}
+        }
+    },
+
+    requestDelay: 400
+};
+
+$("#EscuelaElegida").easyAutocomplete(options);
+</script> 

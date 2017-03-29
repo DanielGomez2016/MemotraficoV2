@@ -4,86 +4,82 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bce8854c77f74d12bbb60d624a6d2d8c" Name="Diagram1" ZoomLevel="57">
-        <EntityTypeShape EntityType="SASModel.AccesoSistema" Width="1.5" PointX="10" PointY="0.5" />
-        <EntityTypeShape EntityType="SASModel.Departamento" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SASModel.Email" Width="1.5" PointX="9.5" PointY="3.5" />
-        <EntityTypeShape EntityType="SASModel.Institucion" Width="1.5" PointX="4.625" PointY="1.125" />
-        <EntityTypeShape EntityType="SASModel.AccesoSistemaRol" Width="1.5" PointX="7.75" PointY="1.25" />
-        <AssociationConnector Association="SASModel.FK_AccesoSistemaRol_AccesoSistema" />
-        <AssociationConnector Association="SASModel.FK_Departamento_Institucion" />
-        <AssociationConnector Association="SASModel.FK_AccesoSistemaRol_Institucion" />
-        <EntityTypeShape EntityType="SASModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SASModel.AspNetRoles" Width="1.5" PointX="0.625" PointY="0.5" />
-        <AssociationConnector Association="SASModel.FK_AccesoSistemaRol_AspNetRoles" />
-        <AssociationConnector Association="SASModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="SASModel.AlmacenamientoDren" Width="1.5" PointX="12.375" PointY="21.875" />
-        <EntityTypeShape EntityType="SASModel.Canalizacion" Width="1.5" PointX="15.375" PointY="19.875" />
-        <EntityTypeShape EntityType="SASModel.ComponenteI" Width="1.5" PointX="12.375" PointY="71.125" />
-        <EntityTypeShape EntityType="SASModel.ComponenteII" Width="1.5" PointX="12.375" PointY="57.625" />
-        <EntityTypeShape EntityType="SASModel.ComponenteIII" Width="1.5" PointX="12.375" PointY="65.25" />
-        <EntityTypeShape EntityType="SASModel.ComponenteIV" Width="1.5" PointX="12.375" PointY="68.125" />
-        <EntityTypeShape EntityType="SASModel.ComponenteV" Width="1.5" PointX="12.375" PointY="54.75" />
-        <EntityTypeShape EntityType="SASModel.ComponenteVI" Width="1.5" PointX="12.375" PointY="61.875" />
-        <EntityTypeShape EntityType="SASModel.ComponenteVII" Width="1.5" PointX="12.375" PointY="78.5" />
-        <EntityTypeShape EntityType="SASModel.ComponenteVIII" Width="1.5" PointX="12.375" PointY="74.375" />
-        <EntityTypeShape EntityType="SASModel.Contacto" Width="1.5" PointX="10.125" PointY="15" />
-        <EntityTypeShape EntityType="SASModel.Croquis" Width="1.5" PointX="12.375" PointY="25.625" />
-        <EntityTypeShape EntityType="SASModel.DetalleCanalizacion" Width="1.5" PointX="17.625" PointY="19.875" />
-        <EntityTypeShape EntityType="SASModel.Documentos" Width="1.5" PointX="19.875" PointY="20.125" />
-        <EntityTypeShape EntityType="SASModel.EnergiaElectrica" Width="1.5" PointX="12.375" PointY="18" />
-        <EntityTypeShape EntityType="SASModel.Entorno" Width="1.5" PointX="12.375" PointY="40" />
-        <EntityTypeShape EntityType="SASModel.EspacioEducativo" Width="1.5" PointX="12.375" PointY="29.375" />
-        <EntityTypeShape EntityType="SASModel.EspacioEducativoDet" Width="1.5" PointX="14.625" PointY="28.75" />
-        <EntityTypeShape EntityType="SASModel.EspacioMultiple" Width="1.5" PointX="12.375" PointY="44.625" />
-        <EntityTypeShape EntityType="SASModel.Estatus" Width="1.5" PointX="7.875" PointY="52.625" />
-        <EntityTypeShape EntityType="SASModel.Localidades" Width="1.5" PointX="5.625" PointY="44.5" />
-        <EntityTypeShape EntityType="SASModel.Matricula" Width="1.5" PointX="12.375" PointY="37.125" />
-        <EntityTypeShape EntityType="SASModel.Municipios" Width="1.5" PointX="3.375" PointY="44.625" />
-        <EntityTypeShape EntityType="SASModel.NivelEducativo" Width="1.5" PointX="5.625" PointY="41.625" />
-        <EntityTypeShape EntityType="SASModel.Procedencia" Width="1.5" PointX="7.875" PointY="49.125" />
-        <EntityTypeShape EntityType="SASModel.Requerimientos" Width="1.5" PointX="10.125" PointY="66.125" />
-        <EntityTypeShape EntityType="SASModel.ServicioMunicipal" Width="1.5" PointX="12.375" PointY="32.625" />
-        <EntityTypeShape EntityType="SASModel.Solicitudes" Width="1.5" PointX="10.125" PointY="43.5" />
-        <EntityTypeShape EntityType="SASModel.TipoAsunto" Width="1.5" PointX="7.875" PointY="40.75" />
-        <EntityTypeShape EntityType="SASModel.TipoProcedencia" Width="1.5" PointX="5.625" PointY="49.625" />
-        <EntityTypeShape EntityType="SASModel.Validacion" Width="1.5" PointX="10.125" PointY="32.125" />
-        <AssociationConnector Association="SASModel.FK_AlmacenamientoDren_Validacion" />
-        <AssociationConnector Association="SASModel.FK_Canalizacion_Departamento" />
-        <AssociationConnector Association="SASModel.FK_Canalizacion_Institucion" />
-        <AssociationConnector Association="SASModel.FK_Canalizacion_Solicitudes" />
-        <AssociationConnector Association="SASModel.FK_DetalleCanalizacion_Canalizacion" />
-        <AssociationConnector Association="SASModel.FK_ComponenteI_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteII_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteIII_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteIV_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteV_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteVI_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteVII_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_ComponenteVIII_Requerimientos" />
-        <AssociationConnector Association="SASModel.FK_Croquis_Validacion" />
-        <AssociationConnector Association="SASModel.FK_Documentos_DetalleCanalizacion" />
-        <AssociationConnector Association="SASModel.FK_EnergiaElectrica_Validacion" />
-        <AssociationConnector Association="SASModel.FK_Entorno_Validacion" />
-        <AssociationConnector Association="SASModel.FK_EspacioEducativo_Validacion" />
-        <AssociationConnector Association="SASModel.FK_EspacioEducativoDet_EspacioEducativo" />
-        <AssociationConnector Association="SASModel.FK_EspacioMultiple_Validacion" />
-        <AssociationConnector Association="SASModel.FK_Solicitudes_Estatus" />
-        <AssociationConnector Association="SASModel.FK_Localidades_Municipios" />
-        <AssociationConnector Association="SASModel.FK_Matricula_Validacion" />
-        <AssociationConnector Association="SASModel.FK_Procedencia_TipoProcedencia" />
-        <AssociationConnector Association="SASModel.FK_Solicitudes_Procedencia" />
-        <AssociationConnector Association="SASModel.FK_ServicioMunicipal_Validacion" />
-        <AssociationConnector Association="SASModel.FK_Solicitudes_TipoAsunto" />
-        <AssociationConnector Association="SASModel.FK_Solicitudes_TipoProcedencia" />
-        <EntityTypeShape EntityType="SASModel.Escuela" Width="1.5" PointX="7.875" PointY="43.875" />
-        <AssociationConnector Association="SASModel.FK_Contacto_Escuela" />
-        <AssociationConnector Association="SASModel.FK_Escuela_Localidades" />
-        <AssociationConnector Association="SASModel.FK_Escuela_Municipios" />
-        <AssociationConnector Association="SASModel.FK_Escuela_NivelEducativo" />
-        <AssociationConnector Association="SASModel.FK_Requerimientos_Escuela" />
-        <AssociationConnector Association="SASModel.FK_Solicitudes_Escuela" />
-        <AssociationConnector Association="SASModel.FK_Validacion_Escuela" />
+      <Diagram DiagramId="2d2545c04232443cac3a30f87918ed58" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AccesoSistema" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AlmacenamientoDren" Width="1.5" PointX="9.75" PointY="74.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Canalizacion" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteI" Width="1.5" PointX="9.75" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteII" Width="1.5" PointX="9.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteIII" Width="1.5" PointX="9.75" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteIV" Width="1.5" PointX="9.75" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteV" Width="1.5" PointX="9.75" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteVI" Width="1.5" PointX="9.75" PointY="59.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteVII" Width="1.5" PointX="9.75" PointY="63.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ComponenteVIII" Width="1.5" PointX="9.75" PointY="66" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Contacto" Width="1.5" PointX="7.5" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Croquis" Width="1.5" PointX="9.75" PointY="78.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="6" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DetalleCanalizacion" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Documentos" Width="1.5" PointX="8" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Email" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EnergiaElectrica" Width="1.5" PointX="9.75" PointY="81.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Entorno" Width="1.5" PointX="9.75" PointY="85.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Escuela" Width="1.5" PointX="5.25" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EspacioEducativo" Width="1.5" PointX="9.75" PointY="90.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EspacioEducativoDet" Width="1.5" PointX="12" PointY="89.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EspacioMultiple" Width="1.5" PointX="9.75" PointY="93.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Estatus" Width="1.5" PointX="5.25" PointY="66.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Institucion" Width="1.5" PointX="3.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Localidades" Width="1.5" PointX="3" PointY="100.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Matricula" Width="1.5" PointX="9.75" PointY="99.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Municipios" Width="1.5" PointX="0.75" PointY="39" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NivelEducativo" Width="1.5" PointX="3" PointY="70" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Procedencia" Width="1.5" PointX="5.25" PointY="74.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Requerimientos" Width="1.5" PointX="7.5" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ServicioMunicipal" Width="1.5" PointX="9.75" PointY="102.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Solicitudes" Width="1.5" PointX="7.5" PointY="69" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoAsunto" Width="1.5" PointX="5.25" PointY="78" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoProcedencia" Width="1.5" PointX="3" PointY="75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Validacion" Width="1.5" PointX="7.5" PointY="88.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AccesoSistemaRol" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_AccesoSistemaRol_AccesoSistema" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AlmacenamientoDren_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AccesoSistemaRol_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteI_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteII_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteIII_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteIV_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteV_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteVI_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteVII_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ComponenteVIII_Requerimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Contacto_Escuela" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Croquis_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Departamento_Institucion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Documentos_DetalleCanalizacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EnergiaElectrica_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Entorno_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Escuela_Localidades" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Escuela_Municipios" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Escuela_NivelEducativo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Requerimientos_Escuela" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Solicitudes_Escuela" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Validacion_Escuela" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EspacioEducativo_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EspacioEducativoDet_EspacioEducativo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EspacioMultiple_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Solicitudes_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_AccesoSistemaRol_Institucion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Localidades_Municipios" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Matricula_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Procedencia_TipoProcedencia" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Solicitudes_Procedencia" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ServicioMunicipal_Validacion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Solicitudes_TipoAsunto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Solicitudes_TipoProcedencia" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

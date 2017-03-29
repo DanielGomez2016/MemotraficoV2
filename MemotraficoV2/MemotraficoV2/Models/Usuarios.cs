@@ -26,6 +26,26 @@ namespace MemotraficoV2.Models
             return institucion.IdInstitucion;
         }
 
+        public static int GetDepto()
+        {
+            var user = HttpContext.Current.User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            ApplicationUser depto = db.Users.First(i => i.Id == user);
+
+            return depto.IdDepartamento;
+        }
+
+        public static string GetUsuario()
+        {
+            var user = HttpContext.Current.User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            ApplicationUser usuario = db.Users.First(i => i.Id == user);
+
+            return usuario.Id;
+        }
+
         public static string Roles()
         {
             var rols = "";
