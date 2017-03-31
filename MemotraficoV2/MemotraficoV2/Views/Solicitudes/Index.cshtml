@@ -26,10 +26,11 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>Escuela</th>
-                                    <th>Director</th>
+                                    <th>Domicilio</th>
                                     <th>Localidad</th>
+                                    <th>Nombre Director</th>
                                     <th># Solicitudes</th>
-                                    <th></th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
 
@@ -38,14 +39,26 @@
                                 {
                                     <tr>
                                         <td>@item.escuela</td>
-                                        <td>@item.director</td>
+                                        <td>@item.direccion</td>
                                         <td>@item.localidad</td>
+                                        <td>@item.director</td>
                                         <td class="text-center">@(item.Solicitudes > 0? "Cuenta con " + Convert.ToString(item.Solicitudes) + " solicitudes" : "No tiene solicitudes")</td>
                                         <td>
-                                            @if (item.Solicitudes > 0)
-                                            {
-                                                <button id="idDetSolicitudes" name="idDetSolicitudes" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.idEscuela">Detalle de Solicitudes</button>
-                                            }
+                                            <div class="btn-group">
+                                                @if (item.Solicitudes > 0)
+                                                {
+                                                    <button id="idDetSolicitudes" name="idDetSolicitudes" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.idEscuela">Solicitudes</button>
+                                                }
+                                                <button id="IdDetalleEsc" name="IdDetalleEsc" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg2" value="@item.idEscuela">Detalle Escuela</button>
+                                                @if (item.validacion)
+                                                {
+                                                    @Html.ActionLink("Validaciones - Requerimientos", "Validaciones", item.idEscuela , new { @class = "col-md-offset-med btn btn-success btn-sm" })
+                                                }
+                                                else
+                                                {
+                                                    @Html.ActionLink("Validaciones - Requerimientos", "Validaciones", item.idEscuela, new { @class = "col-md-offset-med btn btn-warning btn-sm" })
+                                                }
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -84,7 +97,24 @@
 
             </div>
             <div class="modal-footer">
-                <a class="btn btn-dark  btn" data-dismiss="modal">Cancelar</a>
+                <a class="btn btn-dark  btn" data-dismiss="modal">Cerrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="titulo"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-dark  btn" data-dismiss="modal">Cerrar</a>
             </div>
         </div>
     </div>

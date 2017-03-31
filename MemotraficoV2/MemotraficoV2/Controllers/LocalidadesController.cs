@@ -51,6 +51,7 @@ namespace MemotraficoV2.Controllers
                 return Json(new
                 {
                     result = false,
+                    dir = "/Localidades/Create",
                     msj = "El registro no se pudo completar, Intenta nuevamente"
                 });
             }

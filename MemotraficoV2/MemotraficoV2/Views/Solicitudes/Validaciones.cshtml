@@ -1,0 +1,77 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    ViewBag.Title = "Registro de Escuela";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "onSuccessMsj",
+        OnFailure = "onFailureMsj",
+        OnBegin = "Loading(true)",
+        OnComplete = "Loading(false)"
+    };
+}
+
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Validacion / Requerimientos</h2>
+                        <div class="clearfix"></div>
+                        @* opciones modal cerrar encojer y opciones *@
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <label>Folio Solicitud</label>
+                                <div>@Model.FolioSolicitud</div>
+                            </div>
+                        </div>
+
+                        @using (Ajax.BeginForm("Validaciones", "Solicitudes", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.EnergiaElectrica.IdEnergiaElectrica)
+                            @Html.HiddenFor(model => model.Entorno.IdEntorno)
+                            @Html.HiddenFor(model => model.Croquis.IdCroquis)
+                            @Html.HiddenFor(model => model.ServicioMunicipal.IdServicioMpal)
+                            @Html.HiddenFor(model => model.AlmacenamientoDren.IdAlmacenDrenaje)
+                            @Html.HiddenFor(model => model.EspacioMultiple.IdEspacioMultiple)
+                            @Html.HiddenFor(model => model.EspacioEducativo.IdEspacioEducativo)
+                            @Html.HiddenFor(model => model.EspacioEducativoDet.IdEspacioDet)
+                            @Html.HiddenFor(model => model.ComponenteI.IdComponenteI)
+                            @Html.HiddenFor(model => model.ComponenteII.IdComponenteII)
+                            @Html.HiddenFor(model => model.ComponenteIII.IdComponenteIII)
+                            @Html.HiddenFor(model => model.ComponenteIV.IdComponenteIV)
+                            @Html.HiddenFor(model => model.ComponenteV.IdComponenteV)
+                            @Html.HiddenFor(model => model.ComponenteVI.IdComponenteVI)
+                            @Html.HiddenFor(model => model.ComponenteVII.IdComponenteVII)
+                            @Html.HiddenFor(model => model.ComponenteVIII.IdComponenteVIII)
+                            @Html.ValidationSummary("", new { @class = "text-error" })
+
+
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-5">
+                                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-primary" })
+                                    <button id="send" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

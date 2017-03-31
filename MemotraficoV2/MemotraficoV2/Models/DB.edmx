@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccesoSistema">
           <Key>
             <PropertyRef Name="IdAccesoSistema" />
@@ -239,7 +239,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="150" />
-          <Property Name="Documento" Type="binary" MaxLength="8000" />
+          <Property Name="Documento" Type="varbinary(max)" />
           <Property Name="Tipo" Type="varchar" MaxLength="15" />
           <Property Name="IdDetalleCanalizarFk" Type="int" />
         </EntityType>
@@ -1117,8 +1117,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             <End Role="Validacion" EntitySet="Validacion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1345,18 +1344,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdUsuarioFk" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
           <Property Name="Instituto" Type="Int32" />
           <Property Name="Departamento" Type="Int32" />
-          <NavigationProperty Name="Documentos" Relationship="Self.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
-        </EntityType>
-        <EntityType Name="Documentos">
-          <Key>
-            <PropertyRef Name="IdDocumento" />
-          </Key>
-          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Documento" Type="Binary" MaxLength="8000" FixedLength="true" />
-          <Property Name="Tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
-          <NavigationProperty Name="DetalleCanalizacion" Relationship="Self.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
+          <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
         </EntityType>
         <EntityType Name="Email">
           <Key>
@@ -1820,18 +1808,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Documentos_DetalleCanalizacion">
-          <End Role="DetalleCanalizacion" Type="Self.DetalleCanalizacion" Multiplicity="0..1" />
-          <End Role="Documentos" Type="Self.Documentos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetalleCanalizacion">
-              <PropertyRef Name="IdDetalleCanalizar" />
-            </Principal>
-            <Dependent Role="Documentos">
-              <PropertyRef Name="IdDetalleCanalizarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EnergiaElectrica_Validacion">
           <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
           <End Role="EnergiaElectrica" Type="Self.EnergiaElectrica" Multiplicity="*" />
@@ -2094,7 +2070,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySet Name="Croquis" EntityType="Self.Croquis" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" />
           <EntitySet Name="DetalleCanalizacion" EntityType="Self.DetalleCanalizacion" />
-          <EntitySet Name="Documentos" EntityType="Self.Documentos" />
           <EntitySet Name="Email" EntityType="Self.Email" />
           <EntitySet Name="EnergiaElectrica" EntityType="Self.EnergiaElectrica" />
           <EntitySet Name="Entorno" EntityType="Self.Entorno" />
@@ -2171,10 +2146,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <AssociationSet Name="FK_Departamento_Institucion" Association="Self.FK_Departamento_Institucion">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="Departamento" EntitySet="Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Self.FK_Documentos_DetalleCanalizacion">
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-            <End Role="Documentos" EntitySet="Documentos" />
           </AssociationSet>
           <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Self.FK_EnergiaElectrica_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
@@ -2260,7 +2231,35 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
+          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+            <End Role="Documentos" EntitySet="Documentos" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Documentos">
+          <Key>
+            <PropertyRef Name="IdDocumento" />
+          </Key>
+          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
+        </EntityType>
+        <Association Name="FK_Documentos_DetalleCanalizacion">
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
+          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleCanalizacion">
+              <PropertyRef Name="IdDetalleCanalizar" />
+            </Principal>
+            <Dependent Role="Documentos">
+              <PropertyRef Name="IdDetalleCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2489,17 +2488,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
                 <ScalarProperty Name="IdUsuarioFk" ColumnName="IdUsuarioFk" />
                 <ScalarProperty Name="Instituto" ColumnName="Instituto" />
                 <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Documentos">
-            <EntityTypeMapping TypeName="Model.Documentos">
-              <MappingFragment StoreEntitySet="Documentos">
-                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="IdDetalleCanalizarFk" ColumnName="IdDetalleCanalizarFk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2770,6 +2758,17 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Documentos">
+            <EntityTypeMapping TypeName="Model.Documentos">
+              <MappingFragment StoreEntitySet="Documentos">
+                <ScalarProperty Name="IdDetalleCanalizarFk" ColumnName="IdDetalleCanalizarFk" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -21,9 +21,9 @@ namespace MemotraficoV2.Models
             s.IdTipoProcedenciaFk = IdTipoProcedenciaFk;
             s.Folio = GenerarFolio(FechaEntrega);
             s.FechaEntrega = FechaEntrega;
-            db.Solicitudes.AddObject(this);
+            db.Solicitudes.AddObject(s);
             db.SaveChanges();
-            return IdSolicitud;
+            return s.IdSolicitud;
         }
 
         public string GenerarFolio(DateTime? f)
@@ -42,7 +42,7 @@ namespace MemotraficoV2.Models
 
             IQueryable<Escuela> query = db.Escuela;
 
-            if (string.IsNullOrEmpty(term))
+            if (!string.IsNullOrEmpty(term))
             {
                 query = query.Where(i => i.Clave.Contains(term) || i.Nombre.Contains(term));
             }
@@ -51,7 +51,7 @@ namespace MemotraficoV2.Models
                         .Select(i => new
                         {
                             value = i.IdEscuela,
-                            Nombre = i.Clave +" "+i.Nombre
+                            name = i.Clave +" "+i.Nombre
                         })
                         .Take(15)
                         .ToArray();

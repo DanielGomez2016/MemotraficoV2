@@ -1,0 +1,87 @@
+﻿@model MemotraficoV2.Models.Procedencia
+@{
+    ViewBag.Title = "Registro de Escuela";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "onSuccessMsj",
+        OnFailure = "onFailureMsj",
+        OnBegin = "Loading(true)",
+        OnComplete = "Loading(false)"
+    };
+}
+
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registro Nueva Procedenica</h2>
+                        <div class="clearfix"></div>
+                        @* opciones modal cerrar encojer y opciones *@
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        @using (Ajax.BeginForm("Create", "Procedenica", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary("", new { @class = "text-error" })
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Procedencia1, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Procedencia1, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Contacto, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Contacto, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Domicilio, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.Domicilio, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Municipio, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.DropDownList("Municipio", new SelectList(ViewBag.Municipios, "id", "nombre"), "Todos", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.Localidad, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="Localidad" name="Localidad" class="form-control col-md-7 col-xs-12" required></select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                @Html.LabelFor(m => m.IdTipoProcedenciaFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.DropDownList("IdTipoProcedenciaFk", new SelectList(ViewBag.TipoProcedencia, "id", "nombre"), "Tipo Procedencia", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-md-offset-5">
+                                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-primary" })
+                                    <button id="send" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

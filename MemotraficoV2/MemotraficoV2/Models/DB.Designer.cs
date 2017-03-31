@@ -15,6 +15,7 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region Metadatos de relaciones en EDM
@@ -33,7 +34,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Contacto_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Contacto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Contacto), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Croquis_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Croquis", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Croquis), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Departamento_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Departamento), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Documentos_DetalleCanalizacion", "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.DetalleCanalizacion), "Documentos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Documentos), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_EnergiaElectrica_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EnergiaElectrica", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EnergiaElectrica), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Entorno_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Validacion), "Entorno", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Entorno), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_Localidades", "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Localidades), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
@@ -55,6 +55,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoAsunto", "TipoAsunto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoAsunto), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.TipoProcedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
+[assembly: EdmRelationshipAttribute("Model", "FK_Documentos_DetalleCanalizacion", "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.DetalleCanalizacion), "Documentos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Documentos), true)]
 
 #endregion
 
@@ -377,22 +378,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<DetalleCanalizacion> _DetalleCanalizacion;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<Documentos> Documentos
-        {
-            get
-            {
-                if ((_Documentos == null))
-                {
-                    _Documentos = base.CreateObjectSet<Documentos>("Documentos");
-                }
-                return _Documentos;
-            }
-        }
-        private ObjectSet<Documentos> _Documentos;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -729,6 +714,22 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<AccesoSistemaRol> _AccesoSistemaRol;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Documentos> Documentos
+        {
+            get
+            {
+                if ((_Documentos == null))
+                {
+                    _Documentos = base.CreateObjectSet<Documentos>("Documentos");
+                }
+                return _Documentos;
+            }
+        }
+        private ObjectSet<Documentos> _Documentos;
 
         #endregion
 
@@ -868,14 +869,6 @@ namespace MemotraficoV2.Models
         public void AddToDetalleCanalizacion(DetalleCanalizacion detalleCanalizacion)
         {
             base.AddObject("DetalleCanalizacion", detalleCanalizacion);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Documentos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToDocumentos(Documentos documentos)
-        {
-            base.AddObject("Documentos", documentos);
         }
     
         /// <summary>
@@ -1044,6 +1037,14 @@ namespace MemotraficoV2.Models
         public void AddToAccesoSistemaRol(AccesoSistemaRol accesoSistemaRol)
         {
             base.AddObject("AccesoSistemaRol", accesoSistemaRol);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Documentos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToDocumentos(Documentos documentos)
+        {
+            base.AddObject("Documentos", documentos);
         }
 
         #endregion

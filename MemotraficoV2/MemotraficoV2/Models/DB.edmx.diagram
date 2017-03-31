@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d2545c04232443cac3a30f87918ed58" Name="Diagram1">
+      <Diagram DiagramId="518533782f0b4c17b712e20b350d72f3" Name="Diagram1">
         <EntityTypeShape EntityType="Model.AccesoSistema" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AlmacenamientoDren" Width="1.5" PointX="9.75" PointY="74.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="Model.Croquis" Width="1.5" PointX="9.75" PointY="78.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="6" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.DetalleCanalizacion" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Documentos" Width="1.5" PointX="8" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Email" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.EnergiaElectrica" Width="1.5" PointX="9.75" PointY="81.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Entorno" Width="1.5" PointX="9.75" PointY="85.25" IsExpanded="true" />
@@ -58,7 +57,6 @@
         <AssociationConnector Association="Model.FK_Contacto_Escuela" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Croquis_Validacion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Departamento_Institucion" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Documentos_DetalleCanalizacion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EnergiaElectrica_Validacion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Entorno_Validacion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Escuela_Localidades" ManuallyRouted="false" />
@@ -80,6 +78,8 @@
         <AssociationConnector Association="Model.FK_Solicitudes_TipoAsunto" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Solicitudes_TipoProcedencia" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Documentos" Width="1.5" PointX="8" PointY="9.75" />
+        <AssociationConnector Association="Model.FK_Documentos_DetalleCanalizacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -88,14 +88,13 @@
         </div>
     </div>
 </div>
-<div class="modal fade bs-example-modal-sm model-documento" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-sm model-documento" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel2">Documento de Solicitud</h4>
+                <h4 class="modal-title" id="myModalLabel2">Anexo Documento Solicitud</h4>
             </div>
-            <form id="formularioDoc">
-                <input hidden id="" name="iddetcanalizacion"/>
+            <form id="formularioDoc" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
                     <input type="file" name="file" accept="image/*" class="form-control" />
                 </div>

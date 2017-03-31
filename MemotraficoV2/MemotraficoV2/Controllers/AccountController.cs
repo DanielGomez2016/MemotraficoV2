@@ -412,7 +412,12 @@ namespace IdentitySample.Controllers
             var cookie = new HttpCookie("Usuario");
             cookie.Expires = DateTime.Now.AddHours(8);
             cookie["Nombre"] = nu;
-            cookie["Perfil"] = u.Imagen.Length > 0 ? "" : "/Content/Proyecto/images/user.png";
+            if(Convert.ToString(u.Imagen) != "")
+            cookie["Perfil"] = "/Content/Proyecto/images/user.png";
+            else
+            {
+                cookie["Perfil"] = "";
+            }
             cookie["Institucion"] = Convert.ToString(u.IdInstitucion);
 
             Response.Cookies.Add(cookie);
@@ -423,7 +428,7 @@ namespace IdentitySample.Controllers
         {
             var u = User.Identity.GetUserId();
             var user = UserManager.FindById(u);
-            if (user != null)
+            if (user != null || user.Imagen.Count() > 0)
             {
 
                 string type = string.Empty;
@@ -440,7 +445,7 @@ namespace IdentitySample.Controllers
         public FileContentResult GetImagenU(string id)
         {
             var user = UserManager.FindById(id);
-            if (user != null)
+            if (user != null || user.Imagen.Count() > 0)
             {
 
                 string type = string.Empty;
