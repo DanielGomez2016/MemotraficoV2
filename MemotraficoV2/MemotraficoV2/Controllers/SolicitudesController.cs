@@ -127,11 +127,12 @@ namespace MemotraficoV2.Controllers
             }
         }
 
-        public ActionResult Validaciones(int esc, int sol)
+        public ActionResult Validaciones(int esc, string sol)
         {
             SASEntities db = new SASEntities();
             Validacion_Requerimientos vr = new Validacion_Requerimientos();
 
+            vr.FolioSolicitud = sol;
             Contacto c = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == esc);
 
             vr.Escuela = db.Escuela.FirstOrDefault(i => i.IdEscuela == esc);
@@ -145,15 +146,27 @@ namespace MemotraficoV2.Controllers
 
             Validacion v = db.Validacion.FirstOrDefault(i => i.IdEscuelaFk == esc);
 
-            vr.aulas = EspacioEducativoDet.ContarAulas(v.IdValidar);
-            vr.laboratorios = EspacioEducativoDet.ContarLaboratorios(v.IdValidar);
-            vr.talleres = EspacioEducativoDet.ContarTalleres(v.IdValidar);
-            vr.anexos = EspacioEducativoDet.ContarAnexos(v.IdValidar);
+            vr.aulas = EspacioEducativoDet.ContarAulas(v == null ? 0 : v.IdValidar);
+            vr.laboratorios = EspacioEducativoDet.ContarLaboratorios(v == null ? 0 : v.IdValidar);
+            vr.talleres = EspacioEducativoDet.ContarTalleres(v == null ? 0 : v.IdValidar);
+            vr.anexos = EspacioEducativoDet.ContarAnexos(v == null ? 0 : v.IdValidar);
 
             if (v != null)
             {
+                vr.Matricula = db.Matricula.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
+                             db.Matricula.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new Matricula();
+
                 vr.Entorno = db.Entorno.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
                              db.Entorno.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new Entorno();
+
+                if (vr.Entorno != null)
+                {
+                    vr.Entorno.Rio_Arrollo = false;
+                    vr.Entorno.AmenazaVial = false;
+                    vr.Entorno.Comercio = false;
+                    vr.Entorno.DerechoVia = false;
+                    vr.Entorno.Gasolinera = false;
+                }
 
                 vr.Croquis = db.Croquis.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
                              db.Croquis.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new Croquis();
@@ -173,9 +186,10 @@ namespace MemotraficoV2.Controllers
                 vr.EspacioEducativo = db.EspacioEducativo.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
                                       db.EspacioEducativo.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new EspacioEducativo();
 
-                vr.EspacioEducativoDet = db.EspacioEducativoDet.FirstOrDefault(i => i.IdEspacioEducativoFk == 
-                                         db.EspacioEducativo.FirstOrDefault(j => j.IdValidarFk == v.IdValidar).IdEspacioEducativo) != null ?
-                                         db.EspacioEducativoDet.FirstOrDefault(i => i.IdEspacioEducativoFk == vr.EspacioEducativo.IdEspacioEducativo) : new EspacioEducativoDet();
+                vr.EspacioEducativoDet = db.EspacioEducativoDet.Where(i => i.IdEspacioEducativoFk ==
+                                         db.EspacioEducativo.FirstOrDefault(j => j.IdValidarFk == v.IdValidar).IdEspacioEducativo).ToArray() != null ? db.EspacioEducativoDet.Where(i => i.IdEspacioEducativoFk ==
+                                         db.EspacioEducativo.FirstOrDefault(j => j.IdValidarFk == v.IdValidar).IdEspacioEducativo).ToArray() :
+                                         null;
             }
 
             Requerimientos r = db.Requerimientos.FirstOrDefault(i => i.IdEsceulaFk == esc);
@@ -185,8 +199,8 @@ namespace MemotraficoV2.Controllers
                                  db.ComponenteI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteI();
                 vr.ComponenteII = db.ComponenteII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
                                   db.ComponenteII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteII();
-                vr.ComponenteIII = db.ComponenteIII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                   db.ComponenteIII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteIII();
+                vr.ComponenteIII = db.ComponenteIII.Where(i => i.IdRequerimientoFk == r.IdRequerimiento).ToArray() != null ?
+                                   db.ComponenteIII.Where(i => i.IdRequerimientoFk == r.IdRequerimiento).ToArray() : null;
                 vr.ComponenteVI = db.ComponenteVI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
                                   db.ComponenteVI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteVI();
                 vr.ComponenteV = db.ComponenteV.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
@@ -205,6 +219,24 @@ namespace MemotraficoV2.Controllers
         [HttpPost]
         public JsonResult Validaciones(Validacion_Requerimientos vr) {
             return Json(false);
+        }
+
+        public FileContentResult GetCroquis(int id)
+        {
+            SASEntities db = new SASEntities();
+            var croquis = db.Croquis.FirstOrDefault(i => i.IdCroquis == id);
+            if (croquis != null || croquis.DocCroquis.Count() > 0)
+            {
+
+                string type = string.Empty;
+                type = croquis.Tipo;
+                var file = File(croquis.DocCroquis, type);
+                return file;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

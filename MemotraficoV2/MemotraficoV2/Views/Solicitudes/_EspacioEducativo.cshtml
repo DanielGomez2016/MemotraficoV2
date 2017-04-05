@@ -1,0 +1,96 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+<div class="item form-group well col-md-12">
+    <table class="table" id="copiar">
+        <thead>
+            <tr>
+                <th>Edificio</th>
+                <th>Tipologia</th>
+                <th>Aulas</th>
+                <th>Talleres / Laboratorios</th>
+                <th>Serv. Sanitarios</th>
+                <th>Serv. Administrativos</th>
+                <th>Bibliotecas</th>
+                <th>Aula de Usos Multiples</th>
+                <th>Bodegas y Apendices</th>
+                <th><button type="button" id="btnagregarEdi" class="btn-sm btn-info"><i class="fa fa-plus"></i></button></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="copia" hidden>
+                <th>
+                    <input class="form-control" name="EEDEdificio" data-val="0" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDTipologia" value=""/>
+                </th>
+                <th>
+                    <input class="form-control" name="EEDAulas" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDLaboratorio" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDSanitario" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDAdministrativo" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDBiblioteca" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDAulaMultiple" value="0" />
+                </th>
+                <th>
+                    <input class="form-control" name="EEDBodegas" value="0" />
+                </th>
+                <td>
+                    <button type="button" class="btn-sm btn-danger" name="btneliminar"><span class="fa fa-trash"></span></button>
+                </td>
+            </tr>
+
+            @if (Model.EspacioEducativoDet != null)
+            {
+                foreach (var i in Model.EspacioEducativoDet){
+                    <tr>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDEdificio" data-val="0" value="@(i.Edificio)" />
+                        </th>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDTipologia" value="@(i.TipoEstructura)" />
+                        </th>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDAulas" value="@(i.Aulas)" />
+                        </th>
+                        <th class="col-md-2">
+                            <input class="col-md-12" name="EEDLaboratorio" value="@(i.Taller)" />
+                        </th>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDSanitario" value="@(i.ServicioSanitario)" />
+                        </th>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDAdministrativo" value="@(i.ServicioAdministrativo)" />
+                        </th>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDBiblioteca" value="@(i.Biblioteca)" />
+                        </th>
+                        <th class="col-md-1">
+                            <input class="col-md-12" name="EEDAulaMultiple" value="@(i.AulasUsoMultiple)" />
+                        </th>
+                        <th class="col-md-2">
+                            <input class="col-md-12" name="EEDBodegas" value="@(i.BodegaApendice)" />
+                        </th>
+                        <td class="col-md-1">
+                            <button type="button" class="btn-sm btn-danger" name="btneliminar"><span class="fa fa-trash"></span></button>
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

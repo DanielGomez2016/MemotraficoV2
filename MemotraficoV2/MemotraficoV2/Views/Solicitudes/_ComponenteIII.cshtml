@@ -1,0 +1,97 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-4 text-center">Concepto</th>
+                <th class="col-md-4 text-center">Solicita</th>
+                <th class="col-md-4 text-center">Requerimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ComponenteIII == null)
+            {
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Mesa para jardin de niños" readonly/></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Silla para jardin de niños" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Mesa-Bancos Binarios" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Silla con paleta" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Mesa y silla para maestro" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Pizzarron" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Equipo de computo" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Impresora / Multifuncional" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Copiadora" readonly /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" name="C3Conceptos" value="Otro" /></td>
+                <td><input class="form-control" name="C3Solicitante" value="0" /></td>
+                <td><input class="form-control" name="C3Requerimientos" value="0" /></td>
+            </tr>
+            }
+            else
+            {
+                var x = 0;
+                var count = Model.ComponenteIII.Count();
+                foreach (var i in Model.ComponenteIII)
+                {
+                    if (x == (count - 1))
+                    {
+                        <tr>
+                            <td><input class="form-control" name="C3Conceptos" value="@(i.Concepto)" /></td>
+                            <td><input class="form-control" name="C3Solicitante" value="@(i.Solicita)" /></td>
+                            <td><input class="form-control" name="C3Requerimientos" value="@(i.Requiere)" /></td>
+                        </tr>
+                    }
+                    else
+                    {
+                    <tr>
+                        <td><input class="form-control" name="Conceptos" value="@(i.Concepto)" readonly /></td>
+                        <td><input class="form-control" name="Solicitante" value="@(i.Solicita)" /></td>
+                        <td><input class="form-control" name="Requerimientos" value="@(i.Requiere)" /></td>
+                    </tr>
+                    }
+                    x++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

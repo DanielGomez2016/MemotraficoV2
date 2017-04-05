@@ -1,0 +1,120 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+    ViewBag.Title = "_ServiciosMunicipales";
+}
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>En la Comunidad</th>
+                <th class="text-center">Existe</th>
+                <th class="text-center">Distancia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-3"><label>Red de Agua Potable</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.ServicioMunicipal != null)
+                    {
+                        <input type="checkbox" name="SMRed" value="RedAgua" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="SMRed" value="RedAgua" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedAguaDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Red de Drenaje Sanitario</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.ServicioMunicipal != null)
+                    {
+                        <input type="checkbox" name="SMRed" value="RedDrenaje" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="SMRed" value="RedDrenaje" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedDrenajeDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Red de Energia Electrica</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.ServicioMunicipal != null)
+                    {
+                        <input type="checkbox" name="SMRed" value="RedEnergia" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="SMRed" value="RedEnergia" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedEnergiaDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Red de Alumbrado Publico</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.ServicioMunicipal != null)
+                    {
+                        <input type="checkbox" name="SMRed" value="RedAlumbrado" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="SMRed" value="RedAlumbrado" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedAlumbradoDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td><td class="col-md-2 text-center"><label>Tipo de vialidad</label></td><td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3 text-right">
+                    <label>
+                        @if (Model.ServicioMunicipal != null && Model.ServicioMunicipal.VialidadPrimaria == true)
+                        {
+                            <input type="checkbox" name="SMVialidades" value="Primaria" class="js-switch" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="SMVialidades" value="Primaria" class="js-switch" />
+                        }
+                         Primaria
+                    </label>
+                </td>
+                <td class="col-md-3 text-center">
+                    <label>
+                        @if (Model.ServicioMunicipal != null && Model.ServicioMunicipal.VialidadSecundaria == true)
+                        {
+                            <input type="checkbox" name="SMVialidades" value="Secundaria" class="js-switch" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="SMVialidades" value="Secundaria" class="js-switch" />
+                        }
+                        Secundaria
+                    </label>
+                </td>
+                <td class="col-md-7 text-left">
+                    <label>
+                        @if (Model.ServicioMunicipal != null && Model.ServicioMunicipal.VialidadTerciaria == true)
+                        {
+                            <input type="checkbox" name="SMVialidades" value="Terciaria" class="js-switch" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="SMVialidades" value="Terciaria" class="js-switch" />
+                        }
+                        Terciaria
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -34,11 +34,17 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdAlmacenDrenaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdValidarFk" Type="int" />
           <Property Name="Redagua" Type="bit" />
+          <Property Name="RedaguaEstado" Type="int" />
           <Property Name="Pipa" Type="bit" />
+          <Property Name="PipaEstado" Type="int" />
           <Property Name="Cisterna" Type="bit" />
+          <Property Name="CisternaEstado" Type="nchar" MaxLength="10" />
           <Property Name="Tinaco" Type="bit" />
+          <Property Name="TinacoEstado" Type="nchar" MaxLength="10" />
           <Property Name="ColectorMunicipal" Type="bit" />
+          <Property Name="ColectorMunicipalEstado" Type="nchar" MaxLength="10" />
           <Property Name="FosaSeptica" Type="bit" />
+          <Property Name="FosaSepticaEstado" Type="nchar" MaxLength="10" />
           <Property Name="EstadoGeneral" Type="int" />
         </EntityType>
         <EntityType Name="AspNetRoles">
@@ -97,11 +103,16 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="Concepto" Type="varbinary" MaxLength="50" />
-          <Property Name="Esp_A" Type="bit" />
-          <Property Name="Esp_L" Type="bit" />
-          <Property Name="Esp_T" Type="bit" />
-          <Property Name="Esp_Ax" Type="bit" />
+          <Property Name="ConstruccionEspacio" Type="varchar" MaxLength="500" />
+          <Property Name="Pintura" Type="varchar" MaxLength="500" />
+          <Property Name="Impermeabilizante" Type="varchar" MaxLength="500" />
+          <Property Name="PisoCeramica" Type="varchar" MaxLength="500" />
+          <Property Name="Herreria" Type="varchar" MaxLength="500" />
+          <Property Name="AireAcondicionado" Type="varchar" MaxLength="500" />
+          <Property Name="CalentonGas" Type="varchar" MaxLength="500" />
+          <Property Name="InstElectrica" Type="varchar" MaxLength="500" />
+          <Property Name="HidroSanitaria" Type="varchar" MaxLength="500" />
+          <Property Name="InstGas" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ComponenteII">
           <Key>
@@ -109,16 +120,16 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteII" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="ConstruccionModulo" Type="varchar" MaxLength="250" />
-          <Property Name="MuebleSanitario" Type="varchar" MaxLength="250" />
-          <Property Name="Pintura" Type="varchar" MaxLength="250" />
-          <Property Name="Piso" Type="varchar" MaxLength="250" />
-          <Property Name="Herreria" Type="varchar" MaxLength="250" />
-          <Property Name="Acabado" Type="varchar" MaxLength="250" />
-          <Property Name="Cisterna" Type="varchar" MaxLength="250" />
-          <Property Name="InstalacionElectrica" Type="varchar" MaxLength="250" />
-          <Property Name="HidroSanitaria" Type="varchar" MaxLength="250" />
-          <Property Name="Impermeabilizante" Type="varchar" MaxLength="250" />
+          <Property Name="ConstruccionModulo" Type="varchar" MaxLength="500" />
+          <Property Name="MuebleSanitario" Type="varchar" MaxLength="500" />
+          <Property Name="Pintura" Type="varchar" MaxLength="500" />
+          <Property Name="Piso" Type="varchar" MaxLength="500" />
+          <Property Name="Herreria" Type="varchar" MaxLength="500" />
+          <Property Name="Acabado" Type="varchar" MaxLength="500" />
+          <Property Name="Cisterna" Type="varchar" MaxLength="500" />
+          <Property Name="InstalacionElectrica" Type="varchar" MaxLength="500" />
+          <Property Name="HidroSanitaria" Type="varchar" MaxLength="500" />
+          <Property Name="Impermeabilizante" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ComponenteIII">
           <Key>
@@ -126,7 +137,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteIII" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="Concepto" Type="varchar" MaxLength="50" />
+          <Property Name="Concepto" Type="varchar" MaxLength="100" />
           <Property Name="Solicita" Type="int" />
           <Property Name="Requiere" Type="int" />
         </EntityType>
@@ -136,8 +147,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteIV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="RedHidraulica" Type="varchar" MaxLength="250" />
-          <Property Name="Construccion" Type="varchar" MaxLength="250" />
+          <Property Name="RedHidraulica" Type="varchar" MaxLength="500" />
+          <Property Name="Construccion" Type="varchar" MaxLength="500" />
           <Property Name="Rehabilitacion" Type="int" />
         </EntityType>
         <EntityType Name="ComponenteV">
@@ -146,9 +157,9 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="Andadores" Type="varchar" MaxLength="250" />
-          <Property Name="Rampas" Type="varchar" MaxLength="250" />
-          <Property Name="Pasamanos" Type="nchar" MaxLength="10" />
+          <Property Name="Andadores" Type="varchar" MaxLength="500" />
+          <Property Name="Rampas" Type="varchar" MaxLength="500" />
+          <Property Name="Pasamanos" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ComponenteVI">
           <Key>
@@ -156,11 +167,11 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteVI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="ConstruccionModulo" Type="varchar" MaxLength="250" />
-          <Property Name="Pintura" Type="varchar" MaxLength="250" />
-          <Property Name="Piso" Type="varchar" MaxLength="250" />
-          <Property Name="InstalacionElectrica" Type="varchar" MaxLength="250" />
-          <Property Name="AireAcondicionado" Type="varchar" MaxLength="250" />
+          <Property Name="ConstruccionModulo" Type="varchar" MaxLength="500" />
+          <Property Name="Pintura" Type="varchar" MaxLength="500" />
+          <Property Name="Piso" Type="varchar" MaxLength="500" />
+          <Property Name="InstalacionElectrica" Type="varchar" MaxLength="500" />
+          <Property Name="AireAcondicionado" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ComponenteVII">
           <Key>
@@ -168,9 +179,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteVII" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="Telefonia" Type="varchar" MaxLength="250" />
-          <Property Name="Internet" Type="varchar" MaxLength="250" />
-          <Property Name="VozDatos" Type="varchar" MaxLength="250" />
+          <Property Name="Telefonia_internet" Type="varchar" MaxLength="500" />
+          <Property Name="VozDatos" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ComponenteVIII">
           <Key>
@@ -178,15 +188,16 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteVIII" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRequerimientoFk" Type="int" />
-          <Property Name="MuroAcometida" Type="varchar" MaxLength="250" />
-          <Property Name="Alumbrado" Type="varchar" MaxLength="250" />
-          <Property Name="RedElectrica" Type="varchar" MaxLength="250" />
-          <Property Name="Barda" Type="varchar" MaxLength="250" />
-          <Property Name="CanchaMultiple" Type="varchar" MaxLength="250" />
-          <Property Name="PlazaCivica" Type="varchar" MaxLength="250" />
-          <Property Name="Domo" Type="varchar" MaxLength="250" />
-          <Property Name="AstaBandera" Type="varchar" MaxLength="250" />
-          <Property Name="AccesoPrincipal" Type="varchar" MaxLength="250" />
+          <Property Name="MuroAcometida" Type="varchar" MaxLength="500" />
+          <Property Name="Alumbrado" Type="varchar" MaxLength="500" />
+          <Property Name="ContenedorBasura" Type="varchar" MaxLength="500" />
+          <Property Name="Barda" Type="varchar" MaxLength="500" />
+          <Property Name="CanchaMultiple" Type="varchar" MaxLength="500" />
+          <Property Name="Otros" Type="varchar" MaxLength="500" />
+          <Property Name="Domo" Type="varchar" MaxLength="500" />
+          <Property Name="AstaBandera" Type="varchar" MaxLength="500" />
+          <Property Name="AccesoPrincipal" Type="varchar" MaxLength="500" />
+          <Property Name="AreaJuegos" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -204,7 +215,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             <PropertyRef Name="IdCroquis" />
           </Key>
           <Property Name="IdCroquis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DocCroquis" Type="binary" MaxLength="8000" />
+          <Property Name="DocCroquis" Type="varbinary(max)" />
           <Property Name="Tipo" Type="varchar" MaxLength="20" />
           <Property Name="Predio" Type="bit" />
           <Property Name="TipoSuelo" Type="int" />
@@ -240,7 +251,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="150" />
           <Property Name="Documento" Type="varbinary(max)" />
-          <Property Name="Tipo" Type="varchar" MaxLength="15" />
+          <Property Name="Tipo" Type="varchar" MaxLength="25" />
           <Property Name="IdDetalleCanalizarFk" Type="int" />
         </EntityType>
         <EntityType Name="Email">
@@ -262,12 +273,19 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdEnergiaElectrica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdValidarFk" Type="int" />
           <Property Name="Subestacion" Type="bit" />
+          <Property Name="SubestacionEstado" Type="int" />
           <Property Name="MuroAcometida" Type="bit" />
-          <Property Name="NoMedidor" Type="bit" />
+          <Property Name="MuroAcometidaEstado" Type="int" />
+          <Property Name="TableroDistribucion" Type="bit" />
+          <Property Name="TableroDistribucionEstado" Type="int" />
           <Property Name="InterruptorGral" Type="bit" />
+          <Property Name="InterruptorGralEstado" Type="int" />
           <Property Name="Termomagnetico" Type="bit" />
+          <Property Name="TermomagneticoElectrico" Type="int" />
           <Property Name="AlumbradoExt" Type="bit" />
+          <Property Name="AlumbradoExtEstado" Type="int" />
           <Property Name="Luminaria" Type="bit" />
+          <Property Name="LuminariaEstado" Type="int" />
           <Property Name="EstadoGeneral" Type="int" />
         </EntityType>
         <EntityType Name="Entorno">
@@ -325,6 +343,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="ServicioAdministrativo" Type="int" />
           <Property Name="Biblioteca" Type="int" />
           <Property Name="BodegaApendice" Type="int" />
+          <Property Name="AulasUsoMultiple" Type="int" />
         </EntityType>
         <EntityType Name="EspacioMultiple">
           <Key>
@@ -332,8 +351,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdEspacioMultiple" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdValidarFk" Type="int" />
-          <Property Name="MuroAcometidaEstado" Type="int" />
-          <Property Name="MuroAcometida" Type="bit" />
+          <Property Name="AreajuegosEstado" Type="int" />
+          <Property Name="Areajuegos" Type="bit" />
           <Property Name="BardaEstado" Type="int" />
           <Property Name="Barda" Type="bit" />
           <Property Name="RampasEstado" Type="int" />
@@ -348,6 +367,10 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Bebedero" Type="bit" />
           <Property Name="AccesoPEstado" Type="int" />
           <Property Name="AccesoP" Type="bit" />
+          <Property Name="AstaBandera" Type="int" />
+          <Property Name="AstaBanderaEstado" Type="bit" />
+          <Property Name="Otro" Type="bit" />
+          <Property Name="OtroEstado" Type="int" />
         </EntityType>
         <EntityType Name="Estatus">
           <Key>
@@ -1121,16 +1144,201 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccesoSistema" EntityType="Model.AccesoSistema" />
+          <EntitySet Name="AlmacenamientoDren" EntityType="Model.AlmacenamientoDren" />
+          <EntitySet Name="AspNetRoles" EntityType="Model.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
+          <EntitySet Name="Canalizacion" EntityType="Model.Canalizacion" />
+          <EntitySet Name="ComponenteI" EntityType="Model.ComponenteI" />
+          <EntitySet Name="ComponenteII" EntityType="Model.ComponenteII" />
+          <EntitySet Name="ComponenteIII" EntityType="Model.ComponenteIII" />
+          <EntitySet Name="ComponenteIV" EntityType="Model.ComponenteIV" />
+          <EntitySet Name="ComponenteV" EntityType="Model.ComponenteV" />
+          <EntitySet Name="ComponenteVI" EntityType="Model.ComponenteVI" />
+          <EntitySet Name="ComponenteVII" EntityType="Model.ComponenteVII" />
+          <EntitySet Name="ComponenteVIII" EntityType="Model.ComponenteVIII" />
+          <EntitySet Name="Contacto" EntityType="Model.Contacto" />
+          <EntitySet Name="Croquis" EntityType="Model.Croquis" />
+          <EntitySet Name="Departamento" EntityType="Model.Departamento" />
+          <EntitySet Name="DetalleCanalizacion" EntityType="Model.DetalleCanalizacion" />
+          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
+          <EntitySet Name="Email" EntityType="Model.Email" />
+          <EntitySet Name="EnergiaElectrica" EntityType="Model.EnergiaElectrica" />
+          <EntitySet Name="Entorno" EntityType="Model.Entorno" />
+          <EntitySet Name="Escuela" EntityType="Model.Escuela" />
+          <EntitySet Name="EspacioEducativo" EntityType="Model.EspacioEducativo" />
+          <EntitySet Name="EspacioEducativoDet" EntityType="Model.EspacioEducativoDet" />
+          <EntitySet Name="EspacioMultiple" EntityType="Model.EspacioMultiple" />
+          <EntitySet Name="Estatus" EntityType="Model.Estatus" />
+          <EntitySet Name="Institucion" EntityType="Model.Institucion" />
+          <EntitySet Name="Localidades" EntityType="Model.Localidades" />
+          <EntitySet Name="Matricula" EntityType="Model.Matricula" />
+          <EntitySet Name="Municipios" EntityType="Model.Municipios" />
+          <EntitySet Name="NivelEducativo" EntityType="Model.NivelEducativo" />
+          <EntitySet Name="Procedencia" EntityType="Model.Procedencia" />
+          <EntitySet Name="Requerimientos" EntityType="Model.Requerimientos" />
+          <EntitySet Name="ServicioMunicipal" EntityType="Model.ServicioMunicipal" />
+          <EntitySet Name="Solicitudes" EntityType="Model.Solicitudes" />
+          <EntitySet Name="TipoAsunto" EntityType="Model.TipoAsunto" />
+          <EntitySet Name="TipoProcedencia" EntityType="Model.TipoProcedencia" />
+          <EntitySet Name="Validacion" EntityType="Model.Validacion" />
+          <EntitySet Name="AccesoSistemaRol" EntityType="Model.AccesoSistemaRol" />
+          <AssociationSet Name="FK_AccesoSistemaRol_AccesoSistema" Association="Model.FK_AccesoSistemaRol_AccesoSistema">
+            <End Role="AccesoSistema" EntitySet="AccesoSistema" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlmacenamientoDren_Validacion" Association="Model.FK_AlmacenamientoDren_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccesoSistemaRol_AspNetRoles" Association="Model.FK_AccesoSistemaRol_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteI_Requerimientos" Association="Model.FK_ComponenteI_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteI" EntitySet="ComponenteI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteII_Requerimientos" Association="Model.FK_ComponenteII_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteII" EntitySet="ComponenteII" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteIII_Requerimientos" Association="Model.FK_ComponenteIII_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteIII" EntitySet="ComponenteIII" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteIV_Requerimientos" Association="Model.FK_ComponenteIV_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteIV" EntitySet="ComponenteIV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteV_Requerimientos" Association="Model.FK_ComponenteV_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteV" EntitySet="ComponenteV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteVI_Requerimientos" Association="Model.FK_ComponenteVI_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteVI" EntitySet="ComponenteVI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteVII_Requerimientos" Association="Model.FK_ComponenteVII_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteVII" EntitySet="ComponenteVII" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComponenteVIII_Requerimientos" Association="Model.FK_ComponenteVIII_Requerimientos">
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+            <End Role="ComponenteVIII" EntitySet="ComponenteVIII" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacto_Escuela" Association="Model.FK_Contacto_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Croquis_Validacion" Association="Model.FK_Croquis_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="Croquis" EntitySet="Croquis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamento_Institucion" Association="Model.FK_Departamento_Institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+            <End Role="Documentos" EntitySet="Documentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Model.FK_EnergiaElectrica_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="EnergiaElectrica" EntitySet="EnergiaElectrica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entorno_Validacion" Association="Model.FK_Entorno_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="Entorno" EntitySet="Entorno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Escuela_Localidades" Association="Model.FK_Escuela_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Escuela_Municipios" Association="Model.FK_Escuela_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Escuela_NivelEducativo" Association="Model.FK_Escuela_NivelEducativo">
+            <End Role="NivelEducativo" EntitySet="NivelEducativo" />
+            <End Role="Escuela" EntitySet="Escuela" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Escuela" Association="Model.FK_Requerimientos_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Escuela" Association="Model.FK_Solicitudes_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Validacion_Escuela" Association="Model.FK_Validacion_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="Validacion" EntitySet="Validacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspacioEducativo_Validacion" Association="Model.FK_EspacioEducativo_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspacioEducativoDet_EspacioEducativo" Association="Model.FK_EspacioEducativoDet_EspacioEducativo">
+            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
+            <End Role="EspacioEducativoDet" EntitySet="EspacioEducativoDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspacioMultiple_Validacion" Association="Model.FK_EspacioMultiple_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Model.FK_Solicitudes_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccesoSistemaRol_Institucion" Association="Model.FK_AccesoSistemaRol_Institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidades_Municipios" Association="Model.FK_Localidades_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Validacion" Association="Model.FK_Matricula_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Procedencia_TipoProcedencia" Association="Model.FK_Procedencia_TipoProcedencia">
+            <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
+            <End Role="Procedencia" EntitySet="Procedencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Procedencia" Association="Model.FK_Solicitudes_Procedencia">
+            <End Role="Procedencia" EntitySet="Procedencia" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Model.FK_ServicioMunicipal_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_TipoAsunto" Association="Model.FK_Solicitudes_TipoAsunto">
+            <End Role="TipoAsunto" EntitySet="TipoAsunto" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_TipoProcedencia" Association="Model.FK_Solicitudes_TipoProcedencia">
+            <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="AccesoSistema">
           <Key>
             <PropertyRef Name="IdAccesoSistema" />
           </Key>
           <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="controlador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="accion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="controlador" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="accion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="AccesoSistemaRol" Relationship="Self.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistema" ToRole="AccesoSistemaRol" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistema" ToRole="AccesoSistemaRol" />
         </EntityType>
         <EntityType Name="AlmacenamientoDren">
           <Key>
@@ -1139,30 +1347,36 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdAlmacenDrenaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdValidarFk" Type="Int32" />
           <Property Name="Redagua" Type="Boolean" />
+          <Property Name="RedaguaEstado" Type="Int32" />
           <Property Name="Pipa" Type="Boolean" />
+          <Property Name="PipaEstado" Type="Int32" />
           <Property Name="Cisterna" Type="Boolean" />
+          <Property Name="CisternaEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Tinaco" Type="Boolean" />
+          <Property Name="TinacoEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="ColectorMunicipal" Type="Boolean" />
+          <Property Name="ColectorMunicipalEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="FosaSeptica" Type="Boolean" />
+          <Property Name="FosaSepticaEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="EstadoGeneral" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_AlmacenamientoDren_Validacion" FromRole="AlmacenamientoDren" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_AlmacenamientoDren_Validacion" FromRole="AlmacenamientoDren" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AccesoSistemaRol" Relationship="Self.FK_AccesoSistemaRol_AspNetRoles" FromRole="AspNetRoles" ToRole="AccesoSistemaRol" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_AspNetRoles" FromRole="AspNetRoles" ToRole="AccesoSistemaRol" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ApellidoPaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ApellidoMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1179,8 +1393,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Canalizacion">
           <Key>
@@ -1198,12 +1412,17 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="Concepto" Type="Binary" MaxLength="50" FixedLength="false" />
-          <Property Name="Esp_A" Type="Boolean" />
-          <Property Name="Esp_L" Type="Boolean" />
-          <Property Name="Esp_T" Type="Boolean" />
-          <Property Name="Esp_Ax" Type="Boolean" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteI_Requerimientos" FromRole="ComponenteI" ToRole="Requerimientos" />
+          <Property Name="ConstruccionEspacio" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pintura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Impermeabilizante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PisoCeramica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Herreria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AireAcondicionado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CalentonGas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="InstElectrica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="HidroSanitaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="InstGas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteI_Requerimientos" FromRole="ComponenteI" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteII">
           <Key>
@@ -1211,17 +1430,17 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteII" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="ConstruccionModulo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="MuebleSanitario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Pintura" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Piso" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Herreria" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Acabado" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Cisterna" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="InstalacionElectrica" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="HidroSanitaria" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Impermeabilizante" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteII_Requerimientos" FromRole="ComponenteII" ToRole="Requerimientos" />
+          <Property Name="ConstruccionModulo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MuebleSanitario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pintura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Piso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Herreria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Acabado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cisterna" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="InstalacionElectrica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="HidroSanitaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Impermeabilizante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteII_Requerimientos" FromRole="ComponenteII" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteIII">
           <Key>
@@ -1229,10 +1448,10 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteIII" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Solicita" Type="Int32" />
           <Property Name="Requiere" Type="Int32" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteIII_Requerimientos" FromRole="ComponenteIII" ToRole="Requerimientos" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteIII_Requerimientos" FromRole="ComponenteIII" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteIV">
           <Key>
@@ -1240,10 +1459,10 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteIV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="RedHidraulica" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Construccion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RedHidraulica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Construccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Rehabilitacion" Type="Int32" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteIV_Requerimientos" FromRole="ComponenteIV" ToRole="Requerimientos" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteIV_Requerimientos" FromRole="ComponenteIV" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteV">
           <Key>
@@ -1251,10 +1470,10 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="Andadores" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Rampas" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Pasamanos" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteV_Requerimientos" FromRole="ComponenteV" ToRole="Requerimientos" />
+          <Property Name="Andadores" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Rampas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pasamanos" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteV_Requerimientos" FromRole="ComponenteV" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteVI">
           <Key>
@@ -1262,12 +1481,12 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteVI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="ConstruccionModulo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Pintura" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Piso" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="InstalacionElectrica" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="AireAcondicionado" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteVI_Requerimientos" FromRole="ComponenteVI" ToRole="Requerimientos" />
+          <Property Name="ConstruccionModulo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pintura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Piso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="InstalacionElectrica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AireAcondicionado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteVI_Requerimientos" FromRole="ComponenteVI" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteVII">
           <Key>
@@ -1275,10 +1494,9 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteVII" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="Telefonia" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Internet" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="VozDatos" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteVII_Requerimientos" FromRole="ComponenteVII" ToRole="Requerimientos" />
+          <Property Name="Telefonia_internet" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VozDatos" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteVII_Requerimientos" FromRole="ComponenteVII" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteVIII">
           <Key>
@@ -1286,16 +1504,17 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdComponenteVIII" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRequerimientoFk" Type="Int32" />
-          <Property Name="MuroAcometida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Alumbrado" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="RedElectrica" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Barda" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="CanchaMultiple" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="PlazaCivica" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Domo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="AstaBandera" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="AccesoPrincipal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_ComponenteVIII_Requerimientos" FromRole="ComponenteVIII" ToRole="Requerimientos" />
+          <Property Name="MuroAcometida" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Alumbrado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContenedorBasura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Barda" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CanchaMultiple" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Otros" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Domo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AstaBandera" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AccesoPrincipal" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AreaJuegos" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteVIII_Requerimientos" FromRole="ComponenteVIII" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -1307,19 +1526,19 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Contacto_Escuela" FromRole="Contacto" ToRole="Escuela" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Contacto_Escuela" FromRole="Contacto" ToRole="Escuela" />
         </EntityType>
         <EntityType Name="Croquis">
           <Key>
             <PropertyRef Name="IdCroquis" />
           </Key>
           <Property Name="IdCroquis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DocCroquis" Type="Binary" MaxLength="8000" FixedLength="true" />
+          <Property Name="DocCroquis" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Predio" Type="Boolean" />
           <Property Name="TipoSuelo" Type="Int32" />
           <Property Name="IdValidarFk" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_Croquis_Validacion" FromRole="Croquis" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Croquis_Validacion" FromRole="Croquis" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -1331,7 +1550,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Institucion" Relationship="Self.FK_Departamento_Institucion" FromRole="Departamento" ToRole="Institucion" />
+          <NavigationProperty Name="Institucion" Relationship="Model.FK_Departamento_Institucion" FromRole="Departamento" ToRole="Institucion" />
         </EntityType>
         <EntityType Name="DetalleCanalizacion">
           <Key>
@@ -1346,17 +1565,28 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Departamento" Type="Int32" />
           <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
         </EntityType>
+        <EntityType Name="Documentos">
+          <Key>
+            <PropertyRef Name="IdDocumento" />
+          </Key>
+          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
+        </EntityType>
         <EntityType Name="Email">
           <Key>
             <PropertyRef Name="IdEmail" />
           </Key>
           <Property Name="IdEmail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmailTo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdUser" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TipoEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailTo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TipoEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EnergiaElectrica">
           <Key>
@@ -1365,14 +1595,21 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdEnergiaElectrica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdValidarFk" Type="Int32" />
           <Property Name="Subestacion" Type="Boolean" />
+          <Property Name="SubestacionEstado" Type="Int32" />
           <Property Name="MuroAcometida" Type="Boolean" />
-          <Property Name="NoMedidor" Type="Boolean" />
+          <Property Name="MuroAcometidaEstado" Type="Int32" />
+          <Property Name="TableroDistribucion" Type="Boolean" />
+          <Property Name="TableroDistribucionEstado" Type="Int32" />
           <Property Name="InterruptorGral" Type="Boolean" />
+          <Property Name="InterruptorGralEstado" Type="Int32" />
           <Property Name="Termomagnetico" Type="Boolean" />
+          <Property Name="TermomagneticoElectrico" Type="Int32" />
           <Property Name="AlumbradoExt" Type="Boolean" />
+          <Property Name="AlumbradoExtEstado" Type="Int32" />
           <Property Name="Luminaria" Type="Boolean" />
+          <Property Name="LuminariaEstado" Type="Int32" />
           <Property Name="EstadoGeneral" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_EnergiaElectrica_Validacion" FromRole="EnergiaElectrica" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EnergiaElectrica_Validacion" FromRole="EnergiaElectrica" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Entorno">
           <Key>
@@ -1392,7 +1629,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="AmenazaVialDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Comercio" Type="Boolean" />
           <Property Name="ComercioDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_Entorno_Validacion" FromRole="Entorno" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Entorno_Validacion" FromRole="Entorno" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -1408,13 +1645,13 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Turno" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Geox" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Geoy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Contacto" Relationship="Self.FK_Contacto_Escuela" FromRole="Escuela" ToRole="Contacto" />
-          <NavigationProperty Name="Localidades" Relationship="Self.FK_Escuela_Localidades" FromRole="Escuela" ToRole="Localidades" />
-          <NavigationProperty Name="Municipios" Relationship="Self.FK_Escuela_Municipios" FromRole="Escuela" ToRole="Municipios" />
-          <NavigationProperty Name="NivelEducativo" Relationship="Self.FK_Escuela_NivelEducativo" FromRole="Escuela" ToRole="NivelEducativo" />
-          <NavigationProperty Name="Requerimientos" Relationship="Self.FK_Requerimientos_Escuela" FromRole="Escuela" ToRole="Requerimientos" />
-          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_Escuela" FromRole="Escuela" ToRole="Solicitudes" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_Validacion_Escuela" FromRole="Escuela" ToRole="Validacion" />
+          <NavigationProperty Name="Contacto" Relationship="Model.FK_Contacto_Escuela" FromRole="Escuela" ToRole="Contacto" />
+          <NavigationProperty Name="Localidades" Relationship="Model.FK_Escuela_Localidades" FromRole="Escuela" ToRole="Localidades" />
+          <NavigationProperty Name="Municipios" Relationship="Model.FK_Escuela_Municipios" FromRole="Escuela" ToRole="Municipios" />
+          <NavigationProperty Name="NivelEducativo" Relationship="Model.FK_Escuela_NivelEducativo" FromRole="Escuela" ToRole="NivelEducativo" />
+          <NavigationProperty Name="Requerimientos" Relationship="Model.FK_Requerimientos_Escuela" FromRole="Escuela" ToRole="Requerimientos" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Escuela" ToRole="Solicitudes" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Validacion_Escuela" FromRole="Escuela" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="EspacioEducativo">
           <Key>
@@ -1422,8 +1659,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdEspacioEducativo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdValidarFk" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_EspacioEducativo_Validacion" FromRole="EspacioEducativo" ToRole="Validacion" />
-          <NavigationProperty Name="EspacioEducativoDet" Relationship="Self.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativo" ToRole="EspacioEducativoDet" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="EspacioEducativo" ToRole="Validacion" />
+          <NavigationProperty Name="EspacioEducativoDet" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativo" ToRole="EspacioEducativoDet" />
         </EntityType>
         <EntityType Name="EspacioEducativoDet">
           <Key>
@@ -1439,7 +1676,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="ServicioAdministrativo" Type="Int32" />
           <Property Name="Biblioteca" Type="Int32" />
           <Property Name="BodegaApendice" Type="Int32" />
-          <NavigationProperty Name="EspacioEducativo" Relationship="Self.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativoDet" ToRole="EspacioEducativo" />
+          <Property Name="AulasUsoMultiple" Type="Int32" />
+          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativoDet" ToRole="EspacioEducativo" />
         </EntityType>
         <EntityType Name="EspacioMultiple">
           <Key>
@@ -1447,8 +1685,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdEspacioMultiple" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdValidarFk" Type="Int32" />
-          <Property Name="MuroAcometidaEstado" Type="Int32" />
-          <Property Name="MuroAcometida" Type="Boolean" />
+          <Property Name="AreajuegosEstado" Type="Int32" />
+          <Property Name="Areajuegos" Type="Boolean" />
           <Property Name="BardaEstado" Type="Int32" />
           <Property Name="Barda" Type="Boolean" />
           <Property Name="RampasEstado" Type="Int32" />
@@ -1463,7 +1701,11 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Bebedero" Type="Boolean" />
           <Property Name="AccesoPEstado" Type="Int32" />
           <Property Name="AccesoP" Type="Boolean" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_EspacioMultiple_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
+          <Property Name="AstaBandera" Type="Int32" />
+          <Property Name="AstaBanderaEstado" Type="Boolean" />
+          <Property Name="Otro" Type="Boolean" />
+          <Property Name="OtroEstado" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Estatus">
           <Key>
@@ -1471,21 +1713,21 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdEstatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Estatus1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_Estatus" FromRole="Estatus" ToRole="Solicitudes" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Estatus" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="Institucion">
           <Key>
             <PropertyRef Name="IdInstitucion" />
           </Key>
           <Property Name="IdInstitucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Siglas" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Titular" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK_Departamento_Institucion" FromRole="Institucion" ToRole="Departamento" />
-          <NavigationProperty Name="AccesoSistemaRol" Relationship="Self.FK_AccesoSistemaRol_Institucion" FromRole="Institucion" ToRole="AccesoSistemaRol" />
+          <NavigationProperty Name="Departamento" Relationship="Model.FK_Departamento_Institucion" FromRole="Institucion" ToRole="Departamento" />
+          <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="Institucion" ToRole="AccesoSistemaRol" />
         </EntityType>
         <EntityType Name="Localidades">
           <Key>
@@ -1494,8 +1736,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdLocalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="IdMunicipioFk" Type="Int32" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Escuela_Localidades" FromRole="Localidades" ToRole="Escuela" />
-          <NavigationProperty Name="Municipios" Relationship="Self.FK_Localidades_Municipios" FromRole="Localidades" ToRole="Municipios" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_Localidades" FromRole="Localidades" ToRole="Escuela" />
+          <NavigationProperty Name="Municipios" Relationship="Model.FK_Localidades_Municipios" FromRole="Localidades" ToRole="Municipios" />
         </EntityType>
         <EntityType Name="Matricula">
           <Key>
@@ -1506,7 +1748,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Alumnos" Type="Int32" />
           <Property Name="PersonaDiscapacidad" Type="Int32" />
           <Property Name="PersonalDoncente" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_Matricula_Validacion" FromRole="Matricula" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Matricula_Validacion" FromRole="Matricula" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Municipios">
           <Key>
@@ -1514,8 +1756,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdMunicipio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Escuela_Municipios" FromRole="Municipios" ToRole="Escuela" />
-          <NavigationProperty Name="Localidades" Relationship="Self.FK_Localidades_Municipios" FromRole="Municipios" ToRole="Localidades" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_Municipios" FromRole="Municipios" ToRole="Escuela" />
+          <NavigationProperty Name="Localidades" Relationship="Model.FK_Localidades_Municipios" FromRole="Municipios" ToRole="Localidades" />
         </EntityType>
         <EntityType Name="NivelEducativo">
           <Key>
@@ -1524,7 +1766,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdNivelEducativo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nivel" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Escuela_NivelEducativo" FromRole="NivelEducativo" ToRole="Escuela" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_NivelEducativo" FromRole="NivelEducativo" ToRole="Escuela" />
         </EntityType>
         <EntityType Name="Procedencia">
           <Key>
@@ -1537,8 +1779,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Localidad" Type="Int32" />
           <Property Name="Contacto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoProcedenciaFk" Type="Int32" />
-          <NavigationProperty Name="TipoProcedencia" Relationship="Self.FK_Procedencia_TipoProcedencia" FromRole="Procedencia" ToRole="TipoProcedencia" />
-          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_Procedencia" FromRole="Procedencia" ToRole="Solicitudes" />
+          <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Procedencia_TipoProcedencia" FromRole="Procedencia" ToRole="TipoProcedencia" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Procedencia" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="Requerimientos">
           <Key>
@@ -1546,15 +1788,15 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdRequerimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdEsceulaFk" Type="Int32" />
-          <NavigationProperty Name="ComponenteI" Relationship="Self.FK_ComponenteI_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteI" />
-          <NavigationProperty Name="ComponenteII" Relationship="Self.FK_ComponenteII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteII" />
-          <NavigationProperty Name="ComponenteIII" Relationship="Self.FK_ComponenteIII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteIII" />
-          <NavigationProperty Name="ComponenteIV" Relationship="Self.FK_ComponenteIV_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteIV" />
-          <NavigationProperty Name="ComponenteV" Relationship="Self.FK_ComponenteV_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteV" />
-          <NavigationProperty Name="ComponenteVI" Relationship="Self.FK_ComponenteVI_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVI" />
-          <NavigationProperty Name="ComponenteVII" Relationship="Self.FK_ComponenteVII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVII" />
-          <NavigationProperty Name="ComponenteVIII" Relationship="Self.FK_ComponenteVIII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVIII" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Requerimientos_Escuela" FromRole="Requerimientos" ToRole="Escuela" />
+          <NavigationProperty Name="ComponenteI" Relationship="Model.FK_ComponenteI_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteI" />
+          <NavigationProperty Name="ComponenteII" Relationship="Model.FK_ComponenteII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteII" />
+          <NavigationProperty Name="ComponenteIII" Relationship="Model.FK_ComponenteIII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteIII" />
+          <NavigationProperty Name="ComponenteIV" Relationship="Model.FK_ComponenteIV_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteIV" />
+          <NavigationProperty Name="ComponenteV" Relationship="Model.FK_ComponenteV_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteV" />
+          <NavigationProperty Name="ComponenteVI" Relationship="Model.FK_ComponenteVI_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVI" />
+          <NavigationProperty Name="ComponenteVII" Relationship="Model.FK_ComponenteVII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVII" />
+          <NavigationProperty Name="ComponenteVIII" Relationship="Model.FK_ComponenteVIII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVIII" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Requerimientos_Escuela" FromRole="Requerimientos" ToRole="Escuela" />
         </EntityType>
         <EntityType Name="ServicioMunicipal">
           <Key>
@@ -1573,14 +1815,14 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="VialidadPrimaria" Type="Boolean" />
           <Property Name="VialidadSecundaria" Type="Boolean" />
           <Property Name="VialidadTerciaria" Type="Boolean" />
-          <NavigationProperty Name="Validacion" Relationship="Self.FK_ServicioMunicipal_Validacion" FromRole="ServicioMunicipal" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="ServicioMunicipal" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Solicitudes">
           <Key>
             <PropertyRef Name="IdSolicitud" />
           </Key>
           <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Folio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
           <Property Name="IdEstatusFk" Type="Int32" Nullable="false" />
           <Property Name="IdTipoAsuntoFk" Type="Int32" />
@@ -1588,11 +1830,11 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
           <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
           <Property Name="IdEscuelaFk" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
-          <NavigationProperty Name="Estatus" Relationship="Self.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
-          <NavigationProperty Name="Procedencia" Relationship="Self.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
-          <NavigationProperty Name="TipoAsunto" Relationship="Self.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
-          <NavigationProperty Name="TipoProcedencia" Relationship="Self.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
+          <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
+          <NavigationProperty Name="Procedencia" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
+          <NavigationProperty Name="TipoAsunto" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
+          <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
         </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
@@ -1600,7 +1842,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdTipoAsunto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TipoAsunto1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_TipoAsunto" FromRole="TipoAsunto" ToRole="Solicitudes" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="TipoAsunto" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="TipoProcedencia">
           <Key>
@@ -1608,8 +1850,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdTipoProcedencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TipoProcedencia1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Procedencia" Relationship="Self.FK_Procedencia_TipoProcedencia" FromRole="TipoProcedencia" ToRole="Procedencia" />
-          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_TipoProcedencia" FromRole="TipoProcedencia" ToRole="Solicitudes" />
+          <NavigationProperty Name="Procedencia" Relationship="Model.FK_Procedencia_TipoProcedencia" FromRole="TipoProcedencia" ToRole="Procedencia" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="TipoProcedencia" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="Validacion">
           <Key>
@@ -1617,15 +1859,15 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdValidar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdEscuelaFk" Type="Int32" />
-          <NavigationProperty Name="AlmacenamientoDren" Relationship="Self.FK_AlmacenamientoDren_Validacion" FromRole="Validacion" ToRole="AlmacenamientoDren" />
-          <NavigationProperty Name="Croquis" Relationship="Self.FK_Croquis_Validacion" FromRole="Validacion" ToRole="Croquis" />
-          <NavigationProperty Name="EnergiaElectrica" Relationship="Self.FK_EnergiaElectrica_Validacion" FromRole="Validacion" ToRole="EnergiaElectrica" />
-          <NavigationProperty Name="Entorno" Relationship="Self.FK_Entorno_Validacion" FromRole="Validacion" ToRole="Entorno" />
-          <NavigationProperty Name="Escuela" Relationship="Self.FK_Validacion_Escuela" FromRole="Validacion" ToRole="Escuela" />
-          <NavigationProperty Name="EspacioEducativo" Relationship="Self.FK_EspacioEducativo_Validacion" FromRole="Validacion" ToRole="EspacioEducativo" />
-          <NavigationProperty Name="EspacioMultiple" Relationship="Self.FK_EspacioMultiple_Validacion" FromRole="Validacion" ToRole="EspacioMultiple" />
-          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Validacion" FromRole="Validacion" ToRole="Matricula" />
-          <NavigationProperty Name="ServicioMunicipal" Relationship="Self.FK_ServicioMunicipal_Validacion" FromRole="Validacion" ToRole="ServicioMunicipal" />
+          <NavigationProperty Name="AlmacenamientoDren" Relationship="Model.FK_AlmacenamientoDren_Validacion" FromRole="Validacion" ToRole="AlmacenamientoDren" />
+          <NavigationProperty Name="Croquis" Relationship="Model.FK_Croquis_Validacion" FromRole="Validacion" ToRole="Croquis" />
+          <NavigationProperty Name="EnergiaElectrica" Relationship="Model.FK_EnergiaElectrica_Validacion" FromRole="Validacion" ToRole="EnergiaElectrica" />
+          <NavigationProperty Name="Entorno" Relationship="Model.FK_Entorno_Validacion" FromRole="Validacion" ToRole="Entorno" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Validacion_Escuela" FromRole="Validacion" ToRole="Escuela" />
+          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="Validacion" ToRole="EspacioEducativo" />
+          <NavigationProperty Name="EspacioMultiple" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="Validacion" ToRole="EspacioMultiple" />
+          <NavigationProperty Name="Matricula" Relationship="Model.FK_Matricula_Validacion" FromRole="Validacion" ToRole="Matricula" />
+          <NavigationProperty Name="ServicioMunicipal" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="Validacion" ToRole="ServicioMunicipal" />
         </EntityType>
         <EntityType Name="AccesoSistemaRol">
           <Key>
@@ -1634,15 +1876,15 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             <PropertyRef Name="IdAccesoSistema" />
           </Key>
           <Property Name="IdInstituto" Type="Int32" Nullable="false" />
-          <Property Name="IdRol" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRol" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccesoSistema" Relationship="Self.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_AccesoSistemaRol_AspNetRoles" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Institucion" Relationship="Self.FK_AccesoSistemaRol_Institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
+          <NavigationProperty Name="AccesoSistema" Relationship="Model.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.FK_AccesoSistemaRol_AspNetRoles" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Institucion" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
         </EntityType>
         <Association Name="FK_AccesoSistemaRol_AccesoSistema">
-          <End Role="AccesoSistema" Type="Self.AccesoSistema" Multiplicity="1" />
-          <End Role="AccesoSistemaRol" Type="Self.AccesoSistemaRol" Multiplicity="*" />
+          <End Type="Model.AccesoSistema" Role="AccesoSistema" Multiplicity="1" />
+          <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccesoSistema">
               <PropertyRef Name="IdAccesoSistema" />
@@ -1653,8 +1895,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlmacenamientoDren_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="AlmacenamientoDren" Type="Self.AlmacenamientoDren" Multiplicity="*" />
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.AlmacenamientoDren" Role="AlmacenamientoDren" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Validacion">
               <PropertyRef Name="IdValidar" />
@@ -1665,8 +1907,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AccesoSistemaRol_AspNetRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
-          <End Role="AccesoSistemaRol" Type="Self.AccesoSistemaRol" Multiplicity="*" />
+          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
@@ -1677,8 +1919,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteI_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteI" Type="Self.ComponenteI" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteI" Role="ComponenteI" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1689,8 +1931,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteII_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteII" Type="Self.ComponenteII" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteII" Role="ComponenteII" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1701,8 +1943,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteIII_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteIII" Type="Self.ComponenteIII" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteIII" Role="ComponenteIII" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1713,8 +1955,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteIV_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteIV" Type="Self.ComponenteIV" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteIV" Role="ComponenteIV" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1725,8 +1967,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteV_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteV" Type="Self.ComponenteV" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteV" Role="ComponenteV" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1737,8 +1979,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteVI_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteVI" Type="Self.ComponenteVI" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteVI" Role="ComponenteVI" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1749,8 +1991,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteVII_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteVII" Type="Self.ComponenteVII" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteVII" Role="ComponenteVII" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1761,8 +2003,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ComponenteVIII_Requerimientos">
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
-          <End Role="ComponenteVIII" Type="Self.ComponenteVIII" Multiplicity="*" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="0..1" />
+          <End Type="Model.ComponenteVIII" Role="ComponenteVIII" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Requerimientos">
               <PropertyRef Name="IdRequerimiento" />
@@ -1773,8 +2015,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contacto_Escuela">
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="0..1" />
-          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
+          <End Type="Model.Contacto" Role="Contacto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Escuela">
               <PropertyRef Name="IdEscuela" />
@@ -1785,8 +2027,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Croquis_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="Croquis" Type="Self.Croquis" Multiplicity="*" />
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.Croquis" Role="Croquis" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Validacion">
               <PropertyRef Name="IdValidar" />
@@ -1797,8 +2039,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Departamento_Institucion">
-          <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <End Type="Model.Institucion" Role="Institucion" Multiplicity="1" />
+          <End Type="Model.Departamento" Role="Departamento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Institucion">
               <PropertyRef Name="IdInstitucion" />
@@ -1808,446 +2050,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EnergiaElectrica_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="EnergiaElectrica" Type="Self.EnergiaElectrica" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="EnergiaElectrica">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Entorno_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="1" />
-          <End Role="Entorno" Type="Self.Entorno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="Entorno">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Escuela_Localidades">
-          <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidades">
-              <PropertyRef Name="IdLocalidad" />
-            </Principal>
-            <Dependent Role="Escuela">
-              <PropertyRef Name="IdLocalidadFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Escuela_Municipios">
-          <End Role="Municipios" Type="Self.Municipios" Multiplicity="0..1" />
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Municipios">
-              <PropertyRef Name="IdMunicipio" />
-            </Principal>
-            <Dependent Role="Escuela">
-              <PropertyRef Name="IdMunicipioFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Escuela_NivelEducativo">
-          <End Role="NivelEducativo" Type="Self.NivelEducativo" Multiplicity="0..1" />
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NivelEducativo">
-              <PropertyRef Name="IdNivelEducativo" />
-            </Principal>
-            <Dependent Role="Escuela">
-              <PropertyRef Name="IdNivelEducativo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requerimientos_Escuela">
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="0..1" />
-          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="IdEscuela" />
-            </Principal>
-            <Dependent Role="Requerimientos">
-              <PropertyRef Name="IdEsceulaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_Escuela">
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="1" />
-          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="IdEscuela" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdEscuelaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Validacion_Escuela">
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="0..1" />
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="IdEscuela" />
-            </Principal>
-            <Dependent Role="Validacion">
-              <PropertyRef Name="IdEscuelaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EspacioEducativo_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="EspacioEducativo" Type="Self.EspacioEducativo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="EspacioEducativo">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EspacioEducativoDet_EspacioEducativo">
-          <End Role="EspacioEducativo" Type="Self.EspacioEducativo" Multiplicity="0..1" />
-          <End Role="EspacioEducativoDet" Type="Self.EspacioEducativoDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EspacioEducativo">
-              <PropertyRef Name="IdEspacioEducativo" />
-            </Principal>
-            <Dependent Role="EspacioEducativoDet">
-              <PropertyRef Name="IdEspacioEducativoFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EspacioMultiple_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="EspacioMultiple" Type="Self.EspacioMultiple" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="EspacioMultiple">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_Estatus">
-          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
-          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estatus">
-              <PropertyRef Name="IdEstatus" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdEstatusFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccesoSistemaRol_Institucion">
-          <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
-          <End Role="AccesoSistemaRol" Type="Self.AccesoSistemaRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Institucion">
-              <PropertyRef Name="IdInstitucion" />
-            </Principal>
-            <Dependent Role="AccesoSistemaRol">
-              <PropertyRef Name="IdInstituto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Localidades_Municipios">
-          <End Role="Municipios" Type="Self.Municipios" Multiplicity="0..1" />
-          <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Municipios">
-              <PropertyRef Name="IdMunicipio" />
-            </Principal>
-            <Dependent Role="Localidades">
-              <PropertyRef Name="IdMunicipioFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Matricula_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="Matricula">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Procedencia_TipoProcedencia">
-          <End Role="TipoProcedencia" Type="Self.TipoProcedencia" Multiplicity="0..1" />
-          <End Role="Procedencia" Type="Self.Procedencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoProcedencia">
-              <PropertyRef Name="IdTipoProcedencia" />
-            </Principal>
-            <Dependent Role="Procedencia">
-              <PropertyRef Name="IdTipoProcedenciaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_Procedencia">
-          <End Role="Procedencia" Type="Self.Procedencia" Multiplicity="1" />
-          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Procedencia">
-              <PropertyRef Name="IdProcedencia" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdProcedenciaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServicioMunicipal_Validacion">
-          <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="ServicioMunicipal" Type="Self.ServicioMunicipal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="ServicioMunicipal">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_TipoAsunto">
-          <End Role="TipoAsunto" Type="Self.TipoAsunto" Multiplicity="0..1" />
-          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoAsunto">
-              <PropertyRef Name="IdTipoAsunto" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdTipoAsuntoFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_TipoProcedencia">
-          <End Role="TipoProcedencia" Type="Self.TipoProcedencia" Multiplicity="1" />
-          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoProcedencia">
-              <PropertyRef Name="IdTipoProcedencia" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdTipoProcedenciaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="SASEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccesoSistema" EntityType="Self.AccesoSistema" />
-          <EntitySet Name="AlmacenamientoDren" EntityType="Self.AlmacenamientoDren" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Canalizacion" EntityType="Self.Canalizacion" />
-          <EntitySet Name="ComponenteI" EntityType="Self.ComponenteI" />
-          <EntitySet Name="ComponenteII" EntityType="Self.ComponenteII" />
-          <EntitySet Name="ComponenteIII" EntityType="Self.ComponenteIII" />
-          <EntitySet Name="ComponenteIV" EntityType="Self.ComponenteIV" />
-          <EntitySet Name="ComponenteV" EntityType="Self.ComponenteV" />
-          <EntitySet Name="ComponenteVI" EntityType="Self.ComponenteVI" />
-          <EntitySet Name="ComponenteVII" EntityType="Self.ComponenteVII" />
-          <EntitySet Name="ComponenteVIII" EntityType="Self.ComponenteVIII" />
-          <EntitySet Name="Contacto" EntityType="Self.Contacto" />
-          <EntitySet Name="Croquis" EntityType="Self.Croquis" />
-          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
-          <EntitySet Name="DetalleCanalizacion" EntityType="Self.DetalleCanalizacion" />
-          <EntitySet Name="Email" EntityType="Self.Email" />
-          <EntitySet Name="EnergiaElectrica" EntityType="Self.EnergiaElectrica" />
-          <EntitySet Name="Entorno" EntityType="Self.Entorno" />
-          <EntitySet Name="Escuela" EntityType="Self.Escuela" />
-          <EntitySet Name="EspacioEducativo" EntityType="Self.EspacioEducativo" />
-          <EntitySet Name="EspacioEducativoDet" EntityType="Self.EspacioEducativoDet" />
-          <EntitySet Name="EspacioMultiple" EntityType="Self.EspacioMultiple" />
-          <EntitySet Name="Estatus" EntityType="Self.Estatus" />
-          <EntitySet Name="Institucion" EntityType="Self.Institucion" />
-          <EntitySet Name="Localidades" EntityType="Self.Localidades" />
-          <EntitySet Name="Matricula" EntityType="Self.Matricula" />
-          <EntitySet Name="Municipios" EntityType="Self.Municipios" />
-          <EntitySet Name="NivelEducativo" EntityType="Self.NivelEducativo" />
-          <EntitySet Name="Procedencia" EntityType="Self.Procedencia" />
-          <EntitySet Name="Requerimientos" EntityType="Self.Requerimientos" />
-          <EntitySet Name="ServicioMunicipal" EntityType="Self.ServicioMunicipal" />
-          <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" />
-          <EntitySet Name="TipoAsunto" EntityType="Self.TipoAsunto" />
-          <EntitySet Name="TipoProcedencia" EntityType="Self.TipoProcedencia" />
-          <EntitySet Name="Validacion" EntityType="Self.Validacion" />
-          <EntitySet Name="AccesoSistemaRol" EntityType="Self.AccesoSistemaRol" />
-          <AssociationSet Name="FK_AccesoSistemaRol_AccesoSistema" Association="Self.FK_AccesoSistemaRol_AccesoSistema">
-            <End Role="AccesoSistema" EntitySet="AccesoSistema" />
-            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AlmacenamientoDren_Validacion" Association="Self.FK_AlmacenamientoDren_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccesoSistemaRol_AspNetRoles" Association="Self.FK_AccesoSistemaRol_AspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteI_Requerimientos" Association="Self.FK_ComponenteI_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteI" EntitySet="ComponenteI" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteII_Requerimientos" Association="Self.FK_ComponenteII_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteII" EntitySet="ComponenteII" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteIII_Requerimientos" Association="Self.FK_ComponenteIII_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteIII" EntitySet="ComponenteIII" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteIV_Requerimientos" Association="Self.FK_ComponenteIV_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteIV" EntitySet="ComponenteIV" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteV_Requerimientos" Association="Self.FK_ComponenteV_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteV" EntitySet="ComponenteV" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteVI_Requerimientos" Association="Self.FK_ComponenteVI_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteVI" EntitySet="ComponenteVI" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteVII_Requerimientos" Association="Self.FK_ComponenteVII_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteVII" EntitySet="ComponenteVII" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComponenteVIII_Requerimientos" Association="Self.FK_ComponenteVIII_Requerimientos">
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-            <End Role="ComponenteVIII" EntitySet="ComponenteVIII" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contacto_Escuela" Association="Self.FK_Contacto_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="Contacto" EntitySet="Contacto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Croquis_Validacion" Association="Self.FK_Croquis_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="Croquis" EntitySet="Croquis" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Departamento_Institucion" Association="Self.FK_Departamento_Institucion">
-            <End Role="Institucion" EntitySet="Institucion" />
-            <End Role="Departamento" EntitySet="Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Self.FK_EnergiaElectrica_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EnergiaElectrica" EntitySet="EnergiaElectrica" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entorno_Validacion" Association="Self.FK_Entorno_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="Entorno" EntitySet="Entorno" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Escuela_Localidades" Association="Self.FK_Escuela_Localidades">
-            <End Role="Localidades" EntitySet="Localidades" />
-            <End Role="Escuela" EntitySet="Escuela" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Escuela_Municipios" Association="Self.FK_Escuela_Municipios">
-            <End Role="Municipios" EntitySet="Municipios" />
-            <End Role="Escuela" EntitySet="Escuela" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Escuela_NivelEducativo" Association="Self.FK_Escuela_NivelEducativo">
-            <End Role="NivelEducativo" EntitySet="NivelEducativo" />
-            <End Role="Escuela" EntitySet="Escuela" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requerimientos_Escuela" Association="Self.FK_Requerimientos_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="Requerimientos" EntitySet="Requerimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Escuela" Association="Self.FK_Solicitudes_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Validacion_Escuela" Association="Self.FK_Validacion_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="Validacion" EntitySet="Validacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EspacioEducativo_Validacion" Association="Self.FK_EspacioEducativo_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EspacioEducativoDet_EspacioEducativo" Association="Self.FK_EspacioEducativoDet_EspacioEducativo">
-            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
-            <End Role="EspacioEducativoDet" EntitySet="EspacioEducativoDet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EspacioMultiple_Validacion" Association="Self.FK_EspacioMultiple_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Self.FK_Solicitudes_Estatus">
-            <End Role="Estatus" EntitySet="Estatus" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccesoSistemaRol_Institucion" Association="Self.FK_AccesoSistemaRol_Institucion">
-            <End Role="Institucion" EntitySet="Institucion" />
-            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Localidades_Municipios" Association="Self.FK_Localidades_Municipios">
-            <End Role="Municipios" EntitySet="Municipios" />
-            <End Role="Localidades" EntitySet="Localidades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Matricula_Validacion" Association="Self.FK_Matricula_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="Matricula" EntitySet="Matricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Procedencia_TipoProcedencia" Association="Self.FK_Procedencia_TipoProcedencia">
-            <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
-            <End Role="Procedencia" EntitySet="Procedencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Procedencia" Association="Self.FK_Solicitudes_Procedencia">
-            <End Role="Procedencia" EntitySet="Procedencia" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Self.FK_ServicioMunicipal_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_TipoAsunto" Association="Self.FK_Solicitudes_TipoAsunto">
-            <End Role="TipoAsunto" EntitySet="TipoAsunto" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_TipoProcedencia" Association="Self.FK_Solicitudes_TipoProcedencia">
-            <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
-          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-            <End Role="Documentos" EntitySet="Documentos" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Documentos">
-          <Key>
-            <PropertyRef Name="IdDocumento" />
-          </Key>
-          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
-          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
-        </EntityType>
         <Association Name="FK_Documentos_DetalleCanalizacion">
           <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
           <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
@@ -2260,6 +2062,250 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EnergiaElectrica_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.EnergiaElectrica" Role="EnergiaElectrica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="EnergiaElectrica">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entorno_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="1" />
+          <End Type="Model.Entorno" Role="Entorno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="Entorno">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Escuela_Localidades">
+          <End Type="Model.Localidades" Role="Localidades" Multiplicity="0..1" />
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="IdLocalidadFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Escuela_Municipios">
+          <End Type="Model.Municipios" Role="Municipios" Multiplicity="0..1" />
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="IdMunicipioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Escuela_NivelEducativo">
+          <End Type="Model.NivelEducativo" Role="NivelEducativo" Multiplicity="0..1" />
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelEducativo">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Principal>
+            <Dependent Role="Escuela">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Escuela">
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
+          <End Type="Model.Requerimientos" Role="Requerimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="IdEscuela" />
+            </Principal>
+            <Dependent Role="Requerimientos">
+              <PropertyRef Name="IdEsceulaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Escuela">
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="IdEscuela" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEscuelaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Validacion_Escuela">
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="IdEscuela" />
+            </Principal>
+            <Dependent Role="Validacion">
+              <PropertyRef Name="IdEscuelaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspacioEducativo_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.EspacioEducativo" Role="EspacioEducativo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="EspacioEducativo">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspacioEducativoDet_EspacioEducativo">
+          <End Type="Model.EspacioEducativo" Role="EspacioEducativo" Multiplicity="0..1" />
+          <End Type="Model.EspacioEducativoDet" Role="EspacioEducativoDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspacioEducativo">
+              <PropertyRef Name="IdEspacioEducativo" />
+            </Principal>
+            <Dependent Role="EspacioEducativoDet">
+              <PropertyRef Name="IdEspacioEducativoFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspacioMultiple_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.EspacioMultiple" Role="EspacioMultiple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="EspacioMultiple">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Estatus">
+          <End Type="Model.Estatus" Role="Estatus" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEstatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccesoSistemaRol_Institucion">
+          <End Type="Model.Institucion" Role="Institucion" Multiplicity="1" />
+          <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdInstituto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidades_Municipios">
+          <End Type="Model.Municipios" Role="Municipios" Multiplicity="0..1" />
+          <End Type="Model.Localidades" Role="Localidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Localidades">
+              <PropertyRef Name="IdMunicipioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.Matricula" Role="Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Procedencia_TipoProcedencia">
+          <End Type="Model.TipoProcedencia" Role="TipoProcedencia" Multiplicity="0..1" />
+          <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProcedencia">
+              <PropertyRef Name="IdTipoProcedencia" />
+            </Principal>
+            <Dependent Role="Procedencia">
+              <PropertyRef Name="IdTipoProcedenciaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Procedencia">
+          <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedencia">
+              <PropertyRef Name="IdProcedencia" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdProcedenciaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioMunicipal_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.ServicioMunicipal" Role="ServicioMunicipal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="ServicioMunicipal">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_TipoAsunto">
+          <End Type="Model.TipoAsunto" Role="TipoAsunto" Multiplicity="0..1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAsunto">
+              <PropertyRef Name="IdTipoAsunto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdTipoAsuntoFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_TipoProcedencia">
+          <End Type="Model.TipoProcedencia" Role="TipoProcedencia" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProcedencia">
+              <PropertyRef Name="IdTipoProcedencia" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdTipoProcedenciaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2269,495 +2315,239 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySetMapping Name="AccesoSistema">
             <EntityTypeMapping TypeName="Model.AccesoSistema">
               <MappingFragment StoreEntitySet="AccesoSistema">
-                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
-                <ScalarProperty Name="controlador" ColumnName="controlador" />
-                <ScalarProperty Name="accion" ColumnName="accion" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="accion" ColumnName="accion" />
+                <ScalarProperty Name="controlador" ColumnName="controlador" />
+                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AlmacenamientoDren">
             <EntityTypeMapping TypeName="Model.AlmacenamientoDren">
               <MappingFragment StoreEntitySet="AlmacenamientoDren">
-                <ScalarProperty Name="IdAlmacenDrenaje" ColumnName="IdAlmacenDrenaje" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="Redagua" ColumnName="Redagua" />
-                <ScalarProperty Name="Pipa" ColumnName="Pipa" />
-                <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
-                <ScalarProperty Name="Tinaco" ColumnName="Tinaco" />
-                <ScalarProperty Name="ColectorMunicipal" ColumnName="ColectorMunicipal" />
-                <ScalarProperty Name="FosaSeptica" ColumnName="FosaSeptica" />
                 <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
+                <ScalarProperty Name="FosaSepticaEstado" ColumnName="FosaSepticaEstado" />
+                <ScalarProperty Name="FosaSeptica" ColumnName="FosaSeptica" />
+                <ScalarProperty Name="ColectorMunicipalEstado" ColumnName="ColectorMunicipalEstado" />
+                <ScalarProperty Name="ColectorMunicipal" ColumnName="ColectorMunicipal" />
+                <ScalarProperty Name="TinacoEstado" ColumnName="TinacoEstado" />
+                <ScalarProperty Name="Tinaco" ColumnName="Tinaco" />
+                <ScalarProperty Name="CisternaEstado" ColumnName="CisternaEstado" />
+                <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
+                <ScalarProperty Name="PipaEstado" ColumnName="PipaEstado" />
+                <ScalarProperty Name="Pipa" ColumnName="Pipa" />
+                <ScalarProperty Name="RedaguaEstado" ColumnName="RedaguaEstado" />
+                <ScalarProperty Name="Redagua" ColumnName="Redagua" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdAlmacenDrenaje" ColumnName="IdAlmacenDrenaje" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="Model.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Canalizacion">
             <EntityTypeMapping TypeName="Model.Canalizacion">
               <MappingFragment StoreEntitySet="Canalizacion">
-                <ScalarProperty Name="IdCanalizacion" ColumnName="IdCanalizacion" />
-                <ScalarProperty Name="IdInstitucionFk" ColumnName="IdInstitucionFk" />
-                <ScalarProperty Name="IdDepartamentoFk" ColumnName="IdDepartamentoFk" />
-                <ScalarProperty Name="Validacion" ColumnName="Validacion" />
                 <ScalarProperty Name="IdSolicitudFk" ColumnName="IdSolicitudFk" />
+                <ScalarProperty Name="Validacion" ColumnName="Validacion" />
+                <ScalarProperty Name="IdDepartamentoFk" ColumnName="IdDepartamentoFk" />
+                <ScalarProperty Name="IdInstitucionFk" ColumnName="IdInstitucionFk" />
+                <ScalarProperty Name="IdCanalizacion" ColumnName="IdCanalizacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteI">
             <EntityTypeMapping TypeName="Model.ComponenteI">
               <MappingFragment StoreEntitySet="ComponenteI">
-                <ScalarProperty Name="IdComponenteI" ColumnName="IdComponenteI" />
+                <ScalarProperty Name="InstGas" ColumnName="InstGas" />
+                <ScalarProperty Name="HidroSanitaria" ColumnName="HidroSanitaria" />
+                <ScalarProperty Name="InstElectrica" ColumnName="InstElectrica" />
+                <ScalarProperty Name="CalentonGas" ColumnName="CalentonGas" />
+                <ScalarProperty Name="AireAcondicionado" ColumnName="AireAcondicionado" />
+                <ScalarProperty Name="Herreria" ColumnName="Herreria" />
+                <ScalarProperty Name="PisoCeramica" ColumnName="PisoCeramica" />
+                <ScalarProperty Name="Impermeabilizante" ColumnName="Impermeabilizante" />
+                <ScalarProperty Name="Pintura" ColumnName="Pintura" />
+                <ScalarProperty Name="ConstruccionEspacio" ColumnName="ConstruccionEspacio" />
                 <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Esp_A" ColumnName="Esp_A" />
-                <ScalarProperty Name="Esp_L" ColumnName="Esp_L" />
-                <ScalarProperty Name="Esp_T" ColumnName="Esp_T" />
-                <ScalarProperty Name="Esp_Ax" ColumnName="Esp_Ax" />
+                <ScalarProperty Name="IdComponenteI" ColumnName="IdComponenteI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteII">
             <EntityTypeMapping TypeName="Model.ComponenteII">
               <MappingFragment StoreEntitySet="ComponenteII">
-                <ScalarProperty Name="IdComponenteII" ColumnName="IdComponenteII" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="ConstruccionModulo" ColumnName="ConstruccionModulo" />
-                <ScalarProperty Name="MuebleSanitario" ColumnName="MuebleSanitario" />
-                <ScalarProperty Name="Pintura" ColumnName="Pintura" />
-                <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="Herreria" ColumnName="Herreria" />
-                <ScalarProperty Name="Acabado" ColumnName="Acabado" />
-                <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
-                <ScalarProperty Name="InstalacionElectrica" ColumnName="InstalacionElectrica" />
-                <ScalarProperty Name="HidroSanitaria" ColumnName="HidroSanitaria" />
                 <ScalarProperty Name="Impermeabilizante" ColumnName="Impermeabilizante" />
+                <ScalarProperty Name="HidroSanitaria" ColumnName="HidroSanitaria" />
+                <ScalarProperty Name="InstalacionElectrica" ColumnName="InstalacionElectrica" />
+                <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
+                <ScalarProperty Name="Acabado" ColumnName="Acabado" />
+                <ScalarProperty Name="Herreria" ColumnName="Herreria" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Pintura" ColumnName="Pintura" />
+                <ScalarProperty Name="MuebleSanitario" ColumnName="MuebleSanitario" />
+                <ScalarProperty Name="ConstruccionModulo" ColumnName="ConstruccionModulo" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteII" ColumnName="IdComponenteII" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteIII">
             <EntityTypeMapping TypeName="Model.ComponenteIII">
               <MappingFragment StoreEntitySet="ComponenteIII">
-                <ScalarProperty Name="IdComponenteIII" ColumnName="IdComponenteIII" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Solicita" ColumnName="Solicita" />
                 <ScalarProperty Name="Requiere" ColumnName="Requiere" />
+                <ScalarProperty Name="Solicita" ColumnName="Solicita" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteIII" ColumnName="IdComponenteIII" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteIV">
             <EntityTypeMapping TypeName="Model.ComponenteIV">
               <MappingFragment StoreEntitySet="ComponenteIV">
-                <ScalarProperty Name="IdComponenteIV" ColumnName="IdComponenteIV" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="RedHidraulica" ColumnName="RedHidraulica" />
-                <ScalarProperty Name="Construccion" ColumnName="Construccion" />
                 <ScalarProperty Name="Rehabilitacion" ColumnName="Rehabilitacion" />
+                <ScalarProperty Name="Construccion" ColumnName="Construccion" />
+                <ScalarProperty Name="RedHidraulica" ColumnName="RedHidraulica" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteIV" ColumnName="IdComponenteIV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteV">
             <EntityTypeMapping TypeName="Model.ComponenteV">
               <MappingFragment StoreEntitySet="ComponenteV">
-                <ScalarProperty Name="IdComponenteV" ColumnName="IdComponenteV" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="Andadores" ColumnName="Andadores" />
-                <ScalarProperty Name="Rampas" ColumnName="Rampas" />
                 <ScalarProperty Name="Pasamanos" ColumnName="Pasamanos" />
+                <ScalarProperty Name="Rampas" ColumnName="Rampas" />
+                <ScalarProperty Name="Andadores" ColumnName="Andadores" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteV" ColumnName="IdComponenteV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteVI">
             <EntityTypeMapping TypeName="Model.ComponenteVI">
               <MappingFragment StoreEntitySet="ComponenteVI">
-                <ScalarProperty Name="IdComponenteVI" ColumnName="IdComponenteVI" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="ConstruccionModulo" ColumnName="ConstruccionModulo" />
-                <ScalarProperty Name="Pintura" ColumnName="Pintura" />
-                <ScalarProperty Name="Piso" ColumnName="Piso" />
-                <ScalarProperty Name="InstalacionElectrica" ColumnName="InstalacionElectrica" />
                 <ScalarProperty Name="AireAcondicionado" ColumnName="AireAcondicionado" />
+                <ScalarProperty Name="InstalacionElectrica" ColumnName="InstalacionElectrica" />
+                <ScalarProperty Name="Piso" ColumnName="Piso" />
+                <ScalarProperty Name="Pintura" ColumnName="Pintura" />
+                <ScalarProperty Name="ConstruccionModulo" ColumnName="ConstruccionModulo" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteVI" ColumnName="IdComponenteVI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteVII">
             <EntityTypeMapping TypeName="Model.ComponenteVII">
               <MappingFragment StoreEntitySet="ComponenteVII">
-                <ScalarProperty Name="IdComponenteVII" ColumnName="IdComponenteVII" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="Telefonia" ColumnName="Telefonia" />
-                <ScalarProperty Name="Internet" ColumnName="Internet" />
                 <ScalarProperty Name="VozDatos" ColumnName="VozDatos" />
+                <ScalarProperty Name="Telefonia_internet" ColumnName="Telefonia_internet" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteVII" ColumnName="IdComponenteVII" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ComponenteVIII">
             <EntityTypeMapping TypeName="Model.ComponenteVIII">
               <MappingFragment StoreEntitySet="ComponenteVIII">
-                <ScalarProperty Name="IdComponenteVIII" ColumnName="IdComponenteVIII" />
-                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
-                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
-                <ScalarProperty Name="Alumbrado" ColumnName="Alumbrado" />
-                <ScalarProperty Name="RedElectrica" ColumnName="RedElectrica" />
-                <ScalarProperty Name="Barda" ColumnName="Barda" />
-                <ScalarProperty Name="CanchaMultiple" ColumnName="CanchaMultiple" />
-                <ScalarProperty Name="PlazaCivica" ColumnName="PlazaCivica" />
-                <ScalarProperty Name="Domo" ColumnName="Domo" />
-                <ScalarProperty Name="AstaBandera" ColumnName="AstaBandera" />
+                <ScalarProperty Name="AreaJuegos" ColumnName="AreaJuegos" />
                 <ScalarProperty Name="AccesoPrincipal" ColumnName="AccesoPrincipal" />
+                <ScalarProperty Name="AstaBandera" ColumnName="AstaBandera" />
+                <ScalarProperty Name="Domo" ColumnName="Domo" />
+                <ScalarProperty Name="Otros" ColumnName="Otros" />
+                <ScalarProperty Name="CanchaMultiple" ColumnName="CanchaMultiple" />
+                <ScalarProperty Name="Barda" ColumnName="Barda" />
+                <ScalarProperty Name="ContenedorBasura" ColumnName="ContenedorBasura" />
+                <ScalarProperty Name="Alumbrado" ColumnName="Alumbrado" />
+                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
+                <ScalarProperty Name="IdRequerimientoFk" ColumnName="IdRequerimientoFk" />
+                <ScalarProperty Name="IdComponenteVIII" ColumnName="IdComponenteVIII" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contacto">
             <EntityTypeMapping TypeName="Model.Contacto">
               <MappingFragment StoreEntitySet="Contacto">
-                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
-                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Croquis">
             <EntityTypeMapping TypeName="Model.Croquis">
               <MappingFragment StoreEntitySet="Croquis">
-                <ScalarProperty Name="IdCroquis" ColumnName="IdCroquis" />
-                <ScalarProperty Name="DocCroquis" ColumnName="DocCroquis" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Predio" ColumnName="Predio" />
-                <ScalarProperty Name="TipoSuelo" ColumnName="TipoSuelo" />
                 <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="TipoSuelo" ColumnName="TipoSuelo" />
+                <ScalarProperty Name="Predio" ColumnName="Predio" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="DocCroquis" ColumnName="DocCroquis" />
+                <ScalarProperty Name="IdCroquis" ColumnName="IdCroquis" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departamento">
             <EntityTypeMapping TypeName="Model.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Titular" ColumnName="Titular" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Ext" ColumnName="Ext" />
                 <ScalarProperty Name="IdInstitucionFk" ColumnName="IdInstitucionFk" />
+                <ScalarProperty Name="Ext" ColumnName="Ext" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DetalleCanalizacion">
             <EntityTypeMapping TypeName="Model.DetalleCanalizacion">
               <MappingFragment StoreEntitySet="DetalleCanalizacion">
-                <ScalarProperty Name="IdDetalleCanalizar" ColumnName="IdDetalleCanalizar" />
-                <ScalarProperty Name="IdCanalizarFk" ColumnName="IdCanalizarFk" />
-                <ScalarProperty Name="FechaCanalizar" ColumnName="FechaCanalizar" />
-                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
-                <ScalarProperty Name="IdUsuarioFk" ColumnName="IdUsuarioFk" />
-                <ScalarProperty Name="Instituto" ColumnName="Instituto" />
                 <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Instituto" ColumnName="Instituto" />
+                <ScalarProperty Name="IdUsuarioFk" ColumnName="IdUsuarioFk" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="FechaCanalizar" ColumnName="FechaCanalizar" />
+                <ScalarProperty Name="IdCanalizarFk" ColumnName="IdCanalizarFk" />
+                <ScalarProperty Name="IdDetalleCanalizar" ColumnName="IdDetalleCanalizar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Email">
-            <EntityTypeMapping TypeName="Model.Email">
-              <MappingFragment StoreEntitySet="Email">
-                <ScalarProperty Name="IdEmail" ColumnName="IdEmail" />
-                <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="TipoEmail" ColumnName="TipoEmail" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EnergiaElectrica">
-            <EntityTypeMapping TypeName="Model.EnergiaElectrica">
-              <MappingFragment StoreEntitySet="EnergiaElectrica">
-                <ScalarProperty Name="IdEnergiaElectrica" ColumnName="IdEnergiaElectrica" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="Subestacion" ColumnName="Subestacion" />
-                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
-                <ScalarProperty Name="NoMedidor" ColumnName="NoMedidor" />
-                <ScalarProperty Name="InterruptorGral" ColumnName="InterruptorGral" />
-                <ScalarProperty Name="Termomagnetico" ColumnName="Termomagnetico" />
-                <ScalarProperty Name="AlumbradoExt" ColumnName="AlumbradoExt" />
-                <ScalarProperty Name="Luminaria" ColumnName="Luminaria" />
-                <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Entorno">
-            <EntityTypeMapping TypeName="Model.Entorno">
-              <MappingFragment StoreEntitySet="Entorno">
-                <ScalarProperty Name="IdEntorno" ColumnName="IdEntorno" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="Infraestructura" ColumnName="Infraestructura" />
-                <ScalarProperty Name="Terreno" ColumnName="Terreno" />
-                <ScalarProperty Name="Rio_Arrollo" ColumnName="Rio_Arrollo" />
-                <ScalarProperty Name="Rio_ArrolloDistancia" ColumnName="Rio_ArrolloDistancia" />
-                <ScalarProperty Name="Gasolinera" ColumnName="Gasolinera" />
-                <ScalarProperty Name="GasolineraDistancia" ColumnName="GasolineraDistancia" />
-                <ScalarProperty Name="DerechoVia" ColumnName="DerechoVia" />
-                <ScalarProperty Name="DerechoViaDistancia" ColumnName="DerechoViaDistancia" />
-                <ScalarProperty Name="AmenazaVial" ColumnName="AmenazaVial" />
-                <ScalarProperty Name="AmenazaVialDistancia" ColumnName="AmenazaVialDistancia" />
-                <ScalarProperty Name="Comercio" ColumnName="Comercio" />
-                <ScalarProperty Name="ComercioDistancia" ColumnName="ComercioDistancia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Escuela">
-            <EntityTypeMapping TypeName="Model.Escuela">
-              <MappingFragment StoreEntitySet="Escuela">
-                <ScalarProperty Name="IdEscuela" ColumnName="IdEscuela" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Clave" ColumnName="Clave" />
-                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
-                <ScalarProperty Name="IdLocalidadFk" ColumnName="IdLocalidadFk" />
-                <ScalarProperty Name="IdMunicipioFk" ColumnName="IdMunicipioFk" />
-                <ScalarProperty Name="IdNivelEducativo" ColumnName="IdNivelEducativo" />
-                <ScalarProperty Name="Turno" ColumnName="Turno" />
-                <ScalarProperty Name="Geox" ColumnName="Geox" />
-                <ScalarProperty Name="Geoy" ColumnName="Geoy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EspacioEducativo">
-            <EntityTypeMapping TypeName="Model.EspacioEducativo">
-              <MappingFragment StoreEntitySet="EspacioEducativo">
-                <ScalarProperty Name="IdEspacioEducativo" ColumnName="IdEspacioEducativo" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EspacioEducativoDet">
-            <EntityTypeMapping TypeName="Model.EspacioEducativoDet">
-              <MappingFragment StoreEntitySet="EspacioEducativoDet">
-                <ScalarProperty Name="IdEspacioDet" ColumnName="IdEspacioDet" />
-                <ScalarProperty Name="Edificio" ColumnName="Edificio" />
-                <ScalarProperty Name="IdEspacioEducativoFk" ColumnName="IdEspacioEducativoFk" />
-                <ScalarProperty Name="TipoEstructura" ColumnName="TipoEstructura" />
-                <ScalarProperty Name="Aulas" ColumnName="Aulas" />
-                <ScalarProperty Name="Taller" ColumnName="Taller" />
-                <ScalarProperty Name="ServicioSanitario" ColumnName="ServicioSanitario" />
-                <ScalarProperty Name="ServicioAdministrativo" ColumnName="ServicioAdministrativo" />
-                <ScalarProperty Name="Biblioteca" ColumnName="Biblioteca" />
-                <ScalarProperty Name="BodegaApendice" ColumnName="BodegaApendice" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EspacioMultiple">
-            <EntityTypeMapping TypeName="Model.EspacioMultiple">
-              <MappingFragment StoreEntitySet="EspacioMultiple">
-                <ScalarProperty Name="IdEspacioMultiple" ColumnName="IdEspacioMultiple" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="MuroAcometidaEstado" ColumnName="MuroAcometidaEstado" />
-                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
-                <ScalarProperty Name="BardaEstado" ColumnName="BardaEstado" />
-                <ScalarProperty Name="Barda" ColumnName="Barda" />
-                <ScalarProperty Name="RampasEstado" ColumnName="RampasEstado" />
-                <ScalarProperty Name="Rampas" ColumnName="Rampas" />
-                <ScalarProperty Name="CanchaMultipleEstado" ColumnName="CanchaMultipleEstado" />
-                <ScalarProperty Name="CanchaMultiple" ColumnName="CanchaMultiple" />
-                <ScalarProperty Name="PlazaEstado" ColumnName="PlazaEstado" />
-                <ScalarProperty Name="Plaza" ColumnName="Plaza" />
-                <ScalarProperty Name="DomoMallaEstado" ColumnName="DomoMallaEstado" />
-                <ScalarProperty Name="DomoMalla" ColumnName="DomoMalla" />
-                <ScalarProperty Name="BebederoEstado" ColumnName="BebederoEstado" />
-                <ScalarProperty Name="Bebedero" ColumnName="Bebedero" />
-                <ScalarProperty Name="AccesoPEstado" ColumnName="AccesoPEstado" />
-                <ScalarProperty Name="AccesoP" ColumnName="AccesoP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Estatus">
-            <EntityTypeMapping TypeName="Model.Estatus">
-              <MappingFragment StoreEntitySet="Estatus">
-                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
-                <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Institucion">
-            <EntityTypeMapping TypeName="Model.Institucion">
-              <MappingFragment StoreEntitySet="Institucion">
-                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Siglas" ColumnName="Siglas" />
-                <ScalarProperty Name="Titular" ColumnName="Titular" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Ext" ColumnName="Ext" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Localidades">
-            <EntityTypeMapping TypeName="Model.Localidades">
-              <MappingFragment StoreEntitySet="Localidades">
-                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdMunicipioFk" ColumnName="IdMunicipioFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Matricula">
-            <EntityTypeMapping TypeName="Model.Matricula">
-              <MappingFragment StoreEntitySet="Matricula">
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="Alumnos" ColumnName="Alumnos" />
-                <ScalarProperty Name="PersonaDiscapacidad" ColumnName="PersonaDiscapacidad" />
-                <ScalarProperty Name="PersonalDoncente" ColumnName="PersonalDoncente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Municipios">
-            <EntityTypeMapping TypeName="Model.Municipios">
-              <MappingFragment StoreEntitySet="Municipios">
-                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NivelEducativo">
-            <EntityTypeMapping TypeName="Model.NivelEducativo">
-              <MappingFragment StoreEntitySet="NivelEducativo">
-                <ScalarProperty Name="IdNivelEducativo" ColumnName="IdNivelEducativo" />
-                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Procedencia">
-            <EntityTypeMapping TypeName="Model.Procedencia">
-              <MappingFragment StoreEntitySet="Procedencia">
-                <ScalarProperty Name="IdProcedencia" ColumnName="IdProcedencia" />
-                <ScalarProperty Name="Procedencia1" ColumnName="Procedencia" />
-                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
-                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
-                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Requerimientos">
-            <EntityTypeMapping TypeName="Model.Requerimientos">
-              <MappingFragment StoreEntitySet="Requerimientos">
-                <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
-                <ScalarProperty Name="IdEsceulaFk" ColumnName="IdEsceulaFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServicioMunicipal">
-            <EntityTypeMapping TypeName="Model.ServicioMunicipal">
-              <MappingFragment StoreEntitySet="ServicioMunicipal">
-                <ScalarProperty Name="IdServicioMpal" ColumnName="IdServicioMpal" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="RedAgua" ColumnName="RedAgua" />
-                <ScalarProperty Name="RedAguaDistancia" ColumnName="RedAguaDistancia" />
-                <ScalarProperty Name="RedDrenaje" ColumnName="RedDrenaje" />
-                <ScalarProperty Name="RedDrenajeDistancia" ColumnName="RedDrenajeDistancia" />
-                <ScalarProperty Name="RedEnergia" ColumnName="RedEnergia" />
-                <ScalarProperty Name="RedEnergiaDistancia" ColumnName="RedEnergiaDistancia" />
-                <ScalarProperty Name="RedAlumbrado" ColumnName="RedAlumbrado" />
-                <ScalarProperty Name="RedAlumbradoDistancia" ColumnName="RedAlumbradoDistancia" />
-                <ScalarProperty Name="VialidadPrimaria" ColumnName="VialidadPrimaria" />
-                <ScalarProperty Name="VialidadSecundaria" ColumnName="VialidadSecundaria" />
-                <ScalarProperty Name="VialidadTerciaria" ColumnName="VialidadTerciaria" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Solicitudes">
-            <EntityTypeMapping TypeName="Model.Solicitudes">
-              <MappingFragment StoreEntitySet="Solicitudes">
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
-                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
-                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
-                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
-                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
-                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoAsunto">
-            <EntityTypeMapping TypeName="Model.TipoAsunto">
-              <MappingFragment StoreEntitySet="TipoAsunto">
-                <ScalarProperty Name="IdTipoAsunto" ColumnName="IdTipoAsunto" />
-                <ScalarProperty Name="TipoAsunto1" ColumnName="TipoAsunto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoProcedencia">
-            <EntityTypeMapping TypeName="Model.TipoProcedencia">
-              <MappingFragment StoreEntitySet="TipoProcedencia">
-                <ScalarProperty Name="IdTipoProcedencia" ColumnName="IdTipoProcedencia" />
-                <ScalarProperty Name="TipoProcedencia1" ColumnName="TipoProcedencia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Validacion">
-            <EntityTypeMapping TypeName="Model.Validacion">
-              <MappingFragment StoreEntitySet="Validacion">
-                <ScalarProperty Name="IdValidar" ColumnName="IdValidar" />
-                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AccesoSistemaRol">
-            <EntityTypeMapping TypeName="Model.AccesoSistemaRol">
-              <MappingFragment StoreEntitySet="AccesoSistemaRol">
-                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Documentos">
             <EntityTypeMapping TypeName="Model.Documentos">
               <MappingFragment StoreEntitySet="Documentos">
@@ -2769,6 +2559,285 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Email">
+            <EntityTypeMapping TypeName="Model.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="TipoEmail" ColumnName="TipoEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
+                <ScalarProperty Name="IdEmail" ColumnName="IdEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnergiaElectrica">
+            <EntityTypeMapping TypeName="Model.EnergiaElectrica">
+              <MappingFragment StoreEntitySet="EnergiaElectrica">
+                <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
+                <ScalarProperty Name="LuminariaEstado" ColumnName="LuminariaEstado" />
+                <ScalarProperty Name="Luminaria" ColumnName="Luminaria" />
+                <ScalarProperty Name="AlumbradoExtEstado" ColumnName="AlumbradoExtEstado" />
+                <ScalarProperty Name="AlumbradoExt" ColumnName="AlumbradoExt" />
+                <ScalarProperty Name="TermomagneticoElectrico" ColumnName="TermomagneticoElectrico" />
+                <ScalarProperty Name="Termomagnetico" ColumnName="Termomagnetico" />
+                <ScalarProperty Name="InterruptorGralEstado" ColumnName="InterruptorGralEstado" />
+                <ScalarProperty Name="InterruptorGral" ColumnName="InterruptorGral" />
+                <ScalarProperty Name="TableroDistribucionEstado" ColumnName="TableroDistribucionEstado" />
+                <ScalarProperty Name="TableroDistribucion" ColumnName="TableroDistribucion" />
+                <ScalarProperty Name="MuroAcometidaEstado" ColumnName="MuroAcometidaEstado" />
+                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
+                <ScalarProperty Name="SubestacionEstado" ColumnName="SubestacionEstado" />
+                <ScalarProperty Name="Subestacion" ColumnName="Subestacion" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEnergiaElectrica" ColumnName="IdEnergiaElectrica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entorno">
+            <EntityTypeMapping TypeName="Model.Entorno">
+              <MappingFragment StoreEntitySet="Entorno">
+                <ScalarProperty Name="ComercioDistancia" ColumnName="ComercioDistancia" />
+                <ScalarProperty Name="Comercio" ColumnName="Comercio" />
+                <ScalarProperty Name="AmenazaVialDistancia" ColumnName="AmenazaVialDistancia" />
+                <ScalarProperty Name="AmenazaVial" ColumnName="AmenazaVial" />
+                <ScalarProperty Name="DerechoViaDistancia" ColumnName="DerechoViaDistancia" />
+                <ScalarProperty Name="DerechoVia" ColumnName="DerechoVia" />
+                <ScalarProperty Name="GasolineraDistancia" ColumnName="GasolineraDistancia" />
+                <ScalarProperty Name="Gasolinera" ColumnName="Gasolinera" />
+                <ScalarProperty Name="Rio_ArrolloDistancia" ColumnName="Rio_ArrolloDistancia" />
+                <ScalarProperty Name="Rio_Arrollo" ColumnName="Rio_Arrollo" />
+                <ScalarProperty Name="Terreno" ColumnName="Terreno" />
+                <ScalarProperty Name="Infraestructura" ColumnName="Infraestructura" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEntorno" ColumnName="IdEntorno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Escuela">
+            <EntityTypeMapping TypeName="Model.Escuela">
+              <MappingFragment StoreEntitySet="Escuela">
+                <ScalarProperty Name="Geoy" ColumnName="Geoy" />
+                <ScalarProperty Name="Geox" ColumnName="Geox" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="IdNivelEducativo" ColumnName="IdNivelEducativo" />
+                <ScalarProperty Name="IdMunicipioFk" ColumnName="IdMunicipioFk" />
+                <ScalarProperty Name="IdLocalidadFk" ColumnName="IdLocalidadFk" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEscuela" ColumnName="IdEscuela" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspacioEducativo">
+            <EntityTypeMapping TypeName="Model.EspacioEducativo">
+              <MappingFragment StoreEntitySet="EspacioEducativo">
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEspacioEducativo" ColumnName="IdEspacioEducativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspacioEducativoDet">
+            <EntityTypeMapping TypeName="Model.EspacioEducativoDet">
+              <MappingFragment StoreEntitySet="EspacioEducativoDet">
+                <ScalarProperty Name="AulasUsoMultiple" ColumnName="AulasUsoMultiple" />
+                <ScalarProperty Name="BodegaApendice" ColumnName="BodegaApendice" />
+                <ScalarProperty Name="Biblioteca" ColumnName="Biblioteca" />
+                <ScalarProperty Name="ServicioAdministrativo" ColumnName="ServicioAdministrativo" />
+                <ScalarProperty Name="ServicioSanitario" ColumnName="ServicioSanitario" />
+                <ScalarProperty Name="Taller" ColumnName="Taller" />
+                <ScalarProperty Name="Aulas" ColumnName="Aulas" />
+                <ScalarProperty Name="TipoEstructura" ColumnName="TipoEstructura" />
+                <ScalarProperty Name="IdEspacioEducativoFk" ColumnName="IdEspacioEducativoFk" />
+                <ScalarProperty Name="Edificio" ColumnName="Edificio" />
+                <ScalarProperty Name="IdEspacioDet" ColumnName="IdEspacioDet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspacioMultiple">
+            <EntityTypeMapping TypeName="Model.EspacioMultiple">
+              <MappingFragment StoreEntitySet="EspacioMultiple">
+                <ScalarProperty Name="OtroEstado" ColumnName="OtroEstado" />
+                <ScalarProperty Name="Otro" ColumnName="Otro" />
+                <ScalarProperty Name="AstaBanderaEstado" ColumnName="AstaBanderaEstado" />
+                <ScalarProperty Name="AstaBandera" ColumnName="AstaBandera" />
+                <ScalarProperty Name="AccesoP" ColumnName="AccesoP" />
+                <ScalarProperty Name="AccesoPEstado" ColumnName="AccesoPEstado" />
+                <ScalarProperty Name="Bebedero" ColumnName="Bebedero" />
+                <ScalarProperty Name="BebederoEstado" ColumnName="BebederoEstado" />
+                <ScalarProperty Name="DomoMalla" ColumnName="DomoMalla" />
+                <ScalarProperty Name="DomoMallaEstado" ColumnName="DomoMallaEstado" />
+                <ScalarProperty Name="Plaza" ColumnName="Plaza" />
+                <ScalarProperty Name="PlazaEstado" ColumnName="PlazaEstado" />
+                <ScalarProperty Name="CanchaMultiple" ColumnName="CanchaMultiple" />
+                <ScalarProperty Name="CanchaMultipleEstado" ColumnName="CanchaMultipleEstado" />
+                <ScalarProperty Name="Rampas" ColumnName="Rampas" />
+                <ScalarProperty Name="RampasEstado" ColumnName="RampasEstado" />
+                <ScalarProperty Name="Barda" ColumnName="Barda" />
+                <ScalarProperty Name="BardaEstado" ColumnName="BardaEstado" />
+                <ScalarProperty Name="Areajuegos" ColumnName="Areajuegos" />
+                <ScalarProperty Name="AreajuegosEstado" ColumnName="AreajuegosEstado" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEspacioMultiple" ColumnName="IdEspacioMultiple" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estatus">
+            <EntityTypeMapping TypeName="Model.Estatus">
+              <MappingFragment StoreEntitySet="Estatus">
+                <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Institucion">
+            <EntityTypeMapping TypeName="Model.Institucion">
+              <MappingFragment StoreEntitySet="Institucion">
+                <ScalarProperty Name="Ext" ColumnName="Ext" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
+                <ScalarProperty Name="Siglas" ColumnName="Siglas" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidades">
+            <EntityTypeMapping TypeName="Model.Localidades">
+              <MappingFragment StoreEntitySet="Localidades">
+                <ScalarProperty Name="IdMunicipioFk" ColumnName="IdMunicipioFk" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matricula">
+            <EntityTypeMapping TypeName="Model.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="PersonalDoncente" ColumnName="PersonalDoncente" />
+                <ScalarProperty Name="PersonaDiscapacidad" ColumnName="PersonaDiscapacidad" />
+                <ScalarProperty Name="Alumnos" ColumnName="Alumnos" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipios">
+            <EntityTypeMapping TypeName="Model.Municipios">
+              <MappingFragment StoreEntitySet="Municipios">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NivelEducativo">
+            <EntityTypeMapping TypeName="Model.NivelEducativo">
+              <MappingFragment StoreEntitySet="NivelEducativo">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="IdNivelEducativo" ColumnName="IdNivelEducativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Procedencia">
+            <EntityTypeMapping TypeName="Model.Procedencia">
+              <MappingFragment StoreEntitySet="Procedencia">
+                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Procedencia1" ColumnName="Procedencia" />
+                <ScalarProperty Name="IdProcedencia" ColumnName="IdProcedencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requerimientos">
+            <EntityTypeMapping TypeName="Model.Requerimientos">
+              <MappingFragment StoreEntitySet="Requerimientos">
+                <ScalarProperty Name="IdEsceulaFk" ColumnName="IdEsceulaFk" />
+                <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicioMunicipal">
+            <EntityTypeMapping TypeName="Model.ServicioMunicipal">
+              <MappingFragment StoreEntitySet="ServicioMunicipal">
+                <ScalarProperty Name="VialidadTerciaria" ColumnName="VialidadTerciaria" />
+                <ScalarProperty Name="VialidadSecundaria" ColumnName="VialidadSecundaria" />
+                <ScalarProperty Name="VialidadPrimaria" ColumnName="VialidadPrimaria" />
+                <ScalarProperty Name="RedAlumbradoDistancia" ColumnName="RedAlumbradoDistancia" />
+                <ScalarProperty Name="RedAlumbrado" ColumnName="RedAlumbrado" />
+                <ScalarProperty Name="RedEnergiaDistancia" ColumnName="RedEnergiaDistancia" />
+                <ScalarProperty Name="RedEnergia" ColumnName="RedEnergia" />
+                <ScalarProperty Name="RedDrenajeDistancia" ColumnName="RedDrenajeDistancia" />
+                <ScalarProperty Name="RedDrenaje" ColumnName="RedDrenaje" />
+                <ScalarProperty Name="RedAguaDistancia" ColumnName="RedAguaDistancia" />
+                <ScalarProperty Name="RedAgua" ColumnName="RedAgua" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdServicioMpal" ColumnName="IdServicioMpal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitudes">
+            <EntityTypeMapping TypeName="Model.Solicitudes">
+              <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
+                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
+                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
+                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAsunto">
+            <EntityTypeMapping TypeName="Model.TipoAsunto">
+              <MappingFragment StoreEntitySet="TipoAsunto">
+                <ScalarProperty Name="TipoAsunto1" ColumnName="TipoAsunto" />
+                <ScalarProperty Name="IdTipoAsunto" ColumnName="IdTipoAsunto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProcedencia">
+            <EntityTypeMapping TypeName="Model.TipoProcedencia">
+              <MappingFragment StoreEntitySet="TipoProcedencia">
+                <ScalarProperty Name="TipoProcedencia1" ColumnName="TipoProcedencia" />
+                <ScalarProperty Name="IdTipoProcedencia" ColumnName="IdTipoProcedencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Validacion">
+            <EntityTypeMapping TypeName="Model.Validacion">
+              <MappingFragment StoreEntitySet="Validacion">
+                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
+                <ScalarProperty Name="IdValidar" ColumnName="IdValidar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccesoSistemaRol">
+            <EntityTypeMapping TypeName="Model.AccesoSistemaRol">
+              <MappingFragment StoreEntitySet="AccesoSistemaRol">
+                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

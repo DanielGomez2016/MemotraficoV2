@@ -1,0 +1,58 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-4 text-center">Concepto</th>
+                <th class="col-md-8 text-center">Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.Barda)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.Barda, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.CanchaMultiple)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.CanchaMultiple, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.MuroAcometida)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.MuroAcometida, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.Alumbrado)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.Alumbrado, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.Domo)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.Domo, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.AstaBandera)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.AstaBandera, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.AccesoPrincipal)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.AccesoPrincipal, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.AreaJuegos)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.AreaJuegos, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.ContenedorBasura)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.ContenedorBasura, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVIII.Otros)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVIII.Otros, new { @class = "form-control col-md-12" })</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

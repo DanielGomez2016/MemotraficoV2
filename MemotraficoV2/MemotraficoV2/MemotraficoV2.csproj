@@ -318,6 +318,7 @@
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\Images\ajax-loading.gif" />
+    <Content Include="Content\Images\mapachih.jpg" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\loader-style.css" />
@@ -5113,6 +5114,22 @@
     <Content Include="Views\Procedencia\Create.cshtml" />
     <Content Include="Views\Procedencia\Edit.cshtml" />
     <Content Include="Views\Solicitudes\Validaciones.cshtml" />
+    <Content Include="Views\Solicitudes\_Matricula.cshtml" />
+    <Content Include="Views\Solicitudes\_Entorno.cshtml" />
+    <Content Include="Views\Solicitudes\_Croquis.cshtml" />
+    <Content Include="Views\Solicitudes\_ServiciosMunicipales.cshtml" />
+    <Content Include="Views\Solicitudes\_AlmacenamientoDren.cshtml" />
+    <Content Include="Views\Solicitudes\_EnergiaElectrica.cshtml" />
+    <Content Include="Views\Solicitudes\_EspacioMultiple.cshtml" />
+    <Content Include="Views\Solicitudes\_EspacioEducativo.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteI.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteII.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteIII.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteIV.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteV.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteVI.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteVII.cshtml" />
+    <Content Include="Views\Solicitudes\_ComponenteVIII.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

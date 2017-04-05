@@ -1,0 +1,44 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+
+
+@{ Layout = null;}
+
+
+<div class="item form-group well col-md-5">
+    @Html.LabelFor(i => i.Matricula.Alumnos, new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
+    <div class="col-md-8 col-xs-12">
+        @Html.TextBoxFor(i => i.Matricula.Alumnos, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
+    </div>
+    @Html.LabelFor(i => i.Matricula.PersonaDiscapacidad, new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
+    <div class="col-md-8 col-xs-12">
+        @Html.TextBoxFor(i => i.Matricula.PersonaDiscapacidad, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
+    </div>
+    @Html.Label("Total", new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
+    <div class="col-md-8 col-xs-12">
+        @Html.TextBox("Total", null, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
+    </div>
+    @Html.LabelFor(i => i.Matricula.PersonalDoncente, new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
+    <div class="col-md-8 col-xs-12">
+        @Html.TextBoxFor(i => i.Matricula.PersonalDoncente, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
+    </div>
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-1"></div>
+<div class="item form-group well col-md-5">
+    @Html.LabelFor(i => i.aulas, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+    <div class="col-md-offset-1 col-sm-8 col-xs-12">
+        @Html.TextBoxFor(i => i.aulas, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text", disabled = "disabled" })
+    </div>
+    @Html.LabelFor(i => i.laboratorios, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+    <div class="col-md-offset-1 col-sm-8 col-xs-12">
+        @Html.TextBoxFor(i => i.laboratorios, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text", disabled = "disabled" })
+    </div>
+    @Html.LabelFor(i => i.talleres, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+    <div class="col-md-offset-1 col-sm-8 col-xs-12">
+        @Html.TextBoxFor(i => i.talleres, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text", disabled = "disabled" })
+    </div>
+    @Html.LabelFor(i => i.anexos, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+    <div class="col-md-offset-1 col-sm-8 col-xs-12">
+        @Html.TextBoxFor(i => i.anexos, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text", disabled = "disabled" })
+    </div>
+</div>

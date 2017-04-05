@@ -15,7 +15,6 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region Metadatos de relaciones en EDM
@@ -34,6 +33,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Contacto_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Contacto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Contacto), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Croquis_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Croquis", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Croquis), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Departamento_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Departamento), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Documentos_DetalleCanalizacion", "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.DetalleCanalizacion), "Documentos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Documentos), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_EnergiaElectrica_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EnergiaElectrica", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EnergiaElectrica), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Entorno_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Validacion), "Entorno", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Entorno), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_Localidades", "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Localidades), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
@@ -55,7 +55,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoAsunto", "TipoAsunto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoAsunto), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.TipoProcedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
-[assembly: EdmRelationshipAttribute("Model", "FK_Documentos_DetalleCanalizacion", "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.DetalleCanalizacion), "Documentos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Documentos), true)]
 
 #endregion
 
@@ -378,6 +377,22 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<DetalleCanalizacion> _DetalleCanalizacion;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Documentos> Documentos
+        {
+            get
+            {
+                if ((_Documentos == null))
+                {
+                    _Documentos = base.CreateObjectSet<Documentos>("Documentos");
+                }
+                return _Documentos;
+            }
+        }
+        private ObjectSet<Documentos> _Documentos;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -714,22 +729,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<AccesoSistemaRol> _AccesoSistemaRol;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<Documentos> Documentos
-        {
-            get
-            {
-                if ((_Documentos == null))
-                {
-                    _Documentos = base.CreateObjectSet<Documentos>("Documentos");
-                }
-                return _Documentos;
-            }
-        }
-        private ObjectSet<Documentos> _Documentos;
 
         #endregion
 
@@ -869,6 +868,14 @@ namespace MemotraficoV2.Models
         public void AddToDetalleCanalizacion(DetalleCanalizacion detalleCanalizacion)
         {
             base.AddObject("DetalleCanalizacion", detalleCanalizacion);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Documentos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToDocumentos(Documentos documentos)
+        {
+            base.AddObject("Documentos", documentos);
         }
     
         /// <summary>
@@ -1037,14 +1044,6 @@ namespace MemotraficoV2.Models
         public void AddToAccesoSistemaRol(AccesoSistemaRol accesoSistemaRol)
         {
             base.AddObject("AccesoSistemaRol", accesoSistemaRol);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Documentos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToDocumentos(Documentos documentos)
-        {
-            base.AddObject("Documentos", documentos);
         }
 
         #endregion
@@ -1574,6 +1573,30 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RedaguaEstado
+        {
+            get
+            {
+                return _RedaguaEstado;
+            }
+            set
+            {
+                OnRedaguaEstadoChanging(value);
+                ReportPropertyChanging("RedaguaEstado");
+                _RedaguaEstado = StructuralObject.SetValidValue(value, "RedaguaEstado");
+                ReportPropertyChanged("RedaguaEstado");
+                OnRedaguaEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RedaguaEstado;
+        partial void OnRedaguaEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnRedaguaEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Boolean> Pipa
         {
             get
@@ -1592,6 +1615,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Boolean> _Pipa;
         partial void OnPipaChanging(Nullable<global::System.Boolean> value);
         partial void OnPipaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PipaEstado
+        {
+            get
+            {
+                return _PipaEstado;
+            }
+            set
+            {
+                OnPipaEstadoChanging(value);
+                ReportPropertyChanging("PipaEstado");
+                _PipaEstado = StructuralObject.SetValidValue(value, "PipaEstado");
+                ReportPropertyChanged("PipaEstado");
+                OnPipaEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PipaEstado;
+        partial void OnPipaEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnPipaEstadoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -1622,6 +1669,30 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String CisternaEstado
+        {
+            get
+            {
+                return _CisternaEstado;
+            }
+            set
+            {
+                OnCisternaEstadoChanging(value);
+                ReportPropertyChanging("CisternaEstado");
+                _CisternaEstado = StructuralObject.SetValidValue(value, true, "CisternaEstado");
+                ReportPropertyChanged("CisternaEstado");
+                OnCisternaEstadoChanged();
+            }
+        }
+        private global::System.String _CisternaEstado;
+        partial void OnCisternaEstadoChanging(global::System.String value);
+        partial void OnCisternaEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Boolean> Tinaco
         {
             get
@@ -1640,6 +1711,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Boolean> _Tinaco;
         partial void OnTinacoChanging(Nullable<global::System.Boolean> value);
         partial void OnTinacoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TinacoEstado
+        {
+            get
+            {
+                return _TinacoEstado;
+            }
+            set
+            {
+                OnTinacoEstadoChanging(value);
+                ReportPropertyChanging("TinacoEstado");
+                _TinacoEstado = StructuralObject.SetValidValue(value, true, "TinacoEstado");
+                ReportPropertyChanged("TinacoEstado");
+                OnTinacoEstadoChanged();
+            }
+        }
+        private global::System.String _TinacoEstado;
+        partial void OnTinacoEstadoChanging(global::System.String value);
+        partial void OnTinacoEstadoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -1670,6 +1765,30 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String ColectorMunicipalEstado
+        {
+            get
+            {
+                return _ColectorMunicipalEstado;
+            }
+            set
+            {
+                OnColectorMunicipalEstadoChanging(value);
+                ReportPropertyChanging("ColectorMunicipalEstado");
+                _ColectorMunicipalEstado = StructuralObject.SetValidValue(value, true, "ColectorMunicipalEstado");
+                ReportPropertyChanged("ColectorMunicipalEstado");
+                OnColectorMunicipalEstadoChanged();
+            }
+        }
+        private global::System.String _ColectorMunicipalEstado;
+        partial void OnColectorMunicipalEstadoChanging(global::System.String value);
+        partial void OnColectorMunicipalEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Boolean> FosaSeptica
         {
             get
@@ -1688,6 +1807,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Boolean> _FosaSeptica;
         partial void OnFosaSepticaChanging(Nullable<global::System.Boolean> value);
         partial void OnFosaSepticaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FosaSepticaEstado
+        {
+            get
+            {
+                return _FosaSepticaEstado;
+            }
+            set
+            {
+                OnFosaSepticaEstadoChanging(value);
+                ReportPropertyChanging("FosaSepticaEstado");
+                _FosaSepticaEstado = StructuralObject.SetValidValue(value, true, "FosaSepticaEstado");
+                ReportPropertyChanged("FosaSepticaEstado");
+                OnFosaSepticaEstadoChanged();
+            }
+        }
+        private global::System.String _FosaSepticaEstado;
+        partial void OnFosaSepticaEstadoChanging(global::System.String value);
+        partial void OnFosaSepticaEstadoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -2686,120 +2829,240 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] Concepto
+        public global::System.String ConstruccionEspacio
         {
             get
             {
-                return StructuralObject.GetValidValue(_Concepto);
+                return _ConstruccionEspacio;
             }
             set
             {
-                OnConceptoChanging(value);
-                ReportPropertyChanging("Concepto");
-                _Concepto = StructuralObject.SetValidValue(value, true, "Concepto");
-                ReportPropertyChanged("Concepto");
-                OnConceptoChanged();
+                OnConstruccionEspacioChanging(value);
+                ReportPropertyChanging("ConstruccionEspacio");
+                _ConstruccionEspacio = StructuralObject.SetValidValue(value, true, "ConstruccionEspacio");
+                ReportPropertyChanged("ConstruccionEspacio");
+                OnConstruccionEspacioChanged();
             }
         }
-        private global::System.Byte[] _Concepto;
-        partial void OnConceptoChanging(global::System.Byte[] value);
-        partial void OnConceptoChanged();
+        private global::System.String _ConstruccionEspacio;
+        partial void OnConstruccionEspacioChanging(global::System.String value);
+        partial void OnConstruccionEspacioChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Esp_A
+        public global::System.String Pintura
         {
             get
             {
-                return _Esp_A;
+                return _Pintura;
             }
             set
             {
-                OnEsp_AChanging(value);
-                ReportPropertyChanging("Esp_A");
-                _Esp_A = StructuralObject.SetValidValue(value, "Esp_A");
-                ReportPropertyChanged("Esp_A");
-                OnEsp_AChanged();
+                OnPinturaChanging(value);
+                ReportPropertyChanging("Pintura");
+                _Pintura = StructuralObject.SetValidValue(value, true, "Pintura");
+                ReportPropertyChanged("Pintura");
+                OnPinturaChanged();
             }
         }
-        private Nullable<global::System.Boolean> _Esp_A;
-        partial void OnEsp_AChanging(Nullable<global::System.Boolean> value);
-        partial void OnEsp_AChanged();
+        private global::System.String _Pintura;
+        partial void OnPinturaChanging(global::System.String value);
+        partial void OnPinturaChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Esp_L
+        public global::System.String Impermeabilizante
         {
             get
             {
-                return _Esp_L;
+                return _Impermeabilizante;
             }
             set
             {
-                OnEsp_LChanging(value);
-                ReportPropertyChanging("Esp_L");
-                _Esp_L = StructuralObject.SetValidValue(value, "Esp_L");
-                ReportPropertyChanged("Esp_L");
-                OnEsp_LChanged();
+                OnImpermeabilizanteChanging(value);
+                ReportPropertyChanging("Impermeabilizante");
+                _Impermeabilizante = StructuralObject.SetValidValue(value, true, "Impermeabilizante");
+                ReportPropertyChanged("Impermeabilizante");
+                OnImpermeabilizanteChanged();
             }
         }
-        private Nullable<global::System.Boolean> _Esp_L;
-        partial void OnEsp_LChanging(Nullable<global::System.Boolean> value);
-        partial void OnEsp_LChanged();
+        private global::System.String _Impermeabilizante;
+        partial void OnImpermeabilizanteChanging(global::System.String value);
+        partial void OnImpermeabilizanteChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Esp_T
+        public global::System.String PisoCeramica
         {
             get
             {
-                return _Esp_T;
+                return _PisoCeramica;
             }
             set
             {
-                OnEsp_TChanging(value);
-                ReportPropertyChanging("Esp_T");
-                _Esp_T = StructuralObject.SetValidValue(value, "Esp_T");
-                ReportPropertyChanged("Esp_T");
-                OnEsp_TChanged();
+                OnPisoCeramicaChanging(value);
+                ReportPropertyChanging("PisoCeramica");
+                _PisoCeramica = StructuralObject.SetValidValue(value, true, "PisoCeramica");
+                ReportPropertyChanged("PisoCeramica");
+                OnPisoCeramicaChanged();
             }
         }
-        private Nullable<global::System.Boolean> _Esp_T;
-        partial void OnEsp_TChanging(Nullable<global::System.Boolean> value);
-        partial void OnEsp_TChanged();
+        private global::System.String _PisoCeramica;
+        partial void OnPisoCeramicaChanging(global::System.String value);
+        partial void OnPisoCeramicaChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Esp_Ax
+        public global::System.String Herreria
         {
             get
             {
-                return _Esp_Ax;
+                return _Herreria;
             }
             set
             {
-                OnEsp_AxChanging(value);
-                ReportPropertyChanging("Esp_Ax");
-                _Esp_Ax = StructuralObject.SetValidValue(value, "Esp_Ax");
-                ReportPropertyChanged("Esp_Ax");
-                OnEsp_AxChanged();
+                OnHerreriaChanging(value);
+                ReportPropertyChanging("Herreria");
+                _Herreria = StructuralObject.SetValidValue(value, true, "Herreria");
+                ReportPropertyChanged("Herreria");
+                OnHerreriaChanged();
             }
         }
-        private Nullable<global::System.Boolean> _Esp_Ax;
-        partial void OnEsp_AxChanging(Nullable<global::System.Boolean> value);
-        partial void OnEsp_AxChanged();
+        private global::System.String _Herreria;
+        partial void OnHerreriaChanging(global::System.String value);
+        partial void OnHerreriaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AireAcondicionado
+        {
+            get
+            {
+                return _AireAcondicionado;
+            }
+            set
+            {
+                OnAireAcondicionadoChanging(value);
+                ReportPropertyChanging("AireAcondicionado");
+                _AireAcondicionado = StructuralObject.SetValidValue(value, true, "AireAcondicionado");
+                ReportPropertyChanged("AireAcondicionado");
+                OnAireAcondicionadoChanged();
+            }
+        }
+        private global::System.String _AireAcondicionado;
+        partial void OnAireAcondicionadoChanging(global::System.String value);
+        partial void OnAireAcondicionadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CalentonGas
+        {
+            get
+            {
+                return _CalentonGas;
+            }
+            set
+            {
+                OnCalentonGasChanging(value);
+                ReportPropertyChanging("CalentonGas");
+                _CalentonGas = StructuralObject.SetValidValue(value, true, "CalentonGas");
+                ReportPropertyChanged("CalentonGas");
+                OnCalentonGasChanged();
+            }
+        }
+        private global::System.String _CalentonGas;
+        partial void OnCalentonGasChanging(global::System.String value);
+        partial void OnCalentonGasChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String InstElectrica
+        {
+            get
+            {
+                return _InstElectrica;
+            }
+            set
+            {
+                OnInstElectricaChanging(value);
+                ReportPropertyChanging("InstElectrica");
+                _InstElectrica = StructuralObject.SetValidValue(value, true, "InstElectrica");
+                ReportPropertyChanged("InstElectrica");
+                OnInstElectricaChanged();
+            }
+        }
+        private global::System.String _InstElectrica;
+        partial void OnInstElectricaChanging(global::System.String value);
+        partial void OnInstElectricaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String HidroSanitaria
+        {
+            get
+            {
+                return _HidroSanitaria;
+            }
+            set
+            {
+                OnHidroSanitariaChanging(value);
+                ReportPropertyChanging("HidroSanitaria");
+                _HidroSanitaria = StructuralObject.SetValidValue(value, true, "HidroSanitaria");
+                ReportPropertyChanged("HidroSanitaria");
+                OnHidroSanitariaChanged();
+            }
+        }
+        private global::System.String _HidroSanitaria;
+        partial void OnHidroSanitariaChanging(global::System.String value);
+        partial void OnHidroSanitariaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String InstGas
+        {
+            get
+            {
+                return _InstGas;
+            }
+            set
+            {
+                OnInstGasChanging(value);
+                ReportPropertyChanging("InstGas");
+                _InstGas = StructuralObject.SetValidValue(value, true, "InstGas");
+                ReportPropertyChanged("InstGas");
+                OnInstGasChanged();
+            }
+        }
+        private global::System.String _InstGas;
+        partial void OnInstGasChanging(global::System.String value);
+        partial void OnInstGasChanged();
 
         #endregion
 
@@ -4114,48 +4377,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Telefonia
+        public global::System.String Telefonia_internet
         {
             get
             {
-                return _Telefonia;
+                return _Telefonia_internet;
             }
             set
             {
-                OnTelefoniaChanging(value);
-                ReportPropertyChanging("Telefonia");
-                _Telefonia = StructuralObject.SetValidValue(value, true, "Telefonia");
-                ReportPropertyChanged("Telefonia");
-                OnTelefoniaChanged();
+                OnTelefonia_internetChanging(value);
+                ReportPropertyChanging("Telefonia_internet");
+                _Telefonia_internet = StructuralObject.SetValidValue(value, true, "Telefonia_internet");
+                ReportPropertyChanged("Telefonia_internet");
+                OnTelefonia_internetChanged();
             }
         }
-        private global::System.String _Telefonia;
-        partial void OnTelefoniaChanging(global::System.String value);
-        partial void OnTelefoniaChanged();
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Internet
-        {
-            get
-            {
-                return _Internet;
-            }
-            set
-            {
-                OnInternetChanging(value);
-                ReportPropertyChanging("Internet");
-                _Internet = StructuralObject.SetValidValue(value, true, "Internet");
-                ReportPropertyChanged("Internet");
-                OnInternetChanged();
-            }
-        }
-        private global::System.String _Internet;
-        partial void OnInternetChanging(global::System.String value);
-        partial void OnInternetChanged();
+        private global::System.String _Telefonia_internet;
+        partial void OnTelefonia_internetChanging(global::System.String value);
+        partial void OnTelefonia_internetChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4356,24 +4595,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String RedElectrica
+        public global::System.String ContenedorBasura
         {
             get
             {
-                return _RedElectrica;
+                return _ContenedorBasura;
             }
             set
             {
-                OnRedElectricaChanging(value);
-                ReportPropertyChanging("RedElectrica");
-                _RedElectrica = StructuralObject.SetValidValue(value, true, "RedElectrica");
-                ReportPropertyChanged("RedElectrica");
-                OnRedElectricaChanged();
+                OnContenedorBasuraChanging(value);
+                ReportPropertyChanging("ContenedorBasura");
+                _ContenedorBasura = StructuralObject.SetValidValue(value, true, "ContenedorBasura");
+                ReportPropertyChanged("ContenedorBasura");
+                OnContenedorBasuraChanged();
             }
         }
-        private global::System.String _RedElectrica;
-        partial void OnRedElectricaChanging(global::System.String value);
-        partial void OnRedElectricaChanged();
+        private global::System.String _ContenedorBasura;
+        partial void OnContenedorBasuraChanging(global::System.String value);
+        partial void OnContenedorBasuraChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4428,24 +4667,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String PlazaCivica
+        public global::System.String Otros
         {
             get
             {
-                return _PlazaCivica;
+                return _Otros;
             }
             set
             {
-                OnPlazaCivicaChanging(value);
-                ReportPropertyChanging("PlazaCivica");
-                _PlazaCivica = StructuralObject.SetValidValue(value, true, "PlazaCivica");
-                ReportPropertyChanged("PlazaCivica");
-                OnPlazaCivicaChanged();
+                OnOtrosChanging(value);
+                ReportPropertyChanging("Otros");
+                _Otros = StructuralObject.SetValidValue(value, true, "Otros");
+                ReportPropertyChanged("Otros");
+                OnOtrosChanged();
             }
         }
-        private global::System.String _PlazaCivica;
-        partial void OnPlazaCivicaChanging(global::System.String value);
-        partial void OnPlazaCivicaChanged();
+        private global::System.String _Otros;
+        partial void OnOtrosChanging(global::System.String value);
+        partial void OnOtrosChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4518,6 +4757,30 @@ namespace MemotraficoV2.Models
         private global::System.String _AccesoPrincipal;
         partial void OnAccesoPrincipalChanging(global::System.String value);
         partial void OnAccesoPrincipalChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AreaJuegos
+        {
+            get
+            {
+                return _AreaJuegos;
+            }
+            set
+            {
+                OnAreaJuegosChanging(value);
+                ReportPropertyChanging("AreaJuegos");
+                _AreaJuegos = StructuralObject.SetValidValue(value, true, "AreaJuegos");
+                ReportPropertyChanged("AreaJuegos");
+                OnAreaJuegosChanged();
+            }
+        }
+        private global::System.String _AreaJuegos;
+        partial void OnAreaJuegosChanging(global::System.String value);
+        partial void OnAreaJuegosChanged();
 
         #endregion
 
@@ -5958,6 +6221,30 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SubestacionEstado
+        {
+            get
+            {
+                return _SubestacionEstado;
+            }
+            set
+            {
+                OnSubestacionEstadoChanging(value);
+                ReportPropertyChanging("SubestacionEstado");
+                _SubestacionEstado = StructuralObject.SetValidValue(value, "SubestacionEstado");
+                ReportPropertyChanged("SubestacionEstado");
+                OnSubestacionEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SubestacionEstado;
+        partial void OnSubestacionEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnSubestacionEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Boolean> MuroAcometida
         {
             get
@@ -5982,24 +6269,72 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> NoMedidor
+        public Nullable<global::System.Int32> MuroAcometidaEstado
         {
             get
             {
-                return _NoMedidor;
+                return _MuroAcometidaEstado;
             }
             set
             {
-                OnNoMedidorChanging(value);
-                ReportPropertyChanging("NoMedidor");
-                _NoMedidor = StructuralObject.SetValidValue(value, "NoMedidor");
-                ReportPropertyChanged("NoMedidor");
-                OnNoMedidorChanged();
+                OnMuroAcometidaEstadoChanging(value);
+                ReportPropertyChanging("MuroAcometidaEstado");
+                _MuroAcometidaEstado = StructuralObject.SetValidValue(value, "MuroAcometidaEstado");
+                ReportPropertyChanged("MuroAcometidaEstado");
+                OnMuroAcometidaEstadoChanged();
             }
         }
-        private Nullable<global::System.Boolean> _NoMedidor;
-        partial void OnNoMedidorChanging(Nullable<global::System.Boolean> value);
-        partial void OnNoMedidorChanged();
+        private Nullable<global::System.Int32> _MuroAcometidaEstado;
+        partial void OnMuroAcometidaEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnMuroAcometidaEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> TableroDistribucion
+        {
+            get
+            {
+                return _TableroDistribucion;
+            }
+            set
+            {
+                OnTableroDistribucionChanging(value);
+                ReportPropertyChanging("TableroDistribucion");
+                _TableroDistribucion = StructuralObject.SetValidValue(value, "TableroDistribucion");
+                ReportPropertyChanged("TableroDistribucion");
+                OnTableroDistribucionChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _TableroDistribucion;
+        partial void OnTableroDistribucionChanging(Nullable<global::System.Boolean> value);
+        partial void OnTableroDistribucionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TableroDistribucionEstado
+        {
+            get
+            {
+                return _TableroDistribucionEstado;
+            }
+            set
+            {
+                OnTableroDistribucionEstadoChanging(value);
+                ReportPropertyChanging("TableroDistribucionEstado");
+                _TableroDistribucionEstado = StructuralObject.SetValidValue(value, "TableroDistribucionEstado");
+                ReportPropertyChanged("TableroDistribucionEstado");
+                OnTableroDistribucionEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TableroDistribucionEstado;
+        partial void OnTableroDistribucionEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnTableroDistribucionEstadoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -6030,6 +6365,30 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> InterruptorGralEstado
+        {
+            get
+            {
+                return _InterruptorGralEstado;
+            }
+            set
+            {
+                OnInterruptorGralEstadoChanging(value);
+                ReportPropertyChanging("InterruptorGralEstado");
+                _InterruptorGralEstado = StructuralObject.SetValidValue(value, "InterruptorGralEstado");
+                ReportPropertyChanged("InterruptorGralEstado");
+                OnInterruptorGralEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _InterruptorGralEstado;
+        partial void OnInterruptorGralEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnInterruptorGralEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Boolean> Termomagnetico
         {
             get
@@ -6048,6 +6407,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Boolean> _Termomagnetico;
         partial void OnTermomagneticoChanging(Nullable<global::System.Boolean> value);
         partial void OnTermomagneticoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TermomagneticoElectrico
+        {
+            get
+            {
+                return _TermomagneticoElectrico;
+            }
+            set
+            {
+                OnTermomagneticoElectricoChanging(value);
+                ReportPropertyChanging("TermomagneticoElectrico");
+                _TermomagneticoElectrico = StructuralObject.SetValidValue(value, "TermomagneticoElectrico");
+                ReportPropertyChanged("TermomagneticoElectrico");
+                OnTermomagneticoElectricoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TermomagneticoElectrico;
+        partial void OnTermomagneticoElectricoChanging(Nullable<global::System.Int32> value);
+        partial void OnTermomagneticoElectricoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -6078,6 +6461,30 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AlumbradoExtEstado
+        {
+            get
+            {
+                return _AlumbradoExtEstado;
+            }
+            set
+            {
+                OnAlumbradoExtEstadoChanging(value);
+                ReportPropertyChanging("AlumbradoExtEstado");
+                _AlumbradoExtEstado = StructuralObject.SetValidValue(value, "AlumbradoExtEstado");
+                ReportPropertyChanged("AlumbradoExtEstado");
+                OnAlumbradoExtEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AlumbradoExtEstado;
+        partial void OnAlumbradoExtEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnAlumbradoExtEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Boolean> Luminaria
         {
             get
@@ -6096,6 +6503,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Boolean> _Luminaria;
         partial void OnLuminariaChanging(Nullable<global::System.Boolean> value);
         partial void OnLuminariaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LuminariaEstado
+        {
+            get
+            {
+                return _LuminariaEstado;
+            }
+            set
+            {
+                OnLuminariaEstadoChanging(value);
+                ReportPropertyChanging("LuminariaEstado");
+                _LuminariaEstado = StructuralObject.SetValidValue(value, "LuminariaEstado");
+                ReportPropertyChanged("LuminariaEstado");
+                OnLuminariaEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LuminariaEstado;
+        partial void OnLuminariaEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnLuminariaEstadoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -7468,6 +7899,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Int32> _BodegaApendice;
         partial void OnBodegaApendiceChanging(Nullable<global::System.Int32> value);
         partial void OnBodegaApendiceChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AulasUsoMultiple
+        {
+            get
+            {
+                return _AulasUsoMultiple;
+            }
+            set
+            {
+                OnAulasUsoMultipleChanging(value);
+                ReportPropertyChanging("AulasUsoMultiple");
+                _AulasUsoMultiple = StructuralObject.SetValidValue(value, "AulasUsoMultiple");
+                ReportPropertyChanged("AulasUsoMultiple");
+                OnAulasUsoMultipleChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AulasUsoMultiple;
+        partial void OnAulasUsoMultipleChanging(Nullable<global::System.Int32> value);
+        partial void OnAulasUsoMultipleChanged();
 
         #endregion
 
@@ -7596,48 +8051,48 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MuroAcometidaEstado
+        public Nullable<global::System.Int32> AreajuegosEstado
         {
             get
             {
-                return _MuroAcometidaEstado;
+                return _AreajuegosEstado;
             }
             set
             {
-                OnMuroAcometidaEstadoChanging(value);
-                ReportPropertyChanging("MuroAcometidaEstado");
-                _MuroAcometidaEstado = StructuralObject.SetValidValue(value, "MuroAcometidaEstado");
-                ReportPropertyChanged("MuroAcometidaEstado");
-                OnMuroAcometidaEstadoChanged();
+                OnAreajuegosEstadoChanging(value);
+                ReportPropertyChanging("AreajuegosEstado");
+                _AreajuegosEstado = StructuralObject.SetValidValue(value, "AreajuegosEstado");
+                ReportPropertyChanged("AreajuegosEstado");
+                OnAreajuegosEstadoChanged();
             }
         }
-        private Nullable<global::System.Int32> _MuroAcometidaEstado;
-        partial void OnMuroAcometidaEstadoChanging(Nullable<global::System.Int32> value);
-        partial void OnMuroAcometidaEstadoChanged();
+        private Nullable<global::System.Int32> _AreajuegosEstado;
+        partial void OnAreajuegosEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnAreajuegosEstadoChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> MuroAcometida
+        public Nullable<global::System.Boolean> Areajuegos
         {
             get
             {
-                return _MuroAcometida;
+                return _Areajuegos;
             }
             set
             {
-                OnMuroAcometidaChanging(value);
-                ReportPropertyChanging("MuroAcometida");
-                _MuroAcometida = StructuralObject.SetValidValue(value, "MuroAcometida");
-                ReportPropertyChanged("MuroAcometida");
-                OnMuroAcometidaChanged();
+                OnAreajuegosChanging(value);
+                ReportPropertyChanging("Areajuegos");
+                _Areajuegos = StructuralObject.SetValidValue(value, "Areajuegos");
+                ReportPropertyChanged("Areajuegos");
+                OnAreajuegosChanged();
             }
         }
-        private Nullable<global::System.Boolean> _MuroAcometida;
-        partial void OnMuroAcometidaChanging(Nullable<global::System.Boolean> value);
-        partial void OnMuroAcometidaChanged();
+        private Nullable<global::System.Boolean> _Areajuegos;
+        partial void OnAreajuegosChanging(Nullable<global::System.Boolean> value);
+        partial void OnAreajuegosChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -7974,6 +8429,102 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Boolean> _AccesoP;
         partial void OnAccesoPChanging(Nullable<global::System.Boolean> value);
         partial void OnAccesoPChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AstaBandera
+        {
+            get
+            {
+                return _AstaBandera;
+            }
+            set
+            {
+                OnAstaBanderaChanging(value);
+                ReportPropertyChanging("AstaBandera");
+                _AstaBandera = StructuralObject.SetValidValue(value, "AstaBandera");
+                ReportPropertyChanged("AstaBandera");
+                OnAstaBanderaChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AstaBandera;
+        partial void OnAstaBanderaChanging(Nullable<global::System.Int32> value);
+        partial void OnAstaBanderaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> AstaBanderaEstado
+        {
+            get
+            {
+                return _AstaBanderaEstado;
+            }
+            set
+            {
+                OnAstaBanderaEstadoChanging(value);
+                ReportPropertyChanging("AstaBanderaEstado");
+                _AstaBanderaEstado = StructuralObject.SetValidValue(value, "AstaBanderaEstado");
+                ReportPropertyChanged("AstaBanderaEstado");
+                OnAstaBanderaEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _AstaBanderaEstado;
+        partial void OnAstaBanderaEstadoChanging(Nullable<global::System.Boolean> value);
+        partial void OnAstaBanderaEstadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Otro
+        {
+            get
+            {
+                return _Otro;
+            }
+            set
+            {
+                OnOtroChanging(value);
+                ReportPropertyChanging("Otro");
+                _Otro = StructuralObject.SetValidValue(value, "Otro");
+                ReportPropertyChanged("Otro");
+                OnOtroChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Otro;
+        partial void OnOtroChanging(Nullable<global::System.Boolean> value);
+        partial void OnOtroChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OtroEstado
+        {
+            get
+            {
+                return _OtroEstado;
+            }
+            set
+            {
+                OnOtroEstadoChanging(value);
+                ReportPropertyChanging("OtroEstado");
+                _OtroEstado = StructuralObject.SetValidValue(value, "OtroEstado");
+                ReportPropertyChanged("OtroEstado");
+                OnOtroEstadoChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OtroEstado;
+        partial void OnOtroEstadoChanging(Nullable<global::System.Int32> value);
+        partial void OnOtroEstadoChanged();
 
         #endregion
 

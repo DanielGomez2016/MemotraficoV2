@@ -1,0 +1,26 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-4 text-center">Concepto</th>
+                <th class="col-md-8 text-center">Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVII.Telefonia_internet)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVII.Telefonia_internet, new { @class = "form-control col-md-12" })</td>
+            </tr>
+            <tr>
+                <td class="text-center">@Html.LabelFor(i => i.ComponenteVII.VozDatos)</td>
+                <td>@Html.TextBoxFor(i => i.ComponenteVII.VozDatos, new { @class = "form-control col-md-12" })</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
