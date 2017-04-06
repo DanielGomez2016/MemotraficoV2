@@ -8,14 +8,15 @@ namespace MemotraficoV2.ViewModels
 {
     public class Validacion_Requerimientos
     {
-        public int aulas { get; set; }
-        public int laboratorios { get; set; }
-        public int talleres { get; set; }
-        public int anexos { get; set; }
+        public int Aulas { get; set; }
+        public int Laboratorios { get; set; }
+        public int Talleres { get; set; }
+        public int Anexos { get; set; }
         public string FolioSolicitud { get; set; }
 
         public Escuela Escuela { get; set; }
         public Contacto Contacto { get; set; }
+        public Solicitudes Solicitudes { get; set; }
 
         public int validacion { get; set; }
         public Matricula Matricula { get; set; }
@@ -102,7 +103,6 @@ namespace MemotraficoV2.ViewModels
 
 
 
-
         public int requerimientos { get; set; }
         public ComponenteI ComponenteI { get; set; }
         public ComponenteII ComponenteII { get; set; }
@@ -118,8 +118,6 @@ namespace MemotraficoV2.ViewModels
         //Componente IV
         public ComponenteIV ComponenteIV { get; set; }
         public int CIVRehabilitacion { get; set; }
-
-
 
 
         public ComponenteV ComponenteV { get; set; }

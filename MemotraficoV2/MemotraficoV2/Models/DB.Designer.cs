@@ -20,8 +20,9 @@ using System.Xml.Serialization;
 #region Metadatos de relaciones en EDM
 
 [assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_AccesoSistema", "AccesoSistema", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AccesoSistema), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_AlmacenamientoDren_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "AlmacenamientoDren", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AlmacenamientoDren), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_AspNetRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetRoles), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_AlmacenamientoDren_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "AlmacenamientoDren", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AlmacenamientoDren), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteI_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteI", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteI), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteII), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteIII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteIII), true)]
@@ -46,7 +47,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativoDet_EspacioEducativo", "EspacioEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.EspacioEducativo), "EspacioEducativoDet", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioEducativoDet), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_EspacioMultiple_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioMultiple", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioMultiple), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Estatus", "Estatus", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Estatus), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Localidades_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Localidades), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Matricula_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Matricula", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Matricula), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Procedencia_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoProcedencia), "Procedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Procedencia), true)]
@@ -121,6 +121,22 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<AccesoSistema> _AccesoSistema;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<AccesoSistemaRol> AccesoSistemaRol
+        {
+            get
+            {
+                if ((_AccesoSistemaRol == null))
+                {
+                    _AccesoSistemaRol = base.CreateObjectSet<AccesoSistemaRol>("AccesoSistemaRol");
+                }
+                return _AccesoSistemaRol;
+            }
+        }
+        private ObjectSet<AccesoSistemaRol> _AccesoSistemaRol;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -713,22 +729,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Validacion> _Validacion;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<AccesoSistemaRol> AccesoSistemaRol
-        {
-            get
-            {
-                if ((_AccesoSistemaRol == null))
-                {
-                    _AccesoSistemaRol = base.CreateObjectSet<AccesoSistemaRol>("AccesoSistemaRol");
-                }
-                return _AccesoSistemaRol;
-            }
-        }
-        private ObjectSet<AccesoSistemaRol> _AccesoSistemaRol;
 
         #endregion
 
@@ -740,6 +740,14 @@ namespace MemotraficoV2.Models
         public void AddToAccesoSistema(AccesoSistema accesoSistema)
         {
             base.AddObject("AccesoSistema", accesoSistema);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet AccesoSistemaRol. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToAccesoSistemaRol(AccesoSistemaRol accesoSistemaRol)
+        {
+            base.AddObject("AccesoSistemaRol", accesoSistemaRol);
         }
     
         /// <summary>
@@ -1037,14 +1045,6 @@ namespace MemotraficoV2.Models
         {
             base.AddObject("Validacion", validacion);
         }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet AccesoSistemaRol. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToAccesoSistemaRol(AccesoSistemaRol accesoSistemaRol)
-        {
-            base.AddObject("AccesoSistemaRol", accesoSistemaRol);
-        }
 
         #endregion
 
@@ -1252,12 +1252,14 @@ namespace MemotraficoV2.Models
         /// <param name="idInstituto">Valor inicial de la propiedad IdInstituto.</param>
         /// <param name="idRol">Valor inicial de la propiedad IdRol.</param>
         /// <param name="idAccesoSistema">Valor inicial de la propiedad IdAccesoSistema.</param>
-        public static AccesoSistemaRol CreateAccesoSistemaRol(global::System.Int32 idInstituto, global::System.String idRol, global::System.Int32 idAccesoSistema)
+        /// <param name="id">Valor inicial de la propiedad id.</param>
+        public static AccesoSistemaRol CreateAccesoSistemaRol(global::System.Int32 idInstituto, global::System.String idRol, global::System.Int32 idAccesoSistema, global::System.Int32 id)
         {
             AccesoSistemaRol accesoSistemaRol = new AccesoSistemaRol();
             accesoSistemaRol.IdInstituto = idInstituto;
             accesoSistemaRol.IdRol = idRol;
             accesoSistemaRol.IdAccesoSistema = idAccesoSistema;
+            accesoSistemaRol.id = id;
             return accesoSistemaRol;
         }
 
@@ -1268,7 +1270,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IdInstituto
         {
@@ -1278,14 +1280,11 @@ namespace MemotraficoV2.Models
             }
             set
             {
-                if (_IdInstituto != value)
-                {
-                    OnIdInstitutoChanging(value);
-                    ReportPropertyChanging("IdInstituto");
-                    _IdInstituto = StructuralObject.SetValidValue(value, "IdInstituto");
-                    ReportPropertyChanged("IdInstituto");
-                    OnIdInstitutoChanged();
-                }
+                OnIdInstitutoChanging(value);
+                ReportPropertyChanging("IdInstituto");
+                _IdInstituto = StructuralObject.SetValidValue(value, "IdInstituto");
+                ReportPropertyChanged("IdInstituto");
+                OnIdInstitutoChanged();
             }
         }
         private global::System.Int32 _IdInstituto;
@@ -1295,7 +1294,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String IdRol
         {
@@ -1305,14 +1304,11 @@ namespace MemotraficoV2.Models
             }
             set
             {
-                if (_IdRol != value)
-                {
-                    OnIdRolChanging(value);
-                    ReportPropertyChanging("IdRol");
-                    _IdRol = StructuralObject.SetValidValue(value, false, "IdRol");
-                    ReportPropertyChanged("IdRol");
-                    OnIdRolChanged();
-                }
+                OnIdRolChanging(value);
+                ReportPropertyChanging("IdRol");
+                _IdRol = StructuralObject.SetValidValue(value, false, "IdRol");
+                ReportPropertyChanged("IdRol");
+                OnIdRolChanged();
             }
         }
         private global::System.String _IdRol;
@@ -1322,7 +1318,7 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 IdAccesoSistema
         {
@@ -1332,19 +1328,43 @@ namespace MemotraficoV2.Models
             }
             set
             {
-                if (_IdAccesoSistema != value)
-                {
-                    OnIdAccesoSistemaChanging(value);
-                    ReportPropertyChanging("IdAccesoSistema");
-                    _IdAccesoSistema = StructuralObject.SetValidValue(value, "IdAccesoSistema");
-                    ReportPropertyChanged("IdAccesoSistema");
-                    OnIdAccesoSistemaChanged();
-                }
+                OnIdAccesoSistemaChanging(value);
+                ReportPropertyChanging("IdAccesoSistema");
+                _IdAccesoSistema = StructuralObject.SetValidValue(value, "IdAccesoSistema");
+                ReportPropertyChanged("IdAccesoSistema");
+                OnIdAccesoSistemaChanged();
             }
         }
         private global::System.Int32 _IdAccesoSistema;
         partial void OnIdAccesoSistemaChanging(global::System.Int32 value);
         partial void OnIdAccesoSistemaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value, "id");
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
 
         #endregion
 
@@ -2603,15 +2623,13 @@ namespace MemotraficoV2.Models
         /// </summary>
         /// <param name="idCanalizacion">Valor inicial de la propiedad IdCanalizacion.</param>
         /// <param name="idInstitucionFk">Valor inicial de la propiedad IdInstitucionFk.</param>
-        /// <param name="idDepartamentoFk">Valor inicial de la propiedad IdDepartamentoFk.</param>
         /// <param name="validacion">Valor inicial de la propiedad Validacion.</param>
         /// <param name="idSolicitudFk">Valor inicial de la propiedad IdSolicitudFk.</param>
-        public static Canalizacion CreateCanalizacion(global::System.Int32 idCanalizacion, global::System.Int32 idInstitucionFk, global::System.Int32 idDepartamentoFk, global::System.Boolean validacion, global::System.Int32 idSolicitudFk)
+        public static Canalizacion CreateCanalizacion(global::System.Int32 idCanalizacion, global::System.Int32 idInstitucionFk, global::System.Boolean validacion, global::System.Int32 idSolicitudFk)
         {
             Canalizacion canalizacion = new Canalizacion();
             canalizacion.IdCanalizacion = idCanalizacion;
             canalizacion.IdInstitucionFk = idInstitucionFk;
-            canalizacion.IdDepartamentoFk = idDepartamentoFk;
             canalizacion.Validacion = validacion;
             canalizacion.IdSolicitudFk = idSolicitudFk;
             return canalizacion;
@@ -2671,30 +2689,6 @@ namespace MemotraficoV2.Models
         private global::System.Int32 _IdInstitucionFk;
         partial void OnIdInstitucionFkChanging(global::System.Int32 value);
         partial void OnIdInstitucionFkChanged();
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 IdDepartamentoFk
-        {
-            get
-            {
-                return _IdDepartamentoFk;
-            }
-            set
-            {
-                OnIdDepartamentoFkChanging(value);
-                ReportPropertyChanging("IdDepartamentoFk");
-                _IdDepartamentoFk = StructuralObject.SetValidValue(value, "IdDepartamentoFk");
-                ReportPropertyChanged("IdDepartamentoFk");
-                OnIdDepartamentoFkChanged();
-            }
-        }
-        private global::System.Int32 _IdDepartamentoFk;
-        partial void OnIdDepartamentoFkChanging(global::System.Int32 value);
-        partial void OnIdDepartamentoFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -3311,24 +3305,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Acabado
+        public global::System.String FosaSeptica
         {
             get
             {
-                return _Acabado;
+                return _FosaSeptica;
             }
             set
             {
-                OnAcabadoChanging(value);
-                ReportPropertyChanging("Acabado");
-                _Acabado = StructuralObject.SetValidValue(value, true, "Acabado");
-                ReportPropertyChanged("Acabado");
-                OnAcabadoChanged();
+                OnFosaSepticaChanging(value);
+                ReportPropertyChanging("FosaSeptica");
+                _FosaSeptica = StructuralObject.SetValidValue(value, true, "FosaSeptica");
+                ReportPropertyChanged("FosaSeptica");
+                OnFosaSepticaChanged();
             }
         }
-        private global::System.String _Acabado;
-        partial void OnAcabadoChanging(global::System.String value);
-        partial void OnAcabadoChanged();
+        private global::System.String _FosaSeptica;
+        partial void OnFosaSepticaChanging(global::System.String value);
+        partial void OnFosaSepticaChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4249,6 +4243,30 @@ namespace MemotraficoV2.Models
         private global::System.String _AireAcondicionado;
         partial void OnAireAcondicionadoChanging(global::System.String value);
         partial void OnAireAcondicionadoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Impermeabilizante
+        {
+            get
+            {
+                return _Impermeabilizante;
+            }
+            set
+            {
+                OnImpermeabilizanteChanging(value);
+                ReportPropertyChanging("Impermeabilizante");
+                _Impermeabilizante = StructuralObject.SetValidValue(value, true, "Impermeabilizante");
+                ReportPropertyChanged("Impermeabilizante");
+                OnImpermeabilizanteChanged();
+            }
+        }
+        private global::System.String _Impermeabilizante;
+        partial void OnImpermeabilizanteChanging(global::System.String value);
+        partial void OnImpermeabilizanteChanged();
 
         #endregion
 
@@ -4781,6 +4799,30 @@ namespace MemotraficoV2.Models
         private global::System.String _AreaJuegos;
         partial void OnAreaJuegosChanging(global::System.String value);
         partial void OnAreaJuegosChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String OtroConcepto
+        {
+            get
+            {
+                return _OtroConcepto;
+            }
+            set
+            {
+                OnOtroConceptoChanging(value);
+                ReportPropertyChanging("OtroConcepto");
+                _OtroConcepto = StructuralObject.SetValidValue(value, true, "OtroConcepto");
+                ReportPropertyChanged("OtroConcepto");
+                OnOtroConceptoChanged();
+            }
+        }
+        private global::System.String _OtroConcepto;
+        partial void OnOtroConceptoChanging(global::System.String value);
+        partial void OnOtroConceptoChanged();
 
         #endregion
 
@@ -8886,28 +8928,6 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Departamento_Institucion", "Departamento")]
-        public EntityCollection<Departamento> Departamento
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Departamento>("Model.FK_Departamento_Institucion", "Departamento");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Departamento>("Model.FK_Departamento_Institucion", "Departamento", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_AccesoSistemaRol_Institucion", "AccesoSistemaRol")]
         public EntityCollection<AccesoSistemaRol> AccesoSistemaRol
         {
@@ -8920,6 +8940,28 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccesoSistemaRol>("Model.FK_AccesoSistemaRol_Institucion", "AccesoSistemaRol", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Departamento_Institucion", "Departamento")]
+        public EntityCollection<Departamento> Departamento
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Departamento>("Model.FK_Departamento_Institucion", "Departamento");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Departamento>("Model.FK_Departamento_Institucion", "Departamento", value);
                 }
             }
         }
@@ -10749,6 +10791,78 @@ namespace MemotraficoV2.Models
         private global::System.Int32 _IdEscuelaFk;
         partial void OnIdEscuelaFkChanging(global::System.Int32 value);
         partial void OnIdEscuelaFkChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String MetaGeneral
+        {
+            get
+            {
+                return _MetaGeneral;
+            }
+            set
+            {
+                OnMetaGeneralChanging(value);
+                ReportPropertyChanging("MetaGeneral");
+                _MetaGeneral = StructuralObject.SetValidValue(value, true, "MetaGeneral");
+                ReportPropertyChanged("MetaGeneral");
+                OnMetaGeneralChanged();
+            }
+        }
+        private global::System.String _MetaGeneral;
+        partial void OnMetaGeneralChanging(global::System.String value);
+        partial void OnMetaGeneralChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> FechaValidacion
+        {
+            get
+            {
+                return _FechaValidacion;
+            }
+            set
+            {
+                OnFechaValidacionChanging(value);
+                ReportPropertyChanging("FechaValidacion");
+                _FechaValidacion = StructuralObject.SetValidValue(value, "FechaValidacion");
+                ReportPropertyChanged("FechaValidacion");
+                OnFechaValidacionChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _FechaValidacion;
+        partial void OnFechaValidacionChanging(Nullable<global::System.DateTime> value);
+        partial void OnFechaValidacionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Programa
+        {
+            get
+            {
+                return _Programa;
+            }
+            set
+            {
+                OnProgramaChanging(value);
+                ReportPropertyChanging("Programa");
+                _Programa = StructuralObject.SetValidValue(value, true, "Programa");
+                ReportPropertyChanged("Programa");
+                OnProgramaChanged();
+            }
+        }
+        private global::System.String _Programa;
+        partial void OnProgramaChanging(global::System.String value);
+        partial void OnProgramaChanged();
 
         #endregion
 

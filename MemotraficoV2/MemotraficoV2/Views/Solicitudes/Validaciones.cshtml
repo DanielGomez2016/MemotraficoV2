@@ -52,58 +52,58 @@
                                         <div>@Model.FolioSolicitud</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Programa</label>
-                                        <div>@Model.FolioSolicitud</div>
+                                        @Html.LabelFor(i => i.Solicitudes.Programa)
+                                        <div>@Html.TextBoxFor(i => i.Escuela.Geoy , new { @class = "form-control"})</div>
                                     </div>
                                     <div class="col-md-2">
                                     </div>
                                     <div class="col-md-2">
                                     </div>
                                     <div class="col-md-2">
-                                        <label>C.C.T</label>
+                                        @Html.LabelFor(i => i.Escuela.Clave)
                                         <div>@Model.Escuela.Clave</div>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Fecha</label>
-                                        <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
+                                        <div>@Html.TextBoxFor(i => i.Solicitudes.FechaValidacion, new { @class = "form-control", type = "date", value  =(Model.Solicitudes != null && Model.Solicitudes.FechaValidacion != null ? Model.Solicitudes.FechaValidacion.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy")) })</div>
                                     </div>
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Nombre Escuela</label>
+                                        @Html.LabelFor(i => i.Escuela.Nombre)
                                         <div>@Model.Escuela.Nombre</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Localidad</label>
+                                        @Html.LabelFor(i => i.Escuela.Localidades.Nombre)
                                         <div>@Model.Escuela.Localidades.Nombre</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Nivel Educativo</label>
+                                        @Html.LabelFor(i => i.Escuela.NivelEducativo.Nivel)
                                         <div>@Model.Escuela.NivelEducativo.Nivel</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Turno</label>
+                                        @Html.LabelFor(i => i.Escuela.Turno)
                                         <div>@Model.Escuela.Turno</div>
                                     </div>
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Domicilio</label>
+                                        @Html.LabelFor(i => i.Escuela.Domicilio)
                                         <div>@Model.Escuela.Domicilio</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Municipio</label>
+                                        @Html.LabelFor(i => i.Escuela.Municipios.Nombre)
                                         <div>@Model.Escuela.Municipios.Nombre</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Geo x</label>
-                                        <div>@Model.Escuela.Geox</div>
+                                        @Html.LabelFor(i => i.Escuela.Geox)
+                                        <div>@Html.TextBoxFor(i => i.Escuela.Geox, new { @class = "form-control" })</div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Geo y</label>
-                                        <div>@Model.Escuela.Geoy</div>
+                                        @Html.LabelFor(i => i.Escuela.Geoy)
+                                        <div>@Html.TextBoxFor(i => i.Escuela.Geoy, new { @class="form-control"})</div>
                                     </div>
                                 </div>
                                 <br />
@@ -155,7 +155,7 @@
                                         </a>
                                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_Matricula", Model.Matricula)*@
+                                                @Html.Partial("_Matricula", Model.Matricula)
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@
                                         </a>
                                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_Entorno",Model.Entorno)*@
+                                                @Html.Partial("_Entorno",Model.Entorno)
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +175,7 @@
                                         </a>
                                         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_Croquis", Model.Croquis)*@
+                                                @Html.Partial("_Croquis", Model.Croquis)
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                                         </a>
                                         <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ServiciosMunicipales", Model.ServicioMunicipal)*@
+                                                @Html.Partial("_ServiciosMunicipales", Model.ServicioMunicipal)
                                             </div>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                         </a>
                                         <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                                             <div class="panel-body">
-                                               @* @Html.Partial("_AlmacenamientoDren", Model.AlmacenamientoDren)*@
+                                                @Html.Partial("_AlmacenamientoDren", Model.AlmacenamientoDren)
                                             </div>
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@
                                         </a>
                                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_EnergiaElectrica", Model.EnergiaElectrica)*@
+                                                @Html.Partial("_EnergiaElectrica", Model.EnergiaElectrica)
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@
                                         </a>
                                         <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingseven">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_EspacioMultiple", Model.EspacioMultiple)*@
+                                                @Html.Partial("_EspacioMultiple", Model.EspacioMultiple)
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +225,7 @@
                                         </a>
                                         <div id="collapseEigth" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEigth">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_EspacioEducativo", Model.EspacioMultiple)*@
+                                                @Html.Partial("_EspacioEducativo", Model.EspacioMultiple)
                                             </div>
                                         </div>
                                     </div>
@@ -259,7 +259,7 @@
                                         </a>
                                         <div id="collapseOne2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteI", Model.ComponenteI)*@
+                                                @Html.Partial("_ComponenteI", Model.ComponenteI)
                                             </div>
                                         </div>
                                     </div>
@@ -269,7 +269,7 @@
                                         </a>
                                         <div id="collapseTwo2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteII", Model.ComponenteII)*@
+                                                @Html.Partial("_ComponenteII", Model.ComponenteII)
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +279,7 @@
                                         </a>
                                         <div id="collapseThree2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteIII", Model.ComponenteIII)*@
+                                                @Html.Partial("_ComponenteIII", Model.ComponenteIII)
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +289,7 @@
                                         </a>
                                         <div id="collapseFour2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteIV", Model.ComponenteIV)*@
+                                                @Html.Partial("_ComponenteIV", Model.ComponenteIV)
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@
                                         </a>
                                         <div id="collapseFive2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteV", Model.ComponenteV)*@
+                                                @Html.Partial("_ComponenteV", Model.ComponenteV)
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +309,7 @@
                                         </a>
                                         <div id="collapseSix2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteVI", Model.ComponenteIV)*@
+                                                @Html.Partial("_ComponenteVI", Model.ComponenteIV)
                                             </div>
                                         </div>
                                     </div>
@@ -319,7 +319,7 @@
                                         </a>
                                         <div id="collapseSeven2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingseven2">
                                             <div class="panel-body">
-                                                @*@Html.Partial("_ComponenteVII", Model.ComponenteVII)*@
+                                                @Html.Partial("_ComponenteVII", Model.ComponenteVII)
                                             </div>
                                         </div>
                                     </div>

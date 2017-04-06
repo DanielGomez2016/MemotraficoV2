@@ -132,6 +132,8 @@ namespace MemotraficoV2.Controllers
             SASEntities db = new SASEntities();
             Validacion_Requerimientos vr = new Validacion_Requerimientos();
 
+            vr.Solicitudes = db.Solicitudes.FirstOrDefault(i => i.Folio == sol);
+
             vr.FolioSolicitud = sol;
             Contacto c = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == esc);
 
@@ -146,10 +148,10 @@ namespace MemotraficoV2.Controllers
 
             Validacion v = db.Validacion.FirstOrDefault(i => i.IdEscuelaFk == esc);
 
-            vr.aulas = EspacioEducativoDet.ContarAulas(v == null ? 0 : v.IdValidar);
-            vr.laboratorios = EspacioEducativoDet.ContarLaboratorios(v == null ? 0 : v.IdValidar);
-            vr.talleres = EspacioEducativoDet.ContarTalleres(v == null ? 0 : v.IdValidar);
-            vr.anexos = EspacioEducativoDet.ContarAnexos(v == null ? 0 : v.IdValidar);
+            vr.Aulas = EspacioEducativoDet.ContarAulas(v == null ? 0 : v.IdValidar);
+            vr.Laboratorios = EspacioEducativoDet.ContarLaboratorios(v == null ? 0 : v.IdValidar);
+            vr.Talleres = EspacioEducativoDet.ContarTalleres(v == null ? 0 : v.IdValidar);
+            vr.Anexos = EspacioEducativoDet.ContarAnexos(v == null ? 0 : v.IdValidar);
 
             if (v != null)
             {

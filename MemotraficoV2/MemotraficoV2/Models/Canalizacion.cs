@@ -22,7 +22,6 @@ namespace MemotraficoV2.Models
             Canalizacion c = new Canalizacion();
 
             c.IdInstitucionFk = Usuarios.GetInstitucion();
-            c.IdDepartamentoFk = Usuarios.GetDepto();
             c.Validacion = Convert.ToBoolean(ListaValidaciones.NO_VALIDACION);
             c.IdSolicitudFk = s;
 

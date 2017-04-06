@@ -15,17 +15,14 @@
           <Property Name="descripcion" Type="varchar" MaxLength="250" />
           <Property Name="activo" Type="bit" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="AccesoSistemaRol">
           <Key>
-            <PropertyRef Name="IdInstituto" />
-            <PropertyRef Name="IdRol" />
-            <PropertyRef Name="IdAccesoSistema" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="IdInstituto" Type="int" Nullable="false" />
           <Property Name="IdRol" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IdAccesoSistema" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="AlmacenamientoDren">
           <Key>
@@ -93,7 +90,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdCanalizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdInstitucionFk" Type="int" Nullable="false" />
-          <Property Name="IdDepartamentoFk" Type="int" Nullable="false" />
           <Property Name="Validacion" Type="bit" Nullable="false" />
           <Property Name="IdSolicitudFk" Type="int" Nullable="false" />
         </EntityType>
@@ -125,7 +121,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Pintura" Type="varchar" MaxLength="500" />
           <Property Name="Piso" Type="varchar" MaxLength="500" />
           <Property Name="Herreria" Type="varchar" MaxLength="500" />
-          <Property Name="Acabado" Type="varchar" MaxLength="500" />
+          <Property Name="FosaSeptica" Type="varchar" MaxLength="500" />
           <Property Name="Cisterna" Type="varchar" MaxLength="500" />
           <Property Name="InstalacionElectrica" Type="varchar" MaxLength="500" />
           <Property Name="HidroSanitaria" Type="varchar" MaxLength="500" />
@@ -172,6 +168,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Piso" Type="varchar" MaxLength="500" />
           <Property Name="InstalacionElectrica" Type="varchar" MaxLength="500" />
           <Property Name="AireAcondicionado" Type="varchar" MaxLength="500" />
+          <Property Name="Impermeabilizante" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ComponenteVII">
           <Key>
@@ -198,6 +195,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="AstaBandera" Type="varchar" MaxLength="500" />
           <Property Name="AccesoPrincipal" Type="varchar" MaxLength="500" />
           <Property Name="AreaJuegos" Type="varchar" MaxLength="500" />
+          <Property Name="OtroConcepto" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -474,6 +472,9 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdTipoProcedenciaFk" Type="int" Nullable="false" />
           <Property Name="IdProcedenciaFk" Type="int" Nullable="false" />
           <Property Name="IdEscuelaFk" Type="int" Nullable="false" />
+          <Property Name="MetaGeneral" Type="varchar" MaxLength="500" />
+          <Property Name="FechaValidacion" Type="datetime" />
+          <Property Name="Programa" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
@@ -946,6 +947,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
         </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AccesoSistema" EntityType="Self.AccesoSistema" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccesoSistemaRol" EntityType="Self.AccesoSistemaRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlmacenamientoDren" EntityType="Self.AlmacenamientoDren" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
@@ -984,13 +986,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySet Name="TipoAsunto" EntityType="Self.TipoAsunto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProcedencia" EntityType="Self.TipoProcedencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Validacion" EntityType="Self.Validacion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccesoSistemaRol" EntityType="Self.AccesoSistemaRol" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AccesoSistemaRol].[IdInstituto] AS [IdInstituto], 
-    [AccesoSistemaRol].[IdRol] AS [IdRol], 
-    [AccesoSistemaRol].[IdAccesoSistema] AS [IdAccesoSistema]
-    FROM [dbo].[AccesoSistemaRol] AS [AccesoSistemaRol]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_AccesoSistemaRol_AccesoSistema" Association="Self.FK_AccesoSistemaRol_AccesoSistema">
             <End Role="AccesoSistema" EntitySet="AccesoSistema" />
             <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
@@ -1146,6 +1141,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SASEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccesoSistema" EntityType="Model.AccesoSistema" />
+          <EntitySet Name="AccesoSistemaRol" EntityType="Model.AccesoSistemaRol" />
           <EntitySet Name="AlmacenamientoDren" EntityType="Model.AlmacenamientoDren" />
           <EntitySet Name="AspNetRoles" EntityType="Model.AspNetRoles" />
           <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
@@ -1183,18 +1179,21 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySet Name="TipoAsunto" EntityType="Model.TipoAsunto" />
           <EntitySet Name="TipoProcedencia" EntityType="Model.TipoProcedencia" />
           <EntitySet Name="Validacion" EntityType="Model.Validacion" />
-          <EntitySet Name="AccesoSistemaRol" EntityType="Model.AccesoSistemaRol" />
           <AssociationSet Name="FK_AccesoSistemaRol_AccesoSistema" Association="Model.FK_AccesoSistemaRol_AccesoSistema">
             <End Role="AccesoSistema" EntitySet="AccesoSistema" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccesoSistemaRol_AspNetRoles" Association="Model.FK_AccesoSistemaRol_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccesoSistemaRol_Institucion" Association="Model.FK_AccesoSistemaRol_Institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
             <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
           </AssociationSet>
           <AssociationSet Name="FK_AlmacenamientoDren_Validacion" Association="Model.FK_AlmacenamientoDren_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccesoSistemaRol_AspNetRoles" Association="Model.FK_AccesoSistemaRol_AspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
           </AssociationSet>
           <AssociationSet Name="FK_ComponenteI_Requerimientos" Association="Model.FK_ComponenteI_Requerimientos">
             <End Role="Requerimientos" EntitySet="Requerimientos" />
@@ -1292,10 +1291,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             <End Role="Estatus" EntitySet="Estatus" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
-          <AssociationSet Name="FK_AccesoSistemaRol_Institucion" Association="Model.FK_AccesoSistemaRol_Institucion">
-            <End Role="Institucion" EntitySet="Institucion" />
-            <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
-          </AssociationSet>
           <AssociationSet Name="FK_Localidades_Municipios" Association="Model.FK_Localidades_Municipios">
             <End Role="Municipios" EntitySet="Municipios" />
             <End Role="Localidades" EntitySet="Localidades" />
@@ -1339,6 +1334,18 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
           <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistema" ToRole="AccesoSistemaRol" />
+        </EntityType>
+        <EntityType Name="AccesoSistemaRol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="IdInstituto" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AccesoSistema" Relationship="Model.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.FK_AccesoSistemaRol_AspNetRoles" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Institucion" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
         </EntityType>
         <EntityType Name="AlmacenamientoDren">
           <Key>
@@ -1402,7 +1409,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           </Key>
           <Property Name="IdCanalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
-          <Property Name="IdDepartamentoFk" Type="Int32" Nullable="false" />
           <Property Name="Validacion" Type="Boolean" Nullable="false" />
           <Property Name="IdSolicitudFk" Type="Int32" Nullable="false" />
         </EntityType>
@@ -1435,7 +1441,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Pintura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Piso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Herreria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Acabado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FosaSeptica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Cisterna" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="InstalacionElectrica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="HidroSanitaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1486,6 +1492,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Piso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="InstalacionElectrica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AireAcondicionado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Impermeabilizante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteVI_Requerimientos" FromRole="ComponenteVI" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="ComponenteVII">
@@ -1514,6 +1521,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="AstaBandera" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AccesoPrincipal" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AreaJuegos" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OtroConcepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Requerimientos" Relationship="Model.FK_ComponenteVIII_Requerimientos" FromRole="ComponenteVIII" ToRole="Requerimientos" />
         </EntityType>
         <EntityType Name="Contacto">
@@ -1726,8 +1734,8 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Departamento" Relationship="Model.FK_Departamento_Institucion" FromRole="Institucion" ToRole="Departamento" />
           <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="Institucion" ToRole="AccesoSistemaRol" />
+          <NavigationProperty Name="Departamento" Relationship="Model.FK_Departamento_Institucion" FromRole="Institucion" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="Localidades">
           <Key>
@@ -1830,6 +1838,9 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
           <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
           <Property Name="IdEscuelaFk" Type="Int32" Nullable="false" />
+          <Property Name="MetaGeneral" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaValidacion" Type="DateTime" Precision="3" />
+          <Property Name="Programa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
           <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
           <NavigationProperty Name="Procedencia" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
@@ -1869,19 +1880,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <NavigationProperty Name="Matricula" Relationship="Model.FK_Matricula_Validacion" FromRole="Validacion" ToRole="Matricula" />
           <NavigationProperty Name="ServicioMunicipal" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="Validacion" ToRole="ServicioMunicipal" />
         </EntityType>
-        <EntityType Name="AccesoSistemaRol">
-          <Key>
-            <PropertyRef Name="IdInstituto" />
-            <PropertyRef Name="IdRol" />
-            <PropertyRef Name="IdAccesoSistema" />
-          </Key>
-          <Property Name="IdInstituto" Type="Int32" Nullable="false" />
-          <Property Name="IdRol" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IdAccesoSistema" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccesoSistema" Relationship="Model.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Model.FK_AccesoSistemaRol_AspNetRoles" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Institucion" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
-        </EntityType>
         <Association Name="FK_AccesoSistemaRol_AccesoSistema">
           <End Type="Model.AccesoSistema" Role="AccesoSistema" Multiplicity="1" />
           <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
@@ -1894,18 +1892,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AlmacenamientoDren_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.AlmacenamientoDren" Role="AlmacenamientoDren" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="AlmacenamientoDren">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AccesoSistemaRol_AspNetRoles">
           <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
           <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
@@ -1915,6 +1901,30 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             </Principal>
             <Dependent Role="AccesoSistemaRol">
               <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccesoSistemaRol_Institucion">
+          <End Type="Model.Institucion" Role="Institucion" Multiplicity="1" />
+          <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AccesoSistemaRol">
+              <PropertyRef Name="IdInstituto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlmacenamientoDren_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.AlmacenamientoDren" Role="AlmacenamientoDren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="AlmacenamientoDren">
+              <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2206,18 +2216,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AccesoSistemaRol_Institucion">
-          <End Type="Model.Institucion" Role="Institucion" Multiplicity="1" />
-          <End Type="Model.AccesoSistemaRol" Role="AccesoSistemaRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Institucion">
-              <PropertyRef Name="IdInstitucion" />
-            </Principal>
-            <Dependent Role="AccesoSistemaRol">
-              <PropertyRef Name="IdInstituto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Localidades_Municipios">
           <End Type="Model.Municipios" Role="Municipios" Multiplicity="0..1" />
           <End Type="Model.Localidades" Role="Localidades" Multiplicity="*" />
@@ -2306,7 +2304,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2320,6 +2318,16 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
                 <ScalarProperty Name="accion" ColumnName="accion" />
                 <ScalarProperty Name="controlador" ColumnName="controlador" />
                 <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccesoSistemaRol">
+            <EntityTypeMapping TypeName="Model.AccesoSistemaRol">
+              <MappingFragment StoreEntitySet="AccesoSistemaRol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2383,7 +2391,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
               <MappingFragment StoreEntitySet="Canalizacion">
                 <ScalarProperty Name="IdSolicitudFk" ColumnName="IdSolicitudFk" />
                 <ScalarProperty Name="Validacion" ColumnName="Validacion" />
-                <ScalarProperty Name="IdDepartamentoFk" ColumnName="IdDepartamentoFk" />
                 <ScalarProperty Name="IdInstitucionFk" ColumnName="IdInstitucionFk" />
                 <ScalarProperty Name="IdCanalizacion" ColumnName="IdCanalizacion" />
               </MappingFragment>
@@ -2414,7 +2421,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
                 <ScalarProperty Name="HidroSanitaria" ColumnName="HidroSanitaria" />
                 <ScalarProperty Name="InstalacionElectrica" ColumnName="InstalacionElectrica" />
                 <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
-                <ScalarProperty Name="Acabado" ColumnName="Acabado" />
+                <ScalarProperty Name="FosaSeptica" ColumnName="FosaSeptica" />
                 <ScalarProperty Name="Herreria" ColumnName="Herreria" />
                 <ScalarProperty Name="Piso" ColumnName="Piso" />
                 <ScalarProperty Name="Pintura" ColumnName="Pintura" />
@@ -2461,6 +2468,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySetMapping Name="ComponenteVI">
             <EntityTypeMapping TypeName="Model.ComponenteVI">
               <MappingFragment StoreEntitySet="ComponenteVI">
+                <ScalarProperty Name="Impermeabilizante" ColumnName="Impermeabilizante" />
                 <ScalarProperty Name="AireAcondicionado" ColumnName="AireAcondicionado" />
                 <ScalarProperty Name="InstalacionElectrica" ColumnName="InstalacionElectrica" />
                 <ScalarProperty Name="Piso" ColumnName="Piso" />
@@ -2484,6 +2492,7 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySetMapping Name="ComponenteVIII">
             <EntityTypeMapping TypeName="Model.ComponenteVIII">
               <MappingFragment StoreEntitySet="ComponenteVIII">
+                <ScalarProperty Name="OtroConcepto" ColumnName="OtroConcepto" />
                 <ScalarProperty Name="AreaJuegos" ColumnName="AreaJuegos" />
                 <ScalarProperty Name="AccesoPrincipal" ColumnName="AccesoPrincipal" />
                 <ScalarProperty Name="AstaBandera" ColumnName="AstaBandera" />
@@ -2785,6 +2794,9 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
           <EntitySetMapping Name="Solicitudes">
             <EntityTypeMapping TypeName="Model.Solicitudes">
               <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="Programa" ColumnName="Programa" />
+                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
+                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
                 <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
                 <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
                 <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
@@ -2818,15 +2830,6 @@ advertencia 6002: La tabla o vista 'SAS_2.0.dbo.AccesoSistemaRol' no tiene defin
               <MappingFragment StoreEntitySet="Validacion">
                 <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
                 <ScalarProperty Name="IdValidar" ColumnName="IdValidar" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AccesoSistemaRol">
-            <EntityTypeMapping TypeName="Model.AccesoSistemaRol">
-              <MappingFragment StoreEntitySet="AccesoSistemaRol">
-                <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
