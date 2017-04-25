@@ -1,7 +1,17 @@
-﻿@model IEnumerable<MemotraficoV2.ViewModels.SolicitudesEscuelasViewModel>
+﻿@model IEnumerable<MemotraficoV2.Models.Solicitudes>
 
 @{
     ViewBag.Title = "Escuelas";
+    string rol = MemotraficoV2.Models.Usuarios.Roles();
+
+    const string ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
+    const string ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
+    const string OPERADOR = MemotraficoV2.Models.Colecciones.ListaRoles.OPERADOR;
+    const string ADMINISTRATOR = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRATOR;
+
+    const int CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
+    const int CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
+    const int INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
 }
 
 <div class="" role="main">
@@ -22,14 +32,13 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap">
+                        <table id="datatable" class="table table-solicitudes table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr class="text-center">
                                     <th>Escuela</th>
-                                    <th>Domicilio</th>
+                                    <th>Folio</th>
+                                    <th>Fecha Entrega</th>
                                     <th>Localidad</th>
-                                    <th>Nombre Director</th>
-                                    <th># Solicitudes</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -38,26 +47,39 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.escuela</td>
-                                        <td>@item.direccion</td>
-                                        <td>@item.localidad</td>
-                                        <td>@item.director</td>
-                                        <td class="text-center">@(item.Solicitudes > 0? "Cuenta con " + Convert.ToString(item.Solicitudes) + " solicitudes" : "No tiene solicitudes")</td>
+                                        <td>@item.Escuela.Clave @item.Escuela.Nombre</td>
+                                        <td>@item.Folio</td>
+                                        <td>@item.FechaEntrega.Value.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Escuela.Localidades.Nombre, @item.Escuela.Municipios.Nombre</td>
                                         <td>
                                             <div class="btn-group">
-                                                @if (item.Solicitudes > 0)
+                                                @if (item.IdEstatusFk == CANCELADO)
                                                 {
-                                                    <button id="idDetSolicitudes" name="idDetSolicitudes" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.idEscuela">Solicitudes</button>
-                                                }
-                                                <button id="IdDetalleEsc" name="IdDetalleEsc" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg2" value="@item.idEscuela">Detalle Escuela</button>
-                                                @if (item.validacion)
-                                                {
-                                                    @Html.ActionLink("Validaciones - Requerimientos", "Validaciones", item.idEscuela , new { @class = "col-md-offset-med btn btn-success btn-sm" })
+                                                <button name="Solicitud"
+                                                        type="button" class="btn btn-warning btn-sm"
+                                                        data-toggle="modal" data-target=".bs-example-modal-lg"
+                                                        value="@item.IdSolicitud" data-value="@rol"
+                                                        data-evento="SolicitudCancelada">
+                                                     Abrir o Cerrar Solicitud
+                                                </button>
                                                 }
                                                 else
                                                 {
-                                                    @Html.ActionLink("Validaciones - Requerimientos", "Validaciones", item.idEscuela, new { @class = "col-md-offset-med btn btn-warning btn-sm" })
+                                                <button name="Solicitud"
+                                                        type="button" class="btn btn-info btn-sm"
+                                                        data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
+                                                        data-value="@rol"
+                                                        data-evento="PasarADependencia">
+                                                    Info Solicitud
+                                                </button>
                                                 }
+                                                <button name="Solicitud"
+                                                        type="button" class="btn btn-dark btn-sm"
+                                                        data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
+                                                        data-value="@rol"
+                                                        data-evento="HistorialSolicitud">
+                                                    Historial Solicitud
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -77,45 +99,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="titulo"></h4>
-            </div>
-            <div class="modal-body">
-                <table id="datatable" class="detallesolicitudes table table-striped table-bordered dt-responsive nowrap">
-                    <thead>
-                        <tr>
-                            <th>Folio</th>
-                            <th>Asunto</th>
-                            <th>Fecha Entrega</th>
-                            <th>Estatus</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-dark  btn" data-dismiss="modal">Cerrar</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title" id="titulo"></h4>
+                <h4 class="modal-title text-center" id="Titulo"></h4>
             </div>
             <div class="modal-body">
             </div>
-            <div class="modal-footer">
-                <a class="btn btn-dark  btn" data-dismiss="modal">Cerrar</a>
-            </div>
+
         </div>
     </div>
 </div>

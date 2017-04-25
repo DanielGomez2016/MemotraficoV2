@@ -16,28 +16,456 @@ namespace MemotraficoV2.Controllers
         public ActionResult Index()
         {
             SASEntities db = new SASEntities();
-            List<Escuela> e = db.Escuela.ToList();
- 
-            List<SolicitudesEscuelasViewModel> se = new List<SolicitudesEscuelasViewModel>();
+            IQueryable<Solicitudes> query = db.Solicitudes;
 
-            foreach(var r in e)
+            //obtiene rol que tiene el usuario que esta en session
+            var roles = Usuarios.Roles();
+
+            //obtiene el id de usuario que esta en session
+            var usuario = Usuarios.GetUsuario();
+
+            //Obtiene el id de la institucion a la que pertenece
+            var instituto = Usuarios.GetInstitucion();
+
+            //Obtiene el id del departamento al que pertenece
+            var departamento = Usuarios.GetDepto();
+
+            //obtiene el usuario con rol que es uno mas bajo que al que esta en session y pertenece al mismo instituto
+            var RolBajo = Usuarios.RolBajo(roles, instituto);
+
+            //Obtiene el usuario con rol que es uno mas alto al que esta en session y pertenece al mismo instituto
+            var RolAlto = Usuarios.RolAlto(roles, instituto);
+
+            //si eres administrador total, te mostrara todas las solicitudes que existen, aun asi si estas estan canalizadas
+            if (roles == ListaRoles.ADMINISTRATOR)
             {
-                SolicitudesEscuelasViewModel s = new SolicitudesEscuelasViewModel();
-                s.idEscuela = r.IdEscuela;
-                s.escuela = r.Clave + " " + r.Nombre;
-                s.director = db.Contacto.FirstOrDefault(j => j.IdEscuelaFk == r.IdEscuela).Nombre.ToString();
-                s.localidad = r.Localidades.Nombre + ", " + r.Municipios.Nombre;
-                s.telefono = "Tel: " + db.Contacto.FirstOrDefault(j => j.IdEscuelaFk == r.IdEscuela).Telefono.ToString() + " Cel: " + db.Contacto.FirstOrDefault(j => j.IdEscuelaFk == r.IdEscuela).Celular.ToString();
-                s.correo = db.Contacto.FirstOrDefault(j => j.IdEscuelaFk == r.IdEscuela).Email.ToString();
-                s.Solicitudes = db.Solicitudes.Where(j => j.IdEscuelaFk == r.IdEscuela).Count();
-                s.direccion = r.Domicilio;
-                s.turno = r.Turno;
-                s.niveleducativo = r.NivelEducativo.Nivel;
-                s.validacion = db.Validacion.Any(j => j.IdEscuelaFk == r.IdEscuela);
-
-                se.Add(s);
+                return View(query);
             }
-            return View(se);
+            else
+            {
+                //el administrador de solicitudes solo puede ver aquellas solicitudes que han sido registradas, ademas de las canceladas por administrador de dependencia
+                if(roles == ListaRoles.ADMINISTRADOR_SOLICITUDES) {
+
+                    query = query.OrderByDescending(m => m.Folio)
+                                 .Where(i => (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.INICIADO))))
+                                 ||
+                                 (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.CANCELADO)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                 );
+
+                }
+
+                //el administrador de dependencia solo puede ver aquellas solicitudes que han sido canalizadas por el administrador de solicitudes, ademas de las canceladas por operador
+                if (roles == ListaRoles.ADMINISTRADOR_DEPENDENCIA)
+                {
+                    query = query.OrderByDescending(m => m.Folio)
+                                 .Where(i => (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO))) 
+                                 && 
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolAlto))))
+                                 ||
+                                 (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.CANCELADO)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                 );
+                }
+
+                //el operador solo puede ver aquellas solicitudes que han sido canalizadas por administrador de dependencia y que esten asignadas a el mismo
+                if (roles == ListaRoles.OPERADOR)
+                {
+
+                    query = query.OrderByDescending(m => m.Folio)
+                                 .Where(i => i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolAlto)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.UsuarioAtiende == usuario)))
+                                 );
+                }
+            }
+
+            return View(query);
+        }
+
+        public ActionResult Detalle(int solicitud, string rol)
+        {
+            var institucion = Usuarios.GetInstitucion();
+            var uactual = Usuarios.Roles();
+            SASEntities db = new SASEntities();
+
+            if (rol == ListaRoles.ADMINISTRATOR)
+            {
+                ViewBag.TipoAsunto = db.TipoAsunto.ToList().Select(i => new { nombre = i.TipoAsunto1, id = i.IdTipoAsunto });
+                ViewBag.Institucion = db.Institucion.ToList().Select(i => new { nombre = i.Siglas, id = i.IdInstitucion });
+                ViewBag.Departamento = db.Departamento.ToList().Select(i => new { id = i.IdDepartamento, nombre = i.Nombre });
+            }
+
+            if (rol == ListaRoles.ADMINISTRADOR_SOLICITUDES || rol == ListaRoles.ADMINISTRADOR_DEPENDENCIA)
+            {
+                ViewBag.TipoAsunto = db.TipoAsunto.ToList().Select(i => new { nombre = i.TipoAsunto1, id = i.IdTipoAsunto });
+                ViewBag.Institucion = db.Institucion.ToList().Select(i => new { nombre = i.Siglas, id = i.IdInstitucion });
+                ViewBag.Departamento = db.Departamento.Where(i => i.IdInstitucionFk == institucion).ToList().Select(i => new { id = i.IdDepartamento, nombre = i.Nombre });
+            }
+
+            if (rol == ListaRoles.OPERADOR)
+            {
+                ViewBag.TipoAsunto = db.TipoAsunto.ToList().Select(i => new { nombre = i.TipoAsunto1, id = i.IdTipoAsunto });
+                ViewBag.Institucion = db.Institucion.ToList().Select(i => new { nombre = i.Siglas, id = i.IdInstitucion });
+                ViewBag.Departamento = db.Departamento.Where(i => i.IdInstitucionFk == institucion).ToList().Select(i => new { id = i.IdDepartamento, nombre = i.Nombre });
+            }
+
+
+            Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == solicitud);
+            var usuario = db.DetalleCanalizacion.OrderByDescending(i => i.FechaCanalizar).OrderByDescending(i => i.IdCanalizarFk).FirstOrDefault(i => i.Canalizacion.IdSolicitudFk == s.IdSolicitud).IdUsuarioFk.ToString();
+            if(usuario != null)
+            s.UltimoRol = Usuarios.Roles(usuario);
+            s.uactual = uactual;
+            return View(s);
+        }
+
+        public ActionResult Historial(int solicitud, string rol)
+        {
+            SASEntities db = new SASEntities();
+            SolicitudDetalle sd = new SolicitudDetalle();
+            sd.Detalles = new List<Detalle>();
+            int idcanalizacion = db.Canalizacion.FirstOrDefault(i => i.IdSolicitudFk == solicitud).IdCanalizacion;
+            var ix = 0;
+            List<DetalleCanalizacion> dc = db.DetalleCanalizacion
+                .Where(j => j.IdCanalizarFk == idcanalizacion)
+                .OrderByDescending(i => i.IdDetalleCanalizar).ToList();
+            ix = dc.Count();
+            foreach(var x in dc)
+            {
+                Detalle d = new Detalle();
+
+                d.FechaCanalizado = x.FechaCanalizar.Value.ToString("dd/MM/yyyy") + " " + x.FechaCanalizar.Value.ToString("HH:mm:ss");
+                d.Comentario = x.Comentario;
+                d.usuario = Usuarios.GetUsuarioId(x.IdUsuarioFk);
+                d.departamento = Departamento.getNombre(x.Departamento);
+                d.usuarioatiende = Usuarios.GetUsuarioId(x.UsuarioAtiende);
+                d.estatus = x.Estatus.Estatus1;
+                d.numregistro = ix;
+
+                switch (x.Estatus.IdEstatus) {
+                    case ListaEstatus.INICIADO:
+                        d.colorreg = "info";
+                        break;
+                    case ListaEstatus.CANALIZADO:
+                        d.colorreg = "success";
+                        break;
+                    case ListaEstatus.CANCELADO:
+                        d.colorreg = "warning";
+                        break;
+                    case ListaEstatus.CERRADO:
+                        d.colorreg = "danger";
+                        break;
+                    default:
+                        d.colorreg = "";
+                        break;
+                }
+
+                sd.Detalles.Add(d);
+                ix --;
+            }
+            sd.solicitud = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == solicitud);
+
+            var ins = db.Canalizacion.FirstOrDefault(i => i.IdSolicitudFk == solicitud).IdInstitucionFk;
+
+            sd.institucion = Institucion.getinstitucionName(ins);
+            sd.Detalles.OrderBy(i => i.numregistro);
+            return View(sd);
+        }
+
+        public ActionResult OpenSolicitud(int solicitud, string rol)
+        {
+            SASEntities db = new SASEntities();
+            int idcanalizacion = db.Canalizacion.FirstOrDefault(i => i.IdSolicitudFk == solicitud).IdCanalizacion;
+
+            Solicitudes s = db.Solicitudes.OrderByDescending(m => m.Folio)
+                                 .FirstOrDefault(i => (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.CANCELADO)))
+                                 ));
+
+
+            DetalleCanalizacion dc = db.DetalleCanalizacion
+                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                       .OrderByDescending(x => x.FechaCanalizar)
+                                       .FirstOrDefault(n => n.IdCanalizarFk == idcanalizacion && n.IdEstatusFk == ListaEstatus.CANCELADO);
+            s.Comentario = dc.Comentario;
+            return View(s);
+        }
+
+        public JsonResult Canalizar(int TipoAsunto, int Institucion, int IdSolicitud, string Comentario, int Departamento, string Usuario, string rol)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud);
+                int canalizacion = 0;
+                switch (rol)
+                {
+                    case "Administrador de Solicitudes":
+                        s.IdTipoAsuntoFk = TipoAsunto;
+                        s.IdEstatusFk = ListaEstatus.CANALIZADO;
+                        db.SaveChanges();
+
+                        //parametros
+                        //solicitud, institucion, departamento, comentario, usuarioasigna, estatus
+                        canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuario, ListaEstatus.CANALIZADO);
+
+                        break;
+                    case "Administrador de Dependencia":
+                        s.IdEstatusFk = ListaEstatus.CANALIZADO;
+                        db.SaveChanges();
+
+                        //parametros
+                        //solicitud, institucion, departamento, comentario, usuarioasigna, estatus
+                        canalizacion = Canalizacion.Canalizar(IdSolicitud,Institucion, Departamento, Comentario, Usuario, ListaEstatus.CANALIZADO);
+
+                        break;
+                    case "Operador":
+                        s.IdEstatusFk = ListaEstatus.CANALIZADO;
+                        db.SaveChanges();
+
+                        //parametros
+                        //solicitud, institucion, departamento, comentario, usuarioasigna, estatus
+                        canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuario, ListaEstatus.CANALIZADO);
+
+                        break;
+                }
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Solicitudes/",
+                    msj = "La solicitud se a canalizado correctamente"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Solicitudes/",
+                    msj = "La Solicitud no se a podido canalizar, intente nuevamente"
+                });
+
+            }
+        }
+
+        public JsonResult Cancelacion(int IdSolicitud, string Comentario)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud);
+                int institucion = Usuarios.GetInstitucion();
+                int depto = Usuarios.GetDepto();
+
+                s.IdEstatusFk = ListaEstatus.CANCELADO;
+                db.SaveChanges();
+
+                //parametros
+                //solicitud, institucion, departamento, comentario, estatus
+                Canalizacion.Cancelacion(IdSolicitud, institucion, depto, Comentario, ListaEstatus.CANCELADO);
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Solicitudes/",
+                    msj = "La solicitud se a cancelado correctamente"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Solicitudes/",
+                    msj = "La Solicitud no se a podido cancelar, intente nuevamente"
+                });
+
+            }
+        }
+
+        public JsonResult ACSolicitud(int IdSolicitud, string Comentario, string Accion)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
+
+                switch (Accion)
+                {
+                    case "open":
+                        s.IdEstatusFk = ListaEstatus.CANALIZADO;
+                        db.SaveChanges();
+
+                        //parametros
+                        //solicitud, comentario, estatus
+                        Canalizacion.canalizarSimple(IdSolicitud, Comentario, ListaEstatus.CANALIZADO);
+
+                        break;
+                    case "close":
+                        s.IdEstatusFk = ListaEstatus.CANCELADO;
+                        db.SaveChanges();
+
+                        //parametros
+                        //solicitud, institucion, departamento, comentario, estatus
+                        Canalizacion.Cancelacion(IdSolicitud, Usuarios.GetInstitucion(), Usuarios.GetDepto(), Comentario, ListaEstatus.CANCELADO);
+
+                        break;
+                }
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Solicitudes/",
+                    msj = Accion == "open"? "La solicitud se a abierto correctamente" : "La solicitud se a cancelado correctamente"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Solicitudes/",
+                    msj = Accion == "open" ? "La Solicitud no se a podido abrir, intente nuevamente" : "La Solicitud no se a podido cancelar, intente nuevamente"
+                });
+
+            }
+        }
+
+        public JsonResult CanalizarAvance(int IdSolicitud, string Comentario, HttpPostedFileBase[] files)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
+
+                var dcdoc = Canalizacion.CanalizarAvance(IdSolicitud, Comentario);
+
+                for(var i = 0; i < files.Count(); i++)
+                {
+                    Documentos doc = new Documentos();
+                    doc.IdDetalleCanalizarFk = dcdoc;
+                    if (files[i] != null)
+                    {
+                        int length = files[i].ContentLength;
+                        byte[] buffer = new byte[length];
+                        files[i].InputStream.Read(buffer, 0, length);
+                        doc.Documento = buffer;
+                    }
+                    doc.Nombre = "Documento_Avance" + IdSolicitud + "_" + DateTime.Now.Year.ToString();
+                    doc.Tipo = files[i].ContentType;
+
+                    doc.CrearDoc();
+                }
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Solicitudes/",
+                    msj = "El avance se guardo correctamente" 
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Solicitudes/",
+                    msj = "No se a podido guardar el avance, intente nuevamente"
+                });
+
+            }
         }
 
         public JsonResult Autocomplete(string term)
@@ -63,7 +491,7 @@ namespace MemotraficoV2.Controllers
             {
                 SASEntities db = new SASEntities();
                 int v = solicitud.Crear();
-                var canalizacion = Canalizacion.Canalizar(v);
+                var canalizacion = Canalizacion.Canalizar(v,0,0,"","",ListaEstatus.INICIADO);
 
                 return Json(new
                 {
@@ -112,7 +540,7 @@ namespace MemotraficoV2.Controllers
                 return Json(new
                 {
                     result = true,
-                    dir = "/Solicitudes",
+                    dir = "/Solicitudes/Registro",
                     msj = "El documento se a guardado correctamente"
                 });
             }

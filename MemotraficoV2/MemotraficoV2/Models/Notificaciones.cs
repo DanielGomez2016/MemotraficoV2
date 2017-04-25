@@ -27,7 +27,7 @@ namespace MemotraficoV2.Models
                     EnviarNotificaciones(TipoCorreo, Cuerpo, email.EmailTo, email.Subject ,email.IdEmail);
                 }
 
-            }).ToRunNow().AndEvery(1).Minutes();//.AndEvery(1).Months().OnTheFirst(DayOfWeek.Monday).At(3, 0);
+            }).ToRunNow().AndEvery(1).Hours();//.AndEvery(1).Months().OnTheFirst(DayOfWeek.Monday).At(3, 0);
         }
 
         public void EnviarNotificaciones(string TipoCorreo, string cuerpo, string correo, string asuntoCorreo, int idemail)

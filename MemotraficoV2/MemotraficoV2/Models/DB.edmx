@@ -238,9 +238,11 @@
           <Property Name="IdCanalizarFk" Type="int" />
           <Property Name="FechaCanalizar" Type="datetime" />
           <Property Name="Comentario" Type="text" />
-          <Property Name="IdUsuarioFk" Type="nchar" MaxLength="128" />
+          <Property Name="IdUsuarioFk" Type="nvarchar" MaxLength="128" />
           <Property Name="Instituto" Type="int" />
           <Property Name="Departamento" Type="int" />
+          <Property Name="UsuarioAtiende" Type="nvarchar" MaxLength="128" />
+          <Property Name="IdEstatusFk" Type="int" />
         </EntityType>
         <EntityType Name="Documentos">
           <Key>
@@ -545,6 +547,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Canalizacion_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="1" />
+          <End Role="Canalizacion" Type="Self.Canalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="Canalizacion">
+              <PropertyRef Name="IdSolicitudFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ComponenteI_Requerimientos">
           <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="0..1" />
           <End Role="ComponenteI" Type="Self.ComponenteI" Multiplicity="*" />
@@ -702,6 +716,30 @@
             </Principal>
             <Dependent Role="Departamento">
               <PropertyRef Name="IdInstitucionFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCanalizacion_Canalizacion">
+          <End Role="Canalizacion" Type="Self.Canalizacion" Multiplicity="0..1" />
+          <End Role="DetalleCanalizacion" Type="Self.DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canalizacion">
+              <PropertyRef Name="IdCanalizacion" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCanalizacion_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="DetalleCanalizacion" Type="Self.DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdEstatusFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -933,6 +971,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Usuario_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Institucion">
+          <End Role="Institucion" Type="Self.Institucion" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdInstitucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Validacion_Escuela">
           <End Role="Escuela" Type="Self.Escuela" Multiplicity="0..1" />
           <End Role="Validacion" Type="Self.Validacion" Multiplicity="*" />
@@ -1002,6 +1064,10 @@
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
           </AssociationSet>
+          <AssociationSet Name="FK_Canalizacion_Solicitudes" Association="Self.FK_Canalizacion_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="Canalizacion" EntitySet="Canalizacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ComponenteI_Requerimientos" Association="Self.FK_ComponenteI_Requerimientos">
             <End Role="Requerimientos" EntitySet="Requerimientos" />
             <End Role="ComponenteI" EntitySet="ComponenteI" />
@@ -1053,6 +1119,14 @@
           <AssociationSet Name="FK_Departamento_Institucion" Association="Self.FK_Departamento_Institucion">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCanalizacion_Canalizacion" Association="Self.FK_DetalleCanalizacion_Canalizacion">
+            <End Role="Canalizacion" EntitySet="Canalizacion" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCanalizacion_Estatus" Association="Self.FK_DetalleCanalizacion_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Self.FK_Documentos_DetalleCanalizacion">
             <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
@@ -1130,6 +1204,14 @@
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Departamento" Association="Self.FK_Usuario_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Institucion" Association="Self.FK_Usuario_Institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Validacion_Escuela" Association="Self.FK_Validacion_Escuela">
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Validacion" EntitySet="Validacion" />
@@ -1144,8 +1226,6 @@
           <EntitySet Name="AccesoSistemaRol" EntityType="Model.AccesoSistemaRol" />
           <EntitySet Name="AlmacenamientoDren" EntityType="Model.AlmacenamientoDren" />
           <EntitySet Name="AspNetRoles" EntityType="Model.AspNetRoles" />
-          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
-          <EntitySet Name="Canalizacion" EntityType="Model.Canalizacion" />
           <EntitySet Name="ComponenteI" EntityType="Model.ComponenteI" />
           <EntitySet Name="ComponenteII" EntityType="Model.ComponenteII" />
           <EntitySet Name="ComponenteIII" EntityType="Model.ComponenteIII" />
@@ -1157,7 +1237,6 @@
           <EntitySet Name="Contacto" EntityType="Model.Contacto" />
           <EntitySet Name="Croquis" EntityType="Model.Croquis" />
           <EntitySet Name="Departamento" EntityType="Model.Departamento" />
-          <EntitySet Name="DetalleCanalizacion" EntityType="Model.DetalleCanalizacion" />
           <EntitySet Name="Documentos" EntityType="Model.Documentos" />
           <EntitySet Name="Email" EntityType="Model.Email" />
           <EntitySet Name="EnergiaElectrica" EntityType="Model.EnergiaElectrica" />
@@ -1175,7 +1254,6 @@
           <EntitySet Name="Procedencia" EntityType="Model.Procedencia" />
           <EntitySet Name="Requerimientos" EntityType="Model.Requerimientos" />
           <EntitySet Name="ServicioMunicipal" EntityType="Model.ServicioMunicipal" />
-          <EntitySet Name="Solicitudes" EntityType="Model.Solicitudes" />
           <EntitySet Name="TipoAsunto" EntityType="Model.TipoAsunto" />
           <EntitySet Name="TipoProcedencia" EntityType="Model.TipoProcedencia" />
           <EntitySet Name="Validacion" EntityType="Model.Validacion" />
@@ -1239,10 +1317,6 @@
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
-          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-            <End Role="Documentos" EntitySet="Documentos" />
-          </AssociationSet>
           <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Model.FK_EnergiaElectrica_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="EnergiaElectrica" EntitySet="EnergiaElectrica" />
@@ -1267,10 +1341,6 @@
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Requerimientos" EntitySet="Requerimientos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Escuela" Association="Model.FK_Solicitudes_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Validacion_Escuela" Association="Model.FK_Validacion_Escuela">
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Validacion" EntitySet="Validacion" />
@@ -1287,10 +1357,6 @@
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
           </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Model.FK_Solicitudes_Estatus">
-            <End Role="Estatus" EntitySet="Estatus" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Localidades_Municipios" Association="Model.FK_Localidades_Municipios">
             <End Role="Municipios" EntitySet="Municipios" />
             <End Role="Localidades" EntitySet="Localidades" />
@@ -1303,13 +1369,40 @@
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Procedencia" EntitySet="Procedencia" />
           </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Procedencia" Association="Model.FK_Solicitudes_Procedencia">
-            <End Role="Procedencia" EntitySet="Procedencia" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
           <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Model.FK_ServicioMunicipal_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
+          <AssociationSet Name="FK_Usuario_Departamento" Association="Model.FK_Usuario_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Institucion" Association="Model.FK_Usuario_Institucion">
+            <End Role="Institucion" EntitySet="Institucion" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Canalizacion" EntityType="Model.Canalizacion" />
+          <EntitySet Name="Solicitudes" EntityType="Model.Solicitudes" />
+          <AssociationSet Name="FK_Canalizacion_Solicitudes" Association="Model.FK_Canalizacion_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="Canalizacion" EntitySet="Canalizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Escuela" Association="Model.FK_Solicitudes_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Model.FK_Solicitudes_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Procedencia" Association="Model.FK_Solicitudes_Procedencia">
+            <End Role="Procedencia" EntitySet="Procedencia" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitudes_TipoAsunto" Association="Model.FK_Solicitudes_TipoAsunto">
             <End Role="TipoAsunto" EntitySet="TipoAsunto" />
@@ -1319,9 +1412,18 @@
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          <EntitySet Name="DetalleCanalizacion" EntityType="Model.DetalleCanalizacion" />
+          <AssociationSet Name="FK_DetalleCanalizacion_Canalizacion" Association="Model.FK_DetalleCanalizacion_Canalizacion">
+            <End Role="Canalizacion" EntitySet="Canalizacion" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCanalizacion_Estatus" Association="Model.FK_DetalleCanalizacion_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+            <End Role="Documentos" EntitySet="Documentos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccesoSistema">
@@ -1378,39 +1480,6 @@
           <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_AspNetRoles" FromRole="AspNetRoles" ToRole="AccesoSistemaRol" />
           <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ApellidoPaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ApellidoMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IdInstitucion" Type="Int32" Nullable="false" />
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
-          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="Canalizacion">
-          <Key>
-            <PropertyRef Name="IdCanalizacion" />
-          </Key>
-          <Property Name="IdCanalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
-          <Property Name="Validacion" Type="Boolean" Nullable="false" />
-          <Property Name="IdSolicitudFk" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ComponenteI">
           <Key>
@@ -1559,19 +1628,7 @@
           <Property Name="Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Institucion" Relationship="Model.FK_Departamento_Institucion" FromRole="Departamento" ToRole="Institucion" />
-        </EntityType>
-        <EntityType Name="DetalleCanalizacion">
-          <Key>
-            <PropertyRef Name="IdDetalleCanalizar" />
-          </Key>
-          <Property Name="IdDetalleCanalizar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCanalizarFk" Type="Int32" />
-          <Property Name="FechaCanalizar" Type="DateTime" Precision="3" />
-          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioFk" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
-          <Property Name="Instituto" Type="Int32" />
-          <Property Name="Departamento" Type="Int32" />
-          <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Usuario_Departamento" FromRole="Departamento" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Documentos">
           <Key>
@@ -1658,8 +1715,8 @@
           <NavigationProperty Name="Municipios" Relationship="Model.FK_Escuela_Municipios" FromRole="Escuela" ToRole="Municipios" />
           <NavigationProperty Name="NivelEducativo" Relationship="Model.FK_Escuela_NivelEducativo" FromRole="Escuela" ToRole="NivelEducativo" />
           <NavigationProperty Name="Requerimientos" Relationship="Model.FK_Requerimientos_Escuela" FromRole="Escuela" ToRole="Requerimientos" />
-          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Escuela" ToRole="Solicitudes" />
           <NavigationProperty Name="Validacion" Relationship="Model.FK_Validacion_Escuela" FromRole="Escuela" ToRole="Validacion" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Escuela" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="EspacioEducativo">
           <Key>
@@ -1722,6 +1779,7 @@
           <Property Name="IdEstatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Estatus1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Estatus" ToRole="Solicitudes" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="Estatus" ToRole="DetalleCanalizacion" />
         </EntityType>
         <EntityType Name="Institucion">
           <Key>
@@ -1736,6 +1794,7 @@
           <Property Name="Ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AccesoSistemaRol" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="Institucion" ToRole="AccesoSistemaRol" />
           <NavigationProperty Name="Departamento" Relationship="Model.FK_Departamento_Institucion" FromRole="Institucion" ToRole="Departamento" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Usuario_Institucion" FromRole="Institucion" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Localidades">
           <Key>
@@ -1824,28 +1883,6 @@
           <Property Name="VialidadSecundaria" Type="Boolean" />
           <Property Name="VialidadTerciaria" Type="Boolean" />
           <NavigationProperty Name="Validacion" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="ServicioMunicipal" ToRole="Validacion" />
-        </EntityType>
-        <EntityType Name="Solicitudes">
-          <Key>
-            <PropertyRef Name="IdSolicitud" />
-          </Key>
-          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Folio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
-          <Property Name="IdEstatusFk" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoAsuntoFk" Type="Int32" />
-          <Property Name="Asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
-          <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
-          <Property Name="IdEscuelaFk" Type="Int32" Nullable="false" />
-          <Property Name="MetaGeneral" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FechaValidacion" Type="DateTime" Precision="3" />
-          <Property Name="Programa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
-          <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
-          <NavigationProperty Name="Procedencia" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
-          <NavigationProperty Name="TipoAsunto" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
-          <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
         </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
@@ -2060,18 +2097,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Documentos_DetalleCanalizacion">
-          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
-          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetalleCanalizacion">
-              <PropertyRef Name="IdDetalleCanalizar" />
-            </Principal>
-            <Dependent Role="Documentos">
-              <PropertyRef Name="IdDetalleCanalizarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EnergiaElectrica_Validacion">
           <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
           <End Type="Model.EnergiaElectrica" Role="EnergiaElectrica" Multiplicity="*" />
@@ -2144,18 +2169,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Solicitudes_Escuela">
-          <End Type="Model.Escuela" Role="Escuela" Multiplicity="1" />
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="IdEscuela" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdEscuelaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Validacion_Escuela">
           <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
           <End Type="Model.Validacion" Role="Validacion" Multiplicity="*" />
@@ -2204,18 +2217,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Solicitudes_Estatus">
-          <End Type="Model.Estatus" Role="Estatus" Multiplicity="1" />
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estatus">
-              <PropertyRef Name="IdEstatus" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdEstatusFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Localidades_Municipios">
           <End Type="Model.Municipios" Role="Municipios" Multiplicity="0..1" />
           <End Type="Model.Localidades" Role="Localidades" Multiplicity="*" />
@@ -2252,18 +2253,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Solicitudes_Procedencia">
-          <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="1" />
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Procedencia">
-              <PropertyRef Name="IdProcedencia" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdProcedenciaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ServicioMunicipal_Validacion">
           <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
           <End Type="Model.ServicioMunicipal" Role="ServicioMunicipal" Multiplicity="*" />
@@ -2273,6 +2262,142 @@
             </Principal>
             <Dependent Role="ServicioMunicipal">
               <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdInstitucion" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departamento" Relationship="Model.FK_Usuario_Departamento" FromRole="AspNetUsers" ToRole="Departamento" />
+          <NavigationProperty Name="Institucion" Relationship="Model.FK_Usuario_Institucion" FromRole="AspNetUsers" ToRole="Institucion" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="FK_Usuario_Departamento">
+          <End Type="Model.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Institucion">
+          <End Type="Model.Institucion" Role="Institucion" Multiplicity="1" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institucion">
+              <PropertyRef Name="IdInstitucion" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="IdInstitucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Canalizacion">
+          <Key>
+            <PropertyRef Name="IdCanalizacion" />
+          </Key>
+          <Property Name="IdCanalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
+          <Property Name="Validacion" Type="Boolean" Nullable="false" />
+          <Property Name="IdSolicitudFk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Canalizacion" ToRole="Solicitudes" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="Canalizacion" ToRole="DetalleCanalizacion" />
+        </EntityType>
+        <EntityType Name="Solicitudes">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Folio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+          <Property Name="IdEstatusFk" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoAsuntoFk" Type="Int32" />
+          <Property Name="Asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
+          <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
+          <Property Name="IdEscuelaFk" Type="Int32" Nullable="false" />
+          <Property Name="MetaGeneral" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaValidacion" Type="DateTime" Precision="3" />
+          <Property Name="Programa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Canalizacion" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Solicitudes" ToRole="Canalizacion" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
+          <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
+          <NavigationProperty Name="Procedencia" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
+          <NavigationProperty Name="TipoAsunto" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
+          <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
+        </EntityType>
+        <Association Name="FK_Canalizacion_Solicitudes">
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="1" />
+          <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="Canalizacion">
+              <PropertyRef Name="IdSolicitudFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Escuela">
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="IdEscuela" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEscuelaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Estatus">
+          <End Type="Model.Estatus" Role="Estatus" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEstatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Procedencia">
+          <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedencia">
+              <PropertyRef Name="IdProcedencia" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdProcedenciaFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2300,9 +2425,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        <EntityType Name="DetalleCanalizacion">
+          <Key>
+            <PropertyRef Name="IdDetalleCanalizar" />
+          </Key>
+          <Property Name="IdDetalleCanalizar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCanalizarFk" Type="Int32" />
+          <Property Name="FechaCanalizar" Type="DateTime" Precision="3" />
+          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioFk" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Instituto" Type="Int32" />
+          <Property Name="Departamento" Type="Int32" />
+          <Property Name="UsuarioAtiende" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdEstatusFk" Type="Int32" />
+          <NavigationProperty Name="Canalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="DetalleCanalizacion" ToRole="Canalizacion" />
+          <NavigationProperty Name="Estatus" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="DetalleCanalizacion" ToRole="Estatus" />
+          <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
+        </EntityType>
+        <Association Name="FK_DetalleCanalizacion_Canalizacion">
+          <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="0..1" />
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canalizacion">
+              <PropertyRef Name="IdCanalizacion" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCanalizacion_Estatus">
+          <End Type="Model.Estatus" Role="Estatus" Multiplicity="0..1" />
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdEstatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documentos_DetalleCanalizacion">
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
+          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleCanalizacion">
+              <PropertyRef Name="IdDetalleCanalizar" />
+            </Principal>
+            <Dependent Role="Documentos">
+              <PropertyRef Name="IdDetalleCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -2359,40 +2533,6 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="Model.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Canalizacion">
-            <EntityTypeMapping TypeName="Model.Canalizacion">
-              <MappingFragment StoreEntitySet="Canalizacion">
-                <ScalarProperty Name="IdSolicitudFk" ColumnName="IdSolicitudFk" />
-                <ScalarProperty Name="Validacion" ColumnName="Validacion" />
-                <ScalarProperty Name="IdInstitucionFk" ColumnName="IdInstitucionFk" />
-                <ScalarProperty Name="IdCanalizacion" ColumnName="IdCanalizacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2541,19 +2681,6 @@
                 <ScalarProperty Name="Titular" ColumnName="Titular" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetalleCanalizacion">
-            <EntityTypeMapping TypeName="Model.DetalleCanalizacion">
-              <MappingFragment StoreEntitySet="DetalleCanalizacion">
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="Instituto" ColumnName="Instituto" />
-                <ScalarProperty Name="IdUsuarioFk" ColumnName="IdUsuarioFk" />
-                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
-                <ScalarProperty Name="FechaCanalizar" ColumnName="FechaCanalizar" />
-                <ScalarProperty Name="IdCanalizarFk" ColumnName="IdCanalizarFk" />
-                <ScalarProperty Name="IdDetalleCanalizar" ColumnName="IdDetalleCanalizar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2791,24 +2918,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Solicitudes">
-            <EntityTypeMapping TypeName="Model.Solicitudes">
-              <MappingFragment StoreEntitySet="Solicitudes">
-                <ScalarProperty Name="Programa" ColumnName="Programa" />
-                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
-                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
-                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
-                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
-                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
-                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
-                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
-                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoAsunto">
             <EntityTypeMapping TypeName="Model.TipoAsunto">
               <MappingFragment StoreEntitySet="TipoAsunto">
@@ -2833,6 +2942,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdInstitucion" ColumnName="IdInstitucion" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -2841,6 +2974,49 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Canalizacion">
+            <EntityTypeMapping TypeName="Model.Canalizacion">
+              <MappingFragment StoreEntitySet="Canalizacion">
+                <ScalarProperty Name="IdSolicitudFk" ColumnName="IdSolicitudFk" />
+                <ScalarProperty Name="Validacion" ColumnName="Validacion" />
+                <ScalarProperty Name="IdInstitucionFk" ColumnName="IdInstitucionFk" />
+                <ScalarProperty Name="IdCanalizacion" ColumnName="IdCanalizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitudes">
+            <EntityTypeMapping TypeName="Model.Solicitudes">
+              <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="Programa" ColumnName="Programa" />
+                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
+                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
+                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
+                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
+                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
+                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleCanalizacion">
+            <EntityTypeMapping TypeName="Model.DetalleCanalizacion">
+              <MappingFragment StoreEntitySet="DetalleCanalizacion">
+                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
+                <ScalarProperty Name="UsuarioAtiende" ColumnName="UsuarioAtiende" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Instituto" ColumnName="Instituto" />
+                <ScalarProperty Name="IdUsuarioFk" ColumnName="IdUsuarioFk" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="FechaCanalizar" ColumnName="FechaCanalizar" />
+                <ScalarProperty Name="IdCanalizarFk" ColumnName="IdCanalizarFk" />
+                <ScalarProperty Name="IdDetalleCanalizar" ColumnName="IdDetalleCanalizar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -292,5 +292,19 @@ namespace IdentitySample.Controllers
             }
         }
 
+        public string GetInstitucion(int? institucion, int? departamento)
+        {
+            SASEntities db = new SASEntities();
+
+            var cadena = "";
+
+            var inst = db.Institucion.FirstOrDefault(i => i.IdInstitucion == institucion).Nombre;
+            var dept = db.Departamento.FirstOrDefault(i => i.IdDepartamento == departamento).Nombre;
+
+            cadena = dept + " " + inst;
+
+            return cadena;
+        }
+
     }
 }

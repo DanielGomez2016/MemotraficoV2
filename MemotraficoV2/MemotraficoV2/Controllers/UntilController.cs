@@ -70,5 +70,37 @@ namespace MemotraficoV2.Controllers
                 });
             }
         }
+
+        public JsonResult CargarUsuarios(int id)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                List<AspNetUsers> list = db.AspNetUsers.Where(i => i.IdDepartamento == id).ToList();
+
+                List<string> rows = new List<string>();
+                var rowfirst = "<option>Seleciona algun Usuario</option>";
+                rows.Add(rowfirst);
+                foreach (var x in list)
+                {
+                    var nom = x.Nombre + " " + x.ApellidoPaterno + " " + x.ApellidoMaterno;
+                    var option = "<option value=\"" + x.Id + "\">" + nom + "</option>";
+                    rows.Add(option);
+                }
+
+                return Json(new
+                {
+                    total = rows.Count(),
+                    datos = rows.ToList()
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new
+                {
+                    result = true
+                });
+            }
+        }
     }
 }

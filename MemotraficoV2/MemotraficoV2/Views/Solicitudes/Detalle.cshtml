@@ -1,0 +1,345 @@
+﻿@model MemotraficoV2.Models.Solicitudes
+@{
+    string rol = MemotraficoV2.Models.Usuarios.Roles();
+    var ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
+    var ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
+    var OPERADOR = MemotraficoV2.Models.Colecciones.ListaRoles.OPERADOR;
+
+    var CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
+    var CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
+    var INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
+
+    Layout = null;
+}
+    <div class="" role="main">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div>
+                        <div class="x_panel">
+                            @Html.HiddenFor(model => model.IdSolicitud)
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(i => i.Folio)
+                                        <div>@Model.Folio</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(i => i.IdEstatusFk)
+                                        <div>@Model.Estatus.Estatus1</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-2">                                
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(i => i.FechaEntrega)
+                                        <div>@(Model != null && Model.FechaEntrega != null ? Model.FechaEntrega.Value.ToString("dd/MM/yyyy") : "")</div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(i => i.IdTipoProcedenciaFk)
+                                        <div>@Model.TipoProcedencia.TipoProcedencia1</div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(i => i.Escuela.Turno)
+                                        <div>@Model.Escuela.Turno</div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(i => i.Escuela.Clave)
+                                        <div>@Model.Escuela.Clave</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(i => i.Escuela.Nombre)
+                                        <div>@Model.Escuela.Nombre</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>@Html.LabelFor(model => model.Asunto)</label>
+                                        <div>@Model.Asunto</div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-4" hidden name="tipoasunto">
+                                        @Html.LabelFor(i => i.TipoAsunto.TipoAsunto1)
+                                        <div>@Html.DropDownList("TipoAsunto", new SelectList(ViewBag.TipoAsunto, "id", "nombre"), "Selecciona tipo de asunto", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                    </div>
+                                    <div class="col-md-4" hidden name="institucion">
+                                        @Html.Label("Institucion")
+                                        <div>@Html.DropDownList("Institucion", new SelectList(ViewBag.Institucion, "id", "nombre"), "Selecciona Institucion", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                    </div>
+                                    <div class="col-md-4" hidden name="departamento">
+                                        @Html.Label("Departamento")
+                                        <div>@Html.DropDownList("Departamento", new SelectList(ViewBag.Departamento, "id", "nombre"), "Selecciona Departamento", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                    </div>
+                                    <div class="col-md-4" hidden name="usuario">
+                                        @Html.Label("Usuario")
+                                        <div><select id="Usuario" class="form-control col-md-7 col-xs-12" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" hidden name="cancelar" data-accion="close">
+                                        @Html.Label("Cancelar Solicitud")
+                                        <div>@Html.TextArea("SolicitudCancelada", null, new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                    </div>
+                                    <div class="col-md-12" hidden name="comentario">
+                                        @Html.Label("Comentarios")
+                                        <div>@Html.TextArea("Comentario", null, new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                    </div>
+                                    <div class="col-md-12" hidden name="avance">
+                                        @Html.Label("Documento")
+                                        <div><input class="form-control col-md-7 col-xs-12" id="file" name="file" multiple type="file" accept=".pdf, .doc, .jpge, .jpg, .xls, .docx, .xlsx" /></div>
+                                    </div>
+                                </div>                 
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                            <div class="btn-group pull-right">
+                                @if (Model.uactual == OPERADOR)
+                                {
+                                    <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="SubirAvance">Subir Avance</button>
+                                    <button class="btn btn-success hide" type="button" name="SaveAvance">Guardar</button>
+                                }
+                                <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="canalizar">Canalizar Solicitud</button>
+                                <button class="btn btn-success hide" type="button" name="Save" data-rol="@rol" data-accion="canalizar">Guardar</button>
+                                @if (Model.IdEstatusFk != CANCELADO)
+                                {
+                                    <button class="btn btn-default cancelar" type="button" name="acciones" data-rol="@rol" data-accion="close">Cancelar Solicitud</button>
+                                    <button class="btn btn-success hide" type="button" name="SaveCancelacion">Guardar</button>
+                                }
+                                <button class="btn btn-dark" data-dismiss="modal" type="button">Cerrar</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $('[name="acciones"]').click(function () {
+        var button = $(this);
+        var buttonSave = $('[name=Save]');
+        var buttonSave2 = $('[name=SaveCancelacion]');
+        var buttonSaveA = $('[name=SaveAvance]');
+        var accion = $(this).data('accion');
+        var rolusuario = $(this).data('rol');
+        var data = "";
+        var button2 = "";
+
+        if (accion == "canalizar") {
+            button.removeAttr('name');
+            button.addClass('hide');
+
+            buttonSave.removeClass('hide');
+
+            button2 = $('.cancelar');
+            button2.addClass('hide');
+            abrirCampos(rolusuario);
+        }
+        if (accion == "open") {
+            button.text('Abrir Solicitud');
+            button.removeAttr('name');
+            button.attr('id', "IdOpen")
+            button.removeClass('btn-default');
+            button.addClass('btn-success');
+
+            button2 = $('.canalizar');
+            button2.addClass('hide');
+            abrirCampo(accion);
+        }
+        if (accion == "close") {
+            button.removeAttr('name');
+            button.addClass('hide');
+
+            buttonSave2.removeClass('hide');
+
+            button2 = $('.canalizar');
+            button2.addClass('hide');
+            abrirCampo(accion);
+        }
+        if (accion == "SubirAvance") {
+            button.removeAttr('name');
+            button.addClass('hide');
+
+            buttonSaveA.removeClass('hide');
+
+            $('.cancelar').addClass('hide');
+            $('.canalizar').addClass('hide');
+            abrirAvance();
+        }
+    });
+    debugger;
+    $('[name=Save]').click(function () {
+        var rolusuario = $(this).data('rol');
+        var data = null;
+        var url = "";
+        var TipoAsunto = $("#TipoAsunto").val();
+        var Institucion = $("#Institucion").val();
+        var IdSolicitud = $("#IdSolicitud").val();
+        var Departamento = $("#Departamento").val();
+        var Usuario = $("#Usuario").val();
+        var Comentario = $('#Comentario').val();
+
+        switch (rolusuario) {
+            case "Administrador de Solicitudes":
+                data = { TipoAsunto: TipoAsunto, Institucion: Institucion, IdSolicitud: IdSolicitud, Comentario: Comentario, Departamento: 0, Usuario: "", rol: rolusuario };
+                url = '/Solicitudes/Canalizar';
+                break;
+            case "Administrador de Dependencia":
+                data = { TipoAsunto: 0, Institucion: 0, IdSolicitud: IdSolicitud, Comentario: Comentario, Departamento: Departamento, Usuario: Usuario, rol: rolusuario };
+                url = '/Solicitudes/Canalizar';
+                break;
+            case "Operador":
+                data = { TipoAsunto: 0, Institucion: 0, IdSolicitud: IdSolicitud, Comentario: Comentario, Departamento: Departamento, Usuario: Usuario, rol: rolusuario };
+                url = '/Solicitudes/Canalizar';
+                break;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                if (data.result == true) {
+                    AlertSuccess(data.msj, data.dir);
+                    $(".bs-example-modal-lg").modal("hide");
+                }
+            },
+            error: function () {
+                AlertError('No se pudo canalizar el registro. Intente nuevamente.', null);
+            }
+        });
+    });
+
+    $('[name=SaveCancelacion]').click(function () {
+        var IdSolicitud = $("#IdSolicitud").val();
+        var Comentario = $('#SolicitudCancelada').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/Solicitudes/Cancelacion',
+            data: { IdSolicitud: IdSolicitud, Comentario: Comentario },
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                if (data.result == true) {
+                    AlertSuccess(data.msj, data.dir);
+                    $(".bs-example-modal-lg").modal("hide");
+                }
+            },
+            error: function () {
+                AlertError('No se pudo canalizar el registro. Intente nuevamente.', null);
+            }
+        });
+    });
+
+    $('[name=SaveAvance]').click(function () {
+
+        var data = new FormData();
+        var IdSolicitud = $("#IdSolicitud").val();
+        var Comentario = $('#Comentario').val();
+
+        data.append('IdSolicitud', IdSolicitud);
+        data.append('Comentario', Comentario);
+        jQuery.each(jQuery('#file')[0].files, function (i, file) {
+            data.append('files', file);
+        });
+
+        $.ajax({
+            url: "/Solicitudes/CanalizarAvance",
+            type: "post",
+            dataType: "json",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function (data) {
+            if (data.result == true) {
+                AlertSuccess(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+            else {
+                AlertError('No se pudo canalizar el registro. Intente nuevamente.', null);
+            }
+        });
+    });
+
+    function abrirCampos(rol) {
+        switch (rol) {
+            case "Administrador de Solicitudes":
+                $('[name=tipoasunto]').removeAttr('hidden');
+                $('[name=institucion]').removeAttr('hidden');
+                $('[name=comentario]').removeAttr('hidden');
+                break;
+            case "Administrador de Dependencia":
+                $('[name=departamento]').removeAttr('hidden');
+                $('[name=usuario]').removeAttr('hidden');
+                $('[name=comentario]').removeAttr('hidden');
+                break;
+            case "Operador":
+                $('[name=departamento]').removeAttr('hidden');
+                $('[name=usuario]').removeAttr('hidden');
+                $('[name=comentario]').removeAttr('hidden');
+                break;
+        }
+    };
+
+    function abrirAvance() {
+        $('[name=avance]').removeAttr('hidden');
+        $('[name=comentario]').removeAttr('hidden');
+    };
+
+    function abrirCampo(accion) {
+        switch (accion) {
+            case "open":
+                $('[name=abrir]').removeAttr('hidden');
+                break;
+            case "close":
+                $('[name=cancelar]').removeAttr('hidden');
+                break;
+        }
+    };
+
+    $("#Departamento").on("change", function () {
+        var t = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: '/Until/CargarUsuarios',
+            data: { id: t },
+            beforeSend: function () {
+                Loading(true);
+            },
+            complete: function () {
+                Loading(false);
+            },
+            success: function (data) {
+                var t = $('#Usuario').empty();
+                if (data.total > 0) {
+                    for (var i = 0; i < data.total; i++) {
+                        t.append(data.datos[i]);
+                    }
+                }
+            }
+        })
+    });
+</script>

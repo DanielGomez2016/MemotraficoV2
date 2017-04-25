@@ -1,0 +1,130 @@
+﻿@model MemotraficoV2.Models.Solicitudes
+@{
+    string rol = MemotraficoV2.Models.Usuarios.Roles();
+    var ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
+    var ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
+    var OPERADOR = MemotraficoV2.Models.Colecciones.ListaRoles.OPERADOR;
+
+    var CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
+    var CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
+    var INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
+
+    Layout = null;
+}
+<div class="" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div>
+                    <div class="x_panel">
+                        @Html.HiddenFor(model => model.IdSolicitud)
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.Folio)
+                                    <div>@Model.Folio</div>
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.IdEstatusFk)
+                                    <div>@Model.Estatus.Estatus1</div>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.FechaEntrega)
+                                    <div>@(Model != null && Model.FechaEntrega != null ? Model.FechaEntrega.Value.ToString("dd/MM/yyyy") : "")</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(i => i.IdTipoProcedenciaFk)
+                                    <div>@Model.TipoProcedencia.TipoProcedencia1</div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(i => i.Escuela.Turno)
+                                    <div>@Model.Escuela.Turno</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.Escuela.Clave)
+                                    <div>@Model.Escuela.Clave</div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(i => i.Escuela.Nombre)
+                                    <div>@Model.Escuela.Nombre</div>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>@Html.LabelFor(model => model.Asunto)</label>
+                                    <div>@Model.Asunto</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>@Html.LabelFor(model => model.Comentario)</label>
+                                    <div>@Model.Comentario</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Label("Comentarios")
+                                    <div>@Html.TextArea("ComentarioOpen", null, new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-success" type="button" name="Save" data-rol="@rol" data-accion="open">Abrir Solicitud</button>
+                        <button class="btn btn-warning" type="button" name="Save" data-rol="@rol" data-accion="close">Cerrar Solicitud</button>
+                        <button class="btn btn-dark" data-dismiss="modal" type="button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('[name=Save]').click(function () {
+        var rolusuario = $(this).data('rol');
+        var Accion = $(this).data('accion');
+        var Comentario = $('#ComentarioOpen').val();
+        var IdSolicitud = $("#IdSolicitud").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/Solicitudes/ACSolicitud',
+            data: { IdSolicitud: IdSolicitud, Comentario: Comentario, Accion: Accion},
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                if (data.result == true) {
+                    AlertSuccess(data.msj, data.dir);
+                    $(".bs-example-modal-lg").modal("hide");
+                }
+            },
+            error: function () {
+                AlertError('No se pudo re-abrir la solicitud. Intente nuevamente.', null);
+            }
+        });
+    });
+</script>

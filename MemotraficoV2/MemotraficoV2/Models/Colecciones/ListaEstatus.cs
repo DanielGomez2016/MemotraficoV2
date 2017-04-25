@@ -22,5 +22,13 @@ namespace MemotraficoV2.Models.Colecciones
     public class ListaComentarios
     {
         public const string INICIADA = "Se inicializo solicitud con el folio ";
+        public const string CanalizadaDependencia = "Se canalizo a la dependencia indicada";
+        public const string CanalizadaOperador = "Se canalizo al operador asignado";
+        public const string CanalizadaOxO = "Se canalizo a otro operador para continuar con la resolucion de la solicitud";
+        public const string Cancelacion = "Se cancelo la solicitud indicada";
+        public const string Cerrada = "La solicitud fue cerrada";
+        public const string ReAbrir = "La solicitud fue abierta nuevamente";
+        public const string Avance = "Avance de solicitud, con documento(s)";
+
     }
 }

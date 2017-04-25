@@ -31,11 +31,11 @@ namespace IdentitySample
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
+                        validateInterval: TimeSpan.FromHours(8),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 },
                 SlidingExpiration = true,
-                ExpireTimeSpan = TimeSpan.FromMinutes(30)
+                ExpireTimeSpan = TimeSpan.FromHours(8)
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

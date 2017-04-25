@@ -40,5 +40,18 @@ namespace MemotraficoV2.Models
                 throw e;
             }
         }
+
+        public static string getNombre(int? id)
+        {
+            SASEntities db = new SASEntities();
+            if (id != null && id > 0)
+            {
+                return db.Departamento.FirstOrDefault(i => i.IdDepartamento == id).Nombre;
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

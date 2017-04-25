@@ -290,6 +290,7 @@
     <Compile Include="Models\Validacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SolicitudDetalle.cs" />
     <Compile Include="ViewModels\SolicitudesEscuelasViewModel.cs" />
     <Compile Include="ViewModels\Validacion_Requerimientos.cs" />
   </ItemGroup>
@@ -5130,6 +5131,9 @@
     <Content Include="Views\Solicitudes\_ComponenteVI.cshtml" />
     <Content Include="Views\Solicitudes\_ComponenteVII.cshtml" />
     <Content Include="Views\Solicitudes\_ComponenteVIII.cshtml" />
+    <Content Include="Views\Solicitudes\Detalle.cshtml" />
+    <Content Include="Views\Solicitudes\Historial.cshtml" />
+    <Content Include="Views\Solicitudes\OpenSolicitud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,10 @@ namespace MemotraficoV2.Models
 {
     public partial class Solicitudes
     {
+        public string UltimoRol { get; set; }
+        public string uactual { get; set; }
+        public string Comentario { get; set;}
+
         public int Crear()
         {
             SASEntities db = new SASEntities();
@@ -17,7 +21,6 @@ namespace MemotraficoV2.Models
             s.IdEscuelaFk = IdEscuelaFk;
             s.IdEstatusFk = ListaEstatus.INICIADO;
             s.IdProcedenciaFk = IdProcedenciaFk;
-            s.IdTipoAsuntoFk = IdTipoAsuntoFk;
             s.IdTipoProcedenciaFk = IdTipoProcedenciaFk;
             s.Folio = GenerarFolio(FechaEntrega);
             s.FechaEntrega = FechaEntrega;

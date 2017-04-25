@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Informacion Usuario";
+    MemotraficoV2.Models.SASEntities db = new MemotraficoV2.Models.SASEntities();
 }
 
 <div class="col-sm-12">
@@ -27,13 +28,13 @@
         <strong> @Html.DisplayNameFor(model => model.IdInstitucion):</strong>
     </div>
     <div class="col-sm-10 text-right">
-        <em>@Html.DisplayFor(model => model.IdInstitucion)</em>
+        <em>@db.Institucion.FirstOrDefault(i => i.IdInstitucion == Model.IdInstitucion).Siglas.ToString()</em>
     </div>
     <div class="col-sm-2 text-left">
         <strong> @Html.DisplayNameFor(model => model.IdDepartamento):</strong>
     </div>
     <div class="col-sm-10 text-right">
-        <em>@Html.DisplayFor(model => model.IdDepartamento)</em>
+        <em>@db.Departamento.FirstOrDefault(i => i.IdDepartamento == Model.IdDepartamento).Nombre.ToString();</em>
     </div>
     <div class="col-sm-4 text-left">
         <strong> Roles usuario:</strong>

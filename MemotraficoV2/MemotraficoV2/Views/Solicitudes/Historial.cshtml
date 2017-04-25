@@ -1,0 +1,116 @@
+﻿@model MemotraficoV2.ViewModels.SolicitudDetalle
+@{
+    string rol = MemotraficoV2.Models.Usuarios.Roles();
+    var ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
+    var ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
+    var OPERADOR = MemotraficoV2.Models.Colecciones.ListaRoles.OPERADOR;
+
+    var CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
+    var CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
+    var INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
+
+    Layout = null;
+}
+<div class="" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div>
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.solicitud.Folio)
+                                    <div>@Model.solicitud.Folio</div>
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.solicitud.IdEstatusFk)
+                                    <div>@Model.solicitud.Estatus.Estatus1</div>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.solicitud.FechaEntrega)
+                                    <div>@(Model != null && Model.solicitud.FechaEntrega != null ? Model.solicitud.FechaEntrega.Value.ToString("dd/MM/yyyy") : "")</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.solicitud.Escuela.Clave)
+                                    <div>@Model.solicitud.Escuela.Clave</div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(i => i.solicitud.Escuela.Nombre)
+                                    <div>@Model.solicitud.Escuela.Nombre</div>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>@Html.LabelFor(model => model.solicitud.Asunto)</label>
+                                    <div>@Model.solicitud.Asunto</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>@Html.LabelFor(model => model.institucion)</label>
+                                    <div>@Model.institucion</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="datatable" style="width:100%;" class="table table-info table-striped table-bordered dt-responsive nowrap">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Fecha Canalizado</th>
+                                <th>Comentario</th>
+                                <th>Usuario (Canalizo)</th>
+                                <th>Departamento</th>
+                                <th>Usuario (Atendio)</th>
+                                <th>Estatus</th>
+                                <th>Documento(s)</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var i in Model.Detalles)
+                            {
+                                <tr class="@(i.colorreg)">
+                                    <td>@i.numregistro</td>
+                                    <td>@i.FechaCanalizado</td>
+                                    <td>@i.Comentario</td>
+                                    <td>@i.usuario</td>
+                                    <td>@i.departamento</td>
+                                    <td>@i.usuarioatiende</td>
+                                    <td>@i.estatus</td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+
+                    <div class="ln_solid"></div>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-dark" data-dismiss="modal" type="button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.table-info').dataTable();
+    });
+</script>

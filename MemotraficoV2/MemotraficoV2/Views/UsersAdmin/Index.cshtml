@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Index";
     ViewBag.Imagen = "../Content/Proyecto/images/user.png";
+
+    MemotraficoV2.Models.SASEntities db = new MemotraficoV2.Models.SASEntities();
+
 }
 
 <div class="" role="main">
@@ -20,18 +23,6 @@
                     <div class="x_title">
                         @* titulo *@
                         <h2>Usuarios</h2>   @Html.ActionLink("Nuevo Usuario", "Create", null, new { @class = "col-md-offset-med btn btn-primary btn-sm" })
-
-                        @* opciones modal cerrar encojer y opciones *@
-                        @*<ul class="nav navbar-right panel_toolbox">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        @Html.ActionLink("Nuevo Usuario", "Create")
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>*@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -62,7 +53,7 @@
                                         <td>@item.Nombre</td>
                                         <td>@item.ApellidoPaterno @item.ApellidoMaterno</td>
                                         <td>@item.Email</td>
-                                        <td>@item.IdDepartamento , @item.IdInstitucion</td>
+                                        <td>@db.Departamento.FirstOrDefault(i => i.IdDepartamento == item.IdDepartamento).Nombre.ToString() , @db.Institucion.FirstOrDefault(i => i.IdInstitucion == item.IdInstitucion).Siglas.ToString()</td>
                                         <td>
                                             <div class="btn-group">
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
