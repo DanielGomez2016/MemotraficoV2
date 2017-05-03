@@ -134,7 +134,7 @@ namespace MemotraficoV2.Models
             {
                 AspNetUsers us = dbb.AspNetUsers
                                        .FirstOrDefault(i => i.AspNetRoles
-                                       .Any(m => m.Name == ListaRoles.ADMINISTRADOR_SOLICITUDES && i.IdInstitucion == inst));
+                                       .Any(m => m.Name == ListaRoles.ADMINISTRADOR_SOLICITUDES));
                 return us.Id;
             }
             if (rol == ListaRoles.ADMINISTRADOR_SOLICITUDES)
@@ -147,5 +147,16 @@ namespace MemotraficoV2.Models
 
             return "";
         }
+
+        public static string RolIgual(string rol, int inst)
+        {
+            SASEntities dbb = new SASEntities();
+            AspNetUsers us = dbb.AspNetUsers
+                                .FirstOrDefault(i => i.AspNetRoles
+                                .Any(m => m.Name == rol && i.IdInstitucion == inst));
+
+            return us.Id;
+        }
+
     }
 }

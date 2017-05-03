@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="Model.Contacto" Width="1.5" PointX="7.5" PointY="43.25" />
         <EntityTypeShape EntityType="Model.Croquis" Width="1.5" PointX="9.75" PointY="107.625" />
         <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="3" PointY="7.25" />
-        <EntityTypeShape EntityType="Model.Documentos" Width="1.5" PointX="8" PointY="2.625" />
         <EntityTypeShape EntityType="Model.Email" Width="1.5" PointX="7.75" PointY="6.25" />
         <EntityTypeShape EntityType="Model.EnergiaElectrica" Width="1.5" PointX="9.75" PointY="87.125" />
         <EntityTypeShape EntityType="Model.Entorno" Width="1.5" PointX="9.75" PointY="98.5" />
@@ -74,17 +73,22 @@
         <AssociationConnector Association="Model.FK_Usuario_Institucion" />
         <AssociationConnector Association="Model.AspNetUserRoles" />
         <EntityTypeShape EntityType="Model.Canalizacion" Width="1.5" PointX="9.75" PointY="76" />
-        <EntityTypeShape EntityType="Model.Solicitudes" Width="1.5" PointX="7.5" PointY="75.875" />
+        <EntityTypeShape EntityType="Model.DetalleCanalizacion" Width="1.5" PointX="12" PointY="77.125" />
+        <AssociationConnector Association="Model.FK_DetalleCanalizacion_Canalizacion" />
+        <AssociationConnector Association="Model.FK_DetalleCanalizacion_Estatus" />
+        <EntityTypeShape EntityType="Model.Documentos" Width="1.5" PointX="14.25" PointY="77.75" />
+        <AssociationConnector Association="Model.FK_Documentos_DetalleCanalizacion" />
+        <EntityTypeShape EntityType="Model.Beneficiario" Width="1.5" PointX="12.25" PointY="72.625" />
+        <EntityTypeShape EntityType="Model.Solicitudes" Width="1.5" PointX="7.5" PointY="75.75" />
+        <AssociationConnector Association="Model.FK_Beneficiario_Localidades" />
+        <AssociationConnector Association="Model.FK_Beneficiario_Municipios" />
+        <AssociationConnector Association="Model.FK_Solicitudes_Beneficiario" />
         <AssociationConnector Association="Model.FK_Canalizacion_Solicitudes" />
         <AssociationConnector Association="Model.FK_Solicitudes_Escuela" />
         <AssociationConnector Association="Model.FK_Solicitudes_Estatus" />
         <AssociationConnector Association="Model.FK_Solicitudes_Procedencia" />
         <AssociationConnector Association="Model.FK_Solicitudes_TipoAsunto" />
         <AssociationConnector Association="Model.FK_Solicitudes_TipoProcedencia" />
-        <EntityTypeShape EntityType="Model.DetalleCanalizacion" Width="1.5" PointX="12" PointY="77.125" />
-        <AssociationConnector Association="Model.FK_DetalleCanalizacion_Canalizacion" />
-        <AssociationConnector Association="Model.FK_DetalleCanalizacion_Estatus" />
-        <AssociationConnector Association="Model.FK_Documentos_DetalleCanalizacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,6 +1,7 @@
 ﻿@model MemotraficoV2.Models.Solicitudes
 @{
     ViewBag.Title = "Registro de Solicitud";
+    var inst = MemotraficoV2.Models.Usuarios.GetInstitucion();
 
     var options = new AjaxOptions()
     {
@@ -36,6 +37,7 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("IdEscuelaFk")
+                            @Html.Hidden("IdBeneficiarioFk")
                             @Html.ValidationSummary("", new { @class = "text-error" })
                             <div class="item form-group">
                                 @Html.LabelFor(m => m.Asunto, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
@@ -63,10 +65,23 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                @Html.LabelFor(m => m.IdEscuelaFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.TextBox("EscuelaElegida",null, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                <div class="" name="divescuela">
+                                    @Html.LabelFor(m => m.IdEscuelaFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBox("EscuelaElegida", null, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                    </div>
                                 </div>
+                                <div class="hide" name="divbeneficiario">
+                                    @Html.LabelFor(m => m.IdBeneficiarioFk, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        @Html.TextBox("BeneficiarioElegido", null, new { @class = "form-control col-md-7 col-xs-12", @type = "text", style= "width:100%;" })
+                                    </div>
+                                </div>
+                                @if (inst == 1)
+                                {
+                                <button id="beneficiario" data-accion="beneficiario" type="button" name="cambio" class="btn btn-sm btn-dark" data-toggle="tooltip" data-placement="right" title="Cambiar a Beneficiario"><i class="fa fa-retweet"></i></button>
+                                <button id="escuela" data-accion="escuela" type="button" name="cambio"  class="btn btn-sm btn-dark hide" data-toggle="tooltip" data-placement="right" title="Cambiar a Esucela"><i class="fa fa-retweet"></i></button>
+                                }
                             </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
@@ -90,7 +105,8 @@
             </div>
             <form id="formularioDoc" enctype="multipart/form-data" method="post">
                 <div class="modal-body">
-                    <input type="file" name="file" accept="image/*" class="form-control" />
+                    @*<input type="file" name="file" accept="image/*" class="form-control" />*@
+                    <input class="form-control" id="file" name="file" multiple type="file" accept=".pdf, .doc, .jpge, .jpg, .xls, .docx, .xlsx, .ppt, .pptx" />
                 </div>
                 <div class="modal-footer">
                     <button id="btnDocumento" type="submit" class="btn btn-primary">Guardar</button>
@@ -145,4 +161,48 @@ var options = {
 };
 
 $("#EscuelaElegida").easyAutocomplete(options);
+
+var optionsBen = {
+
+    url: function (term) {
+        return "/Solicitudes/AutocompleteBen";
+    },
+
+    getValue: function (element) {
+        $("#IdBeneficiarioFk").val(element.value);
+        return element.name;
+    },
+
+    ajaxSettings: {
+        dataType: "json",
+        method: "POST",
+        data: {
+            dataType: "json"
+        }
+    },
+
+    preparePostData: function (data) {
+        data.term = $("#BeneficiarioElegido").val();
+        return data;
+    },
+
+    list: {
+        showAnimation: {
+            type: "fade", //normal|slide|fade
+            time: 400,
+            callback: function () { }
+        },
+
+        hideAnimation: {
+            type: "slide", //normal|slide|fade
+            time: 400,
+            callback: function () { }
+        }
+    },
+
+    requestDelay: 400,
+    adjustWidth: false,
+};
+
+$("#BeneficiarioElegido").easyAutocomplete(optionsBen);
 </script> 

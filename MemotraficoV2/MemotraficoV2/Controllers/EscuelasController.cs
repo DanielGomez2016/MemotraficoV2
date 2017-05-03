@@ -87,7 +87,7 @@ namespace MemotraficoV2.Controllers
             e.Celular = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Celular.ToString();
 
             ViewBag.Municipio = db.Municipios.Select(i => new { id = i.IdMunicipio, nombre = i.Nombre }).ToList();
-            ViewBag.Localidad = db.Localidades.Where(i => i.IdLocalidad == e.IdMunicipioFk).Select(i => new { id = i.IdLocalidad, nombre = i.Nombre }).ToList();
+            ViewBag.Localidad = db.Localidades.Where(i => i.IdMunicipioFk == e.IdMunicipioFk).Select(i => new { id = i.IdLocalidad, nombre = i.Nombre }).ToList();
             ViewBag.NivelEducativo = db.NivelEducativo.Select(i => new { id = i.IdNivelEducativo, nombre = i.Nivel }).ToList();
 
             return View(e);

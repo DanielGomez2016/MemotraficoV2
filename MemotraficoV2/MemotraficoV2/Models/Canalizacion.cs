@@ -27,6 +27,7 @@ namespace MemotraficoV2.Models
             return IdCanalizacion;
         }
 
+        //es la canalizacion generica que siempre se realiza cuando una solicitud se va a asignar a algun usuario
         public static int Canalizar(int s, int i, int d, string comentario, string usuarioasigna, int estatus)
         {
             SASEntities db = new SASEntities();
@@ -92,7 +93,7 @@ namespace MemotraficoV2.Models
                 {
                     dc.UsuarioAtiende = usuarioasigna;
                 }
-                if(usuarioasigna == "")
+                if(usuarioasigna == "" && rol != ListaRoles.ADMINISTRADOR_SOLICITUDES)
                 {
                     dc.UsuarioAtiende = Usuarios.GetUsuario();
                 }
@@ -127,6 +128,7 @@ namespace MemotraficoV2.Models
             return canalizaDet;
         }
 
+        //se utiliza para cancelar las solicitudes
         public static void Cancelacion(int s, int i,int d, string comentario, int estatus)
         {
             SASEntities db = new SASEntities();
@@ -148,6 +150,7 @@ namespace MemotraficoV2.Models
             dc.Crear();
         }
 
+        //se utiliza para abrir las solicitudes que estan canceladas
         public static void canalizarSimple(int s, string comentario, int estatus)
         {
             SASEntities db = new SASEntities();
@@ -162,13 +165,14 @@ namespace MemotraficoV2.Models
             comentario = comentario != "" ? comentario : ListaComentarios.ReAbrir.ToString(); ;
 
             dc.Comentario = comentario;
-            dc.IdUsuarioFk = Usuarios.RolAlto(Usuarios.Roles(), Usuarios.GetInstitucion());
+            dc.IdUsuarioFk = Usuarios.GetUsuario();
             dc.Departamento = Usuarios.GetDepto();
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = estatus;
             dc.Crear();
         }
 
+        //se utiliza para crear un historial de algun avance en una solicitud, por lo general solo lo usara el rol de operador
         public static int CanalizarAvance(int s, string comentario)
         {
             SASEntities db = new SASEntities();
@@ -184,11 +188,55 @@ namespace MemotraficoV2.Models
             comentario = comentario != "" ? comentario : ListaComentarios.Avance.ToString(); ;
 
             dc.Comentario = comentario;
+            dc.IdUsuarioFk = Usuarios.RolAlto(Usuarios.Roles(), Usuarios.GetInstitucion());
+            dc.Departamento = Usuarios.GetDepto();
+            dc.Instituto = Usuarios.GetInstitucion();
+            dc.IdEstatusFk = ListaEstatus.CANALIZADO;
+            dc.UsuarioAtiende = Usuarios.GetUsuario();
+            return dc.Crear();
+        }
+
+        //Se utiliza para canalizar directamente a ichife
+        public static int CanalizarIchife(int s, string comentario)
+        {
+            SASEntities db = new SASEntities();
+            Canalizacion c = new Canalizacion();
+            DetalleCanalizacion dc = new DetalleCanalizacion();
+            Documentos doc = new Documentos();
+
+            c = db.Canalizacion.FirstOrDefault(j => j.IdSolicitudFk == s);
+
+            dc.IdCanalizarFk = c.IdCanalizacion;
+            dc.FechaCanalizar = DateTime.Now;
+
+            dc.Comentario = comentario;
             dc.IdUsuarioFk = Usuarios.GetUsuario();
             dc.Departamento = Usuarios.GetDepto();
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = ListaEstatus.CANALIZADO;
             dc.UsuarioAtiende = Usuarios.GetUsuario();
+            return dc.Crear();
+        }
+
+        //canaliza las solicitudes que ya se atendieron y el administrador de solicitudes pueda cerrar la solicitud,tiene que pasar por los tres niveles operador,dependencia,admin solicitudes, para dar como concluida la solicitud
+        public static int CanalizarAtendida(int s, string comentario)
+        {
+            SASEntities db = new SASEntities();
+            Canalizacion c = new Canalizacion();
+            DetalleCanalizacion dc = new DetalleCanalizacion();
+            Documentos doc = new Documentos();
+
+            c = db.Canalizacion.FirstOrDefault(j => j.IdSolicitudFk == s);
+
+            //se crea un historial de canalizacion sobre la atencion que se realizo de la solicitud
+            dc.IdCanalizarFk = c.IdCanalizacion;
+            dc.FechaCanalizar = DateTime.Now;
+            dc.Comentario = comentario != "" ? comentario : ListaComentarios.Atendida.ToString();
+            dc.IdUsuarioFk = Usuarios.GetUsuario();
+            dc.Departamento = Usuarios.GetDepto();
+            dc.Instituto = Usuarios.GetInstitucion();
+            dc.IdEstatusFk = ListaEstatus.ATENDIDA;
+            dc.UsuarioAtiende = Usuarios.RolAlto(Usuarios.Roles(), Usuarios.GetInstitucion());
             return dc.Crear();
         }
 

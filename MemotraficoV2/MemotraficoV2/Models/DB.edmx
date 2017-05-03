@@ -84,6 +84,19 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Beneficiario">
+          <Key>
+            <PropertyRef Name="IdBeneficiario" />
+          </Key>
+          <Property Name="IdBeneficiario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="150" />
+          <Property Name="IdLocalidadFk" Type="int" />
+          <Property Name="IdMunicipioFk" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="Celular" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Canalizacion">
           <Key>
             <PropertyRef Name="IdCanalizacion" />
@@ -251,7 +264,7 @@
           <Property Name="IdDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="150" />
           <Property Name="Documento" Type="varbinary(max)" />
-          <Property Name="Tipo" Type="varchar" MaxLength="25" />
+          <Property Name="Tipo" Type="varchar(max)" />
           <Property Name="IdDetalleCanalizarFk" Type="int" />
         </EntityType>
         <EntityType Name="Email">
@@ -473,10 +486,11 @@
           <Property Name="Asunto" Type="varchar" MaxLength="500" />
           <Property Name="IdTipoProcedenciaFk" Type="int" Nullable="false" />
           <Property Name="IdProcedenciaFk" Type="int" Nullable="false" />
-          <Property Name="IdEscuelaFk" Type="int" Nullable="false" />
+          <Property Name="IdEscuelaFk" Type="int" />
           <Property Name="MetaGeneral" Type="varchar" MaxLength="500" />
           <Property Name="FechaValidacion" Type="datetime" />
           <Property Name="Programa" Type="varchar" MaxLength="150" />
+          <Property Name="IdBeneficiarioFk" Type="int" />
         </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
@@ -544,6 +558,30 @@
             </Principal>
             <Dependent Role="AlmacenamientoDren">
               <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiario_Localidades">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+          <End Role="Beneficiario" Type="Self.Beneficiario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="Beneficiario">
+              <PropertyRef Name="IdLocalidadFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiario_Municipios">
+          <End Role="Municipios" Type="Self.Municipios" Multiplicity="0..1" />
+          <End Role="Beneficiario" Type="Self.Beneficiario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Beneficiario">
+              <PropertyRef Name="IdMunicipioFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -911,8 +949,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Solicitudes_Beneficiario">
+          <End Role="Beneficiario" Type="Self.Beneficiario" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiario">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdBeneficiarioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Solicitudes_Escuela">
-          <End Role="Escuela" Type="Self.Escuela" Multiplicity="1" />
+          <End Role="Escuela" Type="Self.Escuela" Multiplicity="0..1" />
           <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Escuela">
@@ -1014,6 +1064,7 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beneficiario" EntityType="Self.Beneficiario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Canalizacion" EntityType="Self.Canalizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComponenteI" EntityType="Self.ComponenteI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComponenteII" EntityType="Self.ComponenteII" Schema="dbo" store:Type="Tables" />
@@ -1063,6 +1114,14 @@
           <AssociationSet Name="FK_AlmacenamientoDren_Validacion" Association="Self.FK_AlmacenamientoDren_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiario_Localidades" Association="Self.FK_Beneficiario_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiario_Municipios" Association="Self.FK_Beneficiario_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
           </AssociationSet>
           <AssociationSet Name="FK_Canalizacion_Solicitudes" Association="Self.FK_Canalizacion_Solicitudes">
             <End Role="Solicitudes" EntitySet="Solicitudes" />
@@ -1184,6 +1243,10 @@
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Beneficiario" Association="Self.FK_Solicitudes_Beneficiario">
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Solicitudes_Escuela" Association="Self.FK_Solicitudes_Escuela">
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
@@ -1237,7 +1300,6 @@
           <EntitySet Name="Contacto" EntityType="Model.Contacto" />
           <EntitySet Name="Croquis" EntityType="Model.Croquis" />
           <EntitySet Name="Departamento" EntityType="Model.Departamento" />
-          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
           <EntitySet Name="Email" EntityType="Model.Email" />
           <EntitySet Name="EnergiaElectrica" EntityType="Model.EnergiaElectrica" />
           <EntitySet Name="Entorno" EntityType="Model.Entorno" />
@@ -1387,7 +1449,34 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Canalizacion" EntityType="Model.Canalizacion" />
+          <EntitySet Name="DetalleCanalizacion" EntityType="Model.DetalleCanalizacion" />
+          <AssociationSet Name="FK_DetalleCanalizacion_Canalizacion" Association="Model.FK_DetalleCanalizacion_Canalizacion">
+            <End Role="Canalizacion" EntitySet="Canalizacion" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCanalizacion_Estatus" Association="Model.FK_DetalleCanalizacion_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
+          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
+          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+            <End Role="Documentos" EntitySet="Documentos" />
+          </AssociationSet>
+          <EntitySet Name="Beneficiario" EntityType="Model.Beneficiario" />
           <EntitySet Name="Solicitudes" EntityType="Model.Solicitudes" />
+          <AssociationSet Name="FK_Beneficiario_Localidades" Association="Model.FK_Beneficiario_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiario_Municipios" Association="Model.FK_Beneficiario_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Beneficiario" Association="Model.FK_Solicitudes_Beneficiario">
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Canalizacion_Solicitudes" Association="Model.FK_Canalizacion_Solicitudes">
             <End Role="Solicitudes" EntitySet="Solicitudes" />
             <End Role="Canalizacion" EntitySet="Canalizacion" />
@@ -1411,19 +1500,6 @@
           <AssociationSet Name="FK_Solicitudes_TipoProcedencia" Association="Model.FK_Solicitudes_TipoProcedencia">
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <EntitySet Name="DetalleCanalizacion" EntityType="Model.DetalleCanalizacion" />
-          <AssociationSet Name="FK_DetalleCanalizacion_Canalizacion" Association="Model.FK_DetalleCanalizacion_Canalizacion">
-            <End Role="Canalizacion" EntitySet="Canalizacion" />
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleCanalizacion_Estatus" Association="Model.FK_DetalleCanalizacion_Estatus">
-            <End Role="Estatus" EntitySet="Estatus" />
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-            <End Role="Documentos" EntitySet="Documentos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccesoSistema">
@@ -1630,17 +1706,6 @@
           <NavigationProperty Name="Institucion" Relationship="Model.FK_Departamento_Institucion" FromRole="Departamento" ToRole="Institucion" />
           <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Usuario_Departamento" FromRole="Departamento" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="Documentos">
-          <Key>
-            <PropertyRef Name="IdDocumento" />
-          </Key>
-          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
-          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
-        </EntityType>
         <EntityType Name="Email">
           <Key>
             <PropertyRef Name="IdEmail" />
@@ -1778,8 +1843,8 @@
           </Key>
           <Property Name="IdEstatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Estatus1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Estatus" ToRole="Solicitudes" />
           <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="Estatus" ToRole="DetalleCanalizacion" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Estatus" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="Institucion">
           <Key>
@@ -1805,6 +1870,7 @@
           <Property Name="IdMunicipioFk" Type="Int32" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_Localidades" FromRole="Localidades" ToRole="Escuela" />
           <NavigationProperty Name="Municipios" Relationship="Model.FK_Localidades_Municipios" FromRole="Localidades" ToRole="Municipios" />
+          <NavigationProperty Name="Beneficiario" Relationship="Model.FK_Beneficiario_Localidades" FromRole="Localidades" ToRole="Beneficiario" />
         </EntityType>
         <EntityType Name="Matricula">
           <Key>
@@ -1825,6 +1891,7 @@
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_Municipios" FromRole="Municipios" ToRole="Escuela" />
           <NavigationProperty Name="Localidades" Relationship="Model.FK_Localidades_Municipios" FromRole="Municipios" ToRole="Localidades" />
+          <NavigationProperty Name="Beneficiario" Relationship="Model.FK_Beneficiario_Municipios" FromRole="Municipios" ToRole="Beneficiario" />
         </EntityType>
         <EntityType Name="NivelEducativo">
           <Key>
@@ -2327,8 +2394,88 @@
           <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
           <Property Name="Validacion" Type="Boolean" Nullable="false" />
           <Property Name="IdSolicitudFk" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Canalizacion" ToRole="Solicitudes" />
           <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="Canalizacion" ToRole="DetalleCanalizacion" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Canalizacion" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="DetalleCanalizacion">
+          <Key>
+            <PropertyRef Name="IdDetalleCanalizar" />
+          </Key>
+          <Property Name="IdDetalleCanalizar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCanalizarFk" Type="Int32" />
+          <Property Name="FechaCanalizar" Type="DateTime" Precision="3" />
+          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioFk" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Instituto" Type="Int32" />
+          <Property Name="Departamento" Type="Int32" />
+          <Property Name="UsuarioAtiende" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdEstatusFk" Type="Int32" />
+          <NavigationProperty Name="Canalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="DetalleCanalizacion" ToRole="Canalizacion" />
+          <NavigationProperty Name="Estatus" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="DetalleCanalizacion" ToRole="Estatus" />
+          <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
+        </EntityType>
+        <Association Name="FK_DetalleCanalizacion_Canalizacion">
+          <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="0..1" />
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canalizacion">
+              <PropertyRef Name="IdCanalizacion" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCanalizacion_Estatus">
+          <End Type="Model.Estatus" Role="Estatus" Multiplicity="0..1" />
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdEstatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Documentos">
+          <Key>
+            <PropertyRef Name="IdDocumento" />
+          </Key>
+          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
+        </EntityType>
+        <Association Name="FK_Documentos_DetalleCanalizacion">
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
+          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleCanalizacion">
+              <PropertyRef Name="IdDetalleCanalizar" />
+            </Principal>
+            <Dependent Role="Documentos">
+              <PropertyRef Name="IdDetalleCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Beneficiario">
+          <Key>
+            <PropertyRef Name="IdBeneficiario" />
+          </Key>
+          <Property Name="IdBeneficiario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdLocalidadFk" Type="Int32" />
+          <Property Name="IdMunicipioFk" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Localidades" Relationship="Model.FK_Beneficiario_Localidades" FromRole="Beneficiario" ToRole="Localidades" />
+          <NavigationProperty Name="Municipios" Relationship="Model.FK_Beneficiario_Municipios" FromRole="Beneficiario" ToRole="Municipios" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Beneficiario" FromRole="Beneficiario" ToRole="Solicitudes" />
         </EntityType>
         <EntityType Name="Solicitudes">
           <Key>
@@ -2342,10 +2489,12 @@
           <Property Name="Asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
           <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
-          <Property Name="IdEscuelaFk" Type="Int32" Nullable="false" />
+          <Property Name="IdEscuelaFk" Type="Int32" />
           <Property Name="MetaGeneral" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="FechaValidacion" Type="DateTime" Precision="3" />
           <Property Name="Programa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdBeneficiarioFk" Type="Int32" />
+          <NavigationProperty Name="Beneficiario" Relationship="Model.FK_Solicitudes_Beneficiario" FromRole="Solicitudes" ToRole="Beneficiario" />
           <NavigationProperty Name="Canalizacion" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Solicitudes" ToRole="Canalizacion" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
           <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
@@ -2353,6 +2502,42 @@
           <NavigationProperty Name="TipoAsunto" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
           <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
         </EntityType>
+        <Association Name="FK_Beneficiario_Localidades">
+          <End Type="Model.Localidades" Role="Localidades" Multiplicity="0..1" />
+          <End Type="Model.Beneficiario" Role="Beneficiario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="Beneficiario">
+              <PropertyRef Name="IdLocalidadFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiario_Municipios">
+          <End Type="Model.Municipios" Role="Municipios" Multiplicity="0..1" />
+          <End Type="Model.Beneficiario" Role="Beneficiario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Beneficiario">
+              <PropertyRef Name="IdMunicipioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Beneficiario">
+          <End Type="Model.Beneficiario" Role="Beneficiario" Multiplicity="0..1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiario">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdBeneficiarioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Canalizacion_Solicitudes">
           <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="1" />
           <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="*" />
@@ -2366,7 +2551,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Solicitudes_Escuela">
-          <End Type="Model.Escuela" Role="Escuela" Multiplicity="1" />
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
           <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Escuela">
@@ -2422,59 +2607,6 @@
             </Principal>
             <Dependent Role="Solicitudes">
               <PropertyRef Name="IdTipoProcedenciaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DetalleCanalizacion">
-          <Key>
-            <PropertyRef Name="IdDetalleCanalizar" />
-          </Key>
-          <Property Name="IdDetalleCanalizar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCanalizarFk" Type="Int32" />
-          <Property Name="FechaCanalizar" Type="DateTime" Precision="3" />
-          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioFk" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Instituto" Type="Int32" />
-          <Property Name="Departamento" Type="Int32" />
-          <Property Name="UsuarioAtiende" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IdEstatusFk" Type="Int32" />
-          <NavigationProperty Name="Canalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="DetalleCanalizacion" ToRole="Canalizacion" />
-          <NavigationProperty Name="Estatus" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="DetalleCanalizacion" ToRole="Estatus" />
-          <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
-        </EntityType>
-        <Association Name="FK_DetalleCanalizacion_Canalizacion">
-          <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="0..1" />
-          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Canalizacion">
-              <PropertyRef Name="IdCanalizacion" />
-            </Principal>
-            <Dependent Role="DetalleCanalizacion">
-              <PropertyRef Name="IdCanalizarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleCanalizacion_Estatus">
-          <End Type="Model.Estatus" Role="Estatus" Multiplicity="0..1" />
-          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estatus">
-              <PropertyRef Name="IdEstatus" />
-            </Principal>
-            <Dependent Role="DetalleCanalizacion">
-              <PropertyRef Name="IdEstatusFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Documentos_DetalleCanalizacion">
-          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
-          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetalleCanalizacion">
-              <PropertyRef Name="IdDetalleCanalizar" />
-            </Principal>
-            <Dependent Role="Documentos">
-              <PropertyRef Name="IdDetalleCanalizarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2681,17 +2813,6 @@
                 <ScalarProperty Name="Titular" ColumnName="Titular" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Documentos">
-            <EntityTypeMapping TypeName="Model.Documentos">
-              <MappingFragment StoreEntitySet="Documentos">
-                <ScalarProperty Name="IdDetalleCanalizarFk" ColumnName="IdDetalleCanalizarFk" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2984,24 +3105,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Solicitudes">
-            <EntityTypeMapping TypeName="Model.Solicitudes">
-              <MappingFragment StoreEntitySet="Solicitudes">
-                <ScalarProperty Name="Programa" ColumnName="Programa" />
-                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
-                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
-                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
-                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
-                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
-                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
-                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
-                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DetalleCanalizacion">
             <EntityTypeMapping TypeName="Model.DetalleCanalizacion">
               <MappingFragment StoreEntitySet="DetalleCanalizacion">
@@ -3014,6 +3117,50 @@
                 <ScalarProperty Name="FechaCanalizar" ColumnName="FechaCanalizar" />
                 <ScalarProperty Name="IdCanalizarFk" ColumnName="IdCanalizarFk" />
                 <ScalarProperty Name="IdDetalleCanalizar" ColumnName="IdDetalleCanalizar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documentos">
+            <EntityTypeMapping TypeName="Model.Documentos">
+              <MappingFragment StoreEntitySet="Documentos">
+                <ScalarProperty Name="IdDetalleCanalizarFk" ColumnName="IdDetalleCanalizarFk" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beneficiario">
+            <EntityTypeMapping TypeName="Model.Beneficiario">
+              <MappingFragment StoreEntitySet="Beneficiario">
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdMunicipioFk" ColumnName="IdMunicipioFk" />
+                <ScalarProperty Name="IdLocalidadFk" ColumnName="IdLocalidadFk" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdBeneficiario" ColumnName="IdBeneficiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitudes">
+            <EntityTypeMapping TypeName="Model.Solicitudes">
+              <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="IdBeneficiarioFk" ColumnName="IdBeneficiarioFk" />
+                <ScalarProperty Name="Programa" ColumnName="Programa" />
+                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
+                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
+                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
+                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
+                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
+                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

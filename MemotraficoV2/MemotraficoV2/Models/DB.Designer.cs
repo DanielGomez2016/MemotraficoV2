@@ -51,15 +51,18 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Departamento", "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Departamento), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
 [assembly: EdmRelationshipAttribute("Model", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
+[assembly: EdmRelationshipAttribute("Model", "FK_DetalleCanalizacion_Canalizacion", "Canalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Canalizacion), "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.DetalleCanalizacion), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_DetalleCanalizacion_Estatus", "Estatus", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Estatus), "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.DetalleCanalizacion), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Documentos_DetalleCanalizacion", "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.DetalleCanalizacion), "Documentos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Documentos), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Beneficiario_Localidades", "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Localidades), "Beneficiario", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Beneficiario), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Beneficiario_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Beneficiario", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Beneficiario), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Beneficiario", "Beneficiario", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Beneficiario), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Canalizacion_Solicitudes", "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Solicitudes), "Canalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Canalizacion), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Escuela), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Estatus", "Estatus", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Estatus), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Procedencia", "Procedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Procedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoAsunto", "TipoAsunto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoAsunto), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.TipoProcedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_DetalleCanalizacion_Canalizacion", "Canalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Canalizacion), "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.DetalleCanalizacion), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_DetalleCanalizacion_Estatus", "Estatus", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Estatus), "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.DetalleCanalizacion), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Documentos_DetalleCanalizacion", "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.DetalleCanalizacion), "Documentos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Documentos), true)]
 
 #endregion
 
@@ -350,22 +353,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Departamento> _Departamento;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<Documentos> Documentos
-        {
-            get
-            {
-                if ((_Documentos == null))
-                {
-                    _Documentos = base.CreateObjectSet<Documentos>("Documentos");
-                }
-                return _Documentos;
-            }
-        }
-        private ObjectSet<Documentos> _Documentos;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -706,22 +693,6 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<Solicitudes> Solicitudes
-        {
-            get
-            {
-                if ((_Solicitudes == null))
-                {
-                    _Solicitudes = base.CreateObjectSet<Solicitudes>("Solicitudes");
-                }
-                return _Solicitudes;
-            }
-        }
-        private ObjectSet<Solicitudes> _Solicitudes;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
         public ObjectSet<DetalleCanalizacion> DetalleCanalizacion
         {
             get
@@ -734,6 +705,54 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<DetalleCanalizacion> _DetalleCanalizacion;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Documentos> Documentos
+        {
+            get
+            {
+                if ((_Documentos == null))
+                {
+                    _Documentos = base.CreateObjectSet<Documentos>("Documentos");
+                }
+                return _Documentos;
+            }
+        }
+        private ObjectSet<Documentos> _Documentos;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Beneficiario> Beneficiario
+        {
+            get
+            {
+                if ((_Beneficiario == null))
+                {
+                    _Beneficiario = base.CreateObjectSet<Beneficiario>("Beneficiario");
+                }
+                return _Beneficiario;
+            }
+        }
+        private ObjectSet<Beneficiario> _Beneficiario;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Solicitudes> Solicitudes
+        {
+            get
+            {
+                if ((_Solicitudes == null))
+                {
+                    _Solicitudes = base.CreateObjectSet<Solicitudes>("Solicitudes");
+                }
+                return _Solicitudes;
+            }
+        }
+        private ObjectSet<Solicitudes> _Solicitudes;
 
         #endregion
 
@@ -857,14 +876,6 @@ namespace MemotraficoV2.Models
         public void AddToDepartamento(Departamento departamento)
         {
             base.AddObject("Departamento", departamento);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Documentos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToDocumentos(Documentos documentos)
-        {
-            base.AddObject("Documentos", documentos);
         }
     
         /// <summary>
@@ -1036,19 +1047,35 @@ namespace MemotraficoV2.Models
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Solicitudes. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToSolicitudes(Solicitudes solicitudes)
-        {
-            base.AddObject("Solicitudes", solicitudes);
-        }
-    
-        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet DetalleCanalizacion. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToDetalleCanalizacion(DetalleCanalizacion detalleCanalizacion)
         {
             base.AddObject("DetalleCanalizacion", detalleCanalizacion);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Documentos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToDocumentos(Documentos documentos)
+        {
+            base.AddObject("Documentos", documentos);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Beneficiario. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToBeneficiario(Beneficiario beneficiario)
+        {
+            base.AddObject("Beneficiario", beneficiario);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Solicitudes. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToSolicitudes(Solicitudes solicitudes)
+        {
+            base.AddObject("Solicitudes", solicitudes);
         }
 
         #endregion
@@ -2692,6 +2719,332 @@ namespace MemotraficoV2.Models
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Beneficiario")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Beneficiario : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto Beneficiario.
+        /// </summary>
+        /// <param name="idBeneficiario">Valor inicial de la propiedad IdBeneficiario.</param>
+        public static Beneficiario CreateBeneficiario(global::System.Int32 idBeneficiario)
+        {
+            Beneficiario beneficiario = new Beneficiario();
+            beneficiario.IdBeneficiario = idBeneficiario;
+            return beneficiario;
+        }
+
+        #endregion
+
+        #region Propiedades simples
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdBeneficiario
+        {
+            get
+            {
+                return _IdBeneficiario;
+            }
+            set
+            {
+                if (_IdBeneficiario != value)
+                {
+                    OnIdBeneficiarioChanging(value);
+                    ReportPropertyChanging("IdBeneficiario");
+                    _IdBeneficiario = StructuralObject.SetValidValue(value, "IdBeneficiario");
+                    ReportPropertyChanged("IdBeneficiario");
+                    OnIdBeneficiarioChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdBeneficiario;
+        partial void OnIdBeneficiarioChanging(global::System.Int32 value);
+        partial void OnIdBeneficiarioChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Nombre
+        {
+            get
+            {
+                return _Nombre;
+            }
+            set
+            {
+                OnNombreChanging(value);
+                ReportPropertyChanging("Nombre");
+                _Nombre = StructuralObject.SetValidValue(value, true, "Nombre");
+                ReportPropertyChanged("Nombre");
+                OnNombreChanged();
+            }
+        }
+        private global::System.String _Nombre;
+        partial void OnNombreChanging(global::System.String value);
+        partial void OnNombreChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Domicilio
+        {
+            get
+            {
+                return _Domicilio;
+            }
+            set
+            {
+                OnDomicilioChanging(value);
+                ReportPropertyChanging("Domicilio");
+                _Domicilio = StructuralObject.SetValidValue(value, true, "Domicilio");
+                ReportPropertyChanged("Domicilio");
+                OnDomicilioChanged();
+            }
+        }
+        private global::System.String _Domicilio;
+        partial void OnDomicilioChanging(global::System.String value);
+        partial void OnDomicilioChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdLocalidadFk
+        {
+            get
+            {
+                return _IdLocalidadFk;
+            }
+            set
+            {
+                OnIdLocalidadFkChanging(value);
+                ReportPropertyChanging("IdLocalidadFk");
+                _IdLocalidadFk = StructuralObject.SetValidValue(value, "IdLocalidadFk");
+                ReportPropertyChanged("IdLocalidadFk");
+                OnIdLocalidadFkChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdLocalidadFk;
+        partial void OnIdLocalidadFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdLocalidadFkChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdMunicipioFk
+        {
+            get
+            {
+                return _IdMunicipioFk;
+            }
+            set
+            {
+                OnIdMunicipioFkChanging(value);
+                ReportPropertyChanging("IdMunicipioFk");
+                _IdMunicipioFk = StructuralObject.SetValidValue(value, "IdMunicipioFk");
+                ReportPropertyChanged("IdMunicipioFk");
+                OnIdMunicipioFkChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdMunicipioFk;
+        partial void OnIdMunicipioFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdMunicipioFkChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true, "Email");
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Telefono
+        {
+            get
+            {
+                return _Telefono;
+            }
+            set
+            {
+                OnTelefonoChanging(value);
+                ReportPropertyChanging("Telefono");
+                _Telefono = StructuralObject.SetValidValue(value, true, "Telefono");
+                ReportPropertyChanged("Telefono");
+                OnTelefonoChanged();
+            }
+        }
+        private global::System.String _Telefono;
+        partial void OnTelefonoChanging(global::System.String value);
+        partial void OnTelefonoChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Celular
+        {
+            get
+            {
+                return _Celular;
+            }
+            set
+            {
+                OnCelularChanging(value);
+                ReportPropertyChanging("Celular");
+                _Celular = StructuralObject.SetValidValue(value, true, "Celular");
+                ReportPropertyChanged("Celular");
+                OnCelularChanged();
+            }
+        }
+        private global::System.String _Celular;
+        partial void OnCelularChanging(global::System.String value);
+        partial void OnCelularChanged();
+
+        #endregion
+
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Beneficiario_Localidades", "Localidades")]
+        public Localidades Localidades
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Localidades>("Model.FK_Beneficiario_Localidades", "Localidades").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Localidades>("Model.FK_Beneficiario_Localidades", "Localidades").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Localidades> LocalidadesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Localidades>("Model.FK_Beneficiario_Localidades", "Localidades");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Localidades>("Model.FK_Beneficiario_Localidades", "Localidades", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Beneficiario_Municipios", "Municipios")]
+        public Municipios Municipios
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Municipios>("Model.FK_Beneficiario_Municipios", "Municipios").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Municipios>("Model.FK_Beneficiario_Municipios", "Municipios").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Municipios> MunicipiosReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Municipios>("Model.FK_Beneficiario_Municipios", "Municipios");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Municipios>("Model.FK_Beneficiario_Municipios", "Municipios", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Solicitudes_Beneficiario", "Solicitudes")]
+        public EntityCollection<Solicitudes> Solicitudes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Solicitudes>("Model.FK_Solicitudes_Beneficiario", "Solicitudes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Solicitudes>("Model.FK_Solicitudes_Beneficiario", "Solicitudes", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="Canalizacion")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2829,6 +3182,28 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DetalleCanalizacion_Canalizacion", "DetalleCanalizacion")]
+        public EntityCollection<DetalleCanalizacion> DetalleCanalizacion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_Canalizacion", "DetalleCanalizacion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_Canalizacion", "DetalleCanalizacion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Canalizacion_Solicitudes", "Solicitudes")]
         public Solicitudes Solicitudes
         {
@@ -2857,28 +3232,6 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Solicitudes>("Model.FK_Canalizacion_Solicitudes", "Solicitudes", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DetalleCanalizacion_Canalizacion", "DetalleCanalizacion")]
-        public EntityCollection<DetalleCanalizacion> DetalleCanalizacion
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_Canalizacion", "DetalleCanalizacion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_Canalizacion", "DetalleCanalizacion", value);
                 }
             }
         }
@@ -8991,28 +9344,6 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Solicitudes_Estatus", "Solicitudes")]
-        public EntityCollection<Solicitudes> Solicitudes
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Solicitudes>("Model.FK_Solicitudes_Estatus", "Solicitudes");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Solicitudes>("Model.FK_Solicitudes_Estatus", "Solicitudes", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DetalleCanalizacion_Estatus", "DetalleCanalizacion")]
         public EntityCollection<DetalleCanalizacion> DetalleCanalizacion
         {
@@ -9025,6 +9356,28 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_Estatus", "DetalleCanalizacion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Solicitudes_Estatus", "Solicitudes")]
+        public EntityCollection<Solicitudes> Solicitudes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Solicitudes>("Model.FK_Solicitudes_Estatus", "Solicitudes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Solicitudes>("Model.FK_Solicitudes_Estatus", "Solicitudes", value);
                 }
             }
         }
@@ -9468,6 +9821,28 @@ namespace MemotraficoV2.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Beneficiario_Localidades", "Beneficiario")]
+        public EntityCollection<Beneficiario> Beneficiario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Beneficiario>("Model.FK_Beneficiario_Localidades", "Beneficiario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Beneficiario>("Model.FK_Beneficiario_Localidades", "Beneficiario", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -9787,6 +10162,28 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Localidades>("Model.FK_Localidades_Municipios", "Localidades", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Beneficiario_Municipios", "Beneficiario")]
+        public EntityCollection<Beneficiario> Beneficiario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Beneficiario>("Model.FK_Beneficiario_Municipios", "Beneficiario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Beneficiario>("Model.FK_Beneficiario_Municipios", "Beneficiario", value);
                 }
             }
         }
@@ -10891,8 +11288,7 @@ namespace MemotraficoV2.Models
         /// <param name="idEstatusFk">Valor inicial de la propiedad IdEstatusFk.</param>
         /// <param name="idTipoProcedenciaFk">Valor inicial de la propiedad IdTipoProcedenciaFk.</param>
         /// <param name="idProcedenciaFk">Valor inicial de la propiedad IdProcedenciaFk.</param>
-        /// <param name="idEscuelaFk">Valor inicial de la propiedad IdEscuelaFk.</param>
-        public static Solicitudes CreateSolicitudes(global::System.Int32 idSolicitud, global::System.String folio, global::System.Int32 idEstatusFk, global::System.Int32 idTipoProcedenciaFk, global::System.Int32 idProcedenciaFk, global::System.Int32 idEscuelaFk)
+        public static Solicitudes CreateSolicitudes(global::System.Int32 idSolicitud, global::System.String folio, global::System.Int32 idEstatusFk, global::System.Int32 idTipoProcedenciaFk, global::System.Int32 idProcedenciaFk)
         {
             Solicitudes solicitudes = new Solicitudes();
             solicitudes.IdSolicitud = idSolicitud;
@@ -10900,7 +11296,6 @@ namespace MemotraficoV2.Models
             solicitudes.IdEstatusFk = idEstatusFk;
             solicitudes.IdTipoProcedenciaFk = idTipoProcedenciaFk;
             solicitudes.IdProcedenciaFk = idProcedenciaFk;
-            solicitudes.IdEscuelaFk = idEscuelaFk;
             return solicitudes;
         }
 
@@ -11106,9 +11501,9 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 IdEscuelaFk
+        public Nullable<global::System.Int32> IdEscuelaFk
         {
             get
             {
@@ -11123,8 +11518,8 @@ namespace MemotraficoV2.Models
                 OnIdEscuelaFkChanged();
             }
         }
-        private global::System.Int32 _IdEscuelaFk;
-        partial void OnIdEscuelaFkChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _IdEscuelaFk;
+        partial void OnIdEscuelaFkChanging(Nullable<global::System.Int32> value);
         partial void OnIdEscuelaFkChanged();
     
         /// <summary>
@@ -11198,10 +11593,72 @@ namespace MemotraficoV2.Models
         private global::System.String _Programa;
         partial void OnProgramaChanging(global::System.String value);
         partial void OnProgramaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdBeneficiarioFk
+        {
+            get
+            {
+                return _IdBeneficiarioFk;
+            }
+            set
+            {
+                OnIdBeneficiarioFkChanging(value);
+                ReportPropertyChanging("IdBeneficiarioFk");
+                _IdBeneficiarioFk = StructuralObject.SetValidValue(value, "IdBeneficiarioFk");
+                ReportPropertyChanged("IdBeneficiarioFk");
+                OnIdBeneficiarioFkChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdBeneficiarioFk;
+        partial void OnIdBeneficiarioFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdBeneficiarioFkChanged();
 
         #endregion
 
         #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Solicitudes_Beneficiario", "Beneficiario")]
+        public Beneficiario Beneficiario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Beneficiario>("Model.FK_Solicitudes_Beneficiario", "Beneficiario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Beneficiario>("Model.FK_Solicitudes_Beneficiario", "Beneficiario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Beneficiario> BeneficiarioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Beneficiario>("Model.FK_Solicitudes_Beneficiario", "Beneficiario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Beneficiario>("Model.FK_Solicitudes_Beneficiario", "Beneficiario", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No hay documentación de metadatos disponible.

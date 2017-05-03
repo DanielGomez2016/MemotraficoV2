@@ -7,7 +7,7 @@
 
     var CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
     var CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
-    var INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
+    var ATENDIDA = MemotraficoV2.Models.Colecciones.ListaEstatus.ATENDIDA;
 
     Layout = null;
 }
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="col-md-12" hidden name="avance">
                                         @Html.Label("Documento")
-                                        <div><input class="form-control col-md-7 col-xs-12" id="file" name="file" multiple type="file" accept=".pdf, .doc, .jpge, .jpg, .xls, .docx, .xlsx" /></div>
+                                        <div><input class="form-control col-md-7 col-xs-12" id="file" name="file" multiple type="file" accept=".pdf, .doc, .jpge, .jpg, .xls, .docx, .xlsx, .ppt, .pptx" /></div>
                                     </div>
                                 </div>                 
                             </div>
@@ -109,9 +109,14 @@
 
                         <div class="ln_solid"></div>
                             <div class="btn-group pull-right">
+                                @if ((Model.uactual == OPERADOR) || (Model.UltimoRol == OPERADOR && Model.IdEstatusFk == ATENDIDA) && Model.uactual == ADMINISTRADOR_DEPENDENCIA)
+                                {
+                                    <button class="btn btn-default atendida" type="button" name="acciones" data-rol="@rol" data-accion="Atendida">Solicitud Atendida</button>
+                                    <button class="btn btn-success hide" type="button" name="SaveAtendida" data-rol="@rol">Guardar</button>
+                                }
                                 @if (Model.uactual == OPERADOR)
                                 {
-                                    <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="SubirAvance">Subir Avance</button>
+                                    <button class="btn btn-default avance" type="button" name="acciones" data-rol="@rol" data-accion="SubirAvance">Subir Avance</button>
                                     <button class="btn btn-success hide" type="button" name="SaveAvance">Guardar</button>
                                 }
                                 <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="canalizar">Canalizar Solicitud</button>
@@ -135,10 +140,10 @@
         var buttonSave = $('[name=Save]');
         var buttonSave2 = $('[name=SaveCancelacion]');
         var buttonSaveA = $('[name=SaveAvance]');
+        var buttonSaveAt = $('[name=SaveAtendida]');
         var accion = $(this).data('accion');
         var rolusuario = $(this).data('rol');
         var data = "";
-        var button2 = "";
 
         if (accion == "canalizar") {
             button.removeAttr('name');
@@ -146,8 +151,11 @@
 
             buttonSave.removeClass('hide');
 
-            button2 = $('.cancelar');
-            button2.addClass('hide');
+            $('.cancelar').addClass('hide');
+            $('.atendida').addClass('hide');
+            $('.avance').addClass('hide');
+            $('.canalizar').addClass('hide');
+
             abrirCampos(rolusuario);
         }
         if (accion == "open") {
@@ -167,8 +175,11 @@
 
             buttonSave2.removeClass('hide');
 
-            button2 = $('.canalizar');
-            button2.addClass('hide');
+            $('.cancelar').addClass('hide');
+            $('.atendida').addClass('hide');
+            $('.avance').addClass('hide');
+            $('.canalizar').addClass('hide');
+
             abrirCampo(accion);
         }
         if (accion == "SubirAvance") {
@@ -178,11 +189,24 @@
             buttonSaveA.removeClass('hide');
 
             $('.cancelar').addClass('hide');
+            $('.atendida').addClass('hide');
+            $('.avance').addClass('hide');
+            $('.canalizar').addClass('hide');
+            abrirAvance();
+        }
+        if (accion == "Atendida") {
+            button.removeAttr('name');
+            button.addClass('hide');
+
+            buttonSaveAt.removeClass('hide');
+
+            $('.cancelar').addClass('hide');
+            $('.atendida').addClass('hide');
+            $('.avance').addClass('hide');
             $('.canalizar').addClass('hide');
             abrirAvance();
         }
     });
-    debugger;
     $('[name=Save]').click(function () {
         var rolusuario = $(this).data('rol');
         var data = null;
@@ -274,12 +298,51 @@
             contentType: false,
             processData: false
         }).done(function (data) {
-            if (data.result == true) {
+            if (data.result == true && data.val == 1) {
                 AlertSuccess(data.msj, data.dir);
                 $(".bs-example-modal-lg").modal("hide");
             }
+            if (data.result == true && data.val == 2) {
+                AlertWarning(data.msj, data.dir);
+            }
             else {
-                AlertError('No se pudo canalizar el registro. Intente nuevamente.', null);
+                AlertError(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+        });
+    });
+
+    $('[name=SaveAtendida]').click(function () {
+
+        var data = new FormData();
+        var IdSolicitud = $("#IdSolicitud").val();
+        var Comentario = $('#Comentario').val();
+
+        data.append('IdSolicitud', IdSolicitud);
+        data.append('Comentario', Comentario);
+        jQuery.each(jQuery('#file')[0].files, function (i, file) {
+            data.append('files', file);
+        });
+
+        $.ajax({
+            url: "/Solicitudes/CanalizarAtendida",
+            type: "post",
+            dataType: "json",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function (data) {
+            if (data.result == true && data.val == 1) {
+                AlertSuccess(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+            if (data.result == true && data.val == 2) {
+                AlertWarning(data.msj, data.dir);
+            }
+            else {
+                AlertError(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
             }
         });
     });

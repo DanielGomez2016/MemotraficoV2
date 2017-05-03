@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Escuelas";
     string rol = MemotraficoV2.Models.Usuarios.Roles();
+    int inst = MemotraficoV2.Models.Usuarios.GetInstitucion();
 
     const string ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
     const string ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
@@ -35,7 +36,7 @@
                         <table id="datatable" class="table table-solicitudes table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Escuela</th>
+                                    <th>Beneficiario</th>
                                     <th>Folio</th>
                                     <th>Fecha Entrega</th>
                                     <th>Localidad</th>
@@ -47,10 +48,21 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
+                                        @if (item.IdEscuelaFk > 0)
+                                    {
                                         <td>@item.Escuela.Clave @item.Escuela.Nombre</td>
                                         <td>@item.Folio</td>
                                         <td>@item.FechaEntrega.Value.ToString("dd/MM/yyyy")</td>
                                         <td>@item.Escuela.Localidades.Nombre, @item.Escuela.Municipios.Nombre</td>
+                                    }
+                                        @if (item.IdBeneficiarioFk > 0)
+                                        {
+                                            <td>@item.Beneficiario.Nombre</td>
+                                            <td>@item.Folio</td>
+                                            <td>@item.FechaEntrega.Value.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.Beneficiario.Localidades.Nombre, @item.Beneficiario.Municipios.Nombre</td>
+                                        }
+                                        
                                         <td>
                                             <div class="btn-group">
                                                 @if (item.IdEstatusFk == CANCELADO)
@@ -65,21 +77,34 @@
                                                 }
                                                 else
                                                 {
-                                                <button name="Solicitud"
-                                                        type="button" class="btn btn-info btn-sm"
-                                                        data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
-                                                        data-value="@rol"
-                                                        data-evento="PasarADependencia">
-                                                    Info Solicitud
-                                                </button>
+                                                    if (item.IdBeneficiarioFk > 0)
+                                                    {
+                                                        <button name="Solicitud"
+                                                                type="button" class="btn btn-info btn-sm"
+                                                                data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
+                                                                data-value="@rol"
+                                                                data-evento="PasarADependenciaICHIFE">
+                                                            Canalizar ICHIFE
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button name="Solicitud"
+                                                                type="button" class="btn btn-info btn-sm"
+                                                                data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
+                                                                data-value="@rol"
+                                                                data-evento="PasarADependencia">
+                                                            Info Solicitud
+                                                        </button>
+                                                    }
                                                 }
-                                                <button name="Solicitud"
-                                                        type="button" class="btn btn-dark btn-sm"
-                                                        data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
-                                                        data-value="@rol"
-                                                        data-evento="HistorialSolicitud">
-                                                    Historial Solicitud
-                                                </button>
+                                                    <button name="Solicitud"
+                                                            type="button" class="btn btn-dark btn-sm"
+                                                            data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
+                                                            data-value="@rol"
+                                                            data-evento="HistorialSolicitud">
+                                                        Historial Solicitud
+                                                    </button>
                                             </div>
                                         </td>
                                     </tr>

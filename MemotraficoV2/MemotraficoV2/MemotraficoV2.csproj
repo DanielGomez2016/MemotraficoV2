@@ -242,6 +242,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccesosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BeneficiariosController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EscuelasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Models\AccesoSistema.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Beneficiario.cs" />
     <Compile Include="Models\Canalizacion.cs" />
     <Compile Include="Models\Colecciones\ListaEstatus.cs" />
     <Compile Include="Models\Colecciones\ListaRoles.cs" />
@@ -5134,6 +5136,9 @@
     <Content Include="Views\Solicitudes\Detalle.cshtml" />
     <Content Include="Views\Solicitudes\Historial.cshtml" />
     <Content Include="Views\Solicitudes\OpenSolicitud.cshtml" />
+    <Content Include="Views\Beneficiarios\Index.cshtml" />
+    <Content Include="Views\Beneficiarios\Create.cshtml" />
+    <Content Include="Views\Beneficiarios\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

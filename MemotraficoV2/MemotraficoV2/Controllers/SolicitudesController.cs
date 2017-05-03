@@ -12,6 +12,90 @@ namespace MemotraficoV2.Controllers
 {
     public class SolicitudesController : Controller
     {
+        #region Registro solicitudes
+        //modulo para generar registro de solicitudes de cualquier institucion donde vaya a ser la recepcion
+        public ActionResult Registro()
+        {
+            SASEntities db = new SASEntities();
+            ViewBag.TipoProcedencia = db.TipoProcedencia.Select(i => new { id = i.IdTipoProcedencia, nombre = i.TipoProcedencia1 }).ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult Registro(Solicitudes solicitud)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                int v = solicitud.Crear();
+                var canalizacion = Canalizacion.Canalizar(v, 0, 0, "", "", ListaEstatus.INICIADO);
+
+                return Json(new
+                {
+                    result = true,
+                    modal = true,
+                    idmodal = "model-documento",
+                    val = canalizacion,
+                    msj = "La solicitud se a registrado Correctamente"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Solicitudes/Registro/",
+                    msj = "La Solicitud no se a podido registrar, intente nuevamente"
+                });
+
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Documento(int iddet, HttpPostedFileBase file)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                var can = db.DetalleCanalizacion.FirstOrDefault(i => i.IdDetalleCanalizar == iddet).IdCanalizarFk;
+                var sol = db.Canalizacion.FirstOrDefault(i => i.IdCanalizacion == can).IdSolicitudFk;
+
+                Documentos doc = new Documentos();
+                doc.IdDetalleCanalizarFk = iddet;
+                if (file != null)
+                {
+                    int length = file.ContentLength;
+                    byte[] buffer = new byte[length];
+                    file.InputStream.Read(buffer, 0, length);
+                    doc.Documento = buffer;
+                }
+                doc.Nombre = "Inicio_Solicitud_" + sol + "_" + DateTime.Now.Year.ToString();
+                doc.Tipo = file.ContentType;
+
+                doc.CrearDoc();
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Solicitudes/Registro",
+                    msj = "El documento se a guardado correctamente"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    dir = "/Solicitudes",
+                    msj = "El documento no se a podido guardar, intentalo nuevamente"
+                });
+            }
+        }
+
+        #endregion
+
+        #region Solicitudes (listado, detalle solicitud, historial solicitud, reabrir solicitud)
         // GET: Solicitudes
         public ActionResult Index()
         {
@@ -35,6 +119,9 @@ namespace MemotraficoV2.Controllers
 
             //Obtiene el usuario con rol que es uno mas alto al que esta en session y pertenece al mismo instituto
             var RolAlto = Usuarios.RolAlto(roles, instituto);
+
+            //Obtiene el usuario con rol que es igual a el al que esta en session y pertenece al mismo instituto, es para cuando se hace canalizacion de operador a poerador
+            var RolIgual = Usuarios.RolIgual(roles, instituto);
 
             //si eres administrador total, te mostrara todas las solicitudes que existen, aun asi si estas estan canalizadas
             if (roles == ListaRoles.ADMINISTRATOR)
@@ -76,6 +163,36 @@ namespace MemotraficoV2.Controllers
                                                                        .Select(l => l.IdDetalleCanalizar)
                                                                        .Max())
                                  .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                 ||
+                                 (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolIgual)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.UsuarioAtiende == null))))
                                  );
 
                 }
@@ -141,7 +258,7 @@ namespace MemotraficoV2.Controllers
                                                                        .Max())
                                  .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO)))
                                  &&
-                                 i.Canalizacion
+                                 (i.Canalizacion
                                  .Any(j => j.DetalleCanalizacion
                                  .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
                                                                        .OrderByDescending(n => n.IdCanalizarFk)
@@ -150,7 +267,17 @@ namespace MemotraficoV2.Controllers
                                                                        .Select(l => l.IdDetalleCanalizar)
                                                                        .Max())
                                  .Any(k => (k.IdUsuarioFk == RolAlto)))
-                                 &&
+                                 ||
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolIgual))))
+                                 ||
                                  i.Canalizacion
                                  .Any(j => j.DetalleCanalizacion
                                  .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
@@ -244,6 +371,8 @@ namespace MemotraficoV2.Controllers
                         break;
                 }
 
+                d.docs = db.Documentos.Where(i => i.IdDetalleCanalizarFk == x.IdDetalleCanalizar).ToList();
+
                 sd.Detalles.Add(d);
                 ix --;
             }
@@ -282,6 +411,10 @@ namespace MemotraficoV2.Controllers
             return View(s);
         }
 
+        #endregion
+
+        #region canalizaciones
+        [HttpPost]
         public JsonResult Canalizar(int TipoAsunto, int Institucion, int IdSolicitud, string Comentario, int Departamento, string Usuario, string rol)
         {
             try
@@ -298,7 +431,7 @@ namespace MemotraficoV2.Controllers
 
                         //parametros
                         //solicitud, institucion, departamento, comentario, usuarioasigna, estatus
-                        canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuario, ListaEstatus.CANALIZADO);
+                        canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuarios.RolBajo(rol, Institucion), ListaEstatus.CANALIZADO);
 
                         break;
                     case "Administrador de Dependencia":
@@ -340,6 +473,7 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        [HttpPost]
         public JsonResult Cancelacion(int IdSolicitud, string Comentario)
         {
             try
@@ -375,6 +509,7 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        [HttpPost]
         public JsonResult ACSolicitud(int IdSolicitud, string Comentario, string Accion)
         {
             try
@@ -423,38 +558,53 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        [HttpPost]
         public JsonResult CanalizarAvance(int IdSolicitud, string Comentario, HttpPostedFileBase[] files)
         {
             try
             {
                 SASEntities db = new SASEntities();
-                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
-
-                var dcdoc = Canalizacion.CanalizarAvance(IdSolicitud, Comentario);
-
-                for(var i = 0; i < files.Count(); i++)
+                if (files != null)
                 {
-                    Documentos doc = new Documentos();
-                    doc.IdDetalleCanalizarFk = dcdoc;
-                    if (files[i] != null)
-                    {
-                        int length = files[i].ContentLength;
-                        byte[] buffer = new byte[length];
-                        files[i].InputStream.Read(buffer, 0, length);
-                        doc.Documento = buffer;
-                    }
-                    doc.Nombre = "Documento_Avance" + IdSolicitud + "_" + DateTime.Now.Year.ToString();
-                    doc.Tipo = files[i].ContentType;
+                    Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
 
-                    doc.CrearDoc();
+                    var dcdoc = Canalizacion.CanalizarAvance(IdSolicitud, Comentario);
+
+                    for (var i = 0; i < files.Count(); i++)
+                    {
+                        Documentos doc = new Documentos();
+                        doc.IdDetalleCanalizarFk = dcdoc;
+                        if (files[i] != null)
+                        {
+                            int length = files[i].ContentLength;
+                            byte[] buffer = new byte[length];
+                            files[i].InputStream.Read(buffer, 0, length);
+                            doc.Documento = buffer;
+                        }
+                        doc.Nombre = "Documento_Avance_" + i + "_" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
+                        doc.Tipo = files[i].ContentType;
+
+                        doc.CrearDoc();
+                    }
+                    return Json(new
+                    {
+                        result = true,
+                        dir = "/Solicitudes/",
+                        msj = "El avance se guardo correctamente"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = true,
+                        dir = "/Solicitudes/",
+                        msj = "Falta documento para confirmar algun avance de la solicitud, intenta nuevamente"
+                    });
+
                 }
 
-                return Json(new
-                {
-                    result = true,
-                    dir = "/Solicitudes/",
-                    msj = "El avance se guardo correctamente" 
-                });
+                
             }
             catch (Exception e)
             {
@@ -468,92 +618,93 @@ namespace MemotraficoV2.Controllers
             }
         }
 
-        public JsonResult Autocomplete(string term)
-        {
-            return Json(Solicitudes.AutocompleteEsc(term), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Registro()
-        {
-            SASEntities db = new SASEntities();
-
-            ViewBag.Estatus = db.Estatus.Select(i => new { id = i.IdEstatus, nombre = i.Estatus1}).ToList();
-            ViewBag.TipoAsunto = db.TipoAsunto.Select(i => new { id = i.IdTipoAsunto, nombre = i.TipoAsunto1 }).ToList();
-            ViewBag.TipoProcedencia = db.TipoProcedencia.Select(i => new { id = i.IdTipoProcedencia, nombre = i.TipoProcedencia1 }).ToList();
-
-            return View();
-        }
-
         [HttpPost]
-        public JsonResult Registro(Solicitudes solicitud)
+        public JsonResult CanalizarAtendida(int IdSolicitud, string Comentario, HttpPostedFileBase[] files)
         {
             try
             {
                 SASEntities db = new SASEntities();
-                int v = solicitud.Crear();
-                var canalizacion = Canalizacion.Canalizar(v,0,0,"","",ListaEstatus.INICIADO);
-
-                return Json(new
+                if (files != null)
                 {
-                    result = true,
-                    modal = true,
-                    idmodal = "model-documento",
-                    val = canalizacion,
-                    msj = "La solicitud se a registrado Correctamente"
-                });
+                    Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud);
+                    s.IdEstatusFk = ListaEstatus.ATENDIDA;
+                    db.SaveChanges();
+
+                    var dcdoc = Canalizacion.CanalizarAtendida(IdSolicitud, Comentario);
+                
+                    for (var i = 0; i < files.Count(); i++)
+                    {
+                        Documentos doc = new Documentos();
+                        doc.IdDetalleCanalizarFk = dcdoc;
+                        if (files[i] != null)
+                        {
+                            int length = files[i].ContentLength;
+                            byte[] buffer = new byte[length];
+                            files[i].InputStream.Read(buffer, 0, length);
+                            doc.Documento = buffer;
+                        }
+                        doc.Nombre = "Documento_Avance_" + i + "_" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
+                        doc.Tipo = files[i].ContentType;
+
+                        doc.CrearDoc();
+                    }
+                    return Json(new
+                    {
+                        result = true,
+                        dir = "/Solicitudes/",
+                        msj = "El avance se guardo correctamente",
+                        val = 1
+                    });
+                }else
+                {
+                    return Json(new
+                    {
+                        val = 2,
+                        result = false,
+                        msj = "Falta algun documento para confirmar que la solicitud fue atendida, intenta nuevamente"
+                    });
+                }
+
+                
             }
             catch (Exception e)
             {
                 return Json(new
                 {
                     result = false,
-                    dir = "/Solicitudes/Registro/",
-                    msj = "La Solicitud no se a podido registrar, intente nuevamente"
+                    dir = "/Solicitudes/",
+                    msj = "No se a podido guardar el avance, intente nuevamente"
                 });
 
             }
         }
 
         [HttpPost]
-        public JsonResult Documento(int iddet, HttpPostedFileBase file)
+        public JsonResult CananlizaICHIFE(int IdSolicitud)
         {
             try
             {
                 SASEntities db = new SASEntities();
-                var can = db.DetalleCanalizacion.FirstOrDefault(i => i.IdDetalleCanalizar == iddet).IdCanalizarFk;
-                var sol = db.Canalizacion.FirstOrDefault(i => i.IdCanalizacion == can).IdSolicitudFk;
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
 
-                Documentos doc = new Documentos();
-                doc.IdDetalleCanalizarFk = iddet;
-                if (file != null)
-                {
-                    int length = file.ContentLength;
-                    byte[] buffer = new byte[length];
-                    file.InputStream.Read(buffer, 0, length);
-                    doc.Documento = buffer;
-                }
-                doc.Nombre = "Inicio_Solicitud_" + sol + "_" + DateTime.Now.Year.ToString();
-                doc.Tipo = file.ContentType;
-
-                doc.CrearDoc();
+                var dcdoc = Canalizacion.CanalizarAvance(IdSolicitud, ListaComentarios.CanalizadaIchife);
 
                 return Json(new
                 {
-                    result = true,
-                    dir = "/Solicitudes/Registro",
-                    msj = "El documento se a guardado correctamente"
+                    result = true
                 });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Json(new
                 {
-                    result = false,
-                    dir = "/Solicitudes",
-                    msj = "El documento no se a podido guardar, intentalo nuevamente"
+                    result = false
                 });
+
             }
         }
+
+        #endregion
 
         public ActionResult Validaciones(int esc, string sol)
         {
@@ -651,6 +802,7 @@ namespace MemotraficoV2.Controllers
             return Json(false);
         }
 
+        #region Helpers
         public FileContentResult GetCroquis(int id)
         {
             SASEntities db = new SASEntities();
@@ -668,5 +820,34 @@ namespace MemotraficoV2.Controllers
                 return null;
             }
         }
+
+        public ActionResult GetDownloadFile(int idfile)
+        {
+            SASEntities db = new SASEntities();
+            var f = db.Documentos.FirstOrDefault(i => i.IdDocumento == idfile);
+            if (f != null)
+            {
+                string type = string.Empty;
+                type = f.Tipo;
+                var file = File(f.Documento, type);
+                file.FileDownloadName = f.Nombre;
+                return file;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public JsonResult Autocomplete(string term)
+        {
+            return Json(Solicitudes.AutocompleteEsc(term), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AutocompleteBen(string term)
+        {
+            return Json(Solicitudes.AutocompleteBen(term), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

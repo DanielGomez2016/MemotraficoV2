@@ -27,28 +27,13 @@
                                     @Html.LabelFor(i => i.solicitud.IdEstatusFk)
                                     <div>@Model.solicitud.Estatus.Estatus1</div>
                                 </div>
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-2">
+                                <div class="col-md-6">
+                                    @Html.Label("Escuela")
+                                    <div>@Model.solicitud.Escuela.Clave @Model.solicitud.Escuela.Nombre</div>
                                 </div>
                                 <div class="col-md-2">
                                     @Html.LabelFor(i => i.solicitud.FechaEntrega)
                                     <div>@(Model != null && Model.solicitud.FechaEntrega != null ? Model.solicitud.FechaEntrega.Value.ToString("dd/MM/yyyy") : "")</div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-md-2">
-                                    @Html.LabelFor(i => i.solicitud.Escuela.Clave)
-                                    <div>@Model.solicitud.Escuela.Clave</div>
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.LabelFor(i => i.solicitud.Escuela.Nombre)
-                                    <div>@Model.solicitud.Escuela.Nombre</div>
-                                </div>
-                                <div class="col-md-4">
                                 </div>
                             </div>
                             <br />
@@ -69,7 +54,7 @@
                     </div>
                     <table id="datatable" style="width:100%;" class="table table-info table-striped table-bordered dt-responsive nowrap">
                         <thead>
-                            <tr class="text-center">
+                            <tr>
                                 <th>#</th>
                                 <th>Fecha Canalizado</th>
                                 <th>Comentario</th>
@@ -92,7 +77,13 @@
                                     <td>@i.departamento</td>
                                     <td>@i.usuarioatiende</td>
                                     <td>@i.estatus</td>
-                                    <td></td>
+                                    <td>
+                                        @foreach (var j in i.docs)
+                                        {
+                                            @Html.ActionLink(j.Nombre, "GetDownloadFile", "Solicitudes", new { idfile = j.IdDocumento },
+                                            new { @class = "btn btn-sm btn-success" , target = "_blank",  } )
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -110,6 +101,7 @@
     </div>
 </div>
 <script>
+    debugger
     $(document).ready(function () {
         $('.table-info').dataTable();
     });

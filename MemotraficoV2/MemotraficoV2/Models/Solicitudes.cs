@@ -18,7 +18,14 @@ namespace MemotraficoV2.Models
             SASEntities db = new SASEntities();
             Solicitudes s = new Solicitudes();
             s.Asunto = Asunto;
-            s.IdEscuelaFk = IdEscuelaFk;
+            if (IdEscuelaFk > 0)
+            {
+                s.IdEscuelaFk = IdEscuelaFk;
+            }
+            if (IdBeneficiarioFk > 0)
+            {
+                s.IdBeneficiarioFk = IdBeneficiarioFk;
+            }
             s.IdEstatusFk = ListaEstatus.INICIADO;
             s.IdProcedenciaFk = IdProcedenciaFk;
             s.IdTipoProcedenciaFk = IdTipoProcedenciaFk;
@@ -55,6 +62,28 @@ namespace MemotraficoV2.Models
                         {
                             value = i.IdEscuela,
                             name = i.Clave +" "+i.Nombre
+                        })
+                        .Take(15)
+                        .ToArray();
+        }
+
+        public static dynamic AutocompleteBen(string term)
+        {
+            SASEntities db = new SASEntities();
+            term = term.Trim();
+
+            IQueryable<Beneficiario> query = db.Beneficiario;
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(i => i.Nombre.Contains(term));
+            }
+
+            return query.OrderBy(i => i.Nombre)
+                        .Select(i => new
+                        {
+                            value = i.IdBeneficiario,
+                            name = i.Nombre
                         })
                         .Take(15)
                         .ToArray();

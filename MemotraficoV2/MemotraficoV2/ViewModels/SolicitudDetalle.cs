@@ -36,5 +36,7 @@ namespace MemotraficoV2.ViewModels
         //color del registro
         public string colorreg { get; set; }
         public int numregistro { get; set; }
+
+        public List<Documentos> docs { get; set; }
     }
 }

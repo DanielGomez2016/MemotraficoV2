@@ -11,6 +11,7 @@ namespace MemotraficoV2.Models.Colecciones
         public const int CANALIZADO = 2;
         public const int CERRADO = 3;
         public const int CANCELADO = 4;
+        public const int ATENDIDA = 5;
     }
 
     public class ListaValidaciones
@@ -29,6 +30,9 @@ namespace MemotraficoV2.Models.Colecciones
         public const string Cerrada = "La solicitud fue cerrada";
         public const string ReAbrir = "La solicitud fue abierta nuevamente";
         public const string Avance = "Avance de solicitud, con documento(s)";
+        public const string Atendida = "Solicitud atendida, con documento(s)";
+        public const string CanalizadaIchife = "Solicitud canalizada, para institucion ICHIFE";
+
 
     }
 }
