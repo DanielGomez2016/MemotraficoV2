@@ -581,7 +581,7 @@ namespace MemotraficoV2.Controllers
                             files[i].InputStream.Read(buffer, 0, length);
                             doc.Documento = buffer;
                         }
-                        doc.Nombre = "Documento_Avance_" + i + "_" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
+                        doc.Nombre = "Documento_Avance_" + (i + 1) + "_" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
                         doc.Tipo = files[i].ContentType;
 
                         doc.CrearDoc();
@@ -828,6 +828,18 @@ namespace MemotraficoV2.Controllers
             if (f != null)
             {
                 string type = string.Empty;
+                switch (f.Tipo)
+                {
+                    case "application/pdf":
+                        type = "application/pdf";
+                        break;
+                    case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                        type = "application/doc";
+                        break;
+                    case "image/jpeg":
+                        type = "jpge";
+                        break;
+                }
                 type = f.Tipo;
                 var file = File(f.Documento, type);
                 file.FileDownloadName = f.Nombre;
