@@ -643,7 +643,7 @@ namespace MemotraficoV2.Controllers
                             files[i].InputStream.Read(buffer, 0, length);
                             doc.Documento = buffer;
                         }
-                        doc.Nombre = "Documento_Avance_" + i + "_" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
+                        doc.Nombre = "Documento_Atendida_" + (i + 1) + "_" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
                         doc.Tipo = files[i].ContentType;
 
                         doc.CrearDoc();
@@ -828,21 +828,41 @@ namespace MemotraficoV2.Controllers
             if (f != null)
             {
                 string type = string.Empty;
+                string ext = string.Empty;
+
                 switch (f.Tipo)
                 {
                     case "application/pdf":
                         type = "application/pdf";
+                        ext = ".pdf";
                         break;
                     case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                        type = "application/doc";
+                        type = "aapplication/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                        ext = ".docx";
+                        break;
+                    case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                        type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        ext = ".xlsx";
+                        break;
+                    case "application/vnd.ms-excel":
+                        type = "application/vnd.ms-excel";
+                        ext = ".xls";
+                        break;
+                    case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+                        type = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+                        ext = ".pptx";
+                        break;
+                    case "application/vnd.ms-powerpoint":
+                        type = "application/vnd.ms-powerpoint";
+                        ext = ".ppt";
                         break;
                     case "image/jpeg":
-                        type = "jpge";
+                        type = "image/jpeg";
+                        ext = ".jpge";
                         break;
                 }
-                type = f.Tipo;
                 var file = File(f.Documento, type);
-                file.FileDownloadName = f.Nombre;
+                file.FileDownloadName = f.Nombre+ext;
                 return file;
             }
             else

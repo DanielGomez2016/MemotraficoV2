@@ -78,11 +78,15 @@
                                     <td>@i.usuarioatiende</td>
                                     <td>@i.estatus</td>
                                     <td>
+                                        s<ul>
                                         @foreach (var j in i.docs)
                                         {
+                                        <li>
                                             @Html.ActionLink(j.Nombre, "GetDownloadFile", "Solicitudes", new { idfile = j.IdDocumento },
-                                            new { @class = "btn btn-sm btn-success" , target = "_blank",  } )
+                                            new { @class = "btn btn-sm btn-success", target = "_blank", })
+                                        </li>
                                         }
+                                        </ul>
                                     </td>
                                 </tr>
                             }
