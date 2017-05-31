@@ -104,7 +104,7 @@ namespace MemotraficoV2.Models
             return db.AccesoSistema.OrderBy(i => new { i.controlador, i.accion }).ToList();
         }
 
-        public static List<AccesoSistema> listarPorRoles(string[] roles, int? institucion = null)
+        public static List<AccesoSistema> listarPorRoles(string roles, int? institucion = null)
         {
             SASEntities db = new SASEntities();
             if (institucion == null)

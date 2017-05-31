@@ -1,0 +1,196 @@
+﻿@model List<MemotraficoV2.Models.AccesoSistema>
+@{
+    ViewBag.Title = "CargarMenu";
+    Layout = null;
+}
+
+@if (Request.IsAuthenticated)
+{
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <li>
+                <a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li>@Html.ActionLink(" Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink(" Acerca De", "About", "Home")</li>
+                    <li>@Html.ActionLink(" Contacto", "Contact", "Home")</li>
+                </ul>
+            </li>
+
+            @if (User.IsInRole(MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRATOR))
+            {
+                <li>
+                    <a><i class="fa fa-group"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink(" Usuarios", "Index", "UsersAdmin")</li>
+                        <li>@Html.ActionLink(" Roles", "Index", "RolesAdmin")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-desktop"></i>Accesos <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Accesos para rol", "Index", "Accesos")</li>
+                        <li>@Html.ActionLink("Modulos", "Sistema", "Accesos")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-list-alt"></i> Catalogos <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink(" Beneficiarios", "Index", "Beneficiarios")</li>
+                        <li>@Html.ActionLink(" Dependencia", "Index", "Instituciones")</li>
+                        <li>@Html.ActionLink(" Escuelas", "Index", "Escuelas")</li>
+                        <li>@Html.ActionLink(" Unidad Administrativa", "Index", "Departamentos")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-map-o"></i> Localidades <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Municipios", "Index", "Municipios")</li>
+                        <li>@Html.ActionLink("Localidades", "Index", "Localidades")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-edit"></i> Solicitudes <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Listado Solicitudes", "Index", "Solicitudes")</li>
+                        <li>@Html.ActionLink("Registro de Solicitudes", "Registro", "Solicitudes")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-check-square-o"></i> Validaciones <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Listado Solicitudes", "Index", "Solicitudes")</li>
+                        <li>@Html.ActionLink("Registro de Solicitudes", "Registro", "Solicitudes")</li>
+                    </ul>
+                </li>
+            }
+            else
+            {
+                if (Model.Any(i => i.controlador == "Beneficiarios") || Model.Any(i => i.controlador == "Instituciones") || Model.Any(i => i.controlador == "Escuelas") || Model.Any(i => i.controlador == "Departamentos"))
+                {
+                    <li>
+                        <a><i class="fa fa-list-alt"></i> Catalogos <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            @if (Model.Any(i => i.controlador == "Beneficiarios" && i.accion == "Index"))
+                            {
+                            <li>@Html.ActionLink(" Beneficiarios", "Index", "Beneficiarios")</li>
+                            }
+                            @if (Model.Any(i => i.controlador == "Instituciones" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink(" Dependencia", "Index", "Instituciones")</li>
+                            }
+                            @if (Model.Any(i => i.controlador == "Escuelas" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink(" Escuelas", "Index", "Escuelas")</li>
+                            }
+                            @if (Model.Any(i => i.controlador == "Departamentos" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink(" Unidad Administrativa", "Index", "Departamentos")</li>
+                            }                           
+                        </ul>
+                    </li>
+                }
+                if (Model.Any(i => i.controlador == "Localidades") || Model.Any(i => i.controlador == "Municipios"))
+                {
+                    <li>
+                        <a><i class="fa fa-map-o"></i> Localidades <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            @if (Model.Any(i => i.controlador == "Municipios" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink(" Municipios", "Index", "Municipios")</li>
+                            }
+                            @if (Model.Any(i => i.controlador == "Localidades" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink(" Localidades", "Index", "Localidades")</li>
+                            }
+                        </ul>
+                    </li>
+                }
+                if (Model.Any(i => i.controlador == "Solicitudes"))
+                {
+                    <li>
+                        <a><i class="fa fa-edit"></i> Solicitudes <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            @if (Model.Any(i => i.controlador == "Solicitudes" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink("Listado Solicitudes", "Index", "Solicitudes")</li>
+                            }
+                            @if (Model.Any(i => i.controlador == "Solicitudes" && i.accion == "Registro"))
+                            {
+                                <li>@Html.ActionLink("Registro de Solicitudes", "Registro", "Solicitudes")</li>
+                            }
+                        </ul>
+                    </li>
+                }
+                if (Model.Any(i => i.controlador == "Validaciones"))
+                {
+                    <li>fa fa-check-square-o
+                        <a><i class=""  aria-hidden="true"></i> Validaciones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            @if (Model.Any(i => i.controlador == "Solicitudes" && i.accion == "Index"))
+                            {
+                                <li>@Html.ActionLink("Listado Solicitudes", "Index", "Solicitudes")</li>
+                            }
+                            @if (Model.Any(i => i.controlador == "Solicitudes" && i.accion == "Registro"))
+                            {
+                                <li>@Html.ActionLink("Registro de Solicitudes", "Registro", "Solicitudes")</li>
+                            }
+                        </ul>
+                    </li>
+                }
+            }
+        </ul>
+        @*<div class="menu_section">
+            <h3>Live On</h3>
+            <ul class="nav side-menu">
+                <li>
+                    <a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="e_commerce.html">E-commerce</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="project_detail.html">Project Detail</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="page_403.html">403 Error</a></li>
+                        <li><a href="page_404.html">404 Error</a></li>
+                        <li><a href="page_500.html">500 Error</a></li>
+                        <li><a href="plain_page.html">Plain Page</a></li>
+                        <li><a href="login.html">Login Page</a></li>
+                        <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="#level1_1">Level One</a>
+                        <li>
+                            <a>Level One<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu">
+                                    <a href="level2.html">Level Two</a>
+                                </li>
+                                <li>
+                                    <a href="#level2_1">Level Two</a>
+                                </li>
+                                <li>
+                                    <a href="#level2_2">Level Two</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#level1_2">Level One</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+            </ul>
+        </div>*@
+    </div>
+    
+}

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MemotraficoV2.Models;
+using MemotraficoV2.Filters;
 
 namespace MemotraficoV2.Controllers
 {
+    [Authorize, Acceso]
     public class ProcedenciaController : Controller
     {
         // GET: Procedencia

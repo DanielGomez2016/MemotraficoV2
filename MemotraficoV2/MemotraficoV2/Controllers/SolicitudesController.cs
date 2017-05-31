@@ -7,9 +7,11 @@ using MemotraficoV2.Models;
 using MemotraficoV2.ViewModels;
 using MemotraficoV2.Models.Colecciones;
 using System.Collections;
+using MemotraficoV2.Filters;
 
 namespace MemotraficoV2.Controllers
 {
+    //[Authorize, Acceso]
     public class SolicitudesController : Controller
     {
         #region Registro solicitudes
@@ -193,6 +195,26 @@ namespace MemotraficoV2.Controllers
                                                                        .Select(l => l.IdDetalleCanalizar)
                                                                        .Max())
                                  .Any(k => (k.UsuarioAtiende == null))))
+                                 ||
+                                 (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.ATENDIDA)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolBajo))))
                                  );
 
                 }
@@ -230,6 +252,26 @@ namespace MemotraficoV2.Controllers
                                                                        .Select(l => l.IdDetalleCanalizar)
                                                                        .Max())
                                  .Any(k => (k.IdEstatusFk == ListaEstatus.CANCELADO)))
+                                 &&
+                                 i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                 ||
+                                 (i.Canalizacion
+                                 .Any(j => j.DetalleCanalizacion
+                                 .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                       .OrderByDescending(n => n.IdCanalizarFk)
+                                                                       .OrderByDescending(x => x.FechaCanalizar)
+                                                                       .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                       .Select(l => l.IdDetalleCanalizar)
+                                                                       .Max())
+                                 .Any(k => (k.IdEstatusFk == ListaEstatus.ATENDIDA)))
                                  &&
                                  i.Canalizacion
                                  .Any(j => j.DetalleCanalizacion
@@ -323,10 +365,11 @@ namespace MemotraficoV2.Controllers
 
 
             Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == solicitud);
-            var usuario = db.DetalleCanalizacion.OrderByDescending(i => i.FechaCanalizar).OrderByDescending(i => i.IdCanalizarFk).FirstOrDefault(i => i.Canalizacion.IdSolicitudFk == s.IdSolicitud).IdUsuarioFk.ToString();
+            var usuario = db.DetalleCanalizacion.OrderByDescending(i => i.IdCanalizarFk).OrderByDescending(i => i.FechaCanalizar).FirstOrDefault(i => i.Canalizacion.IdSolicitudFk == s.IdSolicitud).IdUsuarioFk.ToString();
             if(usuario != null)
             s.UltimoRol = Usuarios.Roles(usuario);
             s.uactual = uactual;
+            s.validacion = db.Canalizacion.FirstOrDefault(i => i.IdSolicitudFk == s.IdSolicitud).Validacion;
             return View(s);
         }
 
@@ -365,6 +408,9 @@ namespace MemotraficoV2.Controllers
                         break;
                     case ListaEstatus.CERRADO:
                         d.colorreg = "danger";
+                        break;
+                    case ListaEstatus.ATENDIDA:
+                        d.colorreg = "success";
                         break;
                     default:
                         d.colorreg = "";
@@ -685,20 +731,56 @@ namespace MemotraficoV2.Controllers
             try
             {
                 SASEntities db = new SASEntities();
-                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud);
+                s.IdEstatusFk = ListaEstatus.CANALIZADO;
+                db.SaveChanges();
 
-                var dcdoc = Canalizacion.CanalizarAvance(IdSolicitud, ListaComentarios.CanalizadaIchife);
+                var dcdoc = Canalizacion.Canalizar(IdSolicitud, 1, 0, ListaComentarios.CanalizadaIchife, Usuarios.RolIchife(), ListaEstatus.CANALIZADO);
 
                 return Json(new
                 {
-                    result = true
+                    result = true,
+                    msj = "Se a canalizado directamente al ICHIFE.",
+                    dir = "/Solicitudes/"
                 });
             }
             catch (Exception e)
             {
                 return Json(new
                 {
-                    result = false
+                    result = false,
+                    msj = "No se a podido canalizar al ICHIFE, intenta nuevamente.",
+                    dir = "/Solicitudes/"
+                });
+
+            }
+        }
+
+        public JsonResult CerrarSolicitud(int IdSolicitud, string Comentario)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.ATENDIDA);
+                s.IdEstatusFk = ListaEstatus.CERRADO;
+                db.SaveChanges();
+
+                var dcdoc = Canalizacion.CerrarSolicitud(IdSolicitud, Comentario);
+
+                return Json(new
+                {
+                    result = true,
+                    msj = "Se a Cerrado correctamente la solicitud.",
+                    dir = "/Solicitudes/"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    msj = "No se a podido cerrar la solicitud, intente nuevamente.",
+                    dir = ""
                 });
 
             }
@@ -706,120 +788,7 @@ namespace MemotraficoV2.Controllers
 
         #endregion
 
-        public ActionResult Validaciones(int esc, string sol)
-        {
-            SASEntities db = new SASEntities();
-            Validacion_Requerimientos vr = new Validacion_Requerimientos();
-
-            vr.Solicitudes = db.Solicitudes.FirstOrDefault(i => i.Folio == sol);
-
-            vr.FolioSolicitud = sol;
-            Contacto c = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == esc);
-
-            vr.Escuela = db.Escuela.FirstOrDefault(i => i.IdEscuela == esc);
-            vr.Escuela.Celular = c.Celular;
-            vr.Escuela.NombreDirector = c.Nombre;
-            vr.Escuela.Telefono = c.Telefono;
-            vr.Escuela.EmailDirector = c.Email;
-
-            vr.validacion = Validacion.Crear(esc);
-            vr.requerimientos = Requerimientos.Crear(esc);
-
-            Validacion v = db.Validacion.FirstOrDefault(i => i.IdEscuelaFk == esc);
-
-            vr.Aulas = EspacioEducativoDet.ContarAulas(v == null ? 0 : v.IdValidar);
-            vr.Laboratorios = EspacioEducativoDet.ContarLaboratorios(v == null ? 0 : v.IdValidar);
-            vr.Talleres = EspacioEducativoDet.ContarTalleres(v == null ? 0 : v.IdValidar);
-            vr.Anexos = EspacioEducativoDet.ContarAnexos(v == null ? 0 : v.IdValidar);
-
-            if (v != null)
-            {
-                vr.Matricula = db.Matricula.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                             db.Matricula.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new Matricula();
-
-                vr.Entorno = db.Entorno.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                             db.Entorno.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new Entorno();
-
-                if (vr.Entorno != null)
-                {
-                    vr.Entorno.Rio_Arrollo = false;
-                    vr.Entorno.AmenazaVial = false;
-                    vr.Entorno.Comercio = false;
-                    vr.Entorno.DerechoVia = false;
-                    vr.Entorno.Gasolinera = false;
-                }
-
-                vr.Croquis = db.Croquis.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                             db.Croquis.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new Croquis();
-
-                vr.ServicioMunicipal = db.ServicioMunicipal.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                                       db.ServicioMunicipal.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new ServicioMunicipal();
-
-                vr.AlmacenamientoDren = db.AlmacenamientoDren.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                                        db.AlmacenamientoDren.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new AlmacenamientoDren();
-
-                vr.EnergiaElectrica = db.EnergiaElectrica.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                                      db.EnergiaElectrica.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new EnergiaElectrica();
-
-                vr.EspacioMultiple = db.EspacioMultiple.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                                     db.EspacioMultiple.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new EspacioMultiple();
-
-                vr.EspacioEducativo = db.EspacioEducativo.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) != null ?
-                                      db.EspacioEducativo.FirstOrDefault(i => i.IdValidarFk == v.IdValidar) : new EspacioEducativo();
-
-                vr.EspacioEducativoDet = db.EspacioEducativoDet.Where(i => i.IdEspacioEducativoFk ==
-                                         db.EspacioEducativo.FirstOrDefault(j => j.IdValidarFk == v.IdValidar).IdEspacioEducativo).ToArray() != null ? db.EspacioEducativoDet.Where(i => i.IdEspacioEducativoFk ==
-                                         db.EspacioEducativo.FirstOrDefault(j => j.IdValidarFk == v.IdValidar).IdEspacioEducativo).ToArray() :
-                                         null;
-            }
-
-            Requerimientos r = db.Requerimientos.FirstOrDefault(i => i.IdEsceulaFk == esc);
-            if(r != null)
-            {
-                vr.ComponenteI = db.ComponenteI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                 db.ComponenteI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteI();
-                vr.ComponenteII = db.ComponenteII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                  db.ComponenteII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteII();
-                vr.ComponenteIII = db.ComponenteIII.Where(i => i.IdRequerimientoFk == r.IdRequerimiento).ToArray() != null ?
-                                   db.ComponenteIII.Where(i => i.IdRequerimientoFk == r.IdRequerimiento).ToArray() : null;
-                vr.ComponenteVI = db.ComponenteVI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                  db.ComponenteVI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteVI();
-                vr.ComponenteV = db.ComponenteV.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                 db.ComponenteV.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteV();
-                vr.ComponenteVI = db.ComponenteVI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                  db.ComponenteVI.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteVI();
-                vr.ComponenteVII = db.ComponenteVII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                   db.ComponenteVII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteVII();
-                vr.ComponenteVIII = db.ComponenteVIII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) == null ?
-                                    db.ComponenteVIII.FirstOrDefault(i => i.IdRequerimientoFk == r.IdRequerimiento) : new ComponenteVIII();
-            }
-
-            return View(vr);
-        }
-
-        [HttpPost]
-        public JsonResult Validaciones(Validacion_Requerimientos vr) {
-            return Json(false);
-        }
-
         #region Helpers
-        public FileContentResult GetCroquis(int id)
-        {
-            SASEntities db = new SASEntities();
-            var croquis = db.Croquis.FirstOrDefault(i => i.IdCroquis == id);
-            if (croquis != null || croquis.DocCroquis.Count() > 0)
-            {
-
-                string type = string.Empty;
-                type = croquis.Tipo;
-                var file = File(croquis.DocCroquis, type);
-                return file;
-            }
-            else
-            {
-                return null;
-            }
-        }
 
         public ActionResult GetDownloadFile(int idfile)
         {

@@ -1,0 +1,399 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">Existe</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-4"><label>Barda / Reja / Malla Perimetral</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.Barda == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Barda" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Barda" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.BardaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBarda" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Rampas y Andadores</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.Rampas == true)
+                            {
+                        <input type="checkbox" name="EspaciosMulti" value="Rampas" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Rampas" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.RampasEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMRampas" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Cancha de Usos Multiples</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.CanchaMultiple == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="CanchaMultiple" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="CanchaMultiple" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.CanchaMultipleEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMCanchaMultiple" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Plaza Civica</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.Plaza == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Plaza" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Plaza" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.PlazaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMPlazaCivica" value="3" />Malo</label>
+                            break;
+                    }
+                   
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Domo / Lamina / Malla Sombra</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.DomoMalla == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="DomoMalla" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="DomoMalla" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.DomoMallaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMDomoMalla" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Asta Bandera</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.AstaBandera == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="AstaBandera" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="AstaBandera" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.AstaBanderaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAstaBandera" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Bebederos</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.Bebedero == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Bebedero" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Bebedero" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.BebederoEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMBebedero" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Acceso Principal</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.AccesoP == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="AccesoP" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="AccesoP" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.AccesoPEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAccesoP" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Area de Juegos Infantiles</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.Areajuegos == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Areajuegos" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Areajuegos" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.AreajuegosEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMAreajuegos" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Otros</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EspacioMultiple != null && Model.EspacioMultiple.Otro == true)
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Otro" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EspaciosMulti" value="Otro" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EspacioMultiple.OtroEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EMOtro" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

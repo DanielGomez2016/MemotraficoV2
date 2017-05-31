@@ -9,13 +9,13 @@
     <div class="col-md-8 col-xs-12">
         @Html.TextBoxFor(i => i.Matricula.Alumnos, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
     </div>
-    @Html.LabelFor(i => i.Matricula.PersonaDiscapacidad, new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
+    @Html.LabelFor(i => i.Matricula.PersonaDiscapacidad, new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-left" })
     <div class="col-md-8 col-xs-12">
         @Html.TextBoxFor(i => i.Matricula.PersonaDiscapacidad, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
     </div>
     @Html.Label("Total", new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
     <div class="col-md-8 col-xs-12">
-        @Html.TextBox("Total", null, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
+        @Html.TextBoxFor(i => i.Matricula.Total, new { @class = "form-control col-md-7 col-xs-12", required = "required", type = "text" })
     </div>
     @Html.LabelFor(i => i.Matricula.PersonalDoncente, new { @class = "control-label col-md-4 col-sm-4 col-xs-12 text-right" })
     <div class="col-md-8 col-xs-12">

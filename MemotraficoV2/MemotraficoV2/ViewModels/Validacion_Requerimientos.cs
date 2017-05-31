@@ -18,7 +18,7 @@ namespace MemotraficoV2.ViewModels
         public Contacto Contacto { get; set; }
         public Solicitudes Solicitudes { get; set; }
 
-        public int validacion { get; set; }
+        public Validacion validacion { get; set; }
         public Matricula Matricula { get; set; }
 
 
@@ -76,12 +76,12 @@ namespace MemotraficoV2.ViewModels
         public EspacioEducativo EspacioEducativo { get; set; }
         public EspacioEducativoDet[] EspacioEducativoDet { get; set; }
         public int[] EEDEdificio { get; set; }
-        public int[] EEDTipologia { get; set; }
+        public string[] EEDTipologia { get; set; }
         public int[] EEDAulas { get; set; }
-        public int[] EEDLaboratorio { get; set; }
+        public int[] EEDTaller { get; set; }
         public int[] EEDSanitario { get; set; }
         public int[] EEDAdministrativo { get; set; }
-        public int[] EEDBiblioteca { get; set; }
+        public int[] EEDLaboratorio { get; set; }
         public int[] EEDAulaMultiple { get; set; }
         public int[] EEDBodegas { get; set; }
 
@@ -103,7 +103,7 @@ namespace MemotraficoV2.ViewModels
 
 
 
-        public int requerimientos { get; set; }
+        public Requerimientos requerimientos { get; set; }
         public ComponenteI ComponenteI { get; set; }
         public ComponenteII ComponenteII { get; set; }
 

@@ -99,6 +99,16 @@ namespace MemotraficoV2.Models
             return rols;
         }
 
+        public static string RolIchife()
+        {
+            SASEntities dbb = new SASEntities();
+            AspNetUsers us = dbb.AspNetUsers
+                             .FirstOrDefault(i => i.AspNetRoles
+                             .Any(m => m.Name == ListaRoles.ADMINISTRADOR_SOLICITUDES && i.IdInstitucion == dbb.Institucion.FirstOrDefault(j => j.Siglas == "ICHIFE").IdInstitucion));
+
+            return us.Id;
+        }
+
         public static string RolBajo(string rol, int inst)
         {
             SASEntities dbb = new SASEntities();

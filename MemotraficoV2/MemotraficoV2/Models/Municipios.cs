@@ -15,5 +15,11 @@ namespace MemotraficoV2.Models
 
             db.SaveChanges();
         }
+
+        public static int IdMunicipios(string municipio)
+        {
+            SASEntities db = new SASEntities();
+            return db.Municipios.FirstOrDefault(i => i.Nombre.Contains(municipio)).IdMunicipio;
+        }
     }
 }

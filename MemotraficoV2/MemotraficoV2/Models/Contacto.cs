@@ -7,6 +7,13 @@ namespace MemotraficoV2.Models
 {
     public partial class Contacto
     {
+        public void Crear()
+        {
+            SASEntities db = new SASEntities();
+            db.Contacto.AddObject(this);
+            db.SaveChanges();
+
+        }
         public void Editar()
         {
             try

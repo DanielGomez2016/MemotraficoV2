@@ -1,0 +1,330 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">Existe</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-2 text-center"><label></label></td>
+                <td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Subestación</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.Subestacion == true)
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="Subestacion" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="Subestacion" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.SubestacionEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat" name="EESubestacion" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="2" />Regular</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat" name="EESubestacion" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat" name="EESubestacion" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="2" />Regular</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat" name="EESubestacion" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="2" />Regular</label>
+                            <label><input type="radio" class="flat" name="EESubestacion" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Muro de Acometida</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.MuroAcometida == true)
+                            {
+                        <input type="checkbox" name="EnergiaElec" value="MuroAcometida" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="MuroAcometida" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.MuroAcometidaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEMuroAcometida" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Alumbrado Exterior</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.AlumbradoExt == true)
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="AlumbradoExt" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="AlumbradoExt" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.AlumbradoExtEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEAlumbradoExt" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Luminarias de Ahorro Energia</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.Luminaria == true)
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="Luminaria" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="Luminaria" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.LuminariaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EELuminaria" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Tablero de Distribucion</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.TableroDistribucion == true)
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="TableroDistribucion" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="TableroDistribucion" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.TableroDistribucionEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETableroDistribucion" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Interruptor General</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.InterruptorGral == true)
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="InterruptorGral" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="InterruptorGral" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.InterruptorGralEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EEInterruptorGral" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Interruptor Termomagnetico</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.EnergiaElectrica != null && Model.EnergiaElectrica.Termomagnetico == true)
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="Termomagnetico" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EnergiaElec" value="Termomagnetico" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.EnergiaElectrica.TermomagneticoElectrico)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="EETermomagnetico" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-2 text-center"><label>Estado General de la Red</label></td>
+                <td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.EnergiaElectrica.EstadoGeneral)
+                    {
+                        case 1:
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="EEEdoGeneral" value="1" checked/> Bueno </label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="EEEdoGeneral" value="2" /> Regular </label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="EEEdoGeneral" value="3" /> Malo </label>
+                            break;
+                        case 2:
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="EEEdoGeneral" value="1" /> Bueno </label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="EEEdoGeneral" value="2" checked/> Regular </label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="EEEdoGeneral" value="3" /> Malo </label>
+                            break;
+                        case 3:
+                            <label  class="col-md-4"><input type="radio" class="flat " name="EEEdoGeneral" value="1" /> Bueno </label>
+                            <label  class="col-md-4"><input type="radio" class="flat " name="EEEdoGeneral" value="2" /> Regular </label>
+                            <label  class="col-md-4"><input type="radio" class="flat " name="EEEdoGeneral" value="3" checked/> Malo </label>
+                            break;
+                        default:
+                            <label  class="col-md-4"><input type="radio" class="flat " name="EEEdoGeneral" value="1" /> Bueno </label>
+                            <label  class="col-md-4"><input type="radio" class="flat " name="EEEdoGeneral" value="2" /> Regular </label>
+                            <label  class="col-md-4"><input type="radio" class="flat " name="EEEdoGeneral" value="3" /> Malo </label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

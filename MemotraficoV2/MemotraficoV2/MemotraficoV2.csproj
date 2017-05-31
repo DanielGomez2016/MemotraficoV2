@@ -255,6 +255,7 @@
     <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\UntilController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\ValidacionesController.cs" />
     <Compile Include="Filters\AccesoAttribute.cs" />
     <Compile Include="Filters\IgnoreAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -263,11 +264,21 @@
     <Compile Include="Models\AccesoSistema.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AlmacenamientoDren.cs" />
     <Compile Include="Models\Beneficiario.cs" />
     <Compile Include="Models\Canalizacion.cs" />
     <Compile Include="Models\Colecciones\ListaEstatus.cs" />
     <Compile Include="Models\Colecciones\ListaRoles.cs" />
+    <Compile Include="Models\ComponenteI.cs" />
+    <Compile Include="Models\ComponenteII.cs" />
+    <Compile Include="Models\ComponenteIII.cs" />
+    <Compile Include="Models\ComponenteIV.cs" />
+    <Compile Include="Models\ComponenteV.cs" />
+    <Compile Include="Models\ComponenteVI.cs" />
+    <Compile Include="Models\ComponenteVII.cs" />
+    <Compile Include="Models\ComponenteVIII.cs" />
     <Compile Include="Models\Contacto.cs" />
+    <Compile Include="Models\Croquis.cs" />
     <Compile Include="Models\Db.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -276,16 +287,23 @@
     <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\DetalleCanalizacion.cs" />
     <Compile Include="Models\Documentos.cs" />
+    <Compile Include="Models\EnergiaElectrica.cs" />
+    <Compile Include="Models\Entorno.cs" />
     <Compile Include="Models\Escuela.cs" />
+    <Compile Include="Models\EspacioEducativo.cs" />
     <Compile Include="Models\EspacioEducativoDet.cs" />
+    <Compile Include="Models\EspacioMultiple.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Institucion.cs" />
     <Compile Include="Models\Localidades.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Matricula.cs" />
     <Compile Include="Models\Municipios.cs" />
+    <Compile Include="Models\NivelEducativo.cs" />
     <Compile Include="Models\Notificaciones.cs" />
     <Compile Include="Models\Procedencia.cs" />
     <Compile Include="Models\Requerimientos.cs" />
+    <Compile Include="Models\ServicioMunicipal.cs" />
     <Compile Include="Models\Solicitudes.cs" />
     <Compile Include="Models\Until.cs" />
     <Compile Include="Models\Usuarios.cs" />
@@ -5116,33 +5134,34 @@
     <Content Include="Views\Procedencia\Index.cshtml" />
     <Content Include="Views\Procedencia\Create.cshtml" />
     <Content Include="Views\Procedencia\Edit.cshtml" />
-    <Content Include="Views\Solicitudes\Validaciones.cshtml" />
-    <Content Include="Views\Solicitudes\_Matricula.cshtml" />
-    <Content Include="Views\Solicitudes\_Entorno.cshtml" />
-    <Content Include="Views\Solicitudes\_Croquis.cshtml" />
-    <Content Include="Views\Solicitudes\_ServiciosMunicipales.cshtml" />
-    <Content Include="Views\Solicitudes\_AlmacenamientoDren.cshtml" />
-    <Content Include="Views\Solicitudes\_EnergiaElectrica.cshtml" />
-    <Content Include="Views\Solicitudes\_EspacioMultiple.cshtml" />
-    <Content Include="Views\Solicitudes\_EspacioEducativo.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteI.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteII.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteIII.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteIV.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteV.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteVI.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteVII.cshtml" />
-    <Content Include="Views\Solicitudes\_ComponenteVIII.cshtml" />
     <Content Include="Views\Solicitudes\Detalle.cshtml" />
     <Content Include="Views\Solicitudes\Historial.cshtml" />
     <Content Include="Views\Solicitudes\OpenSolicitud.cshtml" />
     <Content Include="Views\Beneficiarios\Index.cshtml" />
     <Content Include="Views\Beneficiarios\Create.cshtml" />
     <Content Include="Views\Beneficiarios\Edit.cshtml" />
+    <Content Include="Views\Validaciones\Index.cshtml" />
+    <Content Include="Views\Validaciones\_AlmacenamientoDren.cshtml" />
+    <Content Include="Views\Validaciones\_ServiciosMunicipales.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteVII.cshtml" />
+    <Content Include="Views\Validaciones\_Matricula.cshtml" />
+    <Content Include="Views\Validaciones\_EspacioMultiple.cshtml" />
+    <Content Include="Views\Validaciones\_EspacioEducativo.cshtml" />
+    <Content Include="Views\Validaciones\_Entorno.cshtml" />
+    <Content Include="Views\Validaciones\_EnergiaElectrica.cshtml" />
+    <Content Include="Views\Validaciones\_Croquis.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteVIII.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteVI.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteV.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteIV.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteIII.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteII.cshtml" />
+    <Content Include="Views\Validaciones\_ComponenteI.cshtml" />
+    <Content Include="Views\Accesos\CargarMenu.cshtml" />
+    <Content Include="Views\Until\ImportarExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Until\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

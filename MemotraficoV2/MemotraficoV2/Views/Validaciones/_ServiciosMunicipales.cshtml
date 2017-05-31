@@ -17,7 +17,7 @@
             <tr>
                 <td class="col-md-3"><label>Red de Agua Potable</label></td>
                 <td class="col-md-2 text-center">
-                    @if (Model.ServicioMunicipal != null)
+                    @if (Model.ServicioMunicipal.RedAgua != false)
                     {
                         <input type="checkbox" name="SMRed" value="RedAgua" class="js-switch" checked />
                     }
@@ -26,12 +26,12 @@
                         <input type="checkbox" name="SMRed" value="RedAgua" class="js-switch" />
                     }
                 </td>
-                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedAguaDistancia, new { @class = "col-md-12 form-control" })</td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.ServicioMunicipal.RedAguaDistancia, new { @class = "col-md-12 form-control" })</td>
             </tr>
             <tr>
                 <td class="col-md-3"><label>Red de Drenaje Sanitario</label></td>
                 <td class="col-md-2 text-center">
-                    @if (Model.ServicioMunicipal != null)
+                    @if (Model.ServicioMunicipal.RedDrenaje != false)
                     {
                         <input type="checkbox" name="SMRed" value="RedDrenaje" class="js-switch" checked />
                     }
@@ -40,12 +40,12 @@
                         <input type="checkbox" name="SMRed" value="RedDrenaje" class="js-switch" />
                     }
                 </td>
-                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedDrenajeDistancia, new { @class = "col-md-12 form-control" })</td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.ServicioMunicipal.RedDrenajeDistancia, new { @class = "col-md-12 form-control" })</td>
             </tr>
             <tr>
                 <td class="col-md-3"><label>Red de Energia Electrica</label></td>
                 <td class="col-md-2 text-center">
-                    @if (Model.ServicioMunicipal != null)
+                    @if (Model.ServicioMunicipal.RedEnergia != false)
                     {
                         <input type="checkbox" name="SMRed" value="RedEnergia" class="js-switch" checked />
                     }
@@ -54,12 +54,12 @@
                         <input type="checkbox" name="SMRed" value="RedEnergia" class="js-switch" />
                     }
                 </td>
-                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedEnergiaDistancia, new { @class = "col-md-12 form-control" })</td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.ServicioMunicipal.RedEnergiaDistancia, new { @class = "col-md-12 form-control" })</td>
             </tr>
             <tr>
                 <td class="col-md-3"><label>Red de Alumbrado Publico</label></td>
                 <td class="col-md-2 text-center">
-                    @if (Model.ServicioMunicipal != null)
+                    @if (Model.ServicioMunicipal.RedAlumbrado != false)
                     {
                         <input type="checkbox" name="SMRed" value="RedAlumbrado" class="js-switch" checked />
                     }
@@ -68,7 +68,7 @@
                         <input type="checkbox" name="SMRed" value="RedAlumbrado" class="js-switch" />
                     }
                 </td>
-                <td class="col-md-7">@Html.TextAreaFor(i => i.ServicioMunicipal.RedAlumbradoDistancia, new { @class = "col-md-12 form-control" })</td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.ServicioMunicipal.RedAlumbradoDistancia, new { @class = "col-md-12 form-control" })</td>
             </tr>
             <tr>
                 <td class="col-md-3"></td><td class="col-md-2 text-center"><label>Tipo de vialidad</label></td><td class="col-md-7"></td>
@@ -76,7 +76,7 @@
             <tr>
                 <td class="col-md-3 text-right">
                     <label>
-                        @if (Model.ServicioMunicipal != null && Model.ServicioMunicipal.VialidadPrimaria == true)
+                        @if (Model.ServicioMunicipal.VialidadPrimaria == true)
                         {
                             <input type="checkbox" name="SMVialidades" value="Primaria" class="js-switch" checked />
                         }
@@ -89,7 +89,7 @@
                 </td>
                 <td class="col-md-3 text-center">
                     <label>
-                        @if (Model.ServicioMunicipal != null && Model.ServicioMunicipal.VialidadSecundaria == true)
+                        @if (Model.ServicioMunicipal.VialidadSecundaria == true)
                         {
                             <input type="checkbox" name="SMVialidades" value="Secundaria" class="js-switch" checked />
                         }
@@ -102,7 +102,7 @@
                 </td>
                 <td class="col-md-7 text-left">
                     <label>
-                        @if (Model.ServicioMunicipal != null && Model.ServicioMunicipal.VialidadTerciaria == true)
+                        @if (Model.ServicioMunicipal.VialidadTerciaria == true)
                         {
                             <input type="checkbox" name="SMVialidades" value="Terciaria" class="js-switch" checked />
                         }

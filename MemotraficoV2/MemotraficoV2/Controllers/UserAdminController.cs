@@ -14,7 +14,7 @@ using MemotraficoV2.Models;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()

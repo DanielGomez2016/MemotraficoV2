@@ -1,0 +1,300 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+@{
+    Layout = null;
+}
+
+<div class="item form-group well col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">Existe</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-2 text-center"><label>Agua Potable</label></td>
+                <td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Red de Agua Potable</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.AlmacenamientoDren.Redagua == true)
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Agua_Potable" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Agua_Potable" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.AlmacenamientoDren.RedaguaEstado)
+                    {
+                        case 1:
+                            <label class="col-md-4"><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="1" checked />Bueno</label>
+                            <label class="col-md-4"><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="2" />Regular</label>
+                            <label class="col-md-4"><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADAguaPotable" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Pipas</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.AlmacenamientoDren.Pipa == true)
+                            {
+                        <input type="checkbox" name="AlmanceDren" value="Pipas" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Pipas" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.AlmacenamientoDren.PipaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="1" checked/>Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="2" checked/>Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="3" checked/>Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADPipas" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-2 text-center"><label>Almacenamiento</label></td>
+                <td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Cisternas</label></td>
+                <td class="col-md-4 text-center">
+                    @if ( Model.AlmacenamientoDren.Cisterna == true)
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Cisterna" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Cisterna" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.AlmacenamientoDren.CisternaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" checked value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" checked value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" checked value="3" />Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADCisterna" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Tinacos</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.AlmacenamientoDren.Tinaco == true)
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Tinaco" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="Tinaco" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.AlmacenamientoDren.TinacoEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" checked value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" checked value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" checked value="3" />Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADTinaco" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-2 text-center"><label>Drenaje Sanitario</label></td>
+                <td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Drenaje Sanitario</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.AlmacenamientoDren.ColectorMunicipal == true)
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="ColectorM" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="ColectorM" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.AlmacenamientoDren.ColectorMunicipalEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" checked value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" checked value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" checked value="3" />Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADColectorM" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4"><label>Fosa Septica</label></td>
+                <td class="col-md-4 text-center">
+                    @if (Model.AlmacenamientoDren.FosaSeptica == true)
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="FosaSeptica" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="AlmanceDren" value="FosaSeptica" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-4  text-center">
+                    @switch (Model.AlmacenamientoDren.FosaSepticaEstado)
+                    {
+                        case 1:
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" checked value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" checked value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" checked value="3" />Malo</label>
+                            break;
+                        default:
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="1" />Bueno</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="2" />Regular</label>
+                            <label><input type="radio" class="flat col-md-4" name="ADFosaSeptica" value="3" />Malo</label>
+                            break;
+                    }
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-2 text-center"><label>Estado General de la Red</label></td>
+                <td class="col-md-7"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="col-md-4 text-center">
+                    @switch (Model.AlmacenamientoDren.EstadoGeneral)
+                    {
+                        case 1:
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" checked value="1" />Bueno</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="2" />Regular</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="3" />Malo</label>
+                            break;
+                        case 2:
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="1" />Bueno</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" checked value="2" />Regular</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="3" />Malo</label>
+                            break;
+                        case 3:
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="1" />Bueno</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="2" />Regular</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" checked value="3" />Malo</label>
+                            break;
+                        default:
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="1" />Bueno</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="2" />Regular</label>
+                            <label  class="col-md-4"><input type="radio" class="flat col-md-4" name="ADEdoGeneral" value="3" />Malo</label>
+                            break;
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

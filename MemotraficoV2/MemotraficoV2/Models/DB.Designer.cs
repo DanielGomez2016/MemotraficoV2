@@ -22,7 +22,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_AccesoSistema", "AccesoSistema", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AccesoSistema), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_AspNetRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetRoles), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_AccesoSistemaRol_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AccesoSistemaRol", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AccesoSistemaRol), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_AlmacenamientoDren_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "AlmacenamientoDren", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AlmacenamientoDren), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteI_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteI", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteI), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteII), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteIII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteIII), true)]
@@ -32,22 +31,15 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteVII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVII), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVIII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteVIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVIII), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Contacto_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Contacto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Contacto), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Croquis_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Croquis", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Croquis), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Departamento_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Departamento), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_EnergiaElectrica_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EnergiaElectrica", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EnergiaElectrica), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Entorno_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Validacion), "Entorno", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Entorno), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_Localidades", "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Localidades), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_NivelEducativo", "NivelEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.NivelEducativo), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Requerimientos_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Requerimientos), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Validacion_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Validacion), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativo_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioEducativo), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativoDet_EspacioEducativo", "EspacioEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.EspacioEducativo), "EspacioEducativoDet", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioEducativoDet), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_EspacioMultiple_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioMultiple", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioMultiple), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Localidades_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Localidades), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Matricula_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Matricula", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Matricula), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Procedencia_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoProcedencia), "Procedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Procedencia), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ServicioMunicipal_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ServicioMunicipal", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ServicioMunicipal), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Departamento", "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Departamento), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
 [assembly: EdmRelationshipAttribute("Model", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
@@ -63,6 +55,14 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Procedencia", "Procedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Procedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoAsunto", "TipoAsunto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoAsunto), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.TipoProcedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_AlmacenamientoDren_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "AlmacenamientoDren", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AlmacenamientoDren), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Croquis_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Croquis", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Croquis), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_EnergiaElectrica_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EnergiaElectrica", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EnergiaElectrica), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Entorno_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Validacion), "Entorno", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Entorno), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_EspacioMultiple_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioMultiple", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioMultiple), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Matricula_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Matricula", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Matricula), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ServicioMunicipal_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ServicioMunicipal", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ServicioMunicipal), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativoDet_EspacioEducativo", "EspacioEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.EspacioEducativo), "EspacioEducativoDet", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioEducativoDet), true)]
 
 #endregion
 
@@ -145,22 +145,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<AccesoSistemaRol> _AccesoSistemaRol;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<AlmacenamientoDren> AlmacenamientoDren
-        {
-            get
-            {
-                if ((_AlmacenamientoDren == null))
-                {
-                    _AlmacenamientoDren = base.CreateObjectSet<AlmacenamientoDren>("AlmacenamientoDren");
-                }
-                return _AlmacenamientoDren;
-            }
-        }
-        private ObjectSet<AlmacenamientoDren> _AlmacenamientoDren;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -325,22 +309,6 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<Croquis> Croquis
-        {
-            get
-            {
-                if ((_Croquis == null))
-                {
-                    _Croquis = base.CreateObjectSet<Croquis>("Croquis");
-                }
-                return _Croquis;
-            }
-        }
-        private ObjectSet<Croquis> _Croquis;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
         public ObjectSet<Departamento> Departamento
         {
             get
@@ -373,38 +341,6 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<EnergiaElectrica> EnergiaElectrica
-        {
-            get
-            {
-                if ((_EnergiaElectrica == null))
-                {
-                    _EnergiaElectrica = base.CreateObjectSet<EnergiaElectrica>("EnergiaElectrica");
-                }
-                return _EnergiaElectrica;
-            }
-        }
-        private ObjectSet<EnergiaElectrica> _EnergiaElectrica;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<Entorno> Entorno
-        {
-            get
-            {
-                if ((_Entorno == null))
-                {
-                    _Entorno = base.CreateObjectSet<Entorno>("Entorno");
-                }
-                return _Entorno;
-            }
-        }
-        private ObjectSet<Entorno> _Entorno;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
         public ObjectSet<Escuela> Escuela
         {
             get
@@ -433,38 +369,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<EspacioEducativo> _EspacioEducativo;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<EspacioEducativoDet> EspacioEducativoDet
-        {
-            get
-            {
-                if ((_EspacioEducativoDet == null))
-                {
-                    _EspacioEducativoDet = base.CreateObjectSet<EspacioEducativoDet>("EspacioEducativoDet");
-                }
-                return _EspacioEducativoDet;
-            }
-        }
-        private ObjectSet<EspacioEducativoDet> _EspacioEducativoDet;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<EspacioMultiple> EspacioMultiple
-        {
-            get
-            {
-                if ((_EspacioMultiple == null))
-                {
-                    _EspacioMultiple = base.CreateObjectSet<EspacioMultiple>("EspacioMultiple");
-                }
-                return _EspacioMultiple;
-            }
-        }
-        private ObjectSet<EspacioMultiple> _EspacioMultiple;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -513,22 +417,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Localidades> _Localidades;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<Matricula> Matricula
-        {
-            get
-            {
-                if ((_Matricula == null))
-                {
-                    _Matricula = base.CreateObjectSet<Matricula>("Matricula");
-                }
-                return _Matricula;
-            }
-        }
-        private ObjectSet<Matricula> _Matricula;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -593,22 +481,6 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Requerimientos> _Requerimientos;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        public ObjectSet<ServicioMunicipal> ServicioMunicipal
-        {
-            get
-            {
-                if ((_ServicioMunicipal == null))
-                {
-                    _ServicioMunicipal = base.CreateObjectSet<ServicioMunicipal>("ServicioMunicipal");
-                }
-                return _ServicioMunicipal;
-            }
-        }
-        private ObjectSet<ServicioMunicipal> _ServicioMunicipal;
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -753,6 +625,134 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Solicitudes> _Solicitudes;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<AlmacenamientoDren> AlmacenamientoDren
+        {
+            get
+            {
+                if ((_AlmacenamientoDren == null))
+                {
+                    _AlmacenamientoDren = base.CreateObjectSet<AlmacenamientoDren>("AlmacenamientoDren");
+                }
+                return _AlmacenamientoDren;
+            }
+        }
+        private ObjectSet<AlmacenamientoDren> _AlmacenamientoDren;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Croquis> Croquis
+        {
+            get
+            {
+                if ((_Croquis == null))
+                {
+                    _Croquis = base.CreateObjectSet<Croquis>("Croquis");
+                }
+                return _Croquis;
+            }
+        }
+        private ObjectSet<Croquis> _Croquis;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<EnergiaElectrica> EnergiaElectrica
+        {
+            get
+            {
+                if ((_EnergiaElectrica == null))
+                {
+                    _EnergiaElectrica = base.CreateObjectSet<EnergiaElectrica>("EnergiaElectrica");
+                }
+                return _EnergiaElectrica;
+            }
+        }
+        private ObjectSet<EnergiaElectrica> _EnergiaElectrica;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Entorno> Entorno
+        {
+            get
+            {
+                if ((_Entorno == null))
+                {
+                    _Entorno = base.CreateObjectSet<Entorno>("Entorno");
+                }
+                return _Entorno;
+            }
+        }
+        private ObjectSet<Entorno> _Entorno;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<EspacioMultiple> EspacioMultiple
+        {
+            get
+            {
+                if ((_EspacioMultiple == null))
+                {
+                    _EspacioMultiple = base.CreateObjectSet<EspacioMultiple>("EspacioMultiple");
+                }
+                return _EspacioMultiple;
+            }
+        }
+        private ObjectSet<EspacioMultiple> _EspacioMultiple;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Matricula> Matricula
+        {
+            get
+            {
+                if ((_Matricula == null))
+                {
+                    _Matricula = base.CreateObjectSet<Matricula>("Matricula");
+                }
+                return _Matricula;
+            }
+        }
+        private ObjectSet<Matricula> _Matricula;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<ServicioMunicipal> ServicioMunicipal
+        {
+            get
+            {
+                if ((_ServicioMunicipal == null))
+                {
+                    _ServicioMunicipal = base.CreateObjectSet<ServicioMunicipal>("ServicioMunicipal");
+                }
+                return _ServicioMunicipal;
+            }
+        }
+        private ObjectSet<ServicioMunicipal> _ServicioMunicipal;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<EspacioEducativoDet> EspacioEducativoDet
+        {
+            get
+            {
+                if ((_EspacioEducativoDet == null))
+                {
+                    _EspacioEducativoDet = base.CreateObjectSet<EspacioEducativoDet>("EspacioEducativoDet");
+                }
+                return _EspacioEducativoDet;
+            }
+        }
+        private ObjectSet<EspacioEducativoDet> _EspacioEducativoDet;
 
         #endregion
 
@@ -772,14 +772,6 @@ namespace MemotraficoV2.Models
         public void AddToAccesoSistemaRol(AccesoSistemaRol accesoSistemaRol)
         {
             base.AddObject("AccesoSistemaRol", accesoSistemaRol);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet AlmacenamientoDren. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToAlmacenamientoDren(AlmacenamientoDren almacenamientoDren)
-        {
-            base.AddObject("AlmacenamientoDren", almacenamientoDren);
         }
     
         /// <summary>
@@ -863,14 +855,6 @@ namespace MemotraficoV2.Models
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Croquis. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToCroquis(Croquis croquis)
-        {
-            base.AddObject("Croquis", croquis);
-        }
-    
-        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet Departamento. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToDepartamento(Departamento departamento)
@@ -887,22 +871,6 @@ namespace MemotraficoV2.Models
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet EnergiaElectrica. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToEnergiaElectrica(EnergiaElectrica energiaElectrica)
-        {
-            base.AddObject("EnergiaElectrica", energiaElectrica);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Entorno. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToEntorno(Entorno entorno)
-        {
-            base.AddObject("Entorno", entorno);
-        }
-    
-        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet Escuela. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToEscuela(Escuela escuela)
@@ -916,22 +884,6 @@ namespace MemotraficoV2.Models
         public void AddToEspacioEducativo(EspacioEducativo espacioEducativo)
         {
             base.AddObject("EspacioEducativo", espacioEducativo);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet EspacioEducativoDet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToEspacioEducativoDet(EspacioEducativoDet espacioEducativoDet)
-        {
-            base.AddObject("EspacioEducativoDet", espacioEducativoDet);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet EspacioMultiple. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToEspacioMultiple(EspacioMultiple espacioMultiple)
-        {
-            base.AddObject("EspacioMultiple", espacioMultiple);
         }
     
         /// <summary>
@@ -956,14 +908,6 @@ namespace MemotraficoV2.Models
         public void AddToLocalidades(Localidades localidades)
         {
             base.AddObject("Localidades", localidades);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Matricula. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToMatricula(Matricula matricula)
-        {
-            base.AddObject("Matricula", matricula);
         }
     
         /// <summary>
@@ -996,14 +940,6 @@ namespace MemotraficoV2.Models
         public void AddToRequerimientos(Requerimientos requerimientos)
         {
             base.AddObject("Requerimientos", requerimientos);
-        }
-    
-        /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet ServicioMunicipal. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToServicioMunicipal(ServicioMunicipal servicioMunicipal)
-        {
-            base.AddObject("ServicioMunicipal", servicioMunicipal);
         }
     
         /// <summary>
@@ -1076,6 +1012,70 @@ namespace MemotraficoV2.Models
         public void AddToSolicitudes(Solicitudes solicitudes)
         {
             base.AddObject("Solicitudes", solicitudes);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet AlmacenamientoDren. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToAlmacenamientoDren(AlmacenamientoDren almacenamientoDren)
+        {
+            base.AddObject("AlmacenamientoDren", almacenamientoDren);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Croquis. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToCroquis(Croquis croquis)
+        {
+            base.AddObject("Croquis", croquis);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet EnergiaElectrica. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToEnergiaElectrica(EnergiaElectrica energiaElectrica)
+        {
+            base.AddObject("EnergiaElectrica", energiaElectrica);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Entorno. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToEntorno(Entorno entorno)
+        {
+            base.AddObject("Entorno", entorno);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet EspacioMultiple. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToEspacioMultiple(EspacioMultiple espacioMultiple)
+        {
+            base.AddObject("EspacioMultiple", espacioMultiple);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Matricula. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToMatricula(Matricula matricula)
+        {
+            base.AddObject("Matricula", matricula);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet ServicioMunicipal. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToServicioMunicipal(ServicioMunicipal servicioMunicipal)
+        {
+            base.AddObject("ServicioMunicipal", servicioMunicipal);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet EspacioEducativoDet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToEspacioEducativoDet(EspacioEducativoDet espacioEducativoDet)
+        {
+            base.AddObject("EspacioEducativoDet", espacioEducativoDet);
         }
 
         #endregion
@@ -1721,7 +1721,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String CisternaEstado
+        public Nullable<global::System.Int32> CisternaEstado
         {
             get
             {
@@ -1731,13 +1731,13 @@ namespace MemotraficoV2.Models
             {
                 OnCisternaEstadoChanging(value);
                 ReportPropertyChanging("CisternaEstado");
-                _CisternaEstado = StructuralObject.SetValidValue(value, true, "CisternaEstado");
+                _CisternaEstado = StructuralObject.SetValidValue(value, "CisternaEstado");
                 ReportPropertyChanged("CisternaEstado");
                 OnCisternaEstadoChanged();
             }
         }
-        private global::System.String _CisternaEstado;
-        partial void OnCisternaEstadoChanging(global::System.String value);
+        private Nullable<global::System.Int32> _CisternaEstado;
+        partial void OnCisternaEstadoChanging(Nullable<global::System.Int32> value);
         partial void OnCisternaEstadoChanged();
     
         /// <summary>
@@ -1769,7 +1769,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String TinacoEstado
+        public Nullable<global::System.Int32> TinacoEstado
         {
             get
             {
@@ -1779,13 +1779,13 @@ namespace MemotraficoV2.Models
             {
                 OnTinacoEstadoChanging(value);
                 ReportPropertyChanging("TinacoEstado");
-                _TinacoEstado = StructuralObject.SetValidValue(value, true, "TinacoEstado");
+                _TinacoEstado = StructuralObject.SetValidValue(value, "TinacoEstado");
                 ReportPropertyChanged("TinacoEstado");
                 OnTinacoEstadoChanged();
             }
         }
-        private global::System.String _TinacoEstado;
-        partial void OnTinacoEstadoChanging(global::System.String value);
+        private Nullable<global::System.Int32> _TinacoEstado;
+        partial void OnTinacoEstadoChanging(Nullable<global::System.Int32> value);
         partial void OnTinacoEstadoChanged();
     
         /// <summary>
@@ -1817,7 +1817,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ColectorMunicipalEstado
+        public Nullable<global::System.Int32> ColectorMunicipalEstado
         {
             get
             {
@@ -1827,13 +1827,13 @@ namespace MemotraficoV2.Models
             {
                 OnColectorMunicipalEstadoChanging(value);
                 ReportPropertyChanging("ColectorMunicipalEstado");
-                _ColectorMunicipalEstado = StructuralObject.SetValidValue(value, true, "ColectorMunicipalEstado");
+                _ColectorMunicipalEstado = StructuralObject.SetValidValue(value, "ColectorMunicipalEstado");
                 ReportPropertyChanged("ColectorMunicipalEstado");
                 OnColectorMunicipalEstadoChanged();
             }
         }
-        private global::System.String _ColectorMunicipalEstado;
-        partial void OnColectorMunicipalEstadoChanging(global::System.String value);
+        private Nullable<global::System.Int32> _ColectorMunicipalEstado;
+        partial void OnColectorMunicipalEstadoChanging(Nullable<global::System.Int32> value);
         partial void OnColectorMunicipalEstadoChanged();
     
         /// <summary>
@@ -1865,7 +1865,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String FosaSepticaEstado
+        public Nullable<global::System.Int32> FosaSepticaEstado
         {
             get
             {
@@ -1875,13 +1875,13 @@ namespace MemotraficoV2.Models
             {
                 OnFosaSepticaEstadoChanging(value);
                 ReportPropertyChanging("FosaSepticaEstado");
-                _FosaSepticaEstado = StructuralObject.SetValidValue(value, true, "FosaSepticaEstado");
+                _FosaSepticaEstado = StructuralObject.SetValidValue(value, "FosaSepticaEstado");
                 ReportPropertyChanged("FosaSepticaEstado");
                 OnFosaSepticaEstadoChanged();
             }
         }
-        private global::System.String _FosaSepticaEstado;
-        partial void OnFosaSepticaEstadoChanging(global::System.String value);
+        private Nullable<global::System.Int32> _FosaSepticaEstado;
+        partial void OnFosaSepticaEstadoChanging(Nullable<global::System.Int32> value);
         partial void OnFosaSepticaEstadoChanged();
     
         /// <summary>
@@ -8423,7 +8423,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> TipoEstructura
+        public global::System.String TipoEstructura
         {
             get
             {
@@ -8433,13 +8433,13 @@ namespace MemotraficoV2.Models
             {
                 OnTipoEstructuraChanging(value);
                 ReportPropertyChanging("TipoEstructura");
-                _TipoEstructura = StructuralObject.SetValidValue(value, "TipoEstructura");
+                _TipoEstructura = StructuralObject.SetValidValue(value, true, "TipoEstructura");
                 ReportPropertyChanged("TipoEstructura");
                 OnTipoEstructuraChanged();
             }
         }
-        private Nullable<global::System.Int32> _TipoEstructura;
-        partial void OnTipoEstructuraChanging(Nullable<global::System.Int32> value);
+        private global::System.String _TipoEstructura;
+        partial void OnTipoEstructuraChanging(global::System.String value);
         partial void OnTipoEstructuraChanged();
     
         /// <summary>
@@ -8519,48 +8519,48 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ServicioAdministrativo
+        public Nullable<global::System.Int32> ServicioAdministrativoBiblio
         {
             get
             {
-                return _ServicioAdministrativo;
+                return _ServicioAdministrativoBiblio;
             }
             set
             {
-                OnServicioAdministrativoChanging(value);
-                ReportPropertyChanging("ServicioAdministrativo");
-                _ServicioAdministrativo = StructuralObject.SetValidValue(value, "ServicioAdministrativo");
-                ReportPropertyChanged("ServicioAdministrativo");
-                OnServicioAdministrativoChanged();
+                OnServicioAdministrativoBiblioChanging(value);
+                ReportPropertyChanging("ServicioAdministrativoBiblio");
+                _ServicioAdministrativoBiblio = StructuralObject.SetValidValue(value, "ServicioAdministrativoBiblio");
+                ReportPropertyChanged("ServicioAdministrativoBiblio");
+                OnServicioAdministrativoBiblioChanged();
             }
         }
-        private Nullable<global::System.Int32> _ServicioAdministrativo;
-        partial void OnServicioAdministrativoChanging(Nullable<global::System.Int32> value);
-        partial void OnServicioAdministrativoChanged();
+        private Nullable<global::System.Int32> _ServicioAdministrativoBiblio;
+        partial void OnServicioAdministrativoBiblioChanging(Nullable<global::System.Int32> value);
+        partial void OnServicioAdministrativoBiblioChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Biblioteca
+        public Nullable<global::System.Int32> Laboratirio
         {
             get
             {
-                return _Biblioteca;
+                return _Laboratirio;
             }
             set
             {
-                OnBibliotecaChanging(value);
-                ReportPropertyChanging("Biblioteca");
-                _Biblioteca = StructuralObject.SetValidValue(value, "Biblioteca");
-                ReportPropertyChanged("Biblioteca");
-                OnBibliotecaChanged();
+                OnLaboratirioChanging(value);
+                ReportPropertyChanging("Laboratirio");
+                _Laboratirio = StructuralObject.SetValidValue(value, "Laboratirio");
+                ReportPropertyChanged("Laboratirio");
+                OnLaboratirioChanged();
             }
         }
-        private Nullable<global::System.Int32> _Biblioteca;
-        partial void OnBibliotecaChanging(Nullable<global::System.Int32> value);
-        partial void OnBibliotecaChanged();
+        private Nullable<global::System.Int32> _Laboratirio;
+        partial void OnLaboratirioChanging(Nullable<global::System.Int32> value);
+        partial void OnLaboratirioChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -9121,7 +9121,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AstaBandera
+        public Nullable<global::System.Boolean> AstaBandera
         {
             get
             {
@@ -9136,8 +9136,8 @@ namespace MemotraficoV2.Models
                 OnAstaBanderaChanged();
             }
         }
-        private Nullable<global::System.Int32> _AstaBandera;
-        partial void OnAstaBanderaChanging(Nullable<global::System.Int32> value);
+        private Nullable<global::System.Boolean> _AstaBandera;
+        partial void OnAstaBanderaChanging(Nullable<global::System.Boolean> value);
         partial void OnAstaBanderaChanged();
     
         /// <summary>
@@ -9145,7 +9145,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> AstaBanderaEstado
+        public Nullable<global::System.Int32> AstaBanderaEstado
         {
             get
             {
@@ -9160,8 +9160,8 @@ namespace MemotraficoV2.Models
                 OnAstaBanderaEstadoChanged();
             }
         }
-        private Nullable<global::System.Boolean> _AstaBanderaEstado;
-        partial void OnAstaBanderaEstadoChanging(Nullable<global::System.Boolean> value);
+        private Nullable<global::System.Int32> _AstaBanderaEstado;
+        partial void OnAstaBanderaEstadoChanging(Nullable<global::System.Int32> value);
         partial void OnAstaBanderaEstadoChanged();
     
         /// <summary>
@@ -12196,6 +12196,66 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Validacion_Escuela", "Escuela")]
+        public Escuela Escuela
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Escuela> EscuelaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioEducativo_Validacion", "EspacioEducativo")]
+        public EntityCollection<EspacioEducativo> EspacioEducativo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EspacioEducativo>("Model.FK_EspacioEducativo_Validacion", "EspacioEducativo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EspacioEducativo>("Model.FK_EspacioEducativo_Validacion", "EspacioEducativo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_AlmacenamientoDren_Validacion", "AlmacenamientoDren")]
         public EntityCollection<AlmacenamientoDren> AlmacenamientoDren
         {
@@ -12274,66 +12334,6 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Entorno>("Model.FK_Entorno_Validacion", "Entorno", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Validacion_Escuela", "Escuela")]
-        public Escuela Escuela
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Escuela> EscuelaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Escuela>("Model.FK_Validacion_Escuela", "Escuela", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioEducativo_Validacion", "EspacioEducativo")]
-        public EntityCollection<EspacioEducativo> EspacioEducativo
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EspacioEducativo>("Model.FK_EspacioEducativo_Validacion", "EspacioEducativo");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EspacioEducativo>("Model.FK_EspacioEducativo_Validacion", "EspacioEducativo", value);
                 }
             }
         }

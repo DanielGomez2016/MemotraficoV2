@@ -60,6 +60,12 @@ namespace MemotraficoV2.Models
             return db.Institucion.FirstOrDefault(i => i.IdInstitucion == id);
         }
 
+        public static int getinstitucionxsiglas(string siglas)
+        {
+            SASEntities db = new SASEntities();
+            return db.Institucion.FirstOrDefault(i => i.Siglas == siglas).IdInstitucion;
+        }
+
         public static string getinstitucionName(int id)
         {
             SASEntities db = new SASEntities();

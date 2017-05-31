@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using IdentitySample.Controllers;
+using MemotraficoV2.Filters;
 
 namespace IdentitySample.Controllers
 {

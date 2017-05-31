@@ -27,6 +27,14 @@ namespace MemotraficoV2.Models
             return IdCanalizacion;
         }
 
+        public void EditarValidacion()
+        {
+            SASEntities db = new SASEntities();
+            Canalizacion c = db.Canalizacion.FirstOrDefault(j => j.IdCanalizacion == IdCanalizacion);
+            c.Validacion = Validacion;
+            db.SaveChanges();
+        }
+
         //es la canalizacion generica que siempre se realiza cuando una solicitud se va a asignar a algun usuario
         public static int Canalizar(int s, int i, int d, string comentario, string usuarioasigna, int estatus)
         {
@@ -237,6 +245,27 @@ namespace MemotraficoV2.Models
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = ListaEstatus.ATENDIDA;
             dc.UsuarioAtiende = Usuarios.RolAlto(Usuarios.Roles(), Usuarios.GetInstitucion());
+            return dc.Crear();
+        }
+
+        //cierra la solicitud que ya fue atendida solo por el rol de administrador de solicitudes
+        public static int CerrarSolicitud(int s, string comentario)
+        {
+            SASEntities db = new SASEntities();
+            Canalizacion c = new Canalizacion();
+            DetalleCanalizacion dc = new DetalleCanalizacion();
+            Documentos doc = new Documentos();
+
+            c = db.Canalizacion.FirstOrDefault(j => j.IdSolicitudFk == s);
+
+            //se crea un historial de canalizacion sobre el cierre que se realizo a la solicitud
+            dc.IdCanalizarFk = c.IdCanalizacion;
+            dc.FechaCanalizar = DateTime.Now;
+            dc.Comentario = comentario != "" ? comentario : ListaComentarios.Cerrada.ToString();
+            dc.IdUsuarioFk = Usuarios.GetUsuario();
+            dc.Departamento = 0;
+            dc.Instituto = 0;
+            dc.IdEstatusFk = ListaEstatus.CERRADO;
             return dc.Crear();
         }
 

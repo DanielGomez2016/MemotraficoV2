@@ -13,7 +13,7 @@ using MemotraficoV2.Models.Colecciones;
 
 namespace MemotraficoV2.Controllers
 {
-    [Authorize, Acceso]
+    [Authorize]
     public class AccesosController : Controller
     {
         #region rolemanager y usermanager
@@ -409,9 +409,9 @@ namespace MemotraficoV2.Controllers
         #endregion Edicion Acceso Controladores
 
         [Ignore]
-        public ActionResult CargarMenu(string[] roles, int? cliente)
+        public ActionResult CargarMenu()
         {
-            return View(AccesoSistema.listarPorRoles(Roles.GetRolesForUser(), cliente));
+            return View(AccesoSistema.listarPorRoles(Usuarios.Roles(), Usuarios.GetInstitucion()));
         }
 
         [Ignore]

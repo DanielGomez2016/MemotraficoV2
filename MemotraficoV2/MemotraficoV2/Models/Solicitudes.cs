@@ -4,14 +4,40 @@ using System.Linq;
 using MemotraficoV2.Models;
 using MemotraficoV2.Models.Colecciones;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace MemotraficoV2.Models
 {
+
+    [MetadataType(typeof(mSolicitudes))]
     public partial class Solicitudes
     {
+        public class mSolicitudes
+        {
+            [Required]
+            [Display(Name = "Tipo Asunto")]
+            public string IdTipoAsuntoFk { get; set; }
+
+            [Display(Name = "Tipo Procedencia")]
+            public string IdTipoProcedenciaFk { get; set; }
+
+            [Display(Name = "Procedencia")]
+            public string IdProcedenciaFk { get; set; }
+
+            [Display(Name = "Plantel Educativo")]
+            public string IdEscuelaFk { get; set; }
+
+            [Display(Name = "Fecha Entrega")]
+            public string FechaEntrega { get; set; }
+
+            [Display(Name = "Beneficiario")]
+            public string IdBeneficiarioFk { get; set; }
+        }
+
         public string UltimoRol { get; set; }
         public string uactual { get; set; }
         public string Comentario { get; set;}
+        public Boolean validacion { get; set; }
 
         public int Crear()
         {
@@ -34,6 +60,17 @@ namespace MemotraficoV2.Models
             db.Solicitudes.AddObject(s);
             db.SaveChanges();
             return s.IdSolicitud;
+        }
+
+        public void Editar()
+        {
+            SASEntities db = new SASEntities();
+            Solicitudes s = db.Solicitudes.FirstOrDefault(j => j.IdSolicitud == IdSolicitud);
+            s.Programa = Programa;
+            s.FechaValidacion = FechaValidacion;
+
+            db.SaveChanges();
+
         }
 
         public string GenerarFolio(DateTime? f)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,13 @@ namespace MemotraficoV2.Models
 {
     public partial class Escuela
     {
+        public class mEscuela
+        {
+            [Required]
+            [Display(Name ="Plantel Educativo")]
+            public string Nombre { get; set; }
+        }
+
         public string NombreDirector { get; set; }
         public string EmailDirector { get; set; }
         public string Telefono { get; set; }
@@ -35,15 +43,15 @@ namespace MemotraficoV2.Models
             {
                 SASEntities db = new SASEntities();
                 Escuela e = db.Escuela.FirstOrDefault(i => i.IdEscuela == this.IdEscuela);
-                e.Nombre = Nombre;
-                e.Clave = Clave;
-                e.Domicilio = Domicilio;
-                e.IdLocalidadFk = IdLocalidadFk;
-                e.IdMunicipioFk = IdMunicipioFk;
-                e.IdNivelEducativo = IdNivelEducativo;
-                e.Turno = Turno;
-                e.Geox = Geox;
-                e.Geoy = Geoy;
+                e.Nombre = Nombre != null ? Nombre : e.Nombre;
+                e.Clave = Clave != null ? Clave : e.Clave;
+                e.Domicilio = Domicilio != null ? Domicilio : e.Domicilio;
+                e.IdLocalidadFk = IdLocalidadFk != null ? IdLocalidadFk : e.IdLocalidadFk;
+                e.IdMunicipioFk = IdMunicipioFk != null ? IdMunicipioFk : e.IdMunicipioFk;
+                e.IdNivelEducativo = IdNivelEducativo != null ? IdNivelEducativo : e.IdNivelEducativo;
+                e.Turno = Turno != null ? Turno : e.Turno;
+                e.Geox = Geox != null ? Geox : e.Geox;
+                e.Geoy = Geoy != null ? Geoy : e.Geoy;
 
                 db.SaveChanges();
 

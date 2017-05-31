@@ -8,9 +8,9 @@ using MemotraficoV2.Filters;
 
 namespace MemotraficoV2.Controllers
 {
+    [Authorize, Acceso]
     public class MunicipiosController : Controller
     {
-        [Authorize, Acceso]
         // GET: Municipios
         public ActionResult Index()
         {

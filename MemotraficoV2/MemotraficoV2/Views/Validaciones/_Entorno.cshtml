@@ -1,0 +1,192 @@
+﻿@model MemotraficoV2.ViewModels.Validacion_Requerimientos
+    @{ 
+        Layout = null;
+    }
+
+<div class="item form-group well col-md-6">
+    <label class="col-md-6">Tipo Infraestructura</label>
+    @switch (Model.Entorno.Infraestructura)
+    {
+        case 1:
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="1" checked  /> Nueva   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="2"  /> Consolidacion   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="3"  /> Rehabilitacion </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="4"  /> Mobiliario y Equipo   </label>
+            break;
+        case 2:
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="1"   /> Nueva   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="2" checked  /> Consolidacion   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="3"  /> Rehabilitacion </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="4"  /> Mobiliario y Equipo   </label>
+            break;
+        case 3:
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="1"  /> Nueva   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="2"  /> Consolidacion   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="3" checked  /> Rehabilitacion </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="4"  /> Mobiliario y Equipo   </label>
+            break;
+        case 4:
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="1"  /> Nueva   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="2"  /> Consolidacion   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="3"  /> Rehabilitacion </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="4" checked  /> Mobiliario y Equipo   </label>
+            break;
+        default:
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="1"  /> Nueva   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoInfraestructura" value="2"  /> Consolidacion   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="3"  /> Rehabilitacion </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoInfraestructura" value="4"  /> Mobiliario y Equipo   </label>
+            break;
+    }
+    
+</div>
+<div class="item form-group well col-md-6">
+    <label class="col-md-6">Topografia de Terreno</label>
+    @switch (Model.Entorno.Infraestructura)
+    {
+        case 1:
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="1" checked required /> Plano  </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="2" required /> Pend. Moderada   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="3" required /> Pend. Media </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="4" required /> Pend. Alta   </label>
+            break;
+        case 2:
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="1" required /> Plano  </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="2" checked required /> Pend. Moderada   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="3" required /> Pend. Media </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="4" required /> Pend. Alta   </label>
+            break;
+        case 3:
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="1" required /> Plano  </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="2" required /> Pend. Moderada   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="3" checked required /> Pend. Media </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="4" required /> Pend. Alta   </label>
+            break;
+        case 4:
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="1" required /> Plano  </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="2" required /> Pend. Moderada   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="3" required /> Pend. Media </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="4"  checked required /> Pend. Alta   </label>
+            break;
+        default:
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="1" required /> Plano  </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-6" name="EntornoTerreno" value="2" required /> Pend. Moderada   </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="3" required /> Pend. Media </label><br />
+            <div class="col-md-6"></div>
+            <label><input type="radio" class="flat col-md-3" name="EntornoTerreno" value="4"  required /> Pend. Alta   </label>
+            break;
+    }
+
+</div>
+<div class="item form-group well col-md-12">
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Posible Amenaza</th>
+                <th class="text-center">Existe</th>
+                <th class="text-center">Distancia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-3"><label>Rio(s) y/o Arroyo(s)</label></td>
+                <td class="col-md-2 text-center">
+                @if (Model.Entorno != null && Model.Entorno.Rio_Arrollo == true)
+            {
+                    <input type="checkbox" name="EntornoAmenaza" value="RioArroyo" class="js-switch" checked />
+                }
+                else
+                {
+                    <input type="checkbox" name="EntornoAmenaza" value="RioArroyo" class="js-switch"/>
+                }
+                </td>
+                <td class="col-md-3">@Html.TextBoxFor(i => i.Entorno.Rio_ArrolloDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Gasolinera(s) y/o Gasera(s)</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.Entorno != null && Model.Entorno.Gasolinera == true)
+    {
+                        <input type="checkbox" name="EntornoAmenaza" value="Gasolinera" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EntornoAmenaza" value="Gasolinera" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.Entorno.GasolineraDistancia, new { @class ="col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Derecho de Via</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.Entorno != null && Model.Entorno.DerechoVia == true)
+    {
+                        <input type="checkbox" name="EntornoAmenaza" value="DerechoVia" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EntornoAmenaza" value="DerechoVia" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.Entorno.DerechoViaDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Amenazas Viales</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.Entorno != null && Model.Entorno.AmenazaVial == true)
+    {
+                        <input type="checkbox" name="EntornoAmenaza" value="AmenazaVial" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EntornoAmenaza" value="AmenazaVial" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.Entorno.AmenazaVialDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+            <tr>
+                <td class="col-md-3"><label>Expendio(s) / Comercio(s)</label></td>
+                <td class="col-md-2 text-center">
+                    @if (Model.Entorno != null && Model.Entorno.Comercio == true)
+    {
+                        <input type="checkbox" name="EntornoAmenaza" value="Comercio" class="js-switch" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="EntornoAmenaza" value="Comercio" class="js-switch" />
+                    }
+                </td>
+                <td class="col-md-7">@Html.TextBoxFor(i => i.Entorno.ComercioDistancia, new { @class = "col-md-12 form-control" })</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -92,12 +92,12 @@
     }
 
     function onSSistema(data, status, xhr) {
-        $('#table').DataTable();
         var t = $('#table tbody').empty();
         if (data.total > 0) {
             for (var i = 0; i < data.total; i++) {
                 t.append(data.datos[i]);
             }
+            $('#table').DataTable();
         }
         else
             AlertError("No exisiten registros del controlador", null);

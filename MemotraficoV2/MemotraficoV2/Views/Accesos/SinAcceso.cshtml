@@ -4,16 +4,32 @@
 
 @if (Request.IsAjaxRequest() == false)
 {
-    <div class="jumbotron">
-        <h1><span class="fontawesome-warning-sign"></span> No puedes acceder a esta sección porque no cuentas con los permisos necesarios</h1>
-        <p><a class="btn btn-primary btn-lg" id="btnRegresar" role="button">Regresar</a></p>
-    </div>
+    <div class="" role="main">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                        </div>
+                        <div class="x_content">
+                            <section class="content invoice">
+                                <!-- title row -->
+                                <div class="row">
+                                    <div class="col-xs-12 invoice-header">
+                                        <h1>
+                                            No puedes acceder a esta sección porque no cuentas con los permisos necesarios. Comunicate con el Administrador
 
-    <script>
-        $('#btnRegresar').click(function () {
-            history.back();
-        });
-    </script>
+                                        </h1>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 else
 {

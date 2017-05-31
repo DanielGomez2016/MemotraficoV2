@@ -35,13 +35,13 @@
           <Property Name="Pipa" Type="bit" />
           <Property Name="PipaEstado" Type="int" />
           <Property Name="Cisterna" Type="bit" />
-          <Property Name="CisternaEstado" Type="nchar" MaxLength="10" />
+          <Property Name="CisternaEstado" Type="int" />
           <Property Name="Tinaco" Type="bit" />
-          <Property Name="TinacoEstado" Type="nchar" MaxLength="10" />
+          <Property Name="TinacoEstado" Type="int" />
           <Property Name="ColectorMunicipal" Type="bit" />
-          <Property Name="ColectorMunicipalEstado" Type="nchar" MaxLength="10" />
+          <Property Name="ColectorMunicipalEstado" Type="int" />
           <Property Name="FosaSeptica" Type="bit" />
-          <Property Name="FosaSepticaEstado" Type="nchar" MaxLength="10" />
+          <Property Name="FosaSepticaEstado" Type="int" />
           <Property Name="EstadoGeneral" Type="int" />
         </EntityType>
         <EntityType Name="AspNetRoles">
@@ -349,12 +349,12 @@
           <Property Name="IdEspacioDet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Edificio" Type="int" />
           <Property Name="IdEspacioEducativoFk" Type="int" />
-          <Property Name="TipoEstructura" Type="int" />
+          <Property Name="TipoEstructura" Type="varchar" MaxLength="50" />
           <Property Name="Aulas" Type="int" />
           <Property Name="Taller" Type="int" />
           <Property Name="ServicioSanitario" Type="int" />
-          <Property Name="ServicioAdministrativo" Type="int" />
-          <Property Name="Biblioteca" Type="int" />
+          <Property Name="ServicioAdministrativoBiblio" Type="int" />
+          <Property Name="Laboratirio" Type="int" />
           <Property Name="BodegaApendice" Type="int" />
           <Property Name="AulasUsoMultiple" Type="int" />
         </EntityType>
@@ -380,8 +380,8 @@
           <Property Name="Bebedero" Type="bit" />
           <Property Name="AccesoPEstado" Type="int" />
           <Property Name="AccesoP" Type="bit" />
-          <Property Name="AstaBandera" Type="int" />
-          <Property Name="AstaBanderaEstado" Type="bit" />
+          <Property Name="AstaBandera" Type="bit" />
+          <Property Name="AstaBanderaEstado" Type="int" />
           <Property Name="Otro" Type="bit" />
           <Property Name="OtroEstado" Type="int" />
         </EntityType>
@@ -1287,7 +1287,6 @@
         <EntityContainer Name="SASEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccesoSistema" EntityType="Model.AccesoSistema" />
           <EntitySet Name="AccesoSistemaRol" EntityType="Model.AccesoSistemaRol" />
-          <EntitySet Name="AlmacenamientoDren" EntityType="Model.AlmacenamientoDren" />
           <EntitySet Name="AspNetRoles" EntityType="Model.AspNetRoles" />
           <EntitySet Name="ComponenteI" EntityType="Model.ComponenteI" />
           <EntitySet Name="ComponenteII" EntityType="Model.ComponenteII" />
@@ -1298,24 +1297,17 @@
           <EntitySet Name="ComponenteVII" EntityType="Model.ComponenteVII" />
           <EntitySet Name="ComponenteVIII" EntityType="Model.ComponenteVIII" />
           <EntitySet Name="Contacto" EntityType="Model.Contacto" />
-          <EntitySet Name="Croquis" EntityType="Model.Croquis" />
           <EntitySet Name="Departamento" EntityType="Model.Departamento" />
           <EntitySet Name="Email" EntityType="Model.Email" />
-          <EntitySet Name="EnergiaElectrica" EntityType="Model.EnergiaElectrica" />
-          <EntitySet Name="Entorno" EntityType="Model.Entorno" />
           <EntitySet Name="Escuela" EntityType="Model.Escuela" />
           <EntitySet Name="EspacioEducativo" EntityType="Model.EspacioEducativo" />
-          <EntitySet Name="EspacioEducativoDet" EntityType="Model.EspacioEducativoDet" />
-          <EntitySet Name="EspacioMultiple" EntityType="Model.EspacioMultiple" />
           <EntitySet Name="Estatus" EntityType="Model.Estatus" />
           <EntitySet Name="Institucion" EntityType="Model.Institucion" />
           <EntitySet Name="Localidades" EntityType="Model.Localidades" />
-          <EntitySet Name="Matricula" EntityType="Model.Matricula" />
           <EntitySet Name="Municipios" EntityType="Model.Municipios" />
           <EntitySet Name="NivelEducativo" EntityType="Model.NivelEducativo" />
           <EntitySet Name="Procedencia" EntityType="Model.Procedencia" />
           <EntitySet Name="Requerimientos" EntityType="Model.Requerimientos" />
-          <EntitySet Name="ServicioMunicipal" EntityType="Model.ServicioMunicipal" />
           <EntitySet Name="TipoAsunto" EntityType="Model.TipoAsunto" />
           <EntitySet Name="TipoProcedencia" EntityType="Model.TipoProcedencia" />
           <EntitySet Name="Validacion" EntityType="Model.Validacion" />
@@ -1330,10 +1322,6 @@
           <AssociationSet Name="FK_AccesoSistemaRol_Institucion" Association="Model.FK_AccesoSistemaRol_Institucion">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AlmacenamientoDren_Validacion" Association="Model.FK_AlmacenamientoDren_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
           </AssociationSet>
           <AssociationSet Name="FK_ComponenteI_Requerimientos" Association="Model.FK_ComponenteI_Requerimientos">
             <End Role="Requerimientos" EntitySet="Requerimientos" />
@@ -1371,21 +1359,9 @@
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Contacto" EntitySet="Contacto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Croquis_Validacion" Association="Model.FK_Croquis_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="Croquis" EntitySet="Croquis" />
-          </AssociationSet>
           <AssociationSet Name="FK_Departamento_Institucion" Association="Model.FK_Departamento_Institucion">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="Departamento" EntitySet="Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Model.FK_EnergiaElectrica_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EnergiaElectrica" EntitySet="EnergiaElectrica" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entorno_Validacion" Association="Model.FK_Entorno_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="Entorno" EntitySet="Entorno" />
           </AssociationSet>
           <AssociationSet Name="FK_Escuela_Localidades" Association="Model.FK_Escuela_Localidades">
             <End Role="Localidades" EntitySet="Localidades" />
@@ -1411,29 +1387,13 @@
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
           </AssociationSet>
-          <AssociationSet Name="FK_EspacioEducativoDet_EspacioEducativo" Association="Model.FK_EspacioEducativoDet_EspacioEducativo">
-            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
-            <End Role="EspacioEducativoDet" EntitySet="EspacioEducativoDet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EspacioMultiple_Validacion" Association="Model.FK_EspacioMultiple_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
-          </AssociationSet>
           <AssociationSet Name="FK_Localidades_Municipios" Association="Model.FK_Localidades_Municipios">
             <End Role="Municipios" EntitySet="Municipios" />
             <End Role="Localidades" EntitySet="Localidades" />
           </AssociationSet>
-          <AssociationSet Name="FK_Matricula_Validacion" Association="Model.FK_Matricula_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="Matricula" EntitySet="Matricula" />
-          </AssociationSet>
           <AssociationSet Name="FK_Procedencia_TipoProcedencia" Association="Model.FK_Procedencia_TipoProcedencia">
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Procedencia" EntitySet="Procedencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Model.FK_ServicioMunicipal_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
           </AssociationSet>
           <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
           <AssociationSet Name="FK_Usuario_Departamento" Association="Model.FK_Usuario_Departamento">
@@ -1501,6 +1461,46 @@
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
+          <EntitySet Name="AlmacenamientoDren" EntityType="Model.AlmacenamientoDren" />
+          <EntitySet Name="Croquis" EntityType="Model.Croquis" />
+          <EntitySet Name="EnergiaElectrica" EntityType="Model.EnergiaElectrica" />
+          <EntitySet Name="Entorno" EntityType="Model.Entorno" />
+          <EntitySet Name="EspacioMultiple" EntityType="Model.EspacioMultiple" />
+          <EntitySet Name="Matricula" EntityType="Model.Matricula" />
+          <EntitySet Name="ServicioMunicipal" EntityType="Model.ServicioMunicipal" />
+          <AssociationSet Name="FK_AlmacenamientoDren_Validacion" Association="Model.FK_AlmacenamientoDren_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="AlmacenamientoDren" EntitySet="AlmacenamientoDren" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Croquis_Validacion" Association="Model.FK_Croquis_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="Croquis" EntitySet="Croquis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Model.FK_EnergiaElectrica_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="EnergiaElectrica" EntitySet="EnergiaElectrica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entorno_Validacion" Association="Model.FK_Entorno_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="Entorno" EntitySet="Entorno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspacioMultiple_Validacion" Association="Model.FK_EspacioMultiple_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Validacion" Association="Model.FK_Matricula_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Model.FK_ServicioMunicipal_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
+          </AssociationSet>
+          <EntitySet Name="EspacioEducativoDet" EntityType="Model.EspacioEducativoDet" />
+          <AssociationSet Name="FK_EspacioEducativoDet_EspacioEducativo" Association="Model.FK_EspacioEducativoDet_EspacioEducativo">
+            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
+            <End Role="EspacioEducativoDet" EntitySet="EspacioEducativoDet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccesoSistema">
           <Key>
@@ -1524,27 +1524,6 @@
           <NavigationProperty Name="AccesoSistema" Relationship="Model.FK_AccesoSistemaRol_AccesoSistema" FromRole="AccesoSistemaRol" ToRole="AccesoSistema" />
           <NavigationProperty Name="AspNetRoles" Relationship="Model.FK_AccesoSistemaRol_AspNetRoles" FromRole="AccesoSistemaRol" ToRole="AspNetRoles" />
           <NavigationProperty Name="Institucion" Relationship="Model.FK_AccesoSistemaRol_Institucion" FromRole="AccesoSistemaRol" ToRole="Institucion" />
-        </EntityType>
-        <EntityType Name="AlmacenamientoDren">
-          <Key>
-            <PropertyRef Name="IdAlmacenDrenaje" />
-          </Key>
-          <Property Name="IdAlmacenDrenaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdValidarFk" Type="Int32" />
-          <Property Name="Redagua" Type="Boolean" />
-          <Property Name="RedaguaEstado" Type="Int32" />
-          <Property Name="Pipa" Type="Boolean" />
-          <Property Name="PipaEstado" Type="Int32" />
-          <Property Name="Cisterna" Type="Boolean" />
-          <Property Name="CisternaEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Tinaco" Type="Boolean" />
-          <Property Name="TinacoEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ColectorMunicipal" Type="Boolean" />
-          <Property Name="ColectorMunicipalEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="FosaSeptica" Type="Boolean" />
-          <Property Name="FosaSepticaEstado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EstadoGeneral" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_AlmacenamientoDren_Validacion" FromRole="AlmacenamientoDren" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -1681,18 +1660,6 @@
           <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Contacto_Escuela" FromRole="Contacto" ToRole="Escuela" />
         </EntityType>
-        <EntityType Name="Croquis">
-          <Key>
-            <PropertyRef Name="IdCroquis" />
-          </Key>
-          <Property Name="IdCroquis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DocCroquis" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Predio" Type="Boolean" />
-          <Property Name="TipoSuelo" Type="Int32" />
-          <Property Name="IdValidarFk" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_Croquis_Validacion" FromRole="Croquis" ToRole="Validacion" />
-        </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="IdDepartamento" />
@@ -1717,49 +1684,6 @@
           <Property Name="IdUser" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TipoEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="EnergiaElectrica">
-          <Key>
-            <PropertyRef Name="IdEnergiaElectrica" />
-          </Key>
-          <Property Name="IdEnergiaElectrica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdValidarFk" Type="Int32" />
-          <Property Name="Subestacion" Type="Boolean" />
-          <Property Name="SubestacionEstado" Type="Int32" />
-          <Property Name="MuroAcometida" Type="Boolean" />
-          <Property Name="MuroAcometidaEstado" Type="Int32" />
-          <Property Name="TableroDistribucion" Type="Boolean" />
-          <Property Name="TableroDistribucionEstado" Type="Int32" />
-          <Property Name="InterruptorGral" Type="Boolean" />
-          <Property Name="InterruptorGralEstado" Type="Int32" />
-          <Property Name="Termomagnetico" Type="Boolean" />
-          <Property Name="TermomagneticoElectrico" Type="Int32" />
-          <Property Name="AlumbradoExt" Type="Boolean" />
-          <Property Name="AlumbradoExtEstado" Type="Int32" />
-          <Property Name="Luminaria" Type="Boolean" />
-          <Property Name="LuminariaEstado" Type="Int32" />
-          <Property Name="EstadoGeneral" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_EnergiaElectrica_Validacion" FromRole="EnergiaElectrica" ToRole="Validacion" />
-        </EntityType>
-        <EntityType Name="Entorno">
-          <Key>
-            <PropertyRef Name="IdEntorno" />
-          </Key>
-          <Property Name="IdEntorno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdValidarFk" Type="Int32" Nullable="false" />
-          <Property Name="Infraestructura" Type="Int32" />
-          <Property Name="Terreno" Type="Int32" />
-          <Property Name="Rio_Arrollo" Type="Boolean" />
-          <Property Name="Rio_ArrolloDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Gasolinera" Type="Boolean" />
-          <Property Name="GasolineraDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DerechoVia" Type="Boolean" />
-          <Property Name="DerechoViaDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AmenazaVial" Type="Boolean" />
-          <Property Name="AmenazaVialDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comercio" Type="Boolean" />
-          <Property Name="ComercioDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_Entorno_Validacion" FromRole="Entorno" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Escuela">
           <Key>
@@ -1791,51 +1715,6 @@
           <Property Name="IdValidarFk" Type="Int32" />
           <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="EspacioEducativo" ToRole="Validacion" />
           <NavigationProperty Name="EspacioEducativoDet" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativo" ToRole="EspacioEducativoDet" />
-        </EntityType>
-        <EntityType Name="EspacioEducativoDet">
-          <Key>
-            <PropertyRef Name="IdEspacioDet" />
-          </Key>
-          <Property Name="IdEspacioDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Edificio" Type="Int32" />
-          <Property Name="IdEspacioEducativoFk" Type="Int32" />
-          <Property Name="TipoEstructura" Type="Int32" />
-          <Property Name="Aulas" Type="Int32" />
-          <Property Name="Taller" Type="Int32" />
-          <Property Name="ServicioSanitario" Type="Int32" />
-          <Property Name="ServicioAdministrativo" Type="Int32" />
-          <Property Name="Biblioteca" Type="Int32" />
-          <Property Name="BodegaApendice" Type="Int32" />
-          <Property Name="AulasUsoMultiple" Type="Int32" />
-          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativoDet" ToRole="EspacioEducativo" />
-        </EntityType>
-        <EntityType Name="EspacioMultiple">
-          <Key>
-            <PropertyRef Name="IdEspacioMultiple" />
-          </Key>
-          <Property Name="IdEspacioMultiple" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdValidarFk" Type="Int32" />
-          <Property Name="AreajuegosEstado" Type="Int32" />
-          <Property Name="Areajuegos" Type="Boolean" />
-          <Property Name="BardaEstado" Type="Int32" />
-          <Property Name="Barda" Type="Boolean" />
-          <Property Name="RampasEstado" Type="Int32" />
-          <Property Name="Rampas" Type="Boolean" />
-          <Property Name="CanchaMultipleEstado" Type="Int32" />
-          <Property Name="CanchaMultiple" Type="Boolean" />
-          <Property Name="PlazaEstado" Type="Int32" />
-          <Property Name="Plaza" Type="Boolean" />
-          <Property Name="DomoMallaEstado" Type="Int32" />
-          <Property Name="DomoMalla" Type="Boolean" />
-          <Property Name="BebederoEstado" Type="Int32" />
-          <Property Name="Bebedero" Type="Boolean" />
-          <Property Name="AccesoPEstado" Type="Int32" />
-          <Property Name="AccesoP" Type="Boolean" />
-          <Property Name="AstaBandera" Type="Int32" />
-          <Property Name="AstaBanderaEstado" Type="Boolean" />
-          <Property Name="Otro" Type="Boolean" />
-          <Property Name="OtroEstado" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Estatus">
           <Key>
@@ -1871,17 +1750,6 @@
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_Localidades" FromRole="Localidades" ToRole="Escuela" />
           <NavigationProperty Name="Municipios" Relationship="Model.FK_Localidades_Municipios" FromRole="Localidades" ToRole="Municipios" />
           <NavigationProperty Name="Beneficiario" Relationship="Model.FK_Beneficiario_Localidades" FromRole="Localidades" ToRole="Beneficiario" />
-        </EntityType>
-        <EntityType Name="Matricula">
-          <Key>
-            <PropertyRef Name="IdMatricula" />
-          </Key>
-          <Property Name="IdMatricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdValidarFk" Type="Int32" />
-          <Property Name="Alumnos" Type="Int32" />
-          <Property Name="PersonaDiscapacidad" Type="Int32" />
-          <Property Name="PersonalDoncente" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_Matricula_Validacion" FromRole="Matricula" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Municipios">
           <Key>
@@ -1932,25 +1800,6 @@
           <NavigationProperty Name="ComponenteVIII" Relationship="Model.FK_ComponenteVIII_Requerimientos" FromRole="Requerimientos" ToRole="ComponenteVIII" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Requerimientos_Escuela" FromRole="Requerimientos" ToRole="Escuela" />
         </EntityType>
-        <EntityType Name="ServicioMunicipal">
-          <Key>
-            <PropertyRef Name="IdServicioMpal" />
-          </Key>
-          <Property Name="IdServicioMpal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdValidarFk" Type="Int32" />
-          <Property Name="RedAgua" Type="Boolean" />
-          <Property Name="RedAguaDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RedDrenaje" Type="Boolean" />
-          <Property Name="RedDrenajeDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RedEnergia" Type="Boolean" />
-          <Property Name="RedEnergiaDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RedAlumbrado" Type="Boolean" />
-          <Property Name="RedAlumbradoDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VialidadPrimaria" Type="Boolean" />
-          <Property Name="VialidadSecundaria" Type="Boolean" />
-          <Property Name="VialidadTerciaria" Type="Boolean" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="ServicioMunicipal" ToRole="Validacion" />
-        </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
             <PropertyRef Name="IdTipoAsunto" />
@@ -1974,12 +1823,12 @@
           </Key>
           <Property Name="IdValidar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdEscuelaFk" Type="Int32" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Validacion_Escuela" FromRole="Validacion" ToRole="Escuela" />
+          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="Validacion" ToRole="EspacioEducativo" />
           <NavigationProperty Name="AlmacenamientoDren" Relationship="Model.FK_AlmacenamientoDren_Validacion" FromRole="Validacion" ToRole="AlmacenamientoDren" />
           <NavigationProperty Name="Croquis" Relationship="Model.FK_Croquis_Validacion" FromRole="Validacion" ToRole="Croquis" />
           <NavigationProperty Name="EnergiaElectrica" Relationship="Model.FK_EnergiaElectrica_Validacion" FromRole="Validacion" ToRole="EnergiaElectrica" />
           <NavigationProperty Name="Entorno" Relationship="Model.FK_Entorno_Validacion" FromRole="Validacion" ToRole="Entorno" />
-          <NavigationProperty Name="Escuela" Relationship="Model.FK_Validacion_Escuela" FromRole="Validacion" ToRole="Escuela" />
-          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="Validacion" ToRole="EspacioEducativo" />
           <NavigationProperty Name="EspacioMultiple" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="Validacion" ToRole="EspacioMultiple" />
           <NavigationProperty Name="Matricula" Relationship="Model.FK_Matricula_Validacion" FromRole="Validacion" ToRole="Matricula" />
           <NavigationProperty Name="ServicioMunicipal" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="Validacion" ToRole="ServicioMunicipal" />
@@ -2017,18 +1866,6 @@
             </Principal>
             <Dependent Role="AccesoSistemaRol">
               <PropertyRef Name="IdInstituto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AlmacenamientoDren_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.AlmacenamientoDren" Role="AlmacenamientoDren" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="AlmacenamientoDren">
-              <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2140,18 +1977,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Croquis_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.Croquis" Role="Croquis" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="Croquis">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Departamento_Institucion">
           <End Type="Model.Institucion" Role="Institucion" Multiplicity="1" />
           <End Type="Model.Departamento" Role="Departamento" Multiplicity="*" />
@@ -2161,30 +1986,6 @@
             </Principal>
             <Dependent Role="Departamento">
               <PropertyRef Name="IdInstitucionFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EnergiaElectrica_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.EnergiaElectrica" Role="EnergiaElectrica" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="EnergiaElectrica">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Entorno_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="1" />
-          <End Type="Model.Entorno" Role="Entorno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="Entorno">
-              <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2260,30 +2061,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EspacioEducativoDet_EspacioEducativo">
-          <End Type="Model.EspacioEducativo" Role="EspacioEducativo" Multiplicity="0..1" />
-          <End Type="Model.EspacioEducativoDet" Role="EspacioEducativoDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EspacioEducativo">
-              <PropertyRef Name="IdEspacioEducativo" />
-            </Principal>
-            <Dependent Role="EspacioEducativoDet">
-              <PropertyRef Name="IdEspacioEducativoFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EspacioMultiple_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.EspacioMultiple" Role="EspacioMultiple" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="EspacioMultiple">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Localidades_Municipios">
           <End Type="Model.Municipios" Role="Municipios" Multiplicity="0..1" />
           <End Type="Model.Localidades" Role="Localidades" Multiplicity="*" />
@@ -2296,18 +2073,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Matricula_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.Matricula" Role="Matricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="Matricula">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Procedencia_TipoProcedencia">
           <End Type="Model.TipoProcedencia" Role="TipoProcedencia" Multiplicity="0..1" />
           <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="*" />
@@ -2317,18 +2082,6 @@
             </Principal>
             <Dependent Role="Procedencia">
               <PropertyRef Name="IdTipoProcedenciaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServicioMunicipal_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.ServicioMunicipal" Role="ServicioMunicipal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="ServicioMunicipal">
-              <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2610,6 +2363,253 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AlmacenamientoDren">
+          <Key>
+            <PropertyRef Name="IdAlmacenDrenaje" />
+          </Key>
+          <Property Name="IdAlmacenDrenaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdValidarFk" Type="Int32" />
+          <Property Name="Redagua" Type="Boolean" />
+          <Property Name="RedaguaEstado" Type="Int32" />
+          <Property Name="Pipa" Type="Boolean" />
+          <Property Name="PipaEstado" Type="Int32" />
+          <Property Name="Cisterna" Type="Boolean" />
+          <Property Name="CisternaEstado" Type="Int32" />
+          <Property Name="Tinaco" Type="Boolean" />
+          <Property Name="TinacoEstado" Type="Int32" />
+          <Property Name="ColectorMunicipal" Type="Boolean" />
+          <Property Name="ColectorMunicipalEstado" Type="Int32" />
+          <Property Name="FosaSeptica" Type="Boolean" />
+          <Property Name="FosaSepticaEstado" Type="Int32" />
+          <Property Name="EstadoGeneral" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_AlmacenamientoDren_Validacion" FromRole="AlmacenamientoDren" ToRole="Validacion" />
+        </EntityType>
+        <EntityType Name="Croquis">
+          <Key>
+            <PropertyRef Name="IdCroquis" />
+          </Key>
+          <Property Name="IdCroquis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocCroquis" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Predio" Type="Boolean" />
+          <Property Name="TipoSuelo" Type="Int32" />
+          <Property Name="IdValidarFk" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Croquis_Validacion" FromRole="Croquis" ToRole="Validacion" />
+        </EntityType>
+        <EntityType Name="EnergiaElectrica">
+          <Key>
+            <PropertyRef Name="IdEnergiaElectrica" />
+          </Key>
+          <Property Name="IdEnergiaElectrica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdValidarFk" Type="Int32" />
+          <Property Name="Subestacion" Type="Boolean" />
+          <Property Name="SubestacionEstado" Type="Int32" />
+          <Property Name="MuroAcometida" Type="Boolean" />
+          <Property Name="MuroAcometidaEstado" Type="Int32" />
+          <Property Name="TableroDistribucion" Type="Boolean" />
+          <Property Name="TableroDistribucionEstado" Type="Int32" />
+          <Property Name="InterruptorGral" Type="Boolean" />
+          <Property Name="InterruptorGralEstado" Type="Int32" />
+          <Property Name="Termomagnetico" Type="Boolean" />
+          <Property Name="TermomagneticoElectrico" Type="Int32" />
+          <Property Name="AlumbradoExt" Type="Boolean" />
+          <Property Name="AlumbradoExtEstado" Type="Int32" />
+          <Property Name="Luminaria" Type="Boolean" />
+          <Property Name="LuminariaEstado" Type="Int32" />
+          <Property Name="EstadoGeneral" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EnergiaElectrica_Validacion" FromRole="EnergiaElectrica" ToRole="Validacion" />
+        </EntityType>
+        <EntityType Name="Entorno">
+          <Key>
+            <PropertyRef Name="IdEntorno" />
+          </Key>
+          <Property Name="IdEntorno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdValidarFk" Type="Int32" Nullable="false" />
+          <Property Name="Infraestructura" Type="Int32" />
+          <Property Name="Terreno" Type="Int32" />
+          <Property Name="Rio_Arrollo" Type="Boolean" />
+          <Property Name="Rio_ArrolloDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gasolinera" Type="Boolean" />
+          <Property Name="GasolineraDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DerechoVia" Type="Boolean" />
+          <Property Name="DerechoViaDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AmenazaVial" Type="Boolean" />
+          <Property Name="AmenazaVialDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comercio" Type="Boolean" />
+          <Property Name="ComercioDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Entorno_Validacion" FromRole="Entorno" ToRole="Validacion" />
+        </EntityType>
+        <EntityType Name="EspacioMultiple">
+          <Key>
+            <PropertyRef Name="IdEspacioMultiple" />
+          </Key>
+          <Property Name="IdEspacioMultiple" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdValidarFk" Type="Int32" />
+          <Property Name="AreajuegosEstado" Type="Int32" />
+          <Property Name="Areajuegos" Type="Boolean" />
+          <Property Name="BardaEstado" Type="Int32" />
+          <Property Name="Barda" Type="Boolean" />
+          <Property Name="RampasEstado" Type="Int32" />
+          <Property Name="Rampas" Type="Boolean" />
+          <Property Name="CanchaMultipleEstado" Type="Int32" />
+          <Property Name="CanchaMultiple" Type="Boolean" />
+          <Property Name="PlazaEstado" Type="Int32" />
+          <Property Name="Plaza" Type="Boolean" />
+          <Property Name="DomoMallaEstado" Type="Int32" />
+          <Property Name="DomoMalla" Type="Boolean" />
+          <Property Name="BebederoEstado" Type="Int32" />
+          <Property Name="Bebedero" Type="Boolean" />
+          <Property Name="AccesoPEstado" Type="Int32" />
+          <Property Name="AccesoP" Type="Boolean" />
+          <Property Name="AstaBandera" Type="Boolean" />
+          <Property Name="AstaBanderaEstado" Type="Int32" />
+          <Property Name="Otro" Type="Boolean" />
+          <Property Name="OtroEstado" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdMatricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdValidarFk" Type="Int32" />
+          <Property Name="Alumnos" Type="Int32" />
+          <Property Name="PersonaDiscapacidad" Type="Int32" />
+          <Property Name="PersonalDoncente" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Matricula_Validacion" FromRole="Matricula" ToRole="Validacion" />
+        </EntityType>
+        <EntityType Name="ServicioMunicipal">
+          <Key>
+            <PropertyRef Name="IdServicioMpal" />
+          </Key>
+          <Property Name="IdServicioMpal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdValidarFk" Type="Int32" />
+          <Property Name="RedAgua" Type="Boolean" />
+          <Property Name="RedAguaDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RedDrenaje" Type="Boolean" />
+          <Property Name="RedDrenajeDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RedEnergia" Type="Boolean" />
+          <Property Name="RedEnergiaDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RedAlumbrado" Type="Boolean" />
+          <Property Name="RedAlumbradoDistancia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VialidadPrimaria" Type="Boolean" />
+          <Property Name="VialidadSecundaria" Type="Boolean" />
+          <Property Name="VialidadTerciaria" Type="Boolean" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="ServicioMunicipal" ToRole="Validacion" />
+        </EntityType>
+        <Association Name="FK_AlmacenamientoDren_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.AlmacenamientoDren" Role="AlmacenamientoDren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="AlmacenamientoDren">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Croquis_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.Croquis" Role="Croquis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="Croquis">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnergiaElectrica_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.EnergiaElectrica" Role="EnergiaElectrica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="EnergiaElectrica">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entorno_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="1" />
+          <End Type="Model.Entorno" Role="Entorno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="Entorno">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspacioMultiple_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.EspacioMultiple" Role="EspacioMultiple" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="EspacioMultiple">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.Matricula" Role="Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioMunicipal_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.ServicioMunicipal" Role="ServicioMunicipal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="ServicioMunicipal">
+              <PropertyRef Name="IdValidarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EspacioEducativoDet">
+          <Key>
+            <PropertyRef Name="IdEspacioDet" />
+          </Key>
+          <Property Name="IdEspacioDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Edificio" Type="Int32" />
+          <Property Name="IdEspacioEducativoFk" Type="Int32" />
+          <Property Name="TipoEstructura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Aulas" Type="Int32" />
+          <Property Name="Taller" Type="Int32" />
+          <Property Name="ServicioSanitario" Type="Int32" />
+          <Property Name="ServicioAdministrativoBiblio" Type="Int32" />
+          <Property Name="Laboratirio" Type="Int32" />
+          <Property Name="BodegaApendice" Type="Int32" />
+          <Property Name="AulasUsoMultiple" Type="Int32" />
+          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativoDet" ToRole="EspacioEducativo" />
+        </EntityType>
+        <Association Name="FK_EspacioEducativoDet_EspacioEducativo">
+          <End Type="Model.EspacioEducativo" Role="EspacioEducativo" Multiplicity="0..1" />
+          <End Type="Model.EspacioEducativoDet" Role="EspacioEducativoDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EspacioEducativo">
+              <PropertyRef Name="IdEspacioEducativo" />
+            </Principal>
+            <Dependent Role="EspacioEducativoDet">
+              <PropertyRef Name="IdEspacioEducativoFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2634,27 +2634,6 @@
                 <ScalarProperty Name="IdAccesoSistema" ColumnName="IdAccesoSistema" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdInstituto" ColumnName="IdInstituto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AlmacenamientoDren">
-            <EntityTypeMapping TypeName="Model.AlmacenamientoDren">
-              <MappingFragment StoreEntitySet="AlmacenamientoDren">
-                <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
-                <ScalarProperty Name="FosaSepticaEstado" ColumnName="FosaSepticaEstado" />
-                <ScalarProperty Name="FosaSeptica" ColumnName="FosaSeptica" />
-                <ScalarProperty Name="ColectorMunicipalEstado" ColumnName="ColectorMunicipalEstado" />
-                <ScalarProperty Name="ColectorMunicipal" ColumnName="ColectorMunicipal" />
-                <ScalarProperty Name="TinacoEstado" ColumnName="TinacoEstado" />
-                <ScalarProperty Name="Tinaco" ColumnName="Tinaco" />
-                <ScalarProperty Name="CisternaEstado" ColumnName="CisternaEstado" />
-                <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
-                <ScalarProperty Name="PipaEstado" ColumnName="PipaEstado" />
-                <ScalarProperty Name="Pipa" ColumnName="Pipa" />
-                <ScalarProperty Name="RedaguaEstado" ColumnName="RedaguaEstado" />
-                <ScalarProperty Name="Redagua" ColumnName="Redagua" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="IdAlmacenDrenaje" ColumnName="IdAlmacenDrenaje" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2792,18 +2771,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Croquis">
-            <EntityTypeMapping TypeName="Model.Croquis">
-              <MappingFragment StoreEntitySet="Croquis">
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="TipoSuelo" ColumnName="TipoSuelo" />
-                <ScalarProperty Name="Predio" ColumnName="Predio" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="DocCroquis" ColumnName="DocCroquis" />
-                <ScalarProperty Name="IdCroquis" ColumnName="IdCroquis" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Departamento">
             <EntityTypeMapping TypeName="Model.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
@@ -2829,49 +2796,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EnergiaElectrica">
-            <EntityTypeMapping TypeName="Model.EnergiaElectrica">
-              <MappingFragment StoreEntitySet="EnergiaElectrica">
-                <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
-                <ScalarProperty Name="LuminariaEstado" ColumnName="LuminariaEstado" />
-                <ScalarProperty Name="Luminaria" ColumnName="Luminaria" />
-                <ScalarProperty Name="AlumbradoExtEstado" ColumnName="AlumbradoExtEstado" />
-                <ScalarProperty Name="AlumbradoExt" ColumnName="AlumbradoExt" />
-                <ScalarProperty Name="TermomagneticoElectrico" ColumnName="TermomagneticoElectrico" />
-                <ScalarProperty Name="Termomagnetico" ColumnName="Termomagnetico" />
-                <ScalarProperty Name="InterruptorGralEstado" ColumnName="InterruptorGralEstado" />
-                <ScalarProperty Name="InterruptorGral" ColumnName="InterruptorGral" />
-                <ScalarProperty Name="TableroDistribucionEstado" ColumnName="TableroDistribucionEstado" />
-                <ScalarProperty Name="TableroDistribucion" ColumnName="TableroDistribucion" />
-                <ScalarProperty Name="MuroAcometidaEstado" ColumnName="MuroAcometidaEstado" />
-                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
-                <ScalarProperty Name="SubestacionEstado" ColumnName="SubestacionEstado" />
-                <ScalarProperty Name="Subestacion" ColumnName="Subestacion" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="IdEnergiaElectrica" ColumnName="IdEnergiaElectrica" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Entorno">
-            <EntityTypeMapping TypeName="Model.Entorno">
-              <MappingFragment StoreEntitySet="Entorno">
-                <ScalarProperty Name="ComercioDistancia" ColumnName="ComercioDistancia" />
-                <ScalarProperty Name="Comercio" ColumnName="Comercio" />
-                <ScalarProperty Name="AmenazaVialDistancia" ColumnName="AmenazaVialDistancia" />
-                <ScalarProperty Name="AmenazaVial" ColumnName="AmenazaVial" />
-                <ScalarProperty Name="DerechoViaDistancia" ColumnName="DerechoViaDistancia" />
-                <ScalarProperty Name="DerechoVia" ColumnName="DerechoVia" />
-                <ScalarProperty Name="GasolineraDistancia" ColumnName="GasolineraDistancia" />
-                <ScalarProperty Name="Gasolinera" ColumnName="Gasolinera" />
-                <ScalarProperty Name="Rio_ArrolloDistancia" ColumnName="Rio_ArrolloDistancia" />
-                <ScalarProperty Name="Rio_Arrollo" ColumnName="Rio_Arrollo" />
-                <ScalarProperty Name="Terreno" ColumnName="Terreno" />
-                <ScalarProperty Name="Infraestructura" ColumnName="Infraestructura" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="IdEntorno" ColumnName="IdEntorno" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Escuela">
             <EntityTypeMapping TypeName="Model.Escuela">
               <MappingFragment StoreEntitySet="Escuela">
@@ -2893,51 +2817,6 @@
               <MappingFragment StoreEntitySet="EspacioEducativo">
                 <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
                 <ScalarProperty Name="IdEspacioEducativo" ColumnName="IdEspacioEducativo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EspacioEducativoDet">
-            <EntityTypeMapping TypeName="Model.EspacioEducativoDet">
-              <MappingFragment StoreEntitySet="EspacioEducativoDet">
-                <ScalarProperty Name="AulasUsoMultiple" ColumnName="AulasUsoMultiple" />
-                <ScalarProperty Name="BodegaApendice" ColumnName="BodegaApendice" />
-                <ScalarProperty Name="Biblioteca" ColumnName="Biblioteca" />
-                <ScalarProperty Name="ServicioAdministrativo" ColumnName="ServicioAdministrativo" />
-                <ScalarProperty Name="ServicioSanitario" ColumnName="ServicioSanitario" />
-                <ScalarProperty Name="Taller" ColumnName="Taller" />
-                <ScalarProperty Name="Aulas" ColumnName="Aulas" />
-                <ScalarProperty Name="TipoEstructura" ColumnName="TipoEstructura" />
-                <ScalarProperty Name="IdEspacioEducativoFk" ColumnName="IdEspacioEducativoFk" />
-                <ScalarProperty Name="Edificio" ColumnName="Edificio" />
-                <ScalarProperty Name="IdEspacioDet" ColumnName="IdEspacioDet" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EspacioMultiple">
-            <EntityTypeMapping TypeName="Model.EspacioMultiple">
-              <MappingFragment StoreEntitySet="EspacioMultiple">
-                <ScalarProperty Name="OtroEstado" ColumnName="OtroEstado" />
-                <ScalarProperty Name="Otro" ColumnName="Otro" />
-                <ScalarProperty Name="AstaBanderaEstado" ColumnName="AstaBanderaEstado" />
-                <ScalarProperty Name="AstaBandera" ColumnName="AstaBandera" />
-                <ScalarProperty Name="AccesoP" ColumnName="AccesoP" />
-                <ScalarProperty Name="AccesoPEstado" ColumnName="AccesoPEstado" />
-                <ScalarProperty Name="Bebedero" ColumnName="Bebedero" />
-                <ScalarProperty Name="BebederoEstado" ColumnName="BebederoEstado" />
-                <ScalarProperty Name="DomoMalla" ColumnName="DomoMalla" />
-                <ScalarProperty Name="DomoMallaEstado" ColumnName="DomoMallaEstado" />
-                <ScalarProperty Name="Plaza" ColumnName="Plaza" />
-                <ScalarProperty Name="PlazaEstado" ColumnName="PlazaEstado" />
-                <ScalarProperty Name="CanchaMultiple" ColumnName="CanchaMultiple" />
-                <ScalarProperty Name="CanchaMultipleEstado" ColumnName="CanchaMultipleEstado" />
-                <ScalarProperty Name="Rampas" ColumnName="Rampas" />
-                <ScalarProperty Name="RampasEstado" ColumnName="RampasEstado" />
-                <ScalarProperty Name="Barda" ColumnName="Barda" />
-                <ScalarProperty Name="BardaEstado" ColumnName="BardaEstado" />
-                <ScalarProperty Name="Areajuegos" ColumnName="Areajuegos" />
-                <ScalarProperty Name="AreajuegosEstado" ColumnName="AreajuegosEstado" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="IdEspacioMultiple" ColumnName="IdEspacioMultiple" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2968,17 +2847,6 @@
                 <ScalarProperty Name="IdMunicipioFk" ColumnName="IdMunicipioFk" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Matricula">
-            <EntityTypeMapping TypeName="Model.Matricula">
-              <MappingFragment StoreEntitySet="Matricula">
-                <ScalarProperty Name="PersonalDoncente" ColumnName="PersonalDoncente" />
-                <ScalarProperty Name="PersonaDiscapacidad" ColumnName="PersonaDiscapacidad" />
-                <ScalarProperty Name="Alumnos" ColumnName="Alumnos" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3017,25 +2885,6 @@
               <MappingFragment StoreEntitySet="Requerimientos">
                 <ScalarProperty Name="IdEsceulaFk" ColumnName="IdEsceulaFk" />
                 <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServicioMunicipal">
-            <EntityTypeMapping TypeName="Model.ServicioMunicipal">
-              <MappingFragment StoreEntitySet="ServicioMunicipal">
-                <ScalarProperty Name="VialidadTerciaria" ColumnName="VialidadTerciaria" />
-                <ScalarProperty Name="VialidadSecundaria" ColumnName="VialidadSecundaria" />
-                <ScalarProperty Name="VialidadPrimaria" ColumnName="VialidadPrimaria" />
-                <ScalarProperty Name="RedAlumbradoDistancia" ColumnName="RedAlumbradoDistancia" />
-                <ScalarProperty Name="RedAlumbrado" ColumnName="RedAlumbrado" />
-                <ScalarProperty Name="RedEnergiaDistancia" ColumnName="RedEnergiaDistancia" />
-                <ScalarProperty Name="RedEnergia" ColumnName="RedEnergia" />
-                <ScalarProperty Name="RedDrenajeDistancia" ColumnName="RedDrenajeDistancia" />
-                <ScalarProperty Name="RedDrenaje" ColumnName="RedDrenaje" />
-                <ScalarProperty Name="RedAguaDistancia" ColumnName="RedAguaDistancia" />
-                <ScalarProperty Name="RedAgua" ColumnName="RedAgua" />
-                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
-                <ScalarProperty Name="IdServicioMpal" ColumnName="IdServicioMpal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3161,6 +3010,157 @@
                 <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
                 <ScalarProperty Name="Folio" ColumnName="Folio" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlmacenamientoDren">
+            <EntityTypeMapping TypeName="Model.AlmacenamientoDren">
+              <MappingFragment StoreEntitySet="AlmacenamientoDren">
+                <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
+                <ScalarProperty Name="FosaSepticaEstado" ColumnName="FosaSepticaEstado" />
+                <ScalarProperty Name="FosaSeptica" ColumnName="FosaSeptica" />
+                <ScalarProperty Name="ColectorMunicipalEstado" ColumnName="ColectorMunicipalEstado" />
+                <ScalarProperty Name="ColectorMunicipal" ColumnName="ColectorMunicipal" />
+                <ScalarProperty Name="TinacoEstado" ColumnName="TinacoEstado" />
+                <ScalarProperty Name="Tinaco" ColumnName="Tinaco" />
+                <ScalarProperty Name="CisternaEstado" ColumnName="CisternaEstado" />
+                <ScalarProperty Name="Cisterna" ColumnName="Cisterna" />
+                <ScalarProperty Name="PipaEstado" ColumnName="PipaEstado" />
+                <ScalarProperty Name="Pipa" ColumnName="Pipa" />
+                <ScalarProperty Name="RedaguaEstado" ColumnName="RedaguaEstado" />
+                <ScalarProperty Name="Redagua" ColumnName="Redagua" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdAlmacenDrenaje" ColumnName="IdAlmacenDrenaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Croquis">
+            <EntityTypeMapping TypeName="Model.Croquis">
+              <MappingFragment StoreEntitySet="Croquis">
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="TipoSuelo" ColumnName="TipoSuelo" />
+                <ScalarProperty Name="Predio" ColumnName="Predio" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="DocCroquis" ColumnName="DocCroquis" />
+                <ScalarProperty Name="IdCroquis" ColumnName="IdCroquis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnergiaElectrica">
+            <EntityTypeMapping TypeName="Model.EnergiaElectrica">
+              <MappingFragment StoreEntitySet="EnergiaElectrica">
+                <ScalarProperty Name="EstadoGeneral" ColumnName="EstadoGeneral" />
+                <ScalarProperty Name="LuminariaEstado" ColumnName="LuminariaEstado" />
+                <ScalarProperty Name="Luminaria" ColumnName="Luminaria" />
+                <ScalarProperty Name="AlumbradoExtEstado" ColumnName="AlumbradoExtEstado" />
+                <ScalarProperty Name="AlumbradoExt" ColumnName="AlumbradoExt" />
+                <ScalarProperty Name="TermomagneticoElectrico" ColumnName="TermomagneticoElectrico" />
+                <ScalarProperty Name="Termomagnetico" ColumnName="Termomagnetico" />
+                <ScalarProperty Name="InterruptorGralEstado" ColumnName="InterruptorGralEstado" />
+                <ScalarProperty Name="InterruptorGral" ColumnName="InterruptorGral" />
+                <ScalarProperty Name="TableroDistribucionEstado" ColumnName="TableroDistribucionEstado" />
+                <ScalarProperty Name="TableroDistribucion" ColumnName="TableroDistribucion" />
+                <ScalarProperty Name="MuroAcometidaEstado" ColumnName="MuroAcometidaEstado" />
+                <ScalarProperty Name="MuroAcometida" ColumnName="MuroAcometida" />
+                <ScalarProperty Name="SubestacionEstado" ColumnName="SubestacionEstado" />
+                <ScalarProperty Name="Subestacion" ColumnName="Subestacion" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEnergiaElectrica" ColumnName="IdEnergiaElectrica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entorno">
+            <EntityTypeMapping TypeName="Model.Entorno">
+              <MappingFragment StoreEntitySet="Entorno">
+                <ScalarProperty Name="ComercioDistancia" ColumnName="ComercioDistancia" />
+                <ScalarProperty Name="Comercio" ColumnName="Comercio" />
+                <ScalarProperty Name="AmenazaVialDistancia" ColumnName="AmenazaVialDistancia" />
+                <ScalarProperty Name="AmenazaVial" ColumnName="AmenazaVial" />
+                <ScalarProperty Name="DerechoViaDistancia" ColumnName="DerechoViaDistancia" />
+                <ScalarProperty Name="DerechoVia" ColumnName="DerechoVia" />
+                <ScalarProperty Name="GasolineraDistancia" ColumnName="GasolineraDistancia" />
+                <ScalarProperty Name="Gasolinera" ColumnName="Gasolinera" />
+                <ScalarProperty Name="Rio_ArrolloDistancia" ColumnName="Rio_ArrolloDistancia" />
+                <ScalarProperty Name="Rio_Arrollo" ColumnName="Rio_Arrollo" />
+                <ScalarProperty Name="Terreno" ColumnName="Terreno" />
+                <ScalarProperty Name="Infraestructura" ColumnName="Infraestructura" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEntorno" ColumnName="IdEntorno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspacioMultiple">
+            <EntityTypeMapping TypeName="Model.EspacioMultiple">
+              <MappingFragment StoreEntitySet="EspacioMultiple">
+                <ScalarProperty Name="OtroEstado" ColumnName="OtroEstado" />
+                <ScalarProperty Name="Otro" ColumnName="Otro" />
+                <ScalarProperty Name="AstaBanderaEstado" ColumnName="AstaBanderaEstado" />
+                <ScalarProperty Name="AstaBandera" ColumnName="AstaBandera" />
+                <ScalarProperty Name="AccesoP" ColumnName="AccesoP" />
+                <ScalarProperty Name="AccesoPEstado" ColumnName="AccesoPEstado" />
+                <ScalarProperty Name="Bebedero" ColumnName="Bebedero" />
+                <ScalarProperty Name="BebederoEstado" ColumnName="BebederoEstado" />
+                <ScalarProperty Name="DomoMalla" ColumnName="DomoMalla" />
+                <ScalarProperty Name="DomoMallaEstado" ColumnName="DomoMallaEstado" />
+                <ScalarProperty Name="Plaza" ColumnName="Plaza" />
+                <ScalarProperty Name="PlazaEstado" ColumnName="PlazaEstado" />
+                <ScalarProperty Name="CanchaMultiple" ColumnName="CanchaMultiple" />
+                <ScalarProperty Name="CanchaMultipleEstado" ColumnName="CanchaMultipleEstado" />
+                <ScalarProperty Name="Rampas" ColumnName="Rampas" />
+                <ScalarProperty Name="RampasEstado" ColumnName="RampasEstado" />
+                <ScalarProperty Name="Barda" ColumnName="Barda" />
+                <ScalarProperty Name="BardaEstado" ColumnName="BardaEstado" />
+                <ScalarProperty Name="Areajuegos" ColumnName="Areajuegos" />
+                <ScalarProperty Name="AreajuegosEstado" ColumnName="AreajuegosEstado" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdEspacioMultiple" ColumnName="IdEspacioMultiple" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matricula">
+            <EntityTypeMapping TypeName="Model.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="PersonalDoncente" ColumnName="PersonalDoncente" />
+                <ScalarProperty Name="PersonaDiscapacidad" ColumnName="PersonaDiscapacidad" />
+                <ScalarProperty Name="Alumnos" ColumnName="Alumnos" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicioMunicipal">
+            <EntityTypeMapping TypeName="Model.ServicioMunicipal">
+              <MappingFragment StoreEntitySet="ServicioMunicipal">
+                <ScalarProperty Name="VialidadTerciaria" ColumnName="VialidadTerciaria" />
+                <ScalarProperty Name="VialidadSecundaria" ColumnName="VialidadSecundaria" />
+                <ScalarProperty Name="VialidadPrimaria" ColumnName="VialidadPrimaria" />
+                <ScalarProperty Name="RedAlumbradoDistancia" ColumnName="RedAlumbradoDistancia" />
+                <ScalarProperty Name="RedAlumbrado" ColumnName="RedAlumbrado" />
+                <ScalarProperty Name="RedEnergiaDistancia" ColumnName="RedEnergiaDistancia" />
+                <ScalarProperty Name="RedEnergia" ColumnName="RedEnergia" />
+                <ScalarProperty Name="RedDrenajeDistancia" ColumnName="RedDrenajeDistancia" />
+                <ScalarProperty Name="RedDrenaje" ColumnName="RedDrenaje" />
+                <ScalarProperty Name="RedAguaDistancia" ColumnName="RedAguaDistancia" />
+                <ScalarProperty Name="RedAgua" ColumnName="RedAgua" />
+                <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
+                <ScalarProperty Name="IdServicioMpal" ColumnName="IdServicioMpal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspacioEducativoDet">
+            <EntityTypeMapping TypeName="Model.EspacioEducativoDet">
+              <MappingFragment StoreEntitySet="EspacioEducativoDet">
+                <ScalarProperty Name="AulasUsoMultiple" ColumnName="AulasUsoMultiple" />
+                <ScalarProperty Name="BodegaApendice" ColumnName="BodegaApendice" />
+                <ScalarProperty Name="Laboratirio" ColumnName="Laboratirio" />
+                <ScalarProperty Name="ServicioAdministrativoBiblio" ColumnName="ServicioAdministrativoBiblio" />
+                <ScalarProperty Name="ServicioSanitario" ColumnName="ServicioSanitario" />
+                <ScalarProperty Name="Taller" ColumnName="Taller" />
+                <ScalarProperty Name="Aulas" ColumnName="Aulas" />
+                <ScalarProperty Name="TipoEstructura" ColumnName="TipoEstructura" />
+                <ScalarProperty Name="IdEspacioEducativoFk" ColumnName="IdEspacioEducativoFk" />
+                <ScalarProperty Name="Edificio" ColumnName="Edificio" />
+                <ScalarProperty Name="IdEspacioDet" ColumnName="IdEspacioDet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

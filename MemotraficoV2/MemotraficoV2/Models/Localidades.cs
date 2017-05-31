@@ -23,5 +23,11 @@ namespace MemotraficoV2.Models
                 throw e;
             }
         }
+
+        public static int IdLocalidades(string municipio)
+        {
+            SASEntities db = new SASEntities();
+            return db.Localidades.FirstOrDefault(i => i.Nombre.Contains(municipio)).IdLocalidad;
+        }
     }
 }

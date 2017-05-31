@@ -69,11 +69,11 @@
             }
             else
             {
-                var x = 0;
-                var count = Model.ComponenteIII.Count();
+                var valorultimo = Model.ComponenteIII.Count();
+                var x = 1;
                 foreach (var i in Model.ComponenteIII)
                 {
-                    if (x == (count - 1))
+                    if (valorultimo == x)
                     {
                         <tr>
                             <td><input class="form-control" name="C3Conceptos" value="@(i.Concepto)" /></td>
@@ -83,11 +83,11 @@
                     }
                     else
                     {
-                    <tr>
-                        <td><input class="form-control" name="Conceptos" value="@(i.Concepto)" readonly /></td>
-                        <td><input class="form-control" name="Solicitante" value="@(i.Solicita)" /></td>
-                        <td><input class="form-control" name="Requerimientos" value="@(i.Requiere)" /></td>
-                    </tr>
+                        <tr>
+                            <td><input class="form-control" name="C3Conceptos" value="@(i.Concepto)" readonly /></td>
+                            <td><input class="form-control" name="C3Solicitante" value="@(i.Solicita)" /></td>
+                            <td><input class="form-control" name="C3Requerimientos" value="@(i.Requiere)" /></td>
+                        </tr>
                     }
                     x++;
                 }

@@ -1,4 +1,5 @@
-﻿using MemotraficoV2.Models;
+﻿using MemotraficoV2.Filters;
+using MemotraficoV2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MemotraficoV2.Controllers
 {
+    [Authorize, Acceso]
     public class BeneficiariosController : Controller
     {
         // GET: Beneficiarios

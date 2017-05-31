@@ -1,11 +1,15 @@
 ﻿@model MemotraficoV2.Models.Solicitudes
 @{
     string rol = MemotraficoV2.Models.Usuarios.Roles();
+    int inst = MemotraficoV2.Models.Usuarios.GetInstitucion();
     var ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
     var ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
     var OPERADOR = MemotraficoV2.Models.Colecciones.ListaRoles.OPERADOR;
 
+    var ICHIFE = MemotraficoV2.Models.Institucion.getinstitucionxsiglas("ICHIFE");
+
     var CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
+    var INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
     var CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
     var ATENDIDA = MemotraficoV2.Models.Colecciones.ListaEstatus.ATENDIDA;
 
@@ -109,16 +113,30 @@
 
                         <div class="ln_solid"></div>
                             <div class="btn-group pull-right">
-                                @if ((Model.uactual == OPERADOR) || (Model.UltimoRol == OPERADOR && Model.IdEstatusFk == ATENDIDA) && Model.uactual == ADMINISTRADOR_DEPENDENCIA)
+                                @if (Model.uactual == ADMINISTRADOR_SOLICITUDES && Model.IdBeneficiarioFk>0 && Model.IdEstatusFk == INICIADO && inst == ICHIFE )
                                 {
-                                    <button class="btn btn-default atendida" type="button" name="acciones" data-rol="@rol" data-accion="Atendida">Solicitud Atendida</button>
-                                    <button class="btn btn-success hide" type="button" name="SaveAtendida" data-rol="@rol">Guardar</button>
+                                    <button class="btn btn-default ichife" type="button" name="acciones" data-rol="@rol" data-accion="canalizarIchife">Canalizar Ichife</button>
+                                    <button class="btn btn-success hide" type="button" name="SaveIchife">Guardar</button>
                                 }
-                                @if (Model.uactual == OPERADOR)
+                                @if (((Model.UltimoRol == ADMINISTRADOR_DEPENDENCIA && Model.IdEstatusFk == ATENDIDA) && Model.uactual == ADMINISTRADOR_SOLICITUDES))
                                 {
-                                    <button class="btn btn-default avance" type="button" name="acciones" data-rol="@rol" data-accion="SubirAvance">Subir Avance</button>
-                                    <button class="btn btn-success hide" type="button" name="SaveAvance">Guardar</button>
+                                    <button class="btn btn-default cerrada" type="button" name="acciones" data-rol="@rol" data-accion="CerrarSol">Cerrar solicitud</button>
+                                    <button class="btn btn-success hide" type="button" name="SaveClose" data-rol="@rol">Cerrar solicitud</button>
                                 }
+                                @if (Model.validacion == true)
+                                {
+                                    if ((Model.uactual == OPERADOR) || ((Model.UltimoRol == OPERADOR && Model.IdEstatusFk == ATENDIDA) && Model.uactual == ADMINISTRADOR_DEPENDENCIA))
+                                    {
+                                        <button class="btn btn-default atendida" type="button" name="acciones" data-rol="@rol" data-accion="Atendida">Solicitud Atendida</button>
+                                        <button class="btn btn-success hide" type="button" name="SaveAtendida" data-rol="@rol">Guardar</button>
+                                    }
+                                    if (Model.uactual == OPERADOR)
+                                    {
+                                        <button class="btn btn-default avance" type="button" name="acciones" data-rol="@rol" data-accion="SubirAvance">Subir Avance</button>
+                                        <button class="btn btn-success hide" type="button" name="SaveAvance">Guardar</button>
+                                    }
+                                }
+                               @Html.ActionLink("Validacion ", "Index", "Validaciones",new { esc = Model.Escuela.IdEscuela,  sol = Model.Folio },new {  @class="btn btn-default"})
                                 <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="canalizar">Canalizar Solicitud</button>
                                 <button class="btn btn-success hide" type="button" name="Save" data-rol="@rol" data-accion="canalizar">Guardar</button>
                                 @if (Model.IdEstatusFk != CANCELADO)
@@ -135,78 +153,56 @@
     </div>
 
 <script>
+    debugger
     $('[name="acciones"]').click(function () {
         var button = $(this);
-        var buttonSave = $('[name=Save]');
-        var buttonSave2 = $('[name=SaveCancelacion]');
-        var buttonSaveA = $('[name=SaveAvance]');
-        var buttonSaveAt = $('[name=SaveAtendida]');
+        button.removeAttr('name');
+        button.addClass('hide');
+
         var accion = $(this).data('accion');
         var rolusuario = $(this).data('rol');
         var data = "";
 
-        if (accion == "canalizar") {
-            button.removeAttr('name');
-            button.addClass('hide');
+        switch (accion) {
+            case "canalizar":
+                $('[name=Save]').removeClass('hide');
+                abrirCampos(rolusuario);
+                break;
 
-            buttonSave.removeClass('hide');
+            case "close":
+                $('[name=SaveCancelacion]').removeClass('hide');
+                abrirCampo(accion);
+                break;
 
-            $('.cancelar').addClass('hide');
-            $('.atendida').addClass('hide');
-            $('.avance').addClass('hide');
-            $('.canalizar').addClass('hide');
+            case "SubirAvance":
+                $('[name=SaveAvance]').removeClass('hide');
+                abrirAvance();
+                break;
 
-            abrirCampos(rolusuario);
+            case "Atendida":
+                $('[name=SaveAtendida]').removeClass('hide');
+                abrirAvance();
+                break;
+
+            case "CerrarSol":
+                $('[name=SaveClose]').removeClass('hide');
+                CerrarSolicitud();
+                break;
+
+            case "canalizarIchife":
+                $('[name=SaveIchife]').removeClass('hide');
+                break;
         }
-        if (accion == "open") {
-            button.text('Abrir Solicitud');
-            button.removeAttr('name');
-            button.attr('id', "IdOpen")
-            button.removeClass('btn-default');
-            button.addClass('btn-success');
 
-            button2 = $('.canalizar');
-            button2.addClass('hide');
-            abrirCampo(accion);
-        }
-        if (accion == "close") {
-            button.removeAttr('name');
-            button.addClass('hide');
+        $('.cancelar').addClass('hide');
+        $('.atendida').addClass('hide');
+        $('.avance').addClass('hide');
+        $('.canalizar').addClass('hide');
+        $('.cerrar').addClass('hide');
+        $('.ichife').addClass('hide');
 
-            buttonSave2.removeClass('hide');
-
-            $('.cancelar').addClass('hide');
-            $('.atendida').addClass('hide');
-            $('.avance').addClass('hide');
-            $('.canalizar').addClass('hide');
-
-            abrirCampo(accion);
-        }
-        if (accion == "SubirAvance") {
-            button.removeAttr('name');
-            button.addClass('hide');
-
-            buttonSaveA.removeClass('hide');
-
-            $('.cancelar').addClass('hide');
-            $('.atendida').addClass('hide');
-            $('.avance').addClass('hide');
-            $('.canalizar').addClass('hide');
-            abrirAvance();
-        }
-        if (accion == "Atendida") {
-            button.removeAttr('name');
-            button.addClass('hide');
-
-            buttonSaveAt.removeClass('hide');
-
-            $('.cancelar').addClass('hide');
-            $('.atendida').addClass('hide');
-            $('.avance').addClass('hide');
-            $('.canalizar').addClass('hide');
-            abrirAvance();
-        }
     });
+
     $('[name=Save]').click(function () {
         var rolusuario = $(this).data('rol');
         var data = null;
@@ -347,6 +343,62 @@
         });
     });
 
+    $('[name=SaveClose]').click(function () {
+
+        var data = new FormData();
+        var IdSolicitud = $("#IdSolicitud").val();
+        var Comentario = $("#Comentario").val();
+
+        data.append('IdSolicitud', IdSolicitud);
+        data.append('Comentario', Comentario);
+
+        $.ajax({
+            url: "/Solicitudes/CerrarSolicitud",
+            type: "post",
+            dataType: "json",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function (data) {
+            if (data.result == true) {
+                AlertSuccess(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+            else {
+                AlertError(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+        });
+    });
+
+    $('[name=SaveIchife]').click(function () {
+
+        var data = new FormData();
+        var IdSolicitud = $("#IdSolicitud").val();
+
+        data.append('IdSolicitud', IdSolicitud);
+
+        $.ajax({
+            url: "/Solicitudes/CananlizaICHIFE",
+            type: "post",
+            dataType: "json",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function (data) {
+            if (data.result == true) {
+                AlertSuccess(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+            else {
+                AlertError(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+        });
+    });
+
     function abrirCampos(rol) {
         switch (rol) {
             case "Administrador de Solicitudes":
@@ -369,6 +421,10 @@
 
     function abrirAvance() {
         $('[name=avance]').removeAttr('hidden');
+        $('[name=comentario]').removeAttr('hidden');
+    };
+
+    function CerrarSolicitud() {
         $('[name=comentario]').removeAttr('hidden');
     };
 
