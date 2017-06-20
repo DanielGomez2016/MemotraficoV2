@@ -7,6 +7,12 @@ namespace MemotraficoV2.Models
 {
     public partial class Localidades
     {
+        public void Crear()
+        {
+            SASEntities db = new SASEntities();
+            db.Localidades.AddObject(this);
+            db.SaveChanges();
+        }
         public void Editar()
         {
             try
