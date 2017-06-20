@@ -234,7 +234,7 @@ namespace MemotraficoV2.Controllers
 
                             Contacto c = new Contacto();
                             c = db.Contacto.FirstOrDefault(j => j.IdEscuelaFk == id2);
-                            c.IdEscuelaFk = id;
+                            c.IdEscuelaFk = id2;
                             c.Nombre = ds.Tables[0].Rows[i][27].ToString();
                             //c.Email = ds.Tables[0].Rows[i][10].ToString();
                             c.Telefono = ds.Tables[0].Rows[i][24].ToString();
@@ -337,33 +337,33 @@ namespace MemotraficoV2.Controllers
 
                         SASEntities db = new SASEntities();
                         Municipios m = new Municipios();
-                        var n = ds.Tables[0].Rows[i][0].ToString();
+                        var n = ds.Tables[0].Rows[i][1].ToString();
                         if (!db.Municipios.Any(j => j.Nombre == n))
                         {
-                            m.Nombre = ds.Tables[0].Rows[i][0].ToString();
+                            m.Nombre = ds.Tables[0].Rows[i][1].ToString();
                             var id = m.Crear();
 
                             Localidades l = new Localidades();
                             l.IdMunicipioFk = id;
-                            l.Nombre = ds.Tables[0].Rows[i][9].ToString();
-                            l.ClaveLocalidad = ds.Tables[0].Rows[i][9].ToString();
-                            l.Latitud = ds.Tables[0].Rows[i][9].ToString();
-                            l.longitud = ds.Tables[0].Rows[i][9].ToString();
-                            l.Altitud = ds.Tables[0].Rows[i][9].ToString();
+                            l.Nombre = ds.Tables[0].Rows[i][3].ToString();
+                            l.ClaveLocalidad = ds.Tables[0].Rows[i][2].ToString();
+                            l.Latitud = ds.Tables[0].Rows[i][4].ToString();
+                            l.Longitud = ds.Tables[0].Rows[i][5].ToString();
+                            l.Altitud = Convert.ToInt32(ds.Tables[6].Rows[i][9].ToString());
                             l.Crear();
                         }
                         else
                         {
-                            m.Nombre = ds.Tables[0].Rows[i][0].ToString();
+                            m.Nombre = ds.Tables[0].Rows[i][1].ToString();
                             var id = m.Editar();
-                            var loc = ds.Tables[0].Rows[i][9].ToString();
-                            Localidades l =  db.Localidades.FirstOrDefault(i => i.Nombre == loc);
+                            var loc = ds.Tables[0].Rows[i][3].ToString();
+                            Localidades l =  db.Localidades.FirstOrDefault(j => j.Nombre == loc);
                             l.IdMunicipioFk = id;
-                            l.Nombre = ds.Tables[0].Rows[i][9].ToString();
-                            l.ClaveLocalidad = ds.Tables[0].Rows[i][9].ToString();
-                            l.Latitud = ds.Tables[0].Rows[i][9].ToString();
-                            l.longitud = ds.Tables[0].Rows[i][9].ToString();
-                            l.Altitud = ds.Tables[0].Rows[i][9].ToString();
+                            l.Nombre = ds.Tables[0].Rows[i][3].ToString();
+                            l.ClaveLocalidad = ds.Tables[0].Rows[i][2].ToString();
+                            l.Latitud = ds.Tables[0].Rows[i][4].ToString();
+                            l.Longitud = ds.Tables[0].Rows[i][5].ToString();
+                            l.Altitud = Convert.ToInt32(ds.Tables[6].Rows[i][9].ToString());
                             l.Editar();
 
                         }
@@ -376,7 +376,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Until/ImportarExcel",
-                    msj = "Se agregaron y/o modificaron " + con + " escuelas"
+                    msj = "Se agregaron y/o modificaron " + con + " municipios y localidades"
                 });
             }
             catch
@@ -385,7 +385,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = false,
                     dir = "/Until/ImportarExcel",
-                    msj = "Error al hace el import, Se agregaron y/o modificaron " + con + " escuelas"
+                    msj = "Error al hace el import, Se agregaron y/o modificaron " + con + " municipios y localidades"
                 });
             }
         }
