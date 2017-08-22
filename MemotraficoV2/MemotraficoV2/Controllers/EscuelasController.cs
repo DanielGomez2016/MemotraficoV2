@@ -20,10 +20,10 @@ namespace MemotraficoV2.Controllers
 
             foreach(var x in e)
             {
-                x.NombreDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Nombre.ToString();
-                x.EmailDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Email.ToString();
-                x.Telefono = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Telefono.ToString();
-                x.Celular = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Celular.ToString();
+                x.NombreDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Nombre != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Nombre.ToString() : "";
+                x.EmailDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Email != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Email.ToString() : "";
+                x.Telefono = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Telefono != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Telefono.ToString() : "";
+                x.Celular = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Celular != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Celular.ToString() : "";
 
                 ec.Add(x);
             }
