@@ -193,7 +193,7 @@ namespace MemotraficoV2.Controllers
                             e.Nombre = ds.Tables[0].Rows[i][2].ToString();
                             e.Domicilio = ds.Tables[0].Rows[i][5].ToString();
                             e.IdMunicipioFk = Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString());
-                            e.IdLocalidadFk = Convert.ToInt32(ds.Tables[0].Rows[i][13].ToString());
+                            e.IdLocalidadFk = e.IdLocalidadFk = Localidades.IdLocalidades(ds.Tables[0].Rows[i][13].ToString(), Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString()));
                             //e.IdNivelEducativo = NivelEducativo.IdNivelEdu(ds.Tables[0].Rows[i][5].ToString());
                             e.Turno = ds.Tables[0].Rows[i][3].ToString();
                             //e.Geox = ds.Tables[0].Rows[i][7].ToString();
@@ -227,7 +227,7 @@ namespace MemotraficoV2.Controllers
                             e.Nombre = ds.Tables[0].Rows[i][2].ToString();
                             e.Domicilio = ds.Tables[0].Rows[i][5].ToString();
                             e.IdMunicipioFk = Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString());
-                            e.IdLocalidadFk = Convert.ToInt32(ds.Tables[0].Rows[i][13].ToString());
+                            e.IdLocalidadFk = Localidades.IdLocalidades(ds.Tables[0].Rows[i][13].ToString(), Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString()));
                             //e.IdNivelEducativo = NivelEducativo.IdNivelEdu(ds.Tables[0].Rows[i][5].ToString());
                             e.Turno = ds.Tables[0].Rows[i][3].ToString();
                             //e.Geox = ds.Tables[0].Rows[i][7].ToString();

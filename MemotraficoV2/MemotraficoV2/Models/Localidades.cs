@@ -30,10 +30,13 @@ namespace MemotraficoV2.Models
             }
         }
 
-        public static int IdLocalidades(string municipio)
+        public static int IdLocalidades(string claveloc, int m)
         {
+
+            var str = Convert.ToInt32(claveloc);
+
             SASEntities db = new SASEntities();
-            return db.Localidades.FirstOrDefault(i => i.Nombre.Contains(municipio)).IdLocalidad;
+            return db.Localidades.FirstOrDefault(i => i.ClaveLocalidad.Contains(str.ToString()) && i.IdMunicipioFk == m).IdLocalidad;
         }
     }
 }
