@@ -4935,6 +4935,7 @@
     <Content Include="Models\Db.edmx.diagram">
       <DependentUpon>Db.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\sas.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
