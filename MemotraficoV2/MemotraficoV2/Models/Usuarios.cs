@@ -80,6 +80,26 @@ namespace MemotraficoV2.Models
             return rols;
         }
 
+        public static string RolesIN()
+        {
+            var rols = "";
+            var user = HttpContext.Current.User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            ApplicationUser us = db.Users.First(i => i.Id == user);
+            var rol = us.Roles.Select(i => i.RoleId);
+
+            SASEntities dbb = new SASEntities();
+
+            foreach (var r in rol)
+            {
+                rols = dbb.AspNetRoles.FirstOrDefault(j => j.Id == r).Id;
+            }
+
+
+            return rols;
+        }
+
         public static string Roles(string user)
         {
             var rols = "";

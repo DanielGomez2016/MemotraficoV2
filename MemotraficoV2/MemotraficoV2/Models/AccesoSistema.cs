@@ -104,17 +104,35 @@ namespace MemotraficoV2.Models
             return db.AccesoSistema.OrderBy(i => new { i.controlador, i.accion }).ToList();
         }
 
-        public static List<AccesoSistema> listarPorRoles(string roles, int? institucion = null)
+        public static List<AccesoSistema> listarPorRoles(string rolename, string roles, int? institucion = null)
         {
             SASEntities db = new SASEntities();
             if (institucion == null)
                 institucion = Usuarios.GetInstitucion();
+            if(rolename == "Admin") {
+                return db.AccesoSistema.Where(x =>
+                                               x.AccesoSistemaRol.Any(a =>
+                                                                      a.IdInstituto == institucion))
+                                        .OrderBy(i => new {
+                                            i.controlador,
+                                            i.accion
+                                        })
+                                        .Distinct()
+                                        .ToList();
 
-            return db.AccesoSistema
-                     .Where(i => i.AccesoSistemaRol.Any(a => a.IdInstituto == institucion && roles.Contains(a.AspNetRoles.Name) || roles.Contains(ListaRoles.ADMINISTRATOR)))
-                     .OrderBy(i => new { i.controlador, i.accion })
-                     .Distinct()
-                     .ToList();
+            }else
+            {
+                return db.AccesoSistema.Where(x =>
+                                               x.AccesoSistemaRol.Any(a =>
+                                                                      a.IdInstituto == institucion && a.IdRol == roles))
+                                        .OrderBy(i => new {
+                                            i.controlador,
+                                            i.accion
+                                        })
+                                        .Distinct()
+                                        .ToList();
+            }
+                     
         }
 
         public static bool SistemaCambiarEstatusControlador(int idAccesoSistema, bool nuevoEstatus)

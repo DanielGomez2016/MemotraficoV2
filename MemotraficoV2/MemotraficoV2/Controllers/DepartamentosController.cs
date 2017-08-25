@@ -56,7 +56,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Departamentos/Index/"+depto.IdInstitucionFk,
-                    msj = "El departamento se a registrado Correctamente"
+                    msj = "El departamento se ha registrado Correctamente"
                 });
             }
             catch

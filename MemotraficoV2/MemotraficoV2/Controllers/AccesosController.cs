@@ -411,7 +411,7 @@ namespace MemotraficoV2.Controllers
         [Ignore]
         public ActionResult CargarMenu()
         {
-            return View(AccesoSistema.listarPorRoles(Usuarios.Roles(), Usuarios.GetInstitucion()));
+            return View(AccesoSistema.listarPorRoles(Usuarios.RolesIN(), Usuarios.Roles(), Usuarios.GetInstitucion()));
         }
 
         [Ignore]

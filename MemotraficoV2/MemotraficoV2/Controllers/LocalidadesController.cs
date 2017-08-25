@@ -43,7 +43,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Localidades",
-                    msj = "La localidad se a registrado Correctamente"
+                    msj = "La localidad se ha registrado Correctamente"
                 });
             }
             catch
