@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace MemotraficoV2.Models
 {
-    [MetadataType(typeof(mLocalidades))]
     public partial class Localidades
     {
-
-        public class mLocalidades
-        {
-            [Required]
-            [Display(Name = "Municipio")]
-            public string IdMunicipioFk { get; set; }
-        }
-
         public void Crear()
         {
             SASEntities db = new SASEntities();
@@ -40,13 +30,10 @@ namespace MemotraficoV2.Models
             }
         }
 
-        public static int IdLocalidades(string claveloc, int m)
+        public static int IdLocalidades(string municipio)
         {
-
-            var str = Convert.ToInt32(claveloc);
-
             SASEntities db = new SASEntities();
-            return db.Localidades.FirstOrDefault(i => i.ClaveLocalidad.Contains(str.ToString()) && i.IdMunicipioFk == m).IdLocalidad;
+            return db.Localidades.FirstOrDefault(i => i.Nombre.Contains(municipio)).IdLocalidad;
         }
     }
 }

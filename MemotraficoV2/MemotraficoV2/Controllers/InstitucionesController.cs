@@ -48,7 +48,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Instituciones",
-                    msj = "La institucion se ha registrado Correctamente"
+                    msj = "La institucion se a registrado Correctamente"
                 });
             }
             catch

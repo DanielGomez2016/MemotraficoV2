@@ -63,13 +63,13 @@
                             <div class="item form-group">
                                 @Html.LabelFor(m => m.IdInstitucion, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.DropDownList("IdInstitucion", new SelectList(ViewBag.Institucion, "id", "nombre"), "Todos", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })
+                                    @Html.TextBoxFor(m => m.IdInstitucion, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
                                 </div>
                             </div>
                             <div class="item form-group">
                                 @Html.LabelFor(m => m.IdDepartamento, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.DropDownList("IdDepartamento", new SelectList(ViewBag.Departamento, "id", "nombre"), "Todos", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })
+                                    @Html.TextBoxFor(m => m.IdDepartamento, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
                                 </div>
                             </div>
                             <div class="form-group">

@@ -108,43 +108,11 @@ namespace MemotraficoV2.Controllers
             }
         }
 
-        public JsonResult CargarDepto(int id)
-        {
-            try
-            {
-                SASEntities db = new SASEntities();
-                List<Departamento> list = db.Departamento.Where(i => i.IdInstitucionFk == id).ToList();
-
-                List<string> rows = new List<string>();
-                var rowfirst = "<option>Seleciona el departamento</option>";
-                rows.Add(rowfirst);
-                foreach (var x in list)
-                {
-                    var option = "<option value=\"" + x.IdDepartamento + "\">" + x.Nombre + "</option>";
-                    rows.Add(option);
-                }
-
-                return Json(new
-                {
-                    total = rows.Count(),
-                    datos = rows.ToList()
-                }, JsonRequestBehavior.AllowGet);
-            }
-            catch
-            {
-                return Json(new
-                {
-                    result = true
-                });
-            }
-        }
-
         public ActionResult ImportarExcel()
         {
             return View();
         }
 
-        [HttpPost]
         public JsonResult ImportExcelEscuelas(HttpPostedFileBase file)
         {
             var con = 0;
@@ -223,32 +191,25 @@ namespace MemotraficoV2.Controllers
                             e.Clave = ds.Tables[0].Rows[i][1].ToString();
                             e.Nombre = ds.Tables[0].Rows[i][2].ToString();
                             e.Domicilio = ds.Tables[0].Rows[i][5].ToString();
-                            e.IdMunicipioFk = Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString());
-                            e.IdLocalidadFk = e.IdLocalidadFk = Localidades.IdLocalidades(ds.Tables[0].Rows[i][13].ToString(), Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString()));
+                            e.IdMunicipioFk = Municipios.IdMunicipios(ds.Tables[0].Rows[i][12].ToString());
+                            e.IdLocalidadFk = Localidades.IdLocalidades(ds.Tables[0].Rows[i][14].ToString());
                             //e.IdNivelEducativo = NivelEducativo.IdNivelEdu(ds.Tables[0].Rows[i][5].ToString());
                             e.Turno = ds.Tables[0].Rows[i][3].ToString();
                             //e.Geox = ds.Tables[0].Rows[i][7].ToString();
                             //e.Geoy = ds.Tables[0].Rows[i][8].ToString();
-                            e.Estatus = ds.Tables[0].Rows[i][4].ToString();
-                            if (ds.Tables[0].Rows[i][9].ToString() != "")
-                            {
-                                e.CodigoPostal = Convert.ToInt32(ds.Tables[0].Rows[i][9].ToString());
-                            }
+                            e.Estatus = ds.Tables[0].Rows[i][5].ToString();
+                            e.CodigoPostal = Convert.ToInt32(ds.Tables[0].Rows[i][9].ToString());
                             e.Colonia = ds.Tables[0].Rows[i][10].ToString();
                             e.Marginacion = ds.Tables[0].Rows[i][15].ToString();
                             e.Poblacion = ds.Tables[0].Rows[i][16].ToString();
-                            var zona = ds.Tables[0].Rows[i][23].ToString();
-                            if (!ds.Tables[0].Rows[i][23].ToString().Contains("NA"))
-                            {
-                                e.Zona = Convert.ToInt32(ds.Tables[0].Rows[i][23].ToString());
-                            }
+                            e.Zona = Convert.ToInt32(ds.Tables[0].Rows[i][22].ToString());
                             var id = e.Crear();
 
                             Contacto c = new Contacto();
                             c.IdEscuelaFk = id;
-                            c.Nombre = ds.Tables[0].Rows[i][28].ToString();
+                            c.Nombre = ds.Tables[0].Rows[i][27].ToString();
                             //c.Email = ds.Tables[0].Rows[i][10].ToString();
-                            c.Telefono = ds.Tables[0].Rows[i][25].ToString();
+                            c.Telefono = ds.Tables[0].Rows[i][24].ToString();
                             //c.Celular = ds.Tables[0].Rows[i][12].ToString();
                             c.Crear();
                         }
@@ -257,33 +218,26 @@ namespace MemotraficoV2.Controllers
                             e = db.Escuela.FirstOrDefault(j => j.Clave == clave);
                             e.Nombre = ds.Tables[0].Rows[i][2].ToString();
                             e.Domicilio = ds.Tables[0].Rows[i][5].ToString();
-                            e.IdMunicipioFk = Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString());
-                            e.IdLocalidadFk = Localidades.IdLocalidades(ds.Tables[0].Rows[i][13].ToString(), Convert.ToInt32(ds.Tables[0].Rows[i][11].ToString()));
+                            e.IdMunicipioFk = Municipios.IdMunicipios(ds.Tables[0].Rows[i][12].ToString());
+                            e.IdLocalidadFk = Localidades.IdLocalidades(ds.Tables[0].Rows[i][14].ToString());
                             //e.IdNivelEducativo = NivelEducativo.IdNivelEdu(ds.Tables[0].Rows[i][5].ToString());
                             e.Turno = ds.Tables[0].Rows[i][3].ToString();
                             //e.Geox = ds.Tables[0].Rows[i][7].ToString();
                             //e.Geoy = ds.Tables[0].Rows[i][8].ToString();
-                            e.Estatus = ds.Tables[0].Rows[i][4].ToString();
-                            if (ds.Tables[0].Rows[i][9].ToString() != null && ds.Tables[0].Rows[i][9].ToString() != "")
-                            {
-                                e.CodigoPostal = Convert.ToInt32(ds.Tables[0].Rows[i][9].ToString());
-                            }
+                            e.Estatus = ds.Tables[0].Rows[i][5].ToString();
+                            e.CodigoPostal = Convert.ToInt32(ds.Tables[0].Rows[i][9].ToString());
                             e.Colonia = ds.Tables[0].Rows[i][10].ToString();
                             e.Marginacion = ds.Tables[0].Rows[i][15].ToString();
                             e.Poblacion = ds.Tables[0].Rows[i][16].ToString();
-                            var zona = ds.Tables[0].Rows[i][23].ToString();
-                            if (!ds.Tables[0].Rows[i][23].ToString().Contains("NA"))
-                            {
-                                e.Zona = Convert.ToInt32(ds.Tables[0].Rows[i][23].ToString());
-                            }
+                            e.Zona = Convert.ToInt32(ds.Tables[0].Rows[i][22].ToString());
                             var id2 = e.Editar();
 
                             Contacto c = new Contacto();
                             c = db.Contacto.FirstOrDefault(j => j.IdEscuelaFk == id2);
                             c.IdEscuelaFk = id2;
-                            c.Nombre = ds.Tables[0].Rows[i][28].ToString();
+                            c.Nombre = ds.Tables[0].Rows[i][27].ToString();
                             //c.Email = ds.Tables[0].Rows[i][10].ToString();
-                            c.Telefono = ds.Tables[0].Rows[i][25].ToString();
+                            c.Telefono = ds.Tables[0].Rows[i][24].ToString();
                             //c.Celular = ds.Tables[0].Rows[i][12].ToString();
                             c.Editar();
 
@@ -300,7 +254,7 @@ namespace MemotraficoV2.Controllers
                     msj = "Se agregaron y/o modificaron " + con + " escuelas"
                 });
             }
-            catch(Exception e)
+            catch
             {
                 return Json(new
                 {
@@ -311,7 +265,6 @@ namespace MemotraficoV2.Controllers
             }
         }
 
-        [HttpPost]
         public JsonResult ImportExcelML(HttpPostedFileBase file)
         {
             var con = 0;
@@ -384,47 +337,34 @@ namespace MemotraficoV2.Controllers
 
                         SASEntities db = new SASEntities();
                         Municipios m = new Municipios();
-                        var n = ds.Tables[0].Rows[i][0].ToString();
+                        var n = ds.Tables[0].Rows[i][1].ToString();
                         if (!db.Municipios.Any(j => j.Nombre == n))
                         {
-                            m.Nombre = ds.Tables[0].Rows[i][0].ToString();
+                            m.Nombre = ds.Tables[0].Rows[i][1].ToString();
                             var id = m.Crear();
 
                             Localidades l = new Localidades();
                             l.IdMunicipioFk = id;
-                            l.Nombre = ds.Tables[0].Rows[i][2].ToString();
-                            l.ClaveLocalidad = ds.Tables[0].Rows[i][1].ToString();
-                            l.Latitud = ds.Tables[0].Rows[i][3].ToString();
-                            l.Longitud = ds.Tables[0].Rows[i][4].ToString();
-                            l.Altitud = Convert.ToInt32(ds.Tables[0].Rows[i][5].ToString());
+                            l.Nombre = ds.Tables[0].Rows[i][3].ToString();
+                            l.ClaveLocalidad = ds.Tables[0].Rows[i][2].ToString();
+                            l.Latitud = ds.Tables[0].Rows[i][4].ToString();
+                            l.Longitud = ds.Tables[0].Rows[i][5].ToString();
+                            l.Altitud = Convert.ToInt32(ds.Tables[6].Rows[i][9].ToString());
                             l.Crear();
                         }
                         else
                         {
-                            var id = m.get(ds.Tables[0].Rows[i][0].ToString());
-                            var loc = ds.Tables[0].Rows[i][1].ToString();
-                            Localidades l = new Localidades();
-
-                            if (!db.Localidades.Any(j => j.ClaveLocalidad == loc && j.IdMunicipioFk == id))
-                            {
-                                l.IdMunicipioFk = id;
-                                l.Nombre = ds.Tables[0].Rows[i][2].ToString();
-                                l.ClaveLocalidad = ds.Tables[0].Rows[i][1].ToString();
-                                l.Latitud = ds.Tables[0].Rows[i][3].ToString();
-                                l.Longitud = ds.Tables[0].Rows[i][4].ToString();
-                                l.Altitud = Convert.ToInt32(ds.Tables[0].Rows[i][5].ToString());
-                                l.Crear();
-                            }else
-                            {
-                                l = db.Localidades.FirstOrDefault(x => x.ClaveLocalidad == loc);
-                                l.IdMunicipioFk = id;
-                                l.Nombre = ds.Tables[0].Rows[i][2].ToString();
-                                l.ClaveLocalidad = ds.Tables[0].Rows[i][1].ToString();
-                                l.Latitud = ds.Tables[0].Rows[i][3].ToString();
-                                l.Longitud = ds.Tables[0].Rows[i][4].ToString();
-                                l.Altitud = Convert.ToInt32(ds.Tables[0].Rows[i][5].ToString());
-                                l.Editar();
-                            }
+                            m.Nombre = ds.Tables[0].Rows[i][1].ToString();
+                            var id = m.Editar();
+                            var loc = ds.Tables[0].Rows[i][3].ToString();
+                            Localidades l =  db.Localidades.FirstOrDefault(j => j.Nombre == loc);
+                            l.IdMunicipioFk = id;
+                            l.Nombre = ds.Tables[0].Rows[i][3].ToString();
+                            l.ClaveLocalidad = ds.Tables[0].Rows[i][2].ToString();
+                            l.Latitud = ds.Tables[0].Rows[i][4].ToString();
+                            l.Longitud = ds.Tables[0].Rows[i][5].ToString();
+                            l.Altitud = Convert.ToInt32(ds.Tables[6].Rows[i][9].ToString());
+                            l.Editar();
 
                         }
                         con++;
@@ -439,7 +379,7 @@ namespace MemotraficoV2.Controllers
                     msj = "Se agregaron y/o modificaron " + con + " municipios y localidades"
                 });
             }
-            catch(Exception e)
+            catch
             {
                 return Json(new
                 {

@@ -413,13 +413,11 @@ namespace IdentitySample.Controllers
             var cookie = new HttpCookie("Usuario");
             cookie.Expires = DateTime.Now.AddHours(8);
             cookie["Nombre"] = nu;
-            if (Convert.ToString(u.Imagen) != "")
-            {
-                cookie["Perfil"] = "";
-            }
+            if(Convert.ToString(u.Imagen) != "")
+            cookie["Perfil"] = "/Content/Proyecto/images/user.png";
             else
             {
-                cookie["Perfil"] = "/Content/Proyecto/images/user.png";
+                cookie["Perfil"] = "";
             }
             cookie["Institucion"] = Convert.ToString(u.IdInstitucion);
 
@@ -429,7 +427,6 @@ namespace IdentitySample.Controllers
         //carga la imagen de perfil que tiene el usuario en ese momento
         public FileContentResult GetImagen()
         {
-            try { 
             var u = User.Identity.GetUserId();
             var user = UserManager.FindById(u);
             if (user != null || user.Imagen.Count() > 0)
@@ -441,10 +438,6 @@ namespace IdentitySample.Controllers
                 return file;
             }
             else
-            {
-                return null;
-            }
-            }catch
             {
                 return null;
             }

@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace MemotraficoV2.Models
 {
-    [MetadataType(typeof(mBeneficiario))]
     public partial class Beneficiario
     {
-
-        public class mBeneficiario
-        {
-            [Required]
-            [Display(Name = "Plantel Educativo")]
-            public string Nombre { get; set; }
-        }
-
         public int Crear()
         {
             try

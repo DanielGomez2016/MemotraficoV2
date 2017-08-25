@@ -537,7 +537,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Solicitudes/",
-                    msj = "La validacion de la solicitud se ha completado correctamente"
+                    msj = "La validacion de la solicitud se a completado correctamente"
                 });
             }
             catch(Exception e)
@@ -546,7 +546,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Solicitudes/",
-                    msj = "La validacion  no se ha canalizado correctamente"
+                    msj = "La solicitud se a canalizado correctamente"
                 });
             }
         }

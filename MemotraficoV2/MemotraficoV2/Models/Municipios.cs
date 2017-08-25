@@ -26,18 +26,10 @@ namespace MemotraficoV2.Models
             return IdMunicipio;
         }
 
-        public int get(string n)
-        {
-            SASEntities db = new SASEntities();
-            Municipios m = db.Municipios.FirstOrDefault(i => i.Nombre == n);
-
-            return m.IdMunicipio;
-        }
-
         public static int IdMunicipios(string municipio)
         {
             SASEntities db = new SASEntities();
-            return db.Municipios.FirstOrDefault(i => i.Nombre == municipio).IdMunicipio;
+            return db.Municipios.FirstOrDefault(i => i.Nombre.Contains(municipio)).IdMunicipio;
         }
     }
 }

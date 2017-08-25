@@ -39,7 +39,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Municipios",
-                    msj = "El municipio se ha registrado Correctamente"
+                    msj = "El municipio se a registrado Correctamente"
                 });
             }
             catch

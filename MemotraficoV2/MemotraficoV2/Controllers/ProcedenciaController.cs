@@ -46,7 +46,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Procedencia",
-                    msj = "La procedencia se ha registrado Correctamente"
+                    msj = "La procedencia se a registrado Correctamente"
                 });
             }
             catch
