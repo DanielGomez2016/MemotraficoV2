@@ -62,7 +62,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Escuelas",
-                    msj = "La esceula se a registrado Correctamente"
+                    msj = "La esceula se ha registrado Correctamente"
                 });
             }
             catch

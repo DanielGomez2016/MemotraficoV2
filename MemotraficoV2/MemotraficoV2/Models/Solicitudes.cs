@@ -32,6 +32,9 @@ namespace MemotraficoV2.Models
 
             [Display(Name = "Beneficiario")]
             public string IdBeneficiarioFk { get; set; }
+
+            [Display(Name = "Estatus")]
+            public string IdEstatusFk { get; set; }
         }
 
         public string UltimoRol { get; set; }

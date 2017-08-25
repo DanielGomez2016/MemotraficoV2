@@ -136,6 +136,11 @@ namespace IdentitySample.Controllers
         // GET: /Users/Edit/1
         public async Task<ActionResult> Edit(string id)
         {
+
+            SASEntities db = new SASEntities();
+            ViewBag.Institucion = db.Institucion.Select(i => new { id = i.IdInstitucion, nombre = i.Siglas }).ToList();
+            ViewBag.Departamento = db.Departamento.Select(i => new { id = i.IdDepartamento, nombre = i.Nombre }).ToList();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

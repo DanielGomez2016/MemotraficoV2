@@ -39,7 +39,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Beneficiarios",
-                    msj = "El Beneficiario se a registrado Correctamente"
+                    msj = "El Beneficiario se ha registrado Correctamente"
                 });
             }
             catch

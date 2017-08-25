@@ -6,6 +6,7 @@ using System.Web;
 
 namespace MemotraficoV2.Models
 {
+    [MetadataType(typeof(mEscuela))]
     public partial class Escuela
     {
         public class mEscuela
@@ -13,10 +14,29 @@ namespace MemotraficoV2.Models
             [Required]
             [Display(Name ="Plantel Educativo")]
             public string Nombre { get; set; }
+
+            [Display(Name = "Municipio")]
+            public string IdMunicipioFk { get; set; }
+
+            [Display(Name = "Localidad")]
+            public string IdLocalidadFk { get; set; }
+
+            [Display(Name = "Nivel Educativo")]
+            public string IdNivelEducativo { get; set; }
+
+            [Display(Name = "Geolocalizacion X")]
+            public string Geox { get; set; }
+
+            [Display(Name = "Geolocalizacion Y")]
+            public string Geoy { get; set; }
         }
 
+        [Display(Name = "Nombre Director")]
         public string NombreDirector { get; set; }
+
+        [Display(Name = "Email Director")]
         public string EmailDirector { get; set; }
+
         public string Telefono { get; set; }
         public string Celular { get; set; }
 

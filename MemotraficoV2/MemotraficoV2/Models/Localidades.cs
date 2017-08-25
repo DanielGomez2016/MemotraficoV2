@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace MemotraficoV2.Models
 {
+    [MetadataType(typeof(mLocalidades))]
     public partial class Localidades
     {
+
+        public class mLocalidades
+        {
+            [Required]
+            [Display(Name = "Municipio")]
+            public string IdMunicipioFk { get; set; }
+        }
+
         public void Crear()
         {
             SASEntities db = new SASEntities();

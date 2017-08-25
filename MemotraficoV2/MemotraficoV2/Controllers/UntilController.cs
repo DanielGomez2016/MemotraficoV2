@@ -108,6 +108,37 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        public JsonResult CargarDepto(int id)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                List<Departamento> list = db.Departamento.Where(i => i.IdInstitucionFk == id).ToList();
+
+                List<string> rows = new List<string>();
+                var rowfirst = "<option>Seleciona el departamento</option>";
+                rows.Add(rowfirst);
+                foreach (var x in list)
+                {
+                    var option = "<option value=\"" + x.IdDepartamento + "\">" + x.Nombre + "</option>";
+                    rows.Add(option);
+                }
+
+                return Json(new
+                {
+                    total = rows.Count(),
+                    datos = rows.ToList()
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new
+                {
+                    result = true
+                });
+            }
+        }
+
         public ActionResult ImportarExcel()
         {
             return View();

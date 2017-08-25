@@ -11,7 +11,7 @@ using MemotraficoV2.Filters;
 
 namespace MemotraficoV2.Controllers
 {
-    //[Authorize, Acceso]
+    [Authorize, Acceso]
     public class SolicitudesController : Controller
     {
         #region Registro solicitudes
@@ -39,7 +39,7 @@ namespace MemotraficoV2.Controllers
                     modal = true,
                     idmodal = "model-documento",
                     val = canalizacion,
-                    msj = "La solicitud se a registrado Correctamente"
+                    msj = "La solicitud se ha registrado Correctamente"
                 });
             }
             catch (Exception e)
@@ -81,7 +81,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Solicitudes/Registro",
-                    msj = "El documento se a guardado correctamente"
+                    msj = "El documento se ha guardado correctamente"
                 });
             }
             catch (Exception e)
@@ -90,7 +90,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = false,
                     dir = "/Solicitudes",
-                    msj = "El documento no se a podido guardar, intentalo nuevamente"
+                    msj = "El documento no se ha podido guardar, intentalo nuevamente"
                 });
             }
         }
@@ -540,7 +540,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Solicitudes/",
-                    msj = "La solicitud se a cancelado correctamente"
+                    msj = "La solicitud se ha cancelado correctamente"
                 });
             }
             catch (Exception e)
@@ -549,7 +549,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = false,
                     dir = "/Solicitudes/",
-                    msj = "La Solicitud no se a podido cancelar, intente nuevamente"
+                    msj = "La Solicitud no se ha podido cancelar, intente nuevamente"
                 });
 
             }
@@ -589,7 +589,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = true,
                     dir = "/Solicitudes/",
-                    msj = Accion == "open"? "La solicitud se a abierto correctamente" : "La solicitud se a cancelado correctamente"
+                    msj = Accion == "open"? "La solicitud se ha abierto correctamente" : "La solicitud se a cancelado correctamente"
                 });
             }
             catch (Exception e)
@@ -598,7 +598,7 @@ namespace MemotraficoV2.Controllers
                 {
                     result = false,
                     dir = "/Solicitudes/",
-                    msj = Accion == "open" ? "La Solicitud no se a podido abrir, intente nuevamente" : "La Solicitud no se a podido cancelar, intente nuevamente"
+                    msj = Accion == "open" ? "La Solicitud no se ha podido abrir, intente nuevamente" : "La Solicitud no se a podido cancelar, intente nuevamente"
                 });
 
             }
