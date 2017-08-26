@@ -119,7 +119,6 @@ namespace MemotraficoV2.Models
                                         })
                                         .Distinct()
                                         .ToList();
-
             }else
             {
                 return db.AccesoSistema.Where(x =>
