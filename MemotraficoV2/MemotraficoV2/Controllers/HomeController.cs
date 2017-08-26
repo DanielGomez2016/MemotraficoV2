@@ -19,14 +19,14 @@ namespace IdentitySample.Controllers
         [Authorize]
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Sistema para la Atención de Solicitudes";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "ICHIFE - TECNOLOGÍAS DE LA INFORMACIÓN";
 
             return View();
         }
