@@ -89,7 +89,7 @@
           <Property Name="ApellidoPaterno" Type="nvarchar(max)" />
           <Property Name="ApellidoMaterno" Type="nvarchar(max)" />
           <Property Name="IdInstitucion" Type="int" Nullable="false" />
-          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="IdDepartamento" Type="int" />
           <Property Name="Imagen" Type="varbinary(max)" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
           <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
@@ -367,8 +367,6 @@
           <Property Name="IdEspacioEducativo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdValidarFk" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EspacioEducativoDet">
           <Key>
             <PropertyRef Name="IdEspacioDet" />
@@ -468,6 +466,14 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="Nivel" Type="varchar" MaxLength="150" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="NivelImportancia">
+          <Key>
+            <PropertyRef Name="IdImportancia" />
+          </Key>
+          <Property Name="IdImportancia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nivel" Type="varchar" MaxLength="50" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Procedencia">
           <Key>
             <PropertyRef Name="IdProcedencia" />
@@ -522,16 +528,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="FechaValidacion" Type="datetime" />
           <Property Name="Programa" Type="varchar" MaxLength="150" />
           <Property Name="IdBeneficiarioFk" Type="int" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="IdNivelImportanciaFk" Type="int" />
         </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
@@ -924,12 +921,12 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
         </Association>
         <Association Name="FK_EspacioEducativo_Validacion">
           <End Role="Validacion" Type="Self.Validacion" Multiplicity="0..1" />
-          <End Role="EspacioMultiple" Type="Self.EspacioMultiple" Multiplicity="*" />
+          <End Role="EspacioEducativo" Type="Self.EspacioEducativo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Validacion">
               <PropertyRef Name="IdValidar" />
             </Principal>
-            <Dependent Role="EspacioMultiple">
+            <Dependent Role="EspacioEducativo">
               <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
@@ -1054,6 +1051,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Solicitudes_NivelImportancia">
+          <End Role="NivelImportancia" Type="Self.NivelImportancia" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelImportancia">
+              <PropertyRef Name="IdImportancia" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdNivelImportanciaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Solicitudes_Procedencia">
           <End Role="Procedencia" Type="Self.Procedencia" Multiplicity="1" />
           <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
@@ -1091,7 +1100,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamento">
@@ -1155,6 +1164,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <EntitySet Name="Entorno" EntityType="Self.Entorno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Escuela" EntityType="Self.Escuela" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EspacioEducativo" EntityType="Self.EspacioEducativo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EspacioEducativoDet" EntityType="Self.EspacioEducativoDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EspacioMultiple" EntityType="Self.EspacioMultiple" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institucion" EntityType="Self.Institucion" Schema="dbo" store:Type="Tables" />
@@ -1162,29 +1172,14 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Municipios" EntityType="Self.Municipios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NivelEducativo" EntityType="Self.NivelEducativo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NivelImportancia" EntityType="Self.NivelImportancia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Procedencia" EntityType="Self.Procedencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requerimientos" EntityType="Self.Requerimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServicioMunicipal" EntityType="Self.ServicioMunicipal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoAsunto" EntityType="Self.TipoAsunto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProcedencia" EntityType="Self.TipoProcedencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Validacion" EntityType="Self.Validacion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EspacioEducativoDet" EntityType="Self.EspacioEducativoDet" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EspacioEducativoDet].[IdEspacioDet] AS [IdEspacioDet], 
-    [EspacioEducativoDet].[Edificio] AS [Edificio], 
-    [EspacioEducativoDet].[IdEspacioEducativoFk] AS [IdEspacioEducativoFk], 
-    [EspacioEducativoDet].[TipoEstructura] AS [TipoEstructura], 
-    [EspacioEducativoDet].[Aulas] AS [Aulas], 
-    [EspacioEducativoDet].[Taller] AS [Taller], 
-    [EspacioEducativoDet].[ServicioSanitario] AS [ServicioSanitario], 
-    [EspacioEducativoDet].[ServicioAdministrativoBiblio] AS [ServicioAdministrativoBiblio], 
-    [EspacioEducativoDet].[Laboratirio] AS [Laboratirio], 
-    [EspacioEducativoDet].[BodegaApendice] AS [BodegaApendice], 
-    [EspacioEducativoDet].[AulasUsoMultiple] AS [AulasUsoMultiple]
-    FROM [dbo].[EspacioEducativoDet] AS [EspacioEducativoDet]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_AccesoSistemaRol_AccesoSistema" Association="Self.FK_AccesoSistemaRol_AccesoSistema">
             <End Role="AccesoSistema" EntitySet="AccesoSistema" />
             <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
@@ -1307,7 +1302,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </AssociationSet>
           <AssociationSet Name="FK_EspacioEducativo_Validacion" Association="Self.FK_EspacioEducativo_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
+            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
           </AssociationSet>
           <AssociationSet Name="FK_EspacioEducativoDet_EspacioEducativo" Association="Self.FK_EspacioEducativoDet_EspacioEducativo">
             <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
@@ -1347,6 +1342,10 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </AssociationSet>
           <AssociationSet Name="FK_Solicitudes_Estatus" Association="Self.FK_Solicitudes_Estatus">
             <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_NivelImportancia" Association="Self.FK_Solicitudes_NivelImportancia">
+            <End Role="NivelImportancia" EntitySet="NivelImportancia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitudes_Procedencia" Association="Self.FK_Solicitudes_Procedencia">
@@ -1400,11 +1399,13 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <EntitySet Name="Croquis" EntityType="Model.Croquis" />
           <EntitySet Name="Departamento" EntityType="Model.Departamento" />
           <EntitySet Name="DetalleCanalizacion" EntityType="Model.DetalleCanalizacion" />
+          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
           <EntitySet Name="Email" EntityType="Model.Email" />
           <EntitySet Name="EnergiaElectrica" EntityType="Model.EnergiaElectrica" />
           <EntitySet Name="Entorno" EntityType="Model.Entorno" />
           <EntitySet Name="Escuela" EntityType="Model.Escuela" />
           <EntitySet Name="EspacioEducativo" EntityType="Model.EspacioEducativo" />
+          <EntitySet Name="EspacioEducativoDet" EntityType="Model.EspacioEducativoDet" />
           <EntitySet Name="EspacioMultiple" EntityType="Model.EspacioMultiple" />
           <EntitySet Name="Estatus" EntityType="Model.Estatus" />
           <EntitySet Name="Institucion" EntityType="Model.Institucion" />
@@ -1412,14 +1413,14 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <EntitySet Name="Matricula" EntityType="Model.Matricula" />
           <EntitySet Name="Municipios" EntityType="Model.Municipios" />
           <EntitySet Name="NivelEducativo" EntityType="Model.NivelEducativo" />
+          <EntitySet Name="NivelImportancia" EntityType="Model.NivelImportancia" />
           <EntitySet Name="Procedencia" EntityType="Model.Procedencia" />
           <EntitySet Name="Requerimientos" EntityType="Model.Requerimientos" />
           <EntitySet Name="ServicioMunicipal" EntityType="Model.ServicioMunicipal" />
-          <EntitySet Name="sysdiagrams" EntityType="Model.sysdiagrams" />
+          <EntitySet Name="Solicitudes" EntityType="Model.Solicitudes" />
           <EntitySet Name="TipoAsunto" EntityType="Model.TipoAsunto" />
           <EntitySet Name="TipoProcedencia" EntityType="Model.TipoProcedencia" />
           <EntitySet Name="Validacion" EntityType="Model.Validacion" />
-          <EntitySet Name="EspacioEducativoDet" EntityType="Model.EspacioEducativoDet" />
           <AssociationSet Name="FK_AccesoSistemaRol_AccesoSistema" Association="Model.FK_AccesoSistemaRol_AccesoSistema">
             <End Role="AccesoSistema" EntitySet="AccesoSistema" />
             <End Role="AccesoSistemaRol" EntitySet="AccesoSistemaRol" />
@@ -1459,6 +1460,14 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <AssociationSet Name="FK_Beneficiario_Municipios" Association="Model.FK_Beneficiario_Municipios">
             <End Role="Municipios" EntitySet="Municipios" />
             <End Role="Beneficiario" EntitySet="Beneficiario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Beneficiario" Association="Model.FK_Solicitudes_Beneficiario">
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Canalizacion_Solicitudes" Association="Model.FK_Canalizacion_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="Canalizacion" EntitySet="Canalizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleCanalizacion_Canalizacion" Association="Model.FK_DetalleCanalizacion_Canalizacion">
             <End Role="Canalizacion" EntitySet="Canalizacion" />
@@ -1512,6 +1521,10 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             <End Role="Estatus" EntitySet="Estatus" />
             <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+            <End Role="Documentos" EntitySet="Documentos" />
+          </AssociationSet>
           <AssociationSet Name="FK_EnergiaElectrica_Validacion" Association="Model.FK_EnergiaElectrica_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="EnergiaElectrica" EntitySet="EnergiaElectrica" />
@@ -1536,21 +1549,29 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Requerimientos" EntitySet="Requerimientos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Escuela" Association="Model.FK_Solicitudes_Escuela">
+            <End Role="Escuela" EntitySet="Escuela" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Validacion_Escuela" Association="Model.FK_Validacion_Escuela">
             <End Role="Escuela" EntitySet="Escuela" />
             <End Role="Validacion" EntitySet="Validacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EspacioEducativo_Validacion" Association="Model.FK_EspacioEducativo_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
           </AssociationSet>
           <AssociationSet Name="FK_EspacioEducativoDet_EspacioEducativo" Association="Model.FK_EspacioEducativoDet_EspacioEducativo">
             <End Role="EspacioEducativo" EntitySet="EspacioEducativo" />
             <End Role="EspacioEducativoDet" EntitySet="EspacioEducativoDet" />
           </AssociationSet>
-          <AssociationSet Name="FK_EspacioEducativo_Validacion" Association="Model.FK_EspacioEducativo_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
-          </AssociationSet>
           <AssociationSet Name="FK_EspacioMultiple_Validacion" Association="Model.FK_EspacioMultiple_Validacion">
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="EspacioMultiple" EntitySet="EspacioMultiple" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Model.FK_Solicitudes_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
           </AssociationSet>
           <AssociationSet Name="FK_Localidades_Municipios" Association="Model.FK_Localidades_Municipios">
             <End Role="Municipios" EntitySet="Municipios" />
@@ -1560,43 +1581,21 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             <End Role="Validacion" EntitySet="Validacion" />
             <End Role="Matricula" EntitySet="Matricula" />
           </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_NivelImportancia" Association="Model.FK_Solicitudes_NivelImportancia">
+            <End Role="NivelImportancia" EntitySet="NivelImportancia" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Procedencia_TipoProcedencia" Association="Model.FK_Procedencia_TipoProcedencia">
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Procedencia" EntitySet="Procedencia" />
           </AssociationSet>
-          <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Model.FK_ServicioMunicipal_Validacion">
-            <End Role="Validacion" EntitySet="Validacion" />
-            <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Documentos" EntityType="Model.Documentos" />
-          <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Model.FK_Documentos_DetalleCanalizacion">
-            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
-            <End Role="Documentos" EntitySet="Documentos" />
-          </AssociationSet>
-          <EntitySet Name="Solicitudes" EntityType="Model.Solicitudes" />
-          <AssociationSet Name="FK_Solicitudes_Beneficiario" Association="Model.FK_Solicitudes_Beneficiario">
-            <End Role="Beneficiario" EntitySet="Beneficiario" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Canalizacion_Solicitudes" Association="Model.FK_Canalizacion_Solicitudes">
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-            <End Role="Canalizacion" EntitySet="Canalizacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Escuela" Association="Model.FK_Solicitudes_Escuela">
-            <End Role="Escuela" EntitySet="Escuela" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Model.FK_Solicitudes_Estatus">
-            <End Role="Estatus" EntitySet="Estatus" />
-            <End Role="Solicitudes" EntitySet="Solicitudes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Solicitudes_Procedencia" Association="Model.FK_Solicitudes_Procedencia">
             <End Role="Procedencia" EntitySet="Procedencia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioMunicipal_Validacion" Association="Model.FK_ServicioMunicipal_Validacion">
+            <End Role="Validacion" EntitySet="Validacion" />
+            <End Role="ServicioMunicipal" EntitySet="ServicioMunicipal" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitudes_TipoAsunto" Association="Model.FK_Solicitudes_TipoAsunto">
             <End Role="TipoAsunto" EntitySet="TipoAsunto" />
@@ -1605,6 +1604,10 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <AssociationSet Name="FK_Solicitudes_TipoProcedencia" Association="Model.FK_Solicitudes_TipoProcedencia">
             <End Role="TipoProcedencia" EntitySet="TipoProcedencia" />
             <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccesoSistema">
@@ -1692,7 +1695,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="ApellidoPaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ApellidoMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdInstitucion" Type="Int32" Nullable="false" />
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Int32" />
           <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
@@ -1735,8 +1738,8 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="IdInstitucionFk" Type="Int32" Nullable="false" />
           <Property Name="Validacion" Type="Boolean" Nullable="false" />
           <Property Name="IdSolicitudFk" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="Canalizacion" ToRole="DetalleCanalizacion" />
           <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Canalizacion" ToRole="Solicitudes" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="Canalizacion" ToRole="DetalleCanalizacion" />
         </EntityType>
         <EntityType Name="ComponenteI">
           <Key>
@@ -1904,6 +1907,17 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <NavigationProperty Name="Estatus" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="DetalleCanalizacion" ToRole="Estatus" />
           <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
         </EntityType>
+        <EntityType Name="Documentos">
+          <Key>
+            <PropertyRef Name="IdDocumento" />
+          </Key>
+          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
+        </EntityType>
         <EntityType Name="Email">
           <Key>
             <PropertyRef Name="IdEmail" />
@@ -1984,8 +1998,8 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <NavigationProperty Name="Municipios" Relationship="Model.FK_Escuela_Municipios" FromRole="Escuela" ToRole="Municipios" />
           <NavigationProperty Name="NivelEducativo" Relationship="Model.FK_Escuela_NivelEducativo" FromRole="Escuela" ToRole="NivelEducativo" />
           <NavigationProperty Name="Requerimientos" Relationship="Model.FK_Requerimientos_Escuela" FromRole="Escuela" ToRole="Requerimientos" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_Validacion_Escuela" FromRole="Escuela" ToRole="Validacion" />
           <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Escuela" ToRole="Solicitudes" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_Validacion_Escuela" FromRole="Escuela" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="EspacioEducativo">
           <Key>
@@ -1993,7 +2007,25 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </Key>
           <Property Name="IdEspacioEducativo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdValidarFk" Type="Int32" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="EspacioEducativo" ToRole="Validacion" />
           <NavigationProperty Name="EspacioEducativoDet" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativo" ToRole="EspacioEducativoDet" />
+        </EntityType>
+        <EntityType Name="EspacioEducativoDet">
+          <Key>
+            <PropertyRef Name="IdEspacioDet" />
+          </Key>
+          <Property Name="IdEspacioDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Edificio" Type="Int32" />
+          <Property Name="IdEspacioEducativoFk" Type="Int32" />
+          <Property Name="TipoEstructura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Aulas" Type="Int32" />
+          <Property Name="Taller" Type="Int32" />
+          <Property Name="ServicioSanitario" Type="Int32" />
+          <Property Name="ServicioAdministrativoBiblio" Type="Int32" />
+          <Property Name="Laboratirio" Type="Int32" />
+          <Property Name="BodegaApendice" Type="Int32" />
+          <Property Name="AulasUsoMultiple" Type="Int32" />
+          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativoDet" ToRole="EspacioEducativo" />
         </EntityType>
         <EntityType Name="EspacioMultiple">
           <Key>
@@ -2021,8 +2053,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="AstaBanderaEstado" Type="Int32" />
           <Property Name="Otro" Type="Boolean" />
           <Property Name="OtroEstado" Type="Int32" />
-          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
-          <NavigationProperty Name="Validacion1" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
+          <NavigationProperty Name="Validacion" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="EspacioMultiple" ToRole="Validacion" />
         </EntityType>
         <EntityType Name="Estatus">
           <Key>
@@ -2093,6 +2124,15 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Escuela_NivelEducativo" FromRole="NivelEducativo" ToRole="Escuela" />
         </EntityType>
+        <EntityType Name="NivelImportancia">
+          <Key>
+            <PropertyRef Name="IdImportancia" />
+          </Key>
+          <Property Name="IdImportancia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nivel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitudes" Relationship="Model.FK_Solicitudes_NivelImportancia" FromRole="NivelImportancia" ToRole="Solicitudes" />
+        </EntityType>
         <EntityType Name="Procedencia">
           <Key>
             <PropertyRef Name="IdProcedencia" />
@@ -2142,15 +2182,32 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <Property Name="VialidadTerciaria" Type="Boolean" />
           <NavigationProperty Name="Validacion" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="ServicioMunicipal" ToRole="Validacion" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="Solicitudes">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="IdSolicitud" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Folio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+          <Property Name="IdEstatusFk" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoAsuntoFk" Type="Int32" />
+          <Property Name="Asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
+          <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
+          <Property Name="IdEscuelaFk" Type="Int32" />
+          <Property Name="MetaGeneral" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaValidacion" Type="DateTime" Precision="3" />
+          <Property Name="Programa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdBeneficiarioFk" Type="Int32" />
+          <Property Name="IdNivelImportanciaFk" Type="Int32" />
+          <NavigationProperty Name="Beneficiario" Relationship="Model.FK_Solicitudes_Beneficiario" FromRole="Solicitudes" ToRole="Beneficiario" />
+          <NavigationProperty Name="Canalizacion" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Solicitudes" ToRole="Canalizacion" />
+          <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
+          <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
+          <NavigationProperty Name="NivelImportancia" Relationship="Model.FK_Solicitudes_NivelImportancia" FromRole="Solicitudes" ToRole="NivelImportancia" />
+          <NavigationProperty Name="Procedencia" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
+          <NavigationProperty Name="TipoAsunto" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
+          <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
         </EntityType>
         <EntityType Name="TipoAsunto">
           <Key>
@@ -2180,27 +2237,10 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <NavigationProperty Name="EnergiaElectrica" Relationship="Model.FK_EnergiaElectrica_Validacion" FromRole="Validacion" ToRole="EnergiaElectrica" />
           <NavigationProperty Name="Entorno" Relationship="Model.FK_Entorno_Validacion" FromRole="Validacion" ToRole="Entorno" />
           <NavigationProperty Name="Escuela" Relationship="Model.FK_Validacion_Escuela" FromRole="Validacion" ToRole="Escuela" />
-          <NavigationProperty Name="EspacioMultiple" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="Validacion" ToRole="EspacioMultiple" />
-          <NavigationProperty Name="EspacioMultiple1" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="Validacion" ToRole="EspacioMultiple" />
+          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativo_Validacion" FromRole="Validacion" ToRole="EspacioEducativo" />
+          <NavigationProperty Name="EspacioMultiple" Relationship="Model.FK_EspacioMultiple_Validacion" FromRole="Validacion" ToRole="EspacioMultiple" />
           <NavigationProperty Name="Matricula" Relationship="Model.FK_Matricula_Validacion" FromRole="Validacion" ToRole="Matricula" />
           <NavigationProperty Name="ServicioMunicipal" Relationship="Model.FK_ServicioMunicipal_Validacion" FromRole="Validacion" ToRole="ServicioMunicipal" />
-        </EntityType>
-        <EntityType Name="EspacioEducativoDet">
-          <Key>
-            <PropertyRef Name="IdEspacioDet" />
-          </Key>
-          <Property Name="IdEspacioDet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Edificio" Type="Int32" />
-          <Property Name="IdEspacioEducativoFk" Type="Int32" />
-          <Property Name="TipoEstructura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Aulas" Type="Int32" />
-          <Property Name="Taller" Type="Int32" />
-          <Property Name="ServicioSanitario" Type="Int32" />
-          <Property Name="ServicioAdministrativoBiblio" Type="Int32" />
-          <Property Name="Laboratirio" Type="Int32" />
-          <Property Name="BodegaApendice" Type="Int32" />
-          <Property Name="AulasUsoMultiple" Type="Int32" />
-          <NavigationProperty Name="EspacioEducativo" Relationship="Model.FK_EspacioEducativoDet_EspacioEducativo" FromRole="EspacioEducativoDet" ToRole="EspacioEducativo" />
         </EntityType>
         <Association Name="FK_AccesoSistemaRol_AccesoSistema">
           <End Type="Model.AccesoSistema" Role="AccesoSistema" Multiplicity="1" />
@@ -2279,7 +2319,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Departamento">
-          <End Type="Model.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="Model.Departamento" Role="Departamento" Multiplicity="0..1" />
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamento">
@@ -2323,6 +2363,30 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Principal>
             <Dependent Role="Beneficiario">
               <PropertyRef Name="IdMunicipioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Beneficiario">
+          <End Type="Model.Beneficiario" Role="Beneficiario" Multiplicity="0..1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiario">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdBeneficiarioFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Canalizacion_Solicitudes">
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="1" />
+          <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="Canalizacion">
+              <PropertyRef Name="IdSolicitudFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2482,6 +2546,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Documentos_DetalleCanalizacion">
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
+          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleCanalizacion">
+              <PropertyRef Name="IdDetalleCanalizar" />
+            </Principal>
+            <Dependent Role="Documentos">
+              <PropertyRef Name="IdDetalleCanalizarFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EnergiaElectrica_Validacion">
           <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
           <End Type="Model.EnergiaElectrica" Role="EnergiaElectrica" Multiplicity="*" />
@@ -2554,6 +2630,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Solicitudes_Escuela">
+          <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Escuela">
+              <PropertyRef Name="IdEscuela" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEscuelaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Validacion_Escuela">
           <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
           <End Type="Model.Validacion" Role="Validacion" Multiplicity="*" />
@@ -2563,6 +2651,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Principal>
             <Dependent Role="Validacion">
               <PropertyRef Name="IdEscuelaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EspacioEducativo_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.EspacioEducativo" Role="EspacioEducativo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="EspacioEducativo">
+              <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2578,7 +2678,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EspacioEducativo_Validacion">
+        <Association Name="FK_EspacioMultiple_Validacion">
           <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
           <End Type="Model.EspacioMultiple" Role="EspacioMultiple" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2590,15 +2690,15 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EspacioMultiple_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.EspacioMultiple" Role="EspacioMultiple" Multiplicity="*" />
+        <Association Name="FK_Solicitudes_Estatus">
+          <End Type="Model.Estatus" Role="Estatus" Multiplicity="1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
             </Principal>
-            <Dependent Role="EspacioMultiple">
-              <PropertyRef Name="IdValidarFk" />
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEstatusFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2626,6 +2726,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Solicitudes_NivelImportancia">
+          <End Type="Model.NivelImportancia" Role="NivelImportancia" Multiplicity="0..1" />
+          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelImportancia">
+              <PropertyRef Name="IdImportancia" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdNivelImportanciaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Procedencia_TipoProcedencia">
           <End Type="Model.TipoProcedencia" Role="TipoProcedencia" Multiplicity="0..1" />
           <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="*" />
@@ -2638,118 +2750,6 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServicioMunicipal_Validacion">
-          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
-          <End Type="Model.ServicioMunicipal" Role="ServicioMunicipal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Validacion">
-              <PropertyRef Name="IdValidar" />
-            </Principal>
-            <Dependent Role="ServicioMunicipal">
-              <PropertyRef Name="IdValidarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Documentos">
-          <Key>
-            <PropertyRef Name="IdDocumento" />
-          </Key>
-          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Documento" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdDetalleCanalizarFk" Type="Int32" />
-          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="Documentos" ToRole="DetalleCanalizacion" />
-        </EntityType>
-        <Association Name="FK_Documentos_DetalleCanalizacion">
-          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="0..1" />
-          <End Type="Model.Documentos" Role="Documentos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DetalleCanalizacion">
-              <PropertyRef Name="IdDetalleCanalizar" />
-            </Principal>
-            <Dependent Role="Documentos">
-              <PropertyRef Name="IdDetalleCanalizarFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Solicitudes">
-          <Key>
-            <PropertyRef Name="IdSolicitud" />
-          </Key>
-          <Property Name="IdSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Folio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
-          <Property Name="IdEstatusFk" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoAsuntoFk" Type="Int32" />
-          <Property Name="Asunto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoProcedenciaFk" Type="Int32" Nullable="false" />
-          <Property Name="IdProcedenciaFk" Type="Int32" Nullable="false" />
-          <Property Name="IdEscuelaFk" Type="Int32" />
-          <Property Name="MetaGeneral" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FechaValidacion" Type="DateTime" Precision="3" />
-          <Property Name="Programa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="IdBeneficiarioFk" Type="Int32" />
-          <NavigationProperty Name="Beneficiario" Relationship="Model.FK_Solicitudes_Beneficiario" FromRole="Solicitudes" ToRole="Beneficiario" />
-          <NavigationProperty Name="Canalizacion" Relationship="Model.FK_Canalizacion_Solicitudes" FromRole="Solicitudes" ToRole="Canalizacion" />
-          <NavigationProperty Name="Escuela" Relationship="Model.FK_Solicitudes_Escuela" FromRole="Solicitudes" ToRole="Escuela" />
-          <NavigationProperty Name="Estatus" Relationship="Model.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
-          <NavigationProperty Name="Procedencia" Relationship="Model.FK_Solicitudes_Procedencia" FromRole="Solicitudes" ToRole="Procedencia" />
-          <NavigationProperty Name="TipoAsunto" Relationship="Model.FK_Solicitudes_TipoAsunto" FromRole="Solicitudes" ToRole="TipoAsunto" />
-          <NavigationProperty Name="TipoProcedencia" Relationship="Model.FK_Solicitudes_TipoProcedencia" FromRole="Solicitudes" ToRole="TipoProcedencia" />
-        </EntityType>
-        <Association Name="FK_Solicitudes_Beneficiario">
-          <End Type="Model.Beneficiario" Role="Beneficiario" Multiplicity="0..1" />
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beneficiario">
-              <PropertyRef Name="IdBeneficiario" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdBeneficiarioFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Canalizacion_Solicitudes">
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="1" />
-          <End Type="Model.Canalizacion" Role="Canalizacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Solicitudes">
-              <PropertyRef Name="IdSolicitud" />
-            </Principal>
-            <Dependent Role="Canalizacion">
-              <PropertyRef Name="IdSolicitudFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_Escuela">
-          <End Type="Model.Escuela" Role="Escuela" Multiplicity="0..1" />
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Escuela">
-              <PropertyRef Name="IdEscuela" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdEscuelaFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitudes_Estatus">
-          <End Type="Model.Estatus" Role="Estatus" Multiplicity="1" />
-          <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estatus">
-              <PropertyRef Name="IdEstatus" />
-            </Principal>
-            <Dependent Role="Solicitudes">
-              <PropertyRef Name="IdEstatusFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Solicitudes_Procedencia">
           <End Type="Model.Procedencia" Role="Procedencia" Multiplicity="1" />
           <End Type="Model.Solicitudes" Role="Solicitudes" Multiplicity="*" />
@@ -2759,6 +2759,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Principal>
             <Dependent Role="Solicitudes">
               <PropertyRef Name="IdProcedenciaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioMunicipal_Validacion">
+          <End Type="Model.Validacion" Role="Validacion" Multiplicity="0..1" />
+          <End Type="Model.ServicioMunicipal" Role="ServicioMunicipal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Validacion">
+              <PropertyRef Name="IdValidar" />
+            </Principal>
+            <Dependent Role="ServicioMunicipal">
+              <PropertyRef Name="IdValidarFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2786,7 +2798,11 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="AspNetUserRoles">
+          <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -3074,6 +3090,17 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Documentos">
+            <EntityTypeMapping TypeName="Model.Documentos">
+              <MappingFragment StoreEntitySet="Documentos">
+                <ScalarProperty Name="IdDetalleCanalizarFk" ColumnName="IdDetalleCanalizarFk" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Email">
             <EntityTypeMapping TypeName="Model.Email">
               <MappingFragment StoreEntitySet="Email">
@@ -3157,6 +3184,23 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
               <MappingFragment StoreEntitySet="EspacioEducativo">
                 <ScalarProperty Name="IdValidarFk" ColumnName="IdValidarFk" />
                 <ScalarProperty Name="IdEspacioEducativo" ColumnName="IdEspacioEducativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EspacioEducativoDet">
+            <EntityTypeMapping TypeName="Model.EspacioEducativoDet">
+              <MappingFragment StoreEntitySet="EspacioEducativoDet">
+                <ScalarProperty Name="AulasUsoMultiple" ColumnName="AulasUsoMultiple" />
+                <ScalarProperty Name="BodegaApendice" ColumnName="BodegaApendice" />
+                <ScalarProperty Name="Laboratirio" ColumnName="Laboratirio" />
+                <ScalarProperty Name="ServicioAdministrativoBiblio" ColumnName="ServicioAdministrativoBiblio" />
+                <ScalarProperty Name="ServicioSanitario" ColumnName="ServicioSanitario" />
+                <ScalarProperty Name="Taller" ColumnName="Taller" />
+                <ScalarProperty Name="Aulas" ColumnName="Aulas" />
+                <ScalarProperty Name="TipoEstructura" ColumnName="TipoEstructura" />
+                <ScalarProperty Name="IdEspacioEducativoFk" ColumnName="IdEspacioEducativoFk" />
+                <ScalarProperty Name="Edificio" ColumnName="Edificio" />
+                <ScalarProperty Name="IdEspacioDet" ColumnName="IdEspacioDet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3250,6 +3294,15 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NivelImportancia">
+            <EntityTypeMapping TypeName="Model.NivelImportancia">
+              <MappingFragment StoreEntitySet="NivelImportancia">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="IdImportancia" ColumnName="IdImportancia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Procedencia">
             <EntityTypeMapping TypeName="Model.Procedencia">
               <MappingFragment StoreEntitySet="Procedencia">
@@ -3290,14 +3343,23 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Model.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="Solicitudes">
+            <EntityTypeMapping TypeName="Model.Solicitudes">
+              <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="IdNivelImportanciaFk" ColumnName="IdNivelImportanciaFk" />
+                <ScalarProperty Name="IdBeneficiarioFk" ColumnName="IdBeneficiarioFk" />
+                <ScalarProperty Name="Programa" ColumnName="Programa" />
+                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
+                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
+                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
+                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
+                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
+                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3325,23 +3387,6 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EspacioEducativoDet">
-            <EntityTypeMapping TypeName="Model.EspacioEducativoDet">
-              <MappingFragment StoreEntitySet="EspacioEducativoDet">
-                <ScalarProperty Name="AulasUsoMultiple" ColumnName="AulasUsoMultiple" />
-                <ScalarProperty Name="BodegaApendice" ColumnName="BodegaApendice" />
-                <ScalarProperty Name="Laboratirio" ColumnName="Laboratirio" />
-                <ScalarProperty Name="ServicioAdministrativoBiblio" ColumnName="ServicioAdministrativoBiblio" />
-                <ScalarProperty Name="ServicioSanitario" ColumnName="ServicioSanitario" />
-                <ScalarProperty Name="Taller" ColumnName="Taller" />
-                <ScalarProperty Name="Aulas" ColumnName="Aulas" />
-                <ScalarProperty Name="TipoEstructura" ColumnName="TipoEstructura" />
-                <ScalarProperty Name="IdEspacioEducativoFk" ColumnName="IdEspacioEducativoFk" />
-                <ScalarProperty Name="Edificio" ColumnName="Edificio" />
-                <ScalarProperty Name="IdEspacioDet" ColumnName="IdEspacioDet" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -3350,36 +3395,6 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Documentos">
-            <EntityTypeMapping TypeName="Model.Documentos">
-              <MappingFragment StoreEntitySet="Documentos">
-                <ScalarProperty Name="IdDetalleCanalizarFk" ColumnName="IdDetalleCanalizarFk" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Solicitudes">
-            <EntityTypeMapping TypeName="Model.Solicitudes">
-              <MappingFragment StoreEntitySet="Solicitudes">
-                <ScalarProperty Name="IdBeneficiarioFk" ColumnName="IdBeneficiarioFk" />
-                <ScalarProperty Name="Programa" ColumnName="Programa" />
-                <ScalarProperty Name="FechaValidacion" ColumnName="FechaValidacion" />
-                <ScalarProperty Name="MetaGeneral" ColumnName="MetaGeneral" />
-                <ScalarProperty Name="IdEscuelaFk" ColumnName="IdEscuelaFk" />
-                <ScalarProperty Name="IdProcedenciaFk" ColumnName="IdProcedenciaFk" />
-                <ScalarProperty Name="IdTipoProcedenciaFk" ColumnName="IdTipoProcedenciaFk" />
-                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
-                <ScalarProperty Name="IdTipoAsuntoFk" ColumnName="IdTipoAsuntoFk" />
-                <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

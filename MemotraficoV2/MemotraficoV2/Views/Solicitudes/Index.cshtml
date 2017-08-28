@@ -14,6 +14,26 @@
     const int CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
     const int INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
 }
+<style>
+    span.nivel {
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 1.5em; 
+    height: 1.5em;
+
+
+    -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+}
+</style>
 
 <div class="" role="main">
     <div class="">
@@ -40,6 +60,7 @@
                                     <th>Folio</th>
                                     <th>Fecha Entrega</th>
                                     <th>Localidad</th>
+                                    <th>Nivel</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -54,7 +75,9 @@
                                         <td>@item.Folio</td>
                                         <td>@item.FechaEntrega.Value.ToString("dd/MM/yyyy")</td>
                                         <td>@item.Escuela.Localidades.Nombre, @item.Escuela.Municipios.Nombre</td>
-                                    }
+                                        <td class="text-center"><span class="nivel" style="background-color:@(item.NivelImportancia.Color)">N </span></td>
+
+                                        }
                                         @if (item.IdBeneficiarioFk > 0)
                                         {
                                             <td>@item.Beneficiario.Nombre</td>

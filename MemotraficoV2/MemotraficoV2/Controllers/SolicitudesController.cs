@@ -347,6 +347,7 @@ namespace MemotraficoV2.Controllers
                 ViewBag.TipoAsunto = db.TipoAsunto.ToList().Select(i => new { nombre = i.TipoAsunto1, id = i.IdTipoAsunto });
                 ViewBag.Institucion = db.Institucion.ToList().Select(i => new { nombre = i.Siglas, id = i.IdInstitucion });
                 ViewBag.Departamento = db.Departamento.ToList().Select(i => new { id = i.IdDepartamento, nombre = i.Nombre });
+                ViewBag.NivelImportancia = db.NivelImportancia.ToList().Select(i => new { nombre = i.Nivel, id = i.IdImportancia });
             }
 
             if (rol == ListaRoles.ADMINISTRADOR_SOLICITUDES || rol == ListaRoles.ADMINISTRADOR_DEPENDENCIA)
@@ -354,6 +355,7 @@ namespace MemotraficoV2.Controllers
                 ViewBag.TipoAsunto = db.TipoAsunto.ToList().Select(i => new { nombre = i.TipoAsunto1, id = i.IdTipoAsunto });
                 ViewBag.Institucion = db.Institucion.ToList().Select(i => new { nombre = i.Siglas, id = i.IdInstitucion });
                 ViewBag.Departamento = db.Departamento.Where(i => i.IdInstitucionFk == institucion).ToList().Select(i => new { id = i.IdDepartamento, nombre = i.Nombre });
+                ViewBag.NivelImportancia = db.NivelImportancia.ToList().Select(i => new { nombre = i.Nivel, id = i.IdImportancia });
             }
 
             if (rol == ListaRoles.OPERADOR)
@@ -780,6 +782,34 @@ namespace MemotraficoV2.Controllers
                 {
                     result = false,
                     msj = "No se a podido cerrar la solicitud, intente nuevamente.",
+                    dir = ""
+                });
+
+            }
+        }
+
+        public JsonResult CambiarImportancia(int IdSolicitud, int Importancia)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud);
+                s.IdNivelImportanciaFk = Importancia;
+                db.SaveChanges();
+
+                return Json(new
+                {
+                    result = true,
+                    msj = "Se ha cambiado el nivel de importancia de la solicitud.",
+                    dir = "/Solicitudes/"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = false,
+                    msj = "No se ha podido cambiar el nivel de la solicitud, intente nuevamente.",
                     dir = ""
                 });
 

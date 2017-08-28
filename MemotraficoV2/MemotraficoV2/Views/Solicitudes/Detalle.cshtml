@@ -82,6 +82,10 @@
                                         @Html.LabelFor(i => i.TipoAsunto.TipoAsunto1)
                                         <div>@Html.DropDownList("TipoAsunto", new SelectList(ViewBag.TipoAsunto, "id", "nombre"), "Selecciona tipo de asunto", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
                                     </div>
+                                    <div class="col-md-4" hidden name="nivelimportancia">
+                                        @Html.LabelFor(i => i.NivelImportancia.IdImportancia)
+                                        <div>@Html.DropDownList("IdImportancia", new SelectList(ViewBag.NivelImportancia, "id", "nombre"), "Selecciona nivel", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
+                                    </div>
                                     <div class="col-md-4" hidden name="institucion">
                                         @Html.Label("Institucion")
                                         <div>@Html.DropDownList("Institucion", new SelectList(ViewBag.Institucion, "id", "nombre"), "Selecciona Institucion", new { @class = "form-control col-md-7 col-xs-12", @required = "required" })</div>
@@ -113,6 +117,11 @@
 
                         <div class="ln_solid"></div>
                             <div class="btn-group pull-right">
+                                @if (Model.uactual == ADMINISTRADOR_SOLICITUDES || Model.uactual == ADMINISTRADOR_DEPENDENCIA)
+                                {
+                                    <button class="btn btn-default importancia" type="button" name="acciones" data-rol="@rol" data-accion="cambioImportancia">Nivel Importancia</button>
+                                        <button class="btn btn-success hide" type="button" name="SaveImportancia">Guardar</button>
+                                }
                                 @if (Model.uactual == ADMINISTRADOR_SOLICITUDES && Model.IdBeneficiarioFk>0 && Model.IdEstatusFk == INICIADO && inst == ICHIFE )
                                 {
                                     <button class="btn btn-default ichife" type="button" name="acciones" data-rol="@rol" data-accion="canalizarIchife">Canalizar Ichife</button>
@@ -136,7 +145,7 @@
                                         <button class="btn btn-success hide" type="button" name="SaveAvance">Guardar</button>
                                     }
                                 }
-                               @Html.ActionLink("Validacion ", "Index", "Validaciones",new { esc = Model.Escuela.IdEscuela,  sol = Model.Folio },new {  @class="btn btn-default"})
+                               @Html.ActionLink("Validacion ", "Index", "Validaciones",new { esc = Model.Escuela.IdEscuela,  sol = Model.Folio },new {  @class= "btn btn-default validacionBtn" })
                                 <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="canalizar">Canalizar Solicitud</button>
                                 <button class="btn btn-success hide" type="button" name="Save" data-rol="@rol" data-accion="canalizar">Guardar</button>
                                 @if (Model.IdEstatusFk != CANCELADO)
@@ -192,6 +201,11 @@
             case "canalizarIchife":
                 $('[name=SaveIchife]').removeClass('hide');
                 break;
+
+            case "cambioImportancia":
+                $('[name=SaveImportancia]').removeClass('hide');
+                abrirCampo(accion);
+                break;
         }
 
         $('.cancelar').addClass('hide');
@@ -200,7 +214,10 @@
         $('.canalizar').addClass('hide');
         $('.cerrar').addClass('hide');
         $('.ichife').addClass('hide');
+        $('.importancia').addClass('hide');
+        $('.validacionBtn').addClass('hide');
 
+        
     });
 
     $('[name=Save]').click(function () {
@@ -399,6 +416,36 @@
         });
     });
 
+    $('[name=SaveImportancia]').click(function () {
+
+        var data = new FormData();
+        var IdSolicitud = $("#IdSolicitud").val();
+        var importancia = $('#IdImportancia').val();
+
+        data.append('IdSolicitud', IdSolicitud);
+        data.append('Importancia', importancia);
+
+        $.ajax({
+            url: "/Solicitudes/CambiarImportancia",
+            type: "post",
+            dataType: "json",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function (data) {
+            if (data.result == true) {
+                AlertSuccess(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+            else {
+                AlertError(data.msj, data.dir);
+                $(".bs-example-modal-lg").modal("hide");
+            }
+        });
+    });
+
+
     function abrirCampos(rol) {
         switch (rol) {
             case "Administrador de Solicitudes":
@@ -435,6 +482,9 @@
                 break;
             case "close":
                 $('[name=cancelar]').removeAttr('hidden');
+                break;
+            case "cambioImportancia":
+                $('[name=nivelimportancia]').removeAttr('hidden');
                 break;
         }
     };
