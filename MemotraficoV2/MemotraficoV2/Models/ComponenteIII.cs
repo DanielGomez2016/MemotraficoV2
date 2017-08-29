@@ -17,7 +17,7 @@ namespace MemotraficoV2.Models
         public void Editar()
         {
             SASEntities db = new SASEntities();
-            ComponenteIII c3 = db.ComponenteIII.FirstOrDefault(i => i.IdRequerimientoFk == IdRequerimientoFk);
+            ComponenteIII c3 = db.ComponenteIII.FirstOrDefault(i => i.IdValidarFk == IdValidarFk);
             c3.Concepto = Concepto;
             c3.Solicita = Solicita;
             c3.Requiere = Requiere;
@@ -28,10 +28,10 @@ namespace MemotraficoV2.Models
         {
             SASEntities db = new SASEntities();
             ComponenteIII[] c3 = null;
-            var registro = db.ComponenteIII.Where(i => i.IdRequerimientoFk == valor).Count() > 0 ? true : false;
+            var registro = db.ComponenteIII.Where(i => i.IdValidarFk == valor).Count() > 0 ? true : false;
             if (registro)
             {
-                c3 = db.ComponenteIII.Where(i => i.IdRequerimientoFk == valor).ToArray();
+                c3 = db.ComponenteIII.Where(i => i.IdValidarFk == valor).ToArray();
             }
 
             return c3;
@@ -39,7 +39,7 @@ namespace MemotraficoV2.Models
 
         public static void EliminaRegistros(int valor) {
             SASEntities db = new SASEntities();
-            List<ComponenteIII> lc3 = db.ComponenteIII.Where(i => i.IdRequerimientoFk == valor).ToList();
+            List<ComponenteIII> lc3 = db.ComponenteIII.Where(i => i.IdValidarFk == valor).ToList();
 
             foreach(var x in lc3)
             {

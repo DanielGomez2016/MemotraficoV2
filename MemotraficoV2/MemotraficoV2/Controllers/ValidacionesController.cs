@@ -13,27 +13,65 @@ namespace MemotraficoV2.Controllers
     public class ValidacionesController : Controller
     {
         // GET: Validaciones
-        public ActionResult Index(int esc, string sol)
+        public ActionResult Index()
+        {
+
+            SASEntities db = new SASEntities();
+            List<EscuelaValidacion> Escuelas = db.Escuela
+                                                 .Select(x => new EscuelaValidacion
+                                                 {
+                                                     Id = x.IdEscuela,
+                                                     Nombre = x.Nombre,
+                                                     Clave = x.Clave,
+                                                     TotalValidaciones = x.Validacion
+                                                                          .Where(z => z.IdEscuelaFk == x.IdEscuela)
+                                                                          .Count(),
+                                                     UltimaValidacion = db.Validacion
+                                                                          .FirstOrDefault(z =>
+                                                                                          z.IdEscuelaFk == x.IdEscuela &&
+                                                                                          z.Historial == false) != null ? db.Validacion
+                                                                          .FirstOrDefault(z =>
+                                                                                          z.IdEscuelaFk == x.IdEscuela &&
+                                                                                          z.Historial == false)
+                                                                          .FechaValidacion.ToString() : ""
+                                                 }).ToList();
+            return View(Escuelas);
+        }
+
+        public ActionResult ValidacionEscolar(int escuela, string solicitud, int crear)
         {
             SASEntities db = new SASEntities();
-            Validacion_Requerimientos vr = new Validacion_Requerimientos();
+            Validaciones vr = new Validaciones();
 
-            vr.Solicitudes = db.Solicitudes.FirstOrDefault(i => i.Folio == sol);
+            vr.Solicitudes = solicitud != "" ? null : db.Solicitudes.FirstOrDefault(i => i.Folio == solicitud);
 
-            vr.FolioSolicitud = sol;
-            Contacto c = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == esc);
+            vr.FolioSolicitud = solicitud;
+            Contacto c = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == escuela);
 
-            vr.Escuela = db.Escuela.FirstOrDefault(i => i.IdEscuela == esc);
+            vr.Escuela = db.Escuela.FirstOrDefault(i => i.IdEscuela == escuela);
             vr.Escuela.Celular = c.Celular;
             vr.Escuela.NombreDirector = c.Nombre;
             vr.Escuela.Telefono = c.Telefono;
             vr.Escuela.EmailDirector = c.Email;
 
             //se crear registro de validacion si ya se tiene se regresa el registro
-            vr.validacion = Validacion.ObtenerRegistro(esc);
-
-            //se crear registro de requisitos si ya se tiene se regresa el registro
-            vr.requerimientos = Requerimientos.ObtenerRegistro(esc);
+            if(crear > 0)
+            {
+                vr.validacion = Validacion.EditarRegistro(escuela);
+            }
+            else
+            {
+                var can = db.Validacion
+                            .OrderByDescending(x => x.FechaValidacion)
+                            .Where(x => x.IdEscuelaFk == escuela).Any(x => x.Historial == false);
+                if (!can)
+                {
+                    vr.validacion = Validacion.NuevoRegistro(escuela);
+                }else
+                {
+                    vr.validacion = Validacion.EditarRegistro(escuela);
+                }   
+            }
 
             //llenar los campos de aulas,laboratorios,talleres y anexos
             vr.Aulas = EspacioEducativoDet.ContarAulas(vr.validacion == null ? 0 : vr.validacion.IdValidar);
@@ -41,36 +79,30 @@ namespace MemotraficoV2.Controllers
             vr.Talleres = EspacioEducativoDet.ContarTalleres(vr.validacion == null ? 0 : vr.validacion.IdValidar);
             vr.Anexos = EspacioEducativoDet.ContarAnexos(vr.validacion == null ? 0 : vr.validacion.IdValidar);
 
-            if (vr.validacion.CountRegistro(esc) > 0)
-            {
-                vr.Matricula = Matricula.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.Entorno = Entorno.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.Croquis = Croquis.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.ServicioMunicipal = ServicioMunicipal.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.AlmacenamientoDren = AlmacenamientoDren.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.EnergiaElectrica = EnergiaElectrica.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.EspacioMultiple = EspacioMultiple.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.EspacioEducativo = EspacioEducativo.ObtenerRegistro(vr.validacion.IdValidar);
-                vr.EspacioEducativoDet = EspacioEducativo.ObtenerRegistros(vr.EspacioEducativo.IdEspacioEducativo);
-            }
+            vr.Matricula = Matricula.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.Entorno = Entorno.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.Croquis = Croquis.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ServicioMunicipal = ServicioMunicipal.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.AlmacenamientoDren = AlmacenamientoDren.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.EnergiaElectrica = EnergiaElectrica.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.EspacioMultiple = EspacioMultiple.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.EspacioEducativo = EspacioEducativo.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.EspacioEducativoDet = EspacioEducativo.ObtenerRegistros(vr.EspacioEducativo.IdEspacioEducativo);
 
-            if (vr.requerimientos.CountRegistro(esc) > 0)
-            {
-                vr.ComponenteI = ComponenteI.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteII = ComponenteII.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteIII = ComponenteIII.ObtenerRegistros(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteIV = ComponenteIV.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteV = ComponenteV.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteVI = ComponenteVI.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteVII = ComponenteVII.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-                vr.ComponenteVIII = ComponenteVIII.ObtenerRegistro(vr.requerimientos.IdRequerimiento);
-            }
+            vr.ComponenteI = ComponenteI.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ComponenteII = ComponenteII.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ComponenteIII = ComponenteIII.ObtenerRegistros(vr.validacion.IdValidar);
+            vr.ComponenteIV = ComponenteIV.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ComponenteV = ComponenteV.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ComponenteVI = ComponenteVI.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ComponenteVII = ComponenteVII.ObtenerRegistro(vr.validacion.IdValidar);
+            vr.ComponenteVIII = ComponenteVIII.ObtenerRegistro(vr.validacion.IdValidar);
 
             return View(vr);
         }
 
         [HttpPost]
-        public JsonResult Validaciones(Validacion_Requerimientos vr)
+        public JsonResult Validaciones(Validaciones vr)
         {
             try
             {
@@ -99,8 +131,6 @@ namespace MemotraficoV2.Controllers
                 #region validaciones
                 if (vr.validacion.IdValidar > 0)
                 {
-                    
-
                     #region Matricula
                     //iniciamos guardando cada modulo de validaciones
                     //primer modulo matricula, espacios educativos
@@ -442,18 +472,9 @@ namespace MemotraficoV2.Controllers
                     }
                     #endregion
 
-                   
-                }
-
-                #endregion
-
-                #region requerimientos
-
-                if (vr.requerimientos.IdRequerimiento > 0)
-                {
                     #region  componente I
                     ComponenteI c1 = vr.ComponenteI;
-                    c1.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c1.IdValidarFk = vr.validacion.IdValidar;
                     if (vr.Matricula.IdMatricula > 0)
                     {
                         c1.Editar();
@@ -462,7 +483,7 @@ namespace MemotraficoV2.Controllers
 
                     #region  componente II
                     ComponenteII c2 = vr.ComponenteII;
-                    c2.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c2.IdValidarFk = vr.validacion.IdValidar;
                     if (vr.ComponenteII.IdComponenteII > 0)
                     {
                         c2.Editar();
@@ -472,11 +493,11 @@ namespace MemotraficoV2.Controllers
                     #region  componente III
 
                     var cont = vr.C3Conceptos.Count();
-                    ComponenteIII.EliminaRegistros(vr.requerimientos.IdRequerimiento);
-                    for(var i = 0; i < cont; i++)
+                    ComponenteIII.EliminaRegistros(vr.validacion.IdValidar);
+                    for (var i = 0; i < cont; i++)
                     {
                         ComponenteIII c3 = new ComponenteIII();
-                        c3.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                        c3.IdValidarFk = vr.validacion.IdValidar;
                         c3.Concepto = vr.C3Conceptos[i];
                         c3.Solicita = vr.C3Solicitante[i];
                         c3.Requiere = vr.C3Requerimientos[i];
@@ -487,7 +508,7 @@ namespace MemotraficoV2.Controllers
 
                     #region  componente VI
                     ComponenteIV c4 = vr.ComponenteIV;
-                    c4.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c4.IdValidarFk = vr.validacion.IdValidar;
                     c4.Rehabilitacion = vr.CIVRehabilitacion;
                     if (vr.ComponenteIV.IdComponenteIV > 0)
                     {
@@ -497,7 +518,7 @@ namespace MemotraficoV2.Controllers
 
                     #region  componente V
                     ComponenteV c5 = vr.ComponenteV;
-                    c5.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c5.IdValidarFk = vr.validacion.IdValidar;
                     if (vr.ComponenteV.IdComponenteV > 0)
                     {
                         c5.Editar();
@@ -506,7 +527,7 @@ namespace MemotraficoV2.Controllers
 
                     #region  componente VI
                     ComponenteVI c6 = vr.ComponenteVI;
-                    c6.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c6.IdValidarFk = vr.validacion.IdValidar;
                     if (vr.ComponenteVI.IdComponenteVI > 0)
                     {
                         c6.Editar();
@@ -515,7 +536,7 @@ namespace MemotraficoV2.Controllers
 
                     #region  componente VII
                     ComponenteVII c7 = vr.ComponenteVII;
-                    c7.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c7.IdValidarFk = vr.validacion.IdValidar;
                     if (vr.ComponenteVII.IdComponenteVII > 0)
                     {
                         c7.Editar();
@@ -524,7 +545,7 @@ namespace MemotraficoV2.Controllers
 
                     #region  componente VIII
                     ComponenteVIII c8 = vr.ComponenteVIII;
-                    c8.IdRequerimientoFk = vr.requerimientos.IdRequerimiento;
+                    c8.IdValidarFk = vr.validacion.IdValidar;
                     if (vr.ComponenteVIII.IdComponenteVIII > 0)
                     {
                         c8.Editar();
@@ -549,6 +570,23 @@ namespace MemotraficoV2.Controllers
                     msj = "La validacion  no se ha canalizado correctamente"
                 });
             }
+        }
+
+        public ActionResult Historial(int escuela)
+        {
+            SASEntities db = new SASEntities();
+            List<ValidacionEscuela> v = db.Validacion
+                                     .Where(x => x.IdEscuelaFk == escuela)
+                                     .Select(x => new ValidacionEscuela {
+                                         Ide = escuela,
+                                         Idv = x.IdValidar,
+                                         fecha = x.FechaValidacion.Value.ToString(),
+                                         Historial = x.Historial != true ? false : true,
+                                         nombreUsuario = x.IdUsario
+                                     })
+                                     .OrderBy(x => x.fecha)
+                                     .ToList(); 
+            return View(v);
         }
 
         public FileContentResult GetCroquis(int? id)
@@ -600,6 +638,29 @@ namespace MemotraficoV2.Controllers
                     msj = "El documento no se a podido guardar, intentalo nuevamente"
                 });
             }
+        }
+
+        public ActionResult Escuelas()
+        {
+            SASEntities db = new SASEntities();
+            List<EscuelaValidacion> Escuelas = db.Escuela
+                                                 .Select(x => new EscuelaValidacion {
+                                                     Id = x.IdEscuela,
+                                                     Nombre = x.Nombre,
+                                                     Clave = x.Clave,
+                                                     TotalValidaciones = x.Validacion
+                                                                          .Where(z => z.IdEscuelaFk == x.IdEscuela)
+                                                                          .Count(),
+                                                     UltimaValidacion = db.Validacion
+                                                                          .FirstOrDefault(z =>
+                                                                                          z.IdEscuelaFk == x.IdEscuela &&
+                                                                                          z.Historial == false) != null ?                                           db.Validacion
+                                                                          .FirstOrDefault(z => 
+                                                                                          z.IdEscuelaFk == x.IdEscuela &&
+                                                                                          z.Historial == false)
+                                                                          .FechaValidacion.ToString() : ""
+                                                 }).ToList();
+            return View(Escuelas);
         }
     }
 }

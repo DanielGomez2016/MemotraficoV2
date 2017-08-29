@@ -60,6 +60,20 @@ namespace MemotraficoV2.Models
             }
         }
 
+        public string GetUsuarioNombre(string id)
+        {
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                ApplicationUser usuario = db.Users.First(i => i.Id == id);
+                return usuario.Nombre + " " + usuario.ApellidoPaterno;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         public static string Roles()
         {
             var rols = "";

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MemotraficoV2.ViewModels.ValidacionEscuela>
+@{
+    string rol = MemotraficoV2.Models.Usuarios.Roles();
+    var ADMINISTRADOR_DEPENDENCIA = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_DEPENDENCIA;
+    var ADMINISTRADOR_SOLICITUDES = MemotraficoV2.Models.Colecciones.ListaRoles.ADMINISTRADOR_SOLICITUDES;
+    var OPERADOR = MemotraficoV2.Models.Colecciones.ListaRoles.OPERADOR;
+
+    var CANALIZADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANALIZADO;
+    var CANCELADO = MemotraficoV2.Models.Colecciones.ListaEstatus.CANCELADO;
+    var INICIADO = MemotraficoV2.Models.Colecciones.ListaEstatus.INICIADO;
+    var x = 1;
+
+    Layout = null;
+}
+<div class="" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div>
+                    <table id="datatable" style="width:100%;" class="table table-info table-striped table-bordered dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha Validacion</th>
+                                <th>Usuario Realizo</th>
+                                <th>Historial</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+                                
+                                <tr>
+                                    <td>@x</td>
+                                    <td>@i.fecha</td>
+                                    <td>@(MemotraficoV2.Models.Usuarios.GetUsuarioId(i.nombreUsuario))</td>
+                                    <td>@(i.Historial == true ? "Es Historial" : "Actual" )</td>
+                                    <td>
+                                        <a href="@(Url.Action("ValidacionEscolar",
+                                                                        "Validaciones",
+                                                                        new {
+                                                                            escuela = i.Ide,
+                                                                            solicitud = " ",
+                                                                            crear = 1
+                                                                        }))"
+                                           type="button" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                x +=1;
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="ln_solid"></div>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-dark" data-dismiss="modal" type="button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    debugger
+    $(document).ready(function () {
+        $('.table-info').dataTable();
+    });
+</script>

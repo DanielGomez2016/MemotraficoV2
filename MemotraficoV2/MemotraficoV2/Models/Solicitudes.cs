@@ -57,7 +57,7 @@ namespace MemotraficoV2.Models
             }
             s.IdEstatusFk = ListaEstatus.INICIADO;
             s.IdProcedenciaFk = IdProcedenciaFk;
-            s.IdNivelImportanciaFk = 2;//nivel de importancia normal
+            s.IdNivelImportanciaFk = ListaImportancia.NORMAL;//nivel de importancia normal
             s.IdTipoProcedenciaFk = IdTipoProcedenciaFk;
             s.Folio = GenerarFolio(FechaEntrega);
             s.FechaEntrega = FechaEntrega;

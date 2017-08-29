@@ -62,7 +62,7 @@ namespace MemotraficoV2.Models
         public void Editar()
         {
             SASEntities db = new SASEntities();
-            ComponenteII c2 = db.ComponenteII.FirstOrDefault(i => i.IdRequerimientoFk == IdRequerimientoFk);
+            ComponenteII c2 = db.ComponenteII.FirstOrDefault(i => i.IdValidarFk == IdValidarFk);
             c2.ConstruccionModulo = ConstruccionModulo;
             c2.MuebleSanitario = MuebleSanitario;
             c2.Pintura = Pintura;
@@ -80,10 +80,10 @@ namespace MemotraficoV2.Models
         {
             SASEntities db = new SASEntities();
             ComponenteII c2 = new ComponenteII();
-            var registro = db.ComponenteII.Where(i => i.IdRequerimientoFk == valor).Count() > 0 ? false : true;
+            var registro = db.ComponenteII.Where(i => i.IdValidarFk == valor).Count() > 0 ? false : true;
             if (registro)
             {
-                c2.IdRequerimientoFk = valor;
+                c2.IdValidarFk = valor;
                 c2.ConstruccionModulo = "";
                 c2.MuebleSanitario = "";
                 c2.Pintura = "";
@@ -97,7 +97,7 @@ namespace MemotraficoV2.Models
 
                 c2.Crear();
             }
-            c2 = db.ComponenteII.FirstOrDefault(i => i.IdRequerimientoFk == valor);
+            c2 = db.ComponenteII.FirstOrDefault(i => i.IdValidarFk == valor);
             return c2;
         }
     }

@@ -310,6 +310,7 @@
     <Compile Include="Models\Validacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EscuelaValidacion.cs" />
     <Compile Include="ViewModels\SolicitudDetalle.cs" />
     <Compile Include="ViewModels\SolicitudesEscuelasViewModel.cs" />
     <Compile Include="ViewModels\Validacion_Requerimientos.cs" />
@@ -4994,6 +4995,9 @@
     <Content Include="Views\Validaciones\_ComponenteI.cshtml" />
     <Content Include="Views\Accesos\CargarMenu.cshtml" />
     <Content Include="Views\Until\ImportarExcel.cshtml" />
+    <Content Include="Views\Validaciones\Escuelas.cshtml" />
+    <Content Include="Views\Validaciones\ValidacionEscolar.cshtml" />
+    <Content Include="Views\Validaciones\Historial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

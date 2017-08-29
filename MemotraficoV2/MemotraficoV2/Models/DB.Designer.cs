@@ -25,21 +25,22 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_AlmacenamientoDren_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "AlmacenamientoDren", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AlmacenamientoDren), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId", "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetUsers), "AspNetUserClaims", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUserClaims), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId", "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetUsers), "AspNetUserLogins", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUserLogins), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Departamento", "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Departamento), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Departamento", "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Departamento), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Usuario_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_Validacion_AspNetUsers", "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.AspNetUsers), "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Validacion), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Beneficiario_Localidades", "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Localidades), "Beneficiario", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Beneficiario), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Beneficiario_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Beneficiario", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Beneficiario), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Beneficiario", "Beneficiario", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Beneficiario), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Canalizacion_Solicitudes", "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Solicitudes), "Canalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Canalizacion), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_DetalleCanalizacion_Canalizacion", "Canalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Canalizacion), "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.DetalleCanalizacion), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteI_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteI", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteI), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteII), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteIII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteIII), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteIV_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteIV", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteIV), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteV_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteV", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteV), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVI_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteVI", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVI), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteVII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVII), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVIII_Requerimientos", "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Requerimientos), "ComponenteVIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVIII), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteI_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteI", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteI), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteII_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteII), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteIII_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteIII), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteIV_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteIV", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteIV), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteV_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteV", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteV), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVI_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteVI", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVI), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVII_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteVII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVII), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_ComponenteVIII_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "ComponenteVIII", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.ComponenteVIII), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Contacto_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Contacto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Contacto), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Croquis_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "Croquis", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Croquis), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Departamento_Institucion", "Institucion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Institucion), "Departamento", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Departamento), true)]
@@ -50,11 +51,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_Localidades", "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Localidades), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Escuela_NivelEducativo", "NivelEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.NivelEducativo), "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Escuela), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_Requerimientos_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Requerimientos", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Requerimientos), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Validacion_Escuela", "Escuela", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Escuela), "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Validacion), true)]
-[assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativo_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioEducativo), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativoDet_EspacioEducativo", "EspacioEducativo", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.EspacioEducativo), "EspacioEducativoDet", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioEducativoDet), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_EspacioEducativo_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioMultiple", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioMultiple), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_EspacioMultiple_Validacion", "Validacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Validacion), "EspacioMultiple", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.EspacioMultiple), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_Estatus", "Estatus", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.Estatus), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Localidades_Municipios", "Municipios", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.Municipios), "Localidades", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Localidades), true)]
@@ -552,22 +552,6 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<EspacioEducativoDet> EspacioEducativoDet
-        {
-            get
-            {
-                if ((_EspacioEducativoDet == null))
-                {
-                    _EspacioEducativoDet = base.CreateObjectSet<EspacioEducativoDet>("EspacioEducativoDet");
-                }
-                return _EspacioEducativoDet;
-            }
-        }
-        private ObjectSet<EspacioEducativoDet> _EspacioEducativoDet;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
         public ObjectSet<EspacioMultiple> EspacioMultiple
         {
             get
@@ -712,22 +696,6 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<Requerimientos> Requerimientos
-        {
-            get
-            {
-                if ((_Requerimientos == null))
-                {
-                    _Requerimientos = base.CreateObjectSet<Requerimientos>("Requerimientos");
-                }
-                return _Requerimientos;
-            }
-        }
-        private ObjectSet<Requerimientos> _Requerimientos;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
         public ObjectSet<ServicioMunicipal> ServicioMunicipal
         {
             get
@@ -804,6 +772,22 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Validacion> _Validacion;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<EspacioEducativoDet> EspacioEducativoDet
+        {
+            get
+            {
+                if ((_EspacioEducativoDet == null))
+                {
+                    _EspacioEducativoDet = base.CreateObjectSet<EspacioEducativoDet>("EspacioEducativoDet");
+                }
+                return _EspacioEducativoDet;
+            }
+        }
+        private ObjectSet<EspacioEducativoDet> _EspacioEducativoDet;
 
         #endregion
 
@@ -1026,14 +1010,6 @@ namespace MemotraficoV2.Models
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet EspacioEducativoDet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToEspacioEducativoDet(EspacioEducativoDet espacioEducativoDet)
-        {
-            base.AddObject("EspacioEducativoDet", espacioEducativoDet);
-        }
-    
-        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet EspacioMultiple. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToEspacioMultiple(EspacioMultiple espacioMultiple)
@@ -1106,14 +1082,6 @@ namespace MemotraficoV2.Models
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Requerimientos. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToRequerimientos(Requerimientos requerimientos)
-        {
-            base.AddObject("Requerimientos", requerimientos);
-        }
-    
-        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet ServicioMunicipal. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToServicioMunicipal(ServicioMunicipal servicioMunicipal)
@@ -1151,6 +1119,14 @@ namespace MemotraficoV2.Models
         public void AddToValidacion(Validacion validacion)
         {
             base.AddObject("Validacion", validacion);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet EspacioEducativoDet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToEspacioEducativoDet(EspacioEducativoDet espacioEducativoDet)
+        {
+            base.AddObject("EspacioEducativoDet", espacioEducativoDet);
         }
 
         #endregion
@@ -2552,17 +2528,19 @@ namespace MemotraficoV2.Models
         /// </summary>
         /// <param name="id">Valor inicial de la propiedad Id.</param>
         /// <param name="idInstitucion">Valor inicial de la propiedad IdInstitucion.</param>
+        /// <param name="idDepartamento">Valor inicial de la propiedad IdDepartamento.</param>
         /// <param name="emailConfirmed">Valor inicial de la propiedad EmailConfirmed.</param>
         /// <param name="phoneNumberConfirmed">Valor inicial de la propiedad PhoneNumberConfirmed.</param>
         /// <param name="twoFactorEnabled">Valor inicial de la propiedad TwoFactorEnabled.</param>
         /// <param name="lockoutEnabled">Valor inicial de la propiedad LockoutEnabled.</param>
         /// <param name="accessFailedCount">Valor inicial de la propiedad AccessFailedCount.</param>
         /// <param name="userName">Valor inicial de la propiedad UserName.</param>
-        public static AspNetUsers CreateAspNetUsers(global::System.String id, global::System.Int32 idInstitucion, global::System.Boolean emailConfirmed, global::System.Boolean phoneNumberConfirmed, global::System.Boolean twoFactorEnabled, global::System.Boolean lockoutEnabled, global::System.Int32 accessFailedCount, global::System.String userName)
+        public static AspNetUsers CreateAspNetUsers(global::System.String id, global::System.Int32 idInstitucion, global::System.Int32 idDepartamento, global::System.Boolean emailConfirmed, global::System.Boolean phoneNumberConfirmed, global::System.Boolean twoFactorEnabled, global::System.Boolean lockoutEnabled, global::System.Int32 accessFailedCount, global::System.String userName)
         {
             AspNetUsers aspNetUsers = new AspNetUsers();
             aspNetUsers.Id = id;
             aspNetUsers.IdInstitucion = idInstitucion;
+            aspNetUsers.IdDepartamento = idDepartamento;
             aspNetUsers.EmailConfirmed = emailConfirmed;
             aspNetUsers.PhoneNumberConfirmed = phoneNumberConfirmed;
             aspNetUsers.TwoFactorEnabled = twoFactorEnabled;
@@ -2702,9 +2680,9 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdDepartamento
+        public global::System.Int32 IdDepartamento
         {
             get
             {
@@ -2719,8 +2697,8 @@ namespace MemotraficoV2.Models
                 OnIdDepartamentoChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdDepartamento;
-        partial void OnIdDepartamentoChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _IdDepartamento;
+        partial void OnIdDepartamentoChanging(global::System.Int32 value);
         partial void OnIdDepartamentoChanged();
     
         /// <summary>
@@ -3131,6 +3109,28 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institucion>("Model.FK_Usuario_Institucion", "Institucion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Validacion_AspNetUsers", "Validacion")]
+        public EntityCollection<Validacion> Validacion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Validacion>("Model.FK_Validacion_AspNetUsers", "Validacion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Validacion>("Model.FK_Validacion_AspNetUsers", "Validacion", value);
                 }
             }
         }
@@ -3742,24 +3742,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4011,16 +4011,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteI_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteI_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteI_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteI_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteI_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteI_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -4028,17 +4028,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteI_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteI_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteI_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteI_Validacion", "Validacion", value);
                 }
             }
         }
@@ -4104,24 +4104,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4373,16 +4373,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteII_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteII_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteII_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteII_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteII_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteII_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -4390,17 +4390,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteII_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteII_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteII_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteII_Validacion", "Validacion", value);
                 }
             }
         }
@@ -4466,24 +4466,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4567,16 +4567,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIII_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIII_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteIII_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteIII_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteIII_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteIII_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -4584,17 +4584,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteIII_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteIII_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteIII_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteIII_Validacion", "Validacion", value);
                 }
             }
         }
@@ -4660,24 +4660,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4761,16 +4761,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIV_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIV_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteIV_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteIV_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteIV_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteIV_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -4778,17 +4778,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteIV_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteIV_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteIV_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteIV_Validacion", "Validacion", value);
                 }
             }
         }
@@ -4854,24 +4854,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -4955,16 +4955,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteV_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteV_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteV_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteV_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteV_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteV_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -4972,17 +4972,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteV_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteV_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteV_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteV_Validacion", "Validacion", value);
                 }
             }
         }
@@ -5048,24 +5048,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -5221,16 +5221,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVI_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVI_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVI_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVI_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVI_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVI_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -5238,17 +5238,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVI_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVI_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteVI_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteVI_Validacion", "Validacion", value);
                 }
             }
         }
@@ -5314,24 +5314,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -5391,16 +5391,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVII_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVII_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVII_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVII_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVII_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVII_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -5408,17 +5408,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVII_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVII_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteVII_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteVII_Validacion", "Validacion", value);
                 }
             }
         }
@@ -5484,24 +5484,24 @@ namespace MemotraficoV2.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdRequerimientoFk
+        public Nullable<global::System.Int32> IdValidarFk
         {
             get
             {
-                return _IdRequerimientoFk;
+                return _IdValidarFk;
             }
             set
             {
-                OnIdRequerimientoFkChanging(value);
-                ReportPropertyChanging("IdRequerimientoFk");
-                _IdRequerimientoFk = StructuralObject.SetValidValue(value, "IdRequerimientoFk");
-                ReportPropertyChanged("IdRequerimientoFk");
-                OnIdRequerimientoFkChanged();
+                OnIdValidarFkChanging(value);
+                ReportPropertyChanging("IdValidarFk");
+                _IdValidarFk = StructuralObject.SetValidValue(value, "IdValidarFk");
+                ReportPropertyChanged("IdValidarFk");
+                OnIdValidarFkChanged();
             }
         }
-        private Nullable<global::System.Int32> _IdRequerimientoFk;
-        partial void OnIdRequerimientoFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdRequerimientoFkChanged();
+        private Nullable<global::System.Int32> _IdValidarFk;
+        partial void OnIdValidarFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdValidarFkChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -5777,16 +5777,16 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVIII_Requerimientos", "Requerimientos")]
-        public Requerimientos Requerimientos
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVIII_Validacion", "Validacion")]
+        public Validacion Validacion
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVIII_Requerimientos", "Requerimientos").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVIII_Validacion", "Validacion").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVIII_Requerimientos", "Requerimientos").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVIII_Validacion", "Validacion").Value = value;
             }
         }
         /// <summary>
@@ -5794,17 +5794,17 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Requerimientos> RequerimientosReference
+        public EntityReference<Validacion> ValidacionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Requerimientos>("Model.FK_ComponenteVIII_Requerimientos", "Requerimientos");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_ComponenteVIII_Validacion", "Validacion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Requerimientos>("Model.FK_ComponenteVIII_Requerimientos", "Requerimientos", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_ComponenteVIII_Validacion", "Validacion", value);
                 }
             }
         }
@@ -8699,28 +8699,6 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Requerimientos_Escuela", "Requerimientos")]
-        public EntityCollection<Requerimientos> Requerimientos
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Requerimientos>("Model.FK_Requerimientos_Escuela", "Requerimientos");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Requerimientos>("Model.FK_Requerimientos_Escuela", "Requerimientos", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Solicitudes_Escuela", "Solicitudes")]
         public EntityCollection<Solicitudes> Solicitudes
         {
@@ -8842,44 +8820,6 @@ namespace MemotraficoV2.Models
         #endregion
 
         #region Propiedades de navegación
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioEducativo_Validacion", "Validacion")]
-        public Validacion Validacion
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Validacion> ValidacionReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No hay documentación de metadatos disponible.
@@ -9811,8 +9751,46 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioMultiple_Validacion", "Validacion")]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioEducativo_Validacion", "Validacion")]
         public Validacion Validacion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Validacion> ValidacionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Validacion>("Model.FK_EspacioEducativo_Validacion", "Validacion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioMultiple_Validacion", "Validacion")]
+        public Validacion Validacion1
         {
             get
             {
@@ -9828,7 +9806,7 @@ namespace MemotraficoV2.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Validacion> ValidacionReference
+        public EntityReference<Validacion> Validacion1Reference
         {
             get
             {
@@ -11404,304 +11382,6 @@ namespace MemotraficoV2.Models
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Model", Name="Requerimientos")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Requerimientos : EntityObject
-    {
-        #region Método de generador
-    
-        /// <summary>
-        /// Crear un nuevo objeto Requerimientos.
-        /// </summary>
-        /// <param name="idRequerimiento">Valor inicial de la propiedad IdRequerimiento.</param>
-        public static Requerimientos CreateRequerimientos(global::System.Int32 idRequerimiento)
-        {
-            Requerimientos requerimientos = new Requerimientos();
-            requerimientos.IdRequerimiento = idRequerimiento;
-            return requerimientos;
-        }
-
-        #endregion
-
-        #region Propiedades simples
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 IdRequerimiento
-        {
-            get
-            {
-                return _IdRequerimiento;
-            }
-            set
-            {
-                if (_IdRequerimiento != value)
-                {
-                    OnIdRequerimientoChanging(value);
-                    ReportPropertyChanging("IdRequerimiento");
-                    _IdRequerimiento = StructuralObject.SetValidValue(value, "IdRequerimiento");
-                    ReportPropertyChanged("IdRequerimiento");
-                    OnIdRequerimientoChanged();
-                }
-            }
-        }
-        private global::System.Int32 _IdRequerimiento;
-        partial void OnIdRequerimientoChanging(global::System.Int32 value);
-        partial void OnIdRequerimientoChanged();
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> IdEsceulaFk
-        {
-            get
-            {
-                return _IdEsceulaFk;
-            }
-            set
-            {
-                OnIdEsceulaFkChanging(value);
-                ReportPropertyChanging("IdEsceulaFk");
-                _IdEsceulaFk = StructuralObject.SetValidValue(value, "IdEsceulaFk");
-                ReportPropertyChanged("IdEsceulaFk");
-                OnIdEsceulaFkChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _IdEsceulaFk;
-        partial void OnIdEsceulaFkChanging(Nullable<global::System.Int32> value);
-        partial void OnIdEsceulaFkChanged();
-
-        #endregion
-
-        #region Propiedades de navegación
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteI_Requerimientos", "ComponenteI")]
-        public EntityCollection<ComponenteI> ComponenteI
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteI>("Model.FK_ComponenteI_Requerimientos", "ComponenteI");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteI>("Model.FK_ComponenteI_Requerimientos", "ComponenteI", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteII_Requerimientos", "ComponenteII")]
-        public EntityCollection<ComponenteII> ComponenteII
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteII>("Model.FK_ComponenteII_Requerimientos", "ComponenteII");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteII>("Model.FK_ComponenteII_Requerimientos", "ComponenteII", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIII_Requerimientos", "ComponenteIII")]
-        public EntityCollection<ComponenteIII> ComponenteIII
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteIII>("Model.FK_ComponenteIII_Requerimientos", "ComponenteIII");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteIII>("Model.FK_ComponenteIII_Requerimientos", "ComponenteIII", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIV_Requerimientos", "ComponenteIV")]
-        public EntityCollection<ComponenteIV> ComponenteIV
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteIV>("Model.FK_ComponenteIV_Requerimientos", "ComponenteIV");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteIV>("Model.FK_ComponenteIV_Requerimientos", "ComponenteIV", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteV_Requerimientos", "ComponenteV")]
-        public EntityCollection<ComponenteV> ComponenteV
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteV>("Model.FK_ComponenteV_Requerimientos", "ComponenteV");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteV>("Model.FK_ComponenteV_Requerimientos", "ComponenteV", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVI_Requerimientos", "ComponenteVI")]
-        public EntityCollection<ComponenteVI> ComponenteVI
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteVI>("Model.FK_ComponenteVI_Requerimientos", "ComponenteVI");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteVI>("Model.FK_ComponenteVI_Requerimientos", "ComponenteVI", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVII_Requerimientos", "ComponenteVII")]
-        public EntityCollection<ComponenteVII> ComponenteVII
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteVII>("Model.FK_ComponenteVII_Requerimientos", "ComponenteVII");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteVII>("Model.FK_ComponenteVII_Requerimientos", "ComponenteVII", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVIII_Requerimientos", "ComponenteVIII")]
-        public EntityCollection<ComponenteVIII> ComponenteVIII
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteVIII>("Model.FK_ComponenteVIII_Requerimientos", "ComponenteVIII");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteVIII>("Model.FK_ComponenteVIII_Requerimientos", "ComponenteVIII", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Requerimientos_Escuela", "Escuela")]
-        public Escuela Escuela
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Requerimientos_Escuela", "Escuela").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Requerimientos_Escuela", "Escuela").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Escuela> EscuelaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Escuela>("Model.FK_Requerimientos_Escuela", "Escuela");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Escuela>("Model.FK_Requerimientos_Escuela", "Escuela", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No hay documentación de metadatos disponible.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="Model", Name="ServicioMunicipal")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -13062,6 +12742,78 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Int32> _IdEscuelaFk;
         partial void OnIdEscuelaFkChanging(Nullable<global::System.Int32> value);
         partial void OnIdEscuelaFkChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String IdUsario
+        {
+            get
+            {
+                return _IdUsario;
+            }
+            set
+            {
+                OnIdUsarioChanging(value);
+                ReportPropertyChanging("IdUsario");
+                _IdUsario = StructuralObject.SetValidValue(value, true, "IdUsario");
+                ReportPropertyChanged("IdUsario");
+                OnIdUsarioChanged();
+            }
+        }
+        private global::System.String _IdUsario;
+        partial void OnIdUsarioChanging(global::System.String value);
+        partial void OnIdUsarioChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> FechaValidacion
+        {
+            get
+            {
+                return _FechaValidacion;
+            }
+            set
+            {
+                OnFechaValidacionChanging(value);
+                ReportPropertyChanging("FechaValidacion");
+                _FechaValidacion = StructuralObject.SetValidValue(value, "FechaValidacion");
+                ReportPropertyChanged("FechaValidacion");
+                OnFechaValidacionChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _FechaValidacion;
+        partial void OnFechaValidacionChanging(Nullable<global::System.DateTime> value);
+        partial void OnFechaValidacionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Historial
+        {
+            get
+            {
+                return _Historial;
+            }
+            set
+            {
+                OnHistorialChanging(value);
+                ReportPropertyChanging("Historial");
+                _Historial = StructuralObject.SetValidValue(value, "Historial");
+                ReportPropertyChanged("Historial");
+                OnHistorialChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Historial;
+        partial void OnHistorialChanging(Nullable<global::System.Boolean> value);
+        partial void OnHistorialChanged();
 
         #endregion
 
@@ -13085,6 +12837,220 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AlmacenamientoDren>("Model.FK_AlmacenamientoDren_Validacion", "AlmacenamientoDren", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Validacion_AspNetUsers", "AspNetUsers")]
+        public AspNetUsers AspNetUsers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetUsers>("Model.FK_Validacion_AspNetUsers", "AspNetUsers").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetUsers>("Model.FK_Validacion_AspNetUsers", "AspNetUsers").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AspNetUsers> AspNetUsersReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetUsers>("Model.FK_Validacion_AspNetUsers", "AspNetUsers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AspNetUsers>("Model.FK_Validacion_AspNetUsers", "AspNetUsers", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteI_Validacion", "ComponenteI")]
+        public EntityCollection<ComponenteI> ComponenteI
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteI>("Model.FK_ComponenteI_Validacion", "ComponenteI");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteI>("Model.FK_ComponenteI_Validacion", "ComponenteI", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteII_Validacion", "ComponenteII")]
+        public EntityCollection<ComponenteII> ComponenteII
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteII>("Model.FK_ComponenteII_Validacion", "ComponenteII");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteII>("Model.FK_ComponenteII_Validacion", "ComponenteII", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIII_Validacion", "ComponenteIII")]
+        public EntityCollection<ComponenteIII> ComponenteIII
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteIII>("Model.FK_ComponenteIII_Validacion", "ComponenteIII");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteIII>("Model.FK_ComponenteIII_Validacion", "ComponenteIII", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteIV_Validacion", "ComponenteIV")]
+        public EntityCollection<ComponenteIV> ComponenteIV
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteIV>("Model.FK_ComponenteIV_Validacion", "ComponenteIV");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteIV>("Model.FK_ComponenteIV_Validacion", "ComponenteIV", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteV_Validacion", "ComponenteV")]
+        public EntityCollection<ComponenteV> ComponenteV
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteV>("Model.FK_ComponenteV_Validacion", "ComponenteV");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteV>("Model.FK_ComponenteV_Validacion", "ComponenteV", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVI_Validacion", "ComponenteVI")]
+        public EntityCollection<ComponenteVI> ComponenteVI
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteVI>("Model.FK_ComponenteVI_Validacion", "ComponenteVI");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteVI>("Model.FK_ComponenteVI_Validacion", "ComponenteVI", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVII_Validacion", "ComponenteVII")]
+        public EntityCollection<ComponenteVII> ComponenteVII
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteVII>("Model.FK_ComponenteVII_Validacion", "ComponenteVII");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteVII>("Model.FK_ComponenteVII_Validacion", "ComponenteVII", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_ComponenteVIII_Validacion", "ComponenteVIII")]
+        public EntityCollection<ComponenteVIII> ComponenteVIII
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ComponenteVIII>("Model.FK_ComponenteVIII_Validacion", "ComponenteVIII");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ComponenteVIII>("Model.FK_ComponenteVIII_Validacion", "ComponenteVIII", value);
                 }
             }
         }
@@ -13199,18 +13165,18 @@ namespace MemotraficoV2.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioEducativo_Validacion", "EspacioEducativo")]
-        public EntityCollection<EspacioEducativo> EspacioEducativo
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioEducativo_Validacion", "EspacioMultiple")]
+        public EntityCollection<EspacioMultiple> EspacioMultiple
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EspacioEducativo>("Model.FK_EspacioEducativo_Validacion", "EspacioEducativo");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EspacioMultiple>("Model.FK_EspacioEducativo_Validacion", "EspacioMultiple");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EspacioEducativo>("Model.FK_EspacioEducativo_Validacion", "EspacioEducativo", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EspacioMultiple>("Model.FK_EspacioEducativo_Validacion", "EspacioMultiple", value);
                 }
             }
         }
@@ -13222,7 +13188,7 @@ namespace MemotraficoV2.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_EspacioMultiple_Validacion", "EspacioMultiple")]
-        public EntityCollection<EspacioMultiple> EspacioMultiple
+        public EntityCollection<EspacioMultiple> EspacioMultiple1
         {
             get
             {

@@ -26,7 +26,7 @@ namespace MemotraficoV2.Models
         public void Editar()
         {
             SASEntities db = new SASEntities();
-            ComponenteIV c4 = db.ComponenteIV.FirstOrDefault(i => i.IdRequerimientoFk == IdRequerimientoFk);
+            ComponenteIV c4 = db.ComponenteIV.FirstOrDefault(i => i.IdValidarFk == IdValidarFk);
             c4.RedHidraulica = RedHidraulica;
             c4.Construccion = Construccion;
             c4.Rehabilitacion = Rehabilitacion;
@@ -37,17 +37,17 @@ namespace MemotraficoV2.Models
         {
             SASEntities db = new SASEntities();
             ComponenteIV c4 = new ComponenteIV();
-            var registro = db.ComponenteIV.Where(i => i.IdRequerimientoFk == valor).Count() > 0 ? false : true;
+            var registro = db.ComponenteIV.Where(i => i.IdValidarFk == valor).Count() > 0 ? false : true;
             if (registro)
             {
-                c4.IdRequerimientoFk = valor;
+                c4.IdValidarFk = valor;
                 c4.RedHidraulica = "";
                 c4.Construccion = "";
                 c4.Rehabilitacion = 0;
 
                 c4.Crear();
             }
-            c4 = db.ComponenteIV.FirstOrDefault(i => i.IdRequerimientoFk == valor);
+            c4 = db.ComponenteIV.FirstOrDefault(i => i.IdValidarFk == valor);
             return c4;
         }
     }

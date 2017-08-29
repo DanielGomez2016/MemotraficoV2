@@ -14,6 +14,19 @@ namespace MemotraficoV2.Models.Colecciones
         public const int ATENDIDA = 5;
     }
 
+    public class ListaImportancia
+    {
+        public const int ALTA = 1;
+        public const int NORMAL = 2;
+        public const int BAJO = 3;
+    }
+
+    public class ListadoHistorial
+    {
+        public const bool HISTORIAL = true;
+        public const bool NoHISTORIAL = false;
+    }
+
     public class ListaValidaciones
     {
         public const bool SI_VALIDACION = true;

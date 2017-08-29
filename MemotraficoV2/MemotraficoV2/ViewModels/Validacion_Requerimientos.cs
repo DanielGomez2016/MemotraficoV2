@@ -6,7 +6,7 @@ using MemotraficoV2.Models;
 
 namespace MemotraficoV2.ViewModels
 {
-    public class Validacion_Requerimientos
+    public class Validaciones
     {
         public int Aulas { get; set; }
         public int Laboratorios { get; set; }
@@ -102,8 +102,6 @@ namespace MemotraficoV2.ViewModels
         public int EMOtro { get; set; }
 
 
-
-        public Requerimientos requerimientos { get; set; }
         public ComponenteI ComponenteI { get; set; }
         public ComponenteII ComponenteII { get; set; }
 

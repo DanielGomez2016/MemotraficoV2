@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemotraficoV2.Models.Colecciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,16 @@ namespace MemotraficoV2.Models
     {
         public void Crear()
         {
-            SASEntities db = new SASEntities();
-            db.Validacion.AddObject(this);
-            db.SaveChanges();
+            try
+            {
+                SASEntities db = new SASEntities();
+                db.Validacion.AddObject(this);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            } 
         }
 
         public static Validacion ObtenerRegistro(int escuela)
@@ -26,6 +34,27 @@ namespace MemotraficoV2.Models
             }
             v = db.Validacion.FirstOrDefault(i => i.IdEscuelaFk == escuela);
             return v;
+        }
+
+        public static Validacion NuevoRegistro(int escuela)
+        {
+            SASEntities db = new SASEntities();
+            Validacion v = new Validacion();
+            v.Historial = ListadoHistorial.NoHISTORIAL;
+            v.FechaValidacion = DateTime.Now;
+            v.IdEscuelaFk = escuela;
+            v.IdUsario = Usuarios.GetUsuario();
+
+            v.Crear();
+
+            return db.Validacion.OrderByDescending(x => x.FechaValidacion).FirstOrDefault(x => x.IdEscuelaFk == escuela);
+        }
+
+        public static Validacion EditarRegistro(int escuela)
+        {
+            SASEntities db = new SASEntities();
+            Validacion v = new Validacion();
+            return db.Validacion.OrderByDescending(x => x.FechaValidacion).FirstOrDefault(x => x.IdEscuelaFk == escuela);
         }
 
         public int CountRegistro(int esc)

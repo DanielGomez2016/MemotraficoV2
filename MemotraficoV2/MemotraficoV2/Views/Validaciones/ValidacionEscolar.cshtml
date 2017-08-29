@@ -1,0 +1,349 @@
+﻿@model MemotraficoV2.ViewModels.Validaciones
+    @{
+        ViewBag.Title = "Registro de Escuela";
+
+        var options = new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            OnSuccess = "onSuccessMsj",
+            OnFailure = "onFailureMsj",
+            OnBegin = "Loading(true)",
+            OnComplete = "Loading(false)"
+        };
+    }
+
+    @using (Ajax.BeginForm("Validaciones", "Validaciones", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Escuela.IdEscuela)
+        @Html.HiddenFor(model => model.Matricula.IdMatricula)
+        @Html.HiddenFor(model => model.Solicitudes.IdSolicitud)
+        @Html.HiddenFor(model => model.validacion.IdValidar)
+        @Html.HiddenFor(model => model.EnergiaElectrica.IdEnergiaElectrica)
+        @Html.HiddenFor(model => model.Entorno.IdEntorno)
+        @Html.HiddenFor(model => model.Croquis.IdCroquis)
+        @Html.HiddenFor(model => model.ServicioMunicipal.IdServicioMpal)
+        @Html.HiddenFor(model => model.AlmacenamientoDren.IdAlmacenDrenaje)
+        @Html.HiddenFor(model => model.EspacioMultiple.IdEspacioMultiple)
+        @Html.HiddenFor(model => model.EspacioEducativo.IdEspacioEducativo)
+        @Html.HiddenFor(model => model.ComponenteI.IdComponenteI)
+        @Html.HiddenFor(model => model.ComponenteII.IdComponenteII)
+        @Html.HiddenFor(model => model.ComponenteIV.IdComponenteIV)
+        @Html.HiddenFor(model => model.ComponenteV.IdComponenteV)
+        @Html.HiddenFor(model => model.ComponenteVI.IdComponenteVI)
+        @Html.HiddenFor(model => model.ComponenteVII.IdComponenteVII)
+        @Html.HiddenFor(model => model.ComponenteVIII.IdComponenteVIII)
+        @Html.ValidationSummary("", new { @class = "text-error" })
+        <div class="" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div>
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Validacion / Requerimientos</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label>Folio Solicitud</label>
+                                            <div>@Model.FolioSolicitud</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Solicitudes.Programa)
+                                            <div>@Html.TextBoxFor(i => i.Solicitudes.Programa, new { @class = "form-control" })</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Clave)
+                                            <div>@Model.Escuela.Clave</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Fecha</label>
+                                            <div>
+                                                @Model.validacion.FechaValidacion.ToString()
+    @*@Html.TextBoxFor(i => i.Solicitudes.FechaValidacion, new { @class = "form-control", type = "date", value = (Model.Solicitudes != null && Model.Solicitudes.FechaValidacion != null ? Model.Solicitudes.FechaValidacion.Value.ToString("MMddyyyy") : DateTime.Now.ToString("ddMMyyyy")) })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.LabelFor(i => i.Escuela.Nombre)
+                                            <div>@Model.Escuela.Nombre</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Localidades.Nombre)
+                                            <div>@Model.Escuela.Localidades.Nombre</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.NivelEducativo.Nivel)
+                                            <div>@Model.Escuela.NivelEducativo.Nivel</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Turno)
+                                            <div>@Model.Escuela.Turno</div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.LabelFor(i => i.Escuela.Domicilio)
+                                            <div>@Model.Escuela.Domicilio</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Municipios.Nombre)
+                                            <div>@Model.Escuela.Municipios.Nombre</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Geox)
+                                            <div>@Html.TextBoxFor(i => i.Escuela.Geox, new { @class = "form-control" })</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Geoy)
+                                            <div>@Html.TextBoxFor(i => i.Escuela.Geoy, new { @class = "form-control" })</div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Nombre Director</label>
+                                            <div>@Model.Escuela.NombreDirector</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>E-mail</label>
+                                            <div>@Model.Escuela.EmailDirector</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Telefono del Plantel</label>
+                                            <div>@Model.Escuela.Telefono</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Celular</label>
+                                            <div>@Model.Escuela.Celular</div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Validacion de campo</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel">
+                                        <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <h4 class="panel-title">Matricula, Espacios Educativos</h4>
+                                        </a>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div class="panel-body">
+                                                @Html.Partial("_Matricula", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <h4 class="panel-title">Emplazamiento y Entorno, Posibles Amenazas</h4>
+                                        </a>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                @Html.Partial("_Entorno", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <h4 class="panel-title">Croquis, Tipo de Predio y Suelo</h4>
+                                        </a>
+                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body">
+                                                @Html.Partial("_Croquis", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingFour" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            <h4 class="panel-title">Servicios Municipales</h4>
+                                        </a>
+                                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ServiciosMunicipales", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingFive" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                            <h4 class="panel-title">Agua, Almacenamiento y Drenaje Sanitario</h4>
+                                        </a>
+                                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                            <div class="panel-body">
+                                                @Html.Partial("_AlmacenamientoDren", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingSix" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                            <h4 class="panel-title">Energia Electrica</h4>
+                                        </a>
+                                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                            <div class="panel-body">
+                                                @Html.Partial("_EnergiaElectrica", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingseven" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                            <h4 class="panel-title">Infraestructura - Espacios de Usos Multiples</h4>
+                                        </a>
+                                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingseven">
+                                            <div class="panel-body">
+                                                @Html.Partial("_EspacioMultiple", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingEigth" data-toggle="collapse" data-parent="#accordion" href="#collapseEigth" aria-expanded="false" aria-controls="collapseEigth">
+                                            <h4 class="panel-title">Resumen de Espacios Educativos por Edificio</h4>
+                                        </a>
+                                        <div id="collapseEigth" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEigth">
+                                            <div class="panel-body">
+                                                @Html.Partial("_EspacioEducativo", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Requerimientos</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="accordion" id="accordion2" role="tablist" aria-multiselectable="true">
+                                    <div class="panel">
+                                        <a class="panel-heading" role="tab" id="headingOne2" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">
+                                            <h4 class="panel-title">Componente I (Seg. Estructural y Condiciones Generales)</h4>
+                                        </a>
+                                        <div id="collapseOne2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteI", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingTwo2" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                            <h4 class="panel-title">Componente II (Servicios Sanitarios)</h4>
+                                        </a>
+                                        <div id="collapseTwo2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteII", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingThree2" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
+                                            <h4 class="panel-title">Componente III (Moviliario y Equipo)</h4>
+                                        </a>
+                                        <div id="collapseThree2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteIII", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingFour2" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2" aria-expanded="false" aria-controls="collapseFour2">
+                                            <h4 class="panel-title">Componente IV (Sistema de Bebederos)</h4>
+                                        </a>
+                                        <div id="collapseFour2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteIV", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingFive2" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive2" aria-expanded="false" aria-controls="collapseThree2">
+                                            <h4 class="panel-title">Componente V (Accesibilidad)</h4>
+                                        </a>
+                                        <div id="collapseFive2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteV", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingSix2" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix2" aria-expanded="false" aria-controls="collapseSix2">
+                                            <h4 class="panel-title">Componente VI (Servicios Administrativos)</h4>
+                                        </a>
+                                        <div id="collapseSix2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteVI", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingseven2" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven2" aria-expanded="false" aria-controls="collapseSeven2">
+                                            <h4 class="panel-title">Componente VII (Infraestructura Para la Conectividad)</h4>
+                                        </a>
+                                        <div id="collapseSeven2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingseven2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteVII", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel">
+                                        <a class="panel-heading collapsed" role="tab" id="headingEigth2" data-toggle="collapse" data-parent="#accordion2" href="#collapseEigth2" aria-expanded="false" aria-controls="collapseEigth2">
+                                            <h4 class="panel-title">Componente VIII (Espacios de Usos Multiples)</h4>
+                                        </a>
+                                        <div id="collapseEigth2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEigth2">
+                                            <div class="panel-body">
+                                                @Html.Partial("_ComponenteVIII", Model)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-9 col-md-offset-5">
+                @Html.ActionLink("Cancelar", "Index", new object { }, new { @class = "btn btn-primary" })
+                <button type="submit" id="send" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    }

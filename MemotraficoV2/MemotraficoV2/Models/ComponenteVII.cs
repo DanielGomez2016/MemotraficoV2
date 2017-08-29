@@ -30,7 +30,7 @@ namespace MemotraficoV2.Models
         public void Editar()
         {
             SASEntities db = new SASEntities();
-            ComponenteVII c7 = db.ComponenteVII.FirstOrDefault(i => i.IdRequerimientoFk == IdRequerimientoFk);
+            ComponenteVII c7 = db.ComponenteVII.FirstOrDefault(i => i.IdValidarFk == IdValidarFk);
             c7.Telefonia_internet = Telefonia_internet;
             c7.VozDatos = VozDatos;
             db.SaveChanges();
@@ -40,16 +40,16 @@ namespace MemotraficoV2.Models
         {
             SASEntities db = new SASEntities();
             ComponenteVII c7 = new ComponenteVII();
-            var registro = db.ComponenteVII.Where(i => i.IdRequerimientoFk == valor).Count() > 0 ? false : true;
+            var registro = db.ComponenteVII.Where(i => i.IdValidarFk == valor).Count() > 0 ? false : true;
             if (registro)
             {
-                c7.IdRequerimientoFk = valor;
+                c7.IdValidarFk = valor;
                 c7.Telefonia_internet = "";
                 c7.VozDatos = "";
 
                 c7.Crear();
             }
-            c7 = db.ComponenteVII.FirstOrDefault(i => i.IdRequerimientoFk == valor);
+            c7 = db.ComponenteVII.FirstOrDefault(i => i.IdValidarFk == valor);
             return c7;
         }
     }
