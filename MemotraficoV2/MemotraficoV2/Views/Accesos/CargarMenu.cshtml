@@ -60,8 +60,7 @@
                 <li>
                     <a><i class="fa fa-check-square-o"></i> Validaciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li>@Html.ActionLink("Listado Solicitudes", "Index", "Solicitudes")</li>
-                        <li>@Html.ActionLink("Registro de Solicitudes", "Registro", "Solicitudes")</li>
+                        <li>@Html.ActionLink("Validaciones por Escuela", "Index", "Validaciones")</li>
                     </ul>
                 </li>
             }
@@ -128,13 +127,9 @@
                     <li>fa fa-check-square-o
                         <a><i class=""  aria-hidden="true"></i> Validaciones <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            @if (Model.Any(i => i.controlador == "Solicitudes" && i.accion == "Index"))
+                            @if (Model.Any(i => i.controlador == "Validaciones" && i.accion == "Index"))
                             {
-                                <li>@Html.ActionLink("Listado Solicitudes", "Index", "Solicitudes")</li>
-                            }
-                            @if (Model.Any(i => i.controlador == "Solicitudes" && i.accion == "Registro"))
-                            {
-                                <li>@Html.ActionLink("Registro de Solicitudes", "Registro", "Solicitudes")</li>
+                                <li>@Html.ActionLink("Validaciones por Escuela", "Index", "Validaciones")</li>
                             }
                         </ul>
                     </li>

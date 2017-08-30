@@ -12,11 +12,11 @@ namespace MemotraficoV2.Models
         public class mMatricula
         {
             [Required]
-            [Display(Name = "Personas Con Disc.")]
+            [Display(Name = "P / Con Disc.")]
             public string PersonaDiscapacidad { get; set; }
 
             [Required]
-            [Display(Name = "Personal Docente")]
+            [Display(Name = "P / Docente")]
             public string PersonalDoncente { get; set; }
 
         }

@@ -43,7 +43,7 @@ namespace MemotraficoV2.Controllers
             SASEntities db = new SASEntities();
             Validaciones vr = new Validaciones();
 
-            vr.Solicitudes = solicitud != "" ? null : db.Solicitudes.FirstOrDefault(i => i.Folio == solicitud);
+            vr.Solicitudes = solicitud != "" ? db.Solicitudes.FirstOrDefault(i => i.Folio == solicitud) : null;
 
             vr.FolioSolicitud = solicitud;
             Contacto c = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == escuela);

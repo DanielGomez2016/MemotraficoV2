@@ -340,6 +340,11 @@
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\Images\ajax-loading.gif" />
+    <Content Include="Content\Images\iconsas24x24.png" />
+    <Content Include="Content\Images\iconsas36x36.png" />
+    <Content Include="Content\Images\iconsas48x48.png" />
+    <Content Include="Content\Images\logosas.jpeg" />
+    <Content Include="Content\Images\logosas2.jpg" />
     <Content Include="Content\Images\mapachih.jpg" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
