@@ -41,6 +41,10 @@ namespace MemotraficoV2.Models
         public string uactual { get; set; }
         public string Comentario { get; set;}
         public Boolean validacion { get; set; }
+        [Required]
+        public string telEscuela { get; set; }
+        [Required]
+        public string emailEscuela { get; set; }
 
         public int Crear()
         {

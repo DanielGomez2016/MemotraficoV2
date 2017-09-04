@@ -1,0 +1,150 @@
+﻿@model MemotraficoV2.ViewModels.SolicitudDetalle
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Sistema de Atencion A Solicitudes! | </title>
+    <link rel="shortcut icon" href="~/Content/Images/iconsas48x48.png" />
+    @Styles.Render("~/view")
+
+
+</head>
+<body class="nav-md footer_fixed">
+    <div class="container body ">
+        <div class="main_container">
+            <!-- page content -->
+            <div class="right_col" role="main" style="margin-left:0px;">
+                <div class="" role="main">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div>
+                                    <div class="x_panel">
+                                        <div class="x_content">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(i => i.solicitud.Folio)
+                                                    <div>@Model.solicitud.Folio</div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(i => i.solicitud.IdEstatusFk)
+                                                    <div>@Model.solicitud.Estatus.Estatus1</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.Label("Escuela")
+                                                    <div>@Model.solicitud.Escuela.Clave @Model.solicitud.Escuela.Nombre</div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.LabelFor(i => i.solicitud.FechaEntrega)
+                                                    <div>@(Model != null && Model.solicitud.FechaEntrega != null ? Model.solicitud.FechaEntrega.Value.ToString("dd/MM/yyyy") : "")</div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label>@Html.LabelFor(model => model.solicitud.Asunto)</label>
+                                                    <div>@Model.solicitud.Asunto</div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label>@Html.LabelFor(model => model.institucion)</label>
+                                                    <div>@Model.institucion</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="x_panel">
+                                        <div class="x_content">
+                                          <table id="datatable" style="width:100%;" class="table table-info table-striped table-bordered dt-responsive nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Fecha Canalizado</th>
+                                                        <th>Comentario</th>
+                                                        <th>Usuario (Canalizo)</th>
+                                                        <th>Departamento</th>
+                                                        <th>Usuario (Atendio)</th>
+                                                        <th>Estatus</th>
+                                                        <th>Documento(s)</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @foreach (var i in Model.Detalles)
+                                                {
+                                                <tr class="@(i.colorreg)">
+                                                    <td>@i.numregistro</td>
+                                                    <td>@i.FechaCanalizado</td>
+                                                    <td>@i.Comentario</td>
+                                                    <td>@i.usuario</td>
+                                                    <td>@i.departamento</td>
+                                                    <td>@i.usuarioatiende</td>
+                                                    <td>@i.estatus</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach (var j in i.docs)
+                                                                {
+                                                                <li>
+                                                                    @Html.ActionLink(j.Nombre, "GetDownloadFile", "Solicitudes", new { idfile = j.IdDocumento },
+                                            new { @class = "btn btn-sm btn-success", target = "_blank", })
+                                                                </li>
+                                                                }
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Sistema de Atencion a Solicitudes - &copy; @DateTime.Now.Year
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/tables")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
+</body>
+</html>
+
+<script>
+        $(document).ready(function () {
+            //al cambiar tamaño de la pagina
+            $(window).on("resize", resize);
+
+            // y al cargar la página
+            resize();
+
+        })
+
+        function resize() {
+            var size = ($(window).height() - 10) + 'px'
+            $(".size").attr("style","height:"+size+" !important");
+        }
+</script>

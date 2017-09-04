@@ -14,6 +14,13 @@ namespace MemotraficoV2.Models.Colecciones
         public const int ATENDIDA = 5;
     }
 
+    public class ListaStatusEmail
+    {
+        public const string ENVIAR = "Enviar";
+        public const string REENVIAR = "Reenviar";
+        public const string ENVIADO = "Enviado";
+    }
+
     public class ListaImportancia
     {
         public const int ALTA = 1;

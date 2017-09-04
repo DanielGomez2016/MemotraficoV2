@@ -83,6 +83,18 @@
                                 <button id="escuela" data-accion="escuela" type="button" name="cambio"  class="btn btn-sm btn-dark hide" data-toggle="tooltip" data-placement="right" title="Cambiar a Esucela"><i class="fa fa-retweet"></i></button>
                                 }
                             </div>
+                            <div class="item form-group escuela" hidden>
+                                @Html.Label("Email Escuela", new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                   @Html.TextBoxFor(m => m.emailEscuela, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" }) 
+                                </div>
+                            </div>
+                            <div class="item form-group escuela" hidden>
+                                @Html.Label("Telefono Escuela", new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.telEscuela, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-5">
@@ -161,6 +173,28 @@ var options = {
 };
 
 $("#EscuelaElegida").easyAutocomplete(options);
+
+$("#EscuelaElegida").on("change", function () {
+    var t = $("#IdEscuelaFk").val();
+
+    $(".escuela").removeAttr("hidden");
+
+    $.ajax({
+        type: 'GET',
+        url: '/Until/CargarContactoEscuela',
+        data: { id: t },
+        beforeSend: function () {
+            Loading(true);
+        },
+        complete: function () {
+            Loading(false);
+        },
+        success: function (data) {
+            $("#emailEscuela").val(data.email);
+            $("#telEscuela").val(data.tel);
+        }
+    })
+});
 
 var optionsBen = {
 

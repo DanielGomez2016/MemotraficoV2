@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1de2611bde2449c88bdd371f89dcee62" Name="Diagram1" ZoomLevel="10">
+      <Diagram DiagramId="1de2611bde2449c88bdd371f89dcee62" Name="Diagram1" ZoomLevel="142">
         <EntityTypeShape EntityType="Model.AccesoSistema" Width="1.5" PointX="0.75" PointY="35.125" />
         <EntityTypeShape EntityType="Model.AccesoSistemaRol" Width="1.5" PointX="3" PointY="38.5" />
         <EntityTypeShape EntityType="Model.AlmacenamientoDren" Width="1.5" PointX="9.75" PointY="36.125" />
@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="3" PointY="47.875" />
         <EntityTypeShape EntityType="Model.DetalleCanalizacion" Width="1.5" PointX="12" PointY="77" />
         <EntityTypeShape EntityType="Model.Documentos" Width="1.5" PointX="14.25" PointY="77.5" />
-        <EntityTypeShape EntityType="Model.Email" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.EnergiaElectrica" Width="1.5" PointX="9.75" PointY="23.5" />
         <EntityTypeShape EntityType="Model.Entorno" Width="1.5" PointX="9.75" PointY="72.75" />
         <EntityTypeShape EntityType="Model.Escuela" Width="1.5" PointX="5.25" PointY="51.625" />
@@ -94,6 +93,8 @@
         <AssociationConnector Association="Model.FK_Solicitudes_TipoAsunto" />
         <AssociationConnector Association="Model.FK_Solicitudes_TipoProcedencia" />
         <AssociationConnector Association="Model.AspNetUserRoles" />
+        <EntityTypeShape EntityType="Model.Email" Width="1.5" PointX="7.5" PointY="38" />
+        <AssociationConnector Association="Model.FK_Email_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

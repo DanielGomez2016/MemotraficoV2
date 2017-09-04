@@ -20,25 +20,62 @@ namespace MemotraficoV2.Models
             {
                 SASEntities db = new SASEntities();
                 IQueryable<Email> emails = db.Email.Where(i => i.Status == "Enviar");
-                foreach (var email in emails)
+                if (emails.Any())
                 {
-                    var TipoCorreo = email.TipoEmail;
-                    String Cuerpo = string.Format("Se notifica a la persona (nombre persona o institucion, que su solicitud a sido (cancelada,promovida,cerrada,atendida) por la persona a cargo de la solicitud siendo (nombre encargado) con telefono (telefono) Ext. (extencion), de la institucion correspondiente (nombre instutucion) con la siguiente descripcion de la solicitud: (descripcion))");
-                    EnviarNotificaciones(TipoCorreo, Cuerpo, email.EmailTo, email.Subject ,email.IdEmail);
+                    foreach (var email in emails)
+                    {
+                        EnviarNotificaciones(email.EmailTo, email.Subject, email.Message, email.IdEmail);
+                    }
                 }
-
             }).ToRunNow().AndEvery(1).Hours();//.AndEvery(1).Months().OnTheFirst(DayOfWeek.Monday).At(3, 0);
         }
 
-        public void EnviarNotificaciones(string TipoCorreo, string cuerpo, string correo, string asuntoCorreo, int idemail)
+        public void EnviarNotificaciones(string EmailTo, string TipoAsunto, string formato, int IdEmail)
         {
-            Util.SendEmail(TipoCorreo , correo, cuerpo, asuntoCorreo);
+            Util.EnviarCorreo(EmailTo,TipoAsunto,formato,Obj(IdEmail));
 
             SASEntities db = new SASEntities();
-            Email email = db.Email.FirstOrDefault(i => i.IdEmail == idemail);
+            Email email = db.Email.FirstOrDefault(i => i.IdEmail == IdEmail);
             email.Status = "Enviado";
 
             db.SaveChanges();
+
+        }
+
+        public object Obj(int id)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Email email = db.Email.FirstOrDefault(x => x.IdEmail == id);
+
+                switch (email.Controlador)
+                {
+                    case "Solicitudes":
+
+                        var solicitud = db.Solicitudes.FirstOrDefault(x => x.IdSolicitud == email.Indice);
+                        var contacto = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == solicitud.IdEscuelaFk);
+
+                        return new {
+                            Titulo = email.Subject,
+                            Fecha = solicitud.FechaEntrega.ToString(),
+                            Manager = contacto.Nombre,
+                            Instituto = solicitud.Escuela.Nombre,
+                            Folio = solicitud.Folio,
+                            Url = "SAS/Seguimiento/?folio=" + solicitud.Folio,//cambiar la direccion a donde va dirijido
+                            UnidadAdmin = "Secretaria de Educación Publica",
+                            Telefono = "(614) 4566-8695",
+                            Ext = "25461"
+                        };
+
+                }
+                return null;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
 
         }
     }

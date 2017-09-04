@@ -662,5 +662,33 @@ namespace MemotraficoV2.Controllers
                                                  }).ToList();
             return View(Escuelas);
         }
+
+        public JsonResult CerrarValidacion(int id)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Validacion v = db.Validacion.FirstOrDefault(x => x.IdValidar == id);
+                v.Historial = true;
+
+                db.SaveChanges();
+
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Validaciones/",
+                    msj = "La validacion ha sido cerrada correctamente"
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    result = true,
+                    dir = "/Validaciones/",
+                    msj = "La validacion  no se ha cerrado correctamente"
+                });
+            }
+        }
     }
 }

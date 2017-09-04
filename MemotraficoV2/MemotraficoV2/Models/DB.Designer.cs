@@ -66,6 +66,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoAsunto", "TipoAsunto", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoAsunto), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.TipoProcedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
+[assembly: EdmRelationshipAttribute("Model", "FK_Email_AspNetUsers", "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetUsers), "Email", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Email), true)]
 
 #endregion
 
@@ -472,22 +473,6 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        public ObjectSet<Email> Email
-        {
-            get
-            {
-                if ((_Email == null))
-                {
-                    _Email = base.CreateObjectSet<Email>("Email");
-                }
-                return _Email;
-            }
-        }
-        private ObjectSet<Email> _Email;
-    
-        /// <summary>
-        /// No hay documentación de metadatos disponible.
-        /// </summary>
         public ObjectSet<EnergiaElectrica> EnergiaElectrica
         {
             get
@@ -788,6 +773,22 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<EspacioEducativoDet> _EspacioEducativoDet;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Email> Email
+        {
+            get
+            {
+                if ((_Email == null))
+                {
+                    _Email = base.CreateObjectSet<Email>("Email");
+                }
+                return _Email;
+            }
+        }
+        private ObjectSet<Email> _Email;
 
         #endregion
 
@@ -970,14 +971,6 @@ namespace MemotraficoV2.Models
         }
     
         /// <summary>
-        /// Método desusado para agregar un nuevo objeto al EntitySet Email. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
-        /// </summary>
-        public void AddToEmail(Email email)
-        {
-            base.AddObject("Email", email);
-        }
-    
-        /// <summary>
         /// Método desusado para agregar un nuevo objeto al EntitySet EnergiaElectrica. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
         /// </summary>
         public void AddToEnergiaElectrica(EnergiaElectrica energiaElectrica)
@@ -1127,6 +1120,14 @@ namespace MemotraficoV2.Models
         public void AddToEspacioEducativoDet(EspacioEducativoDet espacioEducativoDet)
         {
             base.AddObject("EspacioEducativoDet", espacioEducativoDet);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Email. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToEmail(Email email)
+        {
+            base.AddObject("Email", email);
         }
 
         #endregion
@@ -3153,6 +3154,28 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AspNetRoles>("Model.AspNetUserRoles", "AspNetRoles", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Email_AspNetUsers", "Email")]
+        public EntityCollection<Email> Email1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Email>("Model.FK_Email_AspNetUsers", "Email");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Email>("Model.FK_Email_AspNetUsers", "Email", value);
                 }
             }
         }
@@ -7054,8 +7077,7 @@ namespace MemotraficoV2.Models
         /// <param name="message">Valor inicial de la propiedad Message.</param>
         /// <param name="idUser">Valor inicial de la propiedad IdUser.</param>
         /// <param name="status">Valor inicial de la propiedad Status.</param>
-        /// <param name="tipoEmail">Valor inicial de la propiedad TipoEmail.</param>
-        public static Email CreateEmail(global::System.Int32 idEmail, global::System.String emailTo, global::System.String subject, global::System.String message, global::System.String idUser, global::System.String status, global::System.String tipoEmail)
+        public static Email CreateEmail(global::System.Int32 idEmail, global::System.String emailTo, global::System.String subject, global::System.String message, global::System.String idUser, global::System.String status)
         {
             Email email = new Email();
             email.IdEmail = idEmail;
@@ -7064,7 +7086,6 @@ namespace MemotraficoV2.Models
             email.Message = message;
             email.IdUser = idUser;
             email.Status = status;
-            email.TipoEmail = tipoEmail;
             return email;
         }
 
@@ -7222,26 +7243,92 @@ namespace MemotraficoV2.Models
         /// <summary>
         /// No hay documentación de metadatos disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String TipoEmail
+        public global::System.String Controlador
         {
             get
             {
-                return _TipoEmail;
+                return _Controlador;
             }
             set
             {
-                OnTipoEmailChanging(value);
-                ReportPropertyChanging("TipoEmail");
-                _TipoEmail = StructuralObject.SetValidValue(value, false, "TipoEmail");
-                ReportPropertyChanged("TipoEmail");
-                OnTipoEmailChanged();
+                OnControladorChanging(value);
+                ReportPropertyChanging("Controlador");
+                _Controlador = StructuralObject.SetValidValue(value, true, "Controlador");
+                ReportPropertyChanged("Controlador");
+                OnControladorChanged();
             }
         }
-        private global::System.String _TipoEmail;
-        partial void OnTipoEmailChanging(global::System.String value);
-        partial void OnTipoEmailChanged();
+        private global::System.String _Controlador;
+        partial void OnControladorChanging(global::System.String value);
+        partial void OnControladorChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Indice
+        {
+            get
+            {
+                return _Indice;
+            }
+            set
+            {
+                OnIndiceChanging(value);
+                ReportPropertyChanging("Indice");
+                _Indice = StructuralObject.SetValidValue(value, "Indice");
+                ReportPropertyChanged("Indice");
+                OnIndiceChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Indice;
+        partial void OnIndiceChanging(Nullable<global::System.Int32> value);
+        partial void OnIndiceChanged();
+
+        #endregion
+
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_Email_AspNetUsers", "AspNetUsers")]
+        public AspNetUsers AspNetUsers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetUsers>("Model.FK_Email_AspNetUsers", "AspNetUsers").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetUsers>("Model.FK_Email_AspNetUsers", "AspNetUsers").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AspNetUsers> AspNetUsersReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AspNetUsers>("Model.FK_Email_AspNetUsers", "AspNetUsers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AspNetUsers>("Model.FK_Email_AspNetUsers", "AspNetUsers", value);
+                }
+            }
+        }
 
         #endregion
 

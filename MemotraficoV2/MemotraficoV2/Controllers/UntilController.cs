@@ -9,6 +9,8 @@ using System.Data;
 using System.Xml;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Collections.Specialized;
 
 namespace MemotraficoV2.Controllers
 {
@@ -129,6 +131,29 @@ namespace MemotraficoV2.Controllers
                 {
                     total = rows.Count(),
                     datos = rows.ToList()
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new
+                {
+                    result = true
+                });
+            }
+        }
+
+        public JsonResult CargarContactoEscuela(int id)
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                var contacto = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == id);
+
+
+                return Json(new
+                {
+                    tel = contacto.Telefono,
+                    email = contacto.Email
                 }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -450,6 +475,7 @@ namespace MemotraficoV2.Controllers
                 });
             }
         }
+
 
     }
 }

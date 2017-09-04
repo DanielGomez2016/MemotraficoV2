@@ -252,6 +252,7 @@
     <Compile Include="Controllers\MunicipiosController.cs" />
     <Compile Include="Controllers\ProcedenciaController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\SeguimientoController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\UntilController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -311,6 +312,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EscuelaValidacion.cs" />
+    <Compile Include="ViewModels\SeguimientoViewModel.cs" />
     <Compile Include="ViewModels\SolicitudDetalle.cs" />
     <Compile Include="ViewModels\SolicitudesEscuelasViewModel.cs" />
     <Compile Include="ViewModels\Validacion_Requerimientos.cs" />
@@ -345,11 +347,14 @@
     <Content Include="Content\Images\iconsas48x48.png" />
     <Content Include="Content\Images\logosas.jpeg" />
     <Content Include="Content\Images\logosas2.jpg" />
+    <Content Include="Content\Images\Logotipo Chihuahua Amanece horizontal TV DIGITAL.jpg" />
     <Content Include="Content\Images\mapachih.jpg" />
+    <Content Include="Content\Images\Secretaria de Educacion y Deporte.png" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\loader-style.css" />
     <Content Include="Content\Loader-style2.css" />
+    <Content Include="Content\PlantillasEmail\NuevaSolicitud.html" />
     <Content Include="Content\Proyecto\animate.css\animate.css" />
     <Content Include="Content\Proyecto\animate.css\animate.min.css" />
     <Content Include="Content\Proyecto\autosize\autosize.js" />
@@ -5003,6 +5008,7 @@
     <Content Include="Views\Validaciones\Escuelas.cshtml" />
     <Content Include="Views\Validaciones\ValidacionEscolar.cshtml" />
     <Content Include="Views\Validaciones\Historial.cshtml" />
+    <Content Include="Views\Seguimiento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
