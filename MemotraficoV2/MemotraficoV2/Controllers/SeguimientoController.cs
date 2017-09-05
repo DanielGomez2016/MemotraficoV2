@@ -76,5 +76,55 @@ namespace MemotraficoV2.Controllers
             sd.Detalles.OrderBy(i => i.numregistro);
             return View(sd);
         }
-    }
+
+        public ActionResult DownFile(int idfile)
+        {
+            SASEntities db = new SASEntities();
+            var f = db.Documentos.FirstOrDefault(i => i.IdDocumento == idfile);
+            if (f != null)
+            {
+                string type = string.Empty;
+                string ext = string.Empty;
+
+                switch (f.Tipo)
+                {
+                    case "application/pdf":
+                        type = "application/pdf";
+                        ext = ".pdf";
+                        break;
+                    case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                        type = "aapplication/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                        ext = ".docx";
+                        break;
+                    case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                        type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        ext = ".xlsx";
+                        break;
+                    case "application/vnd.ms-excel":
+                        type = "application/vnd.ms-excel";
+                        ext = ".xls";
+                        break;
+                    case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+                        type = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+                        ext = ".pptx";
+                        break;
+                    case "application/vnd.ms-powerpoint":
+                        type = "application/vnd.ms-powerpoint";
+                        ext = ".ppt";
+                        break;
+                    case "image/jpeg":
+                        type = "image/jpeg";
+                        ext = ".jpge";
+                        break;
+                }
+                var file = File(f.Documento, type);
+                file.FileDownloadName = f.Nombre + ext;
+                return file;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }   
 }
