@@ -133,6 +133,8 @@ namespace MemotraficoV2.Models
                 canalizaDet = dc.Crear();
             }
 
+            TipoNotificacion(estatus,s);
+
             return canalizaDet;
         }
 
@@ -156,6 +158,8 @@ namespace MemotraficoV2.Models
             dc.Instituto = i;
             dc.IdEstatusFk = estatus;
             dc.Crear();
+
+            TipoNotificacion(estatus, s);
         }
 
         //se utiliza para abrir las solicitudes que estan canceladas
@@ -178,6 +182,8 @@ namespace MemotraficoV2.Models
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = estatus;
             dc.Crear();
+
+            TipoNotificacion(estatus, s);
         }
 
         //se utiliza para crear un historial de algun avance en una solicitud, por lo general solo lo usara el rol de operador
@@ -201,6 +207,7 @@ namespace MemotraficoV2.Models
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = ListaEstatus.CANALIZADO;
             dc.UsuarioAtiende = Usuarios.GetUsuario();
+
             return dc.Crear();
         }
 
@@ -223,7 +230,11 @@ namespace MemotraficoV2.Models
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = ListaEstatus.CANALIZADO;
             dc.UsuarioAtiende = Usuarios.GetUsuario();
+
+            TipoNotificacion(ListaEstatus.CANALIZADO, s);
+
             return dc.Crear();
+
         }
 
         //canaliza las solicitudes que ya se atendieron y el administrador de solicitudes pueda cerrar la solicitud,tiene que pasar por los tres niveles operador,dependencia,admin solicitudes, para dar como concluida la solicitud
@@ -245,6 +256,9 @@ namespace MemotraficoV2.Models
             dc.Instituto = Usuarios.GetInstitucion();
             dc.IdEstatusFk = ListaEstatus.ATENDIDA;
             dc.UsuarioAtiende = Usuarios.RolAlto(Usuarios.Roles(), Usuarios.GetInstitucion());
+
+            TipoNotificacion(ListaEstatus.ATENDIDA, s);
+
             return dc.Crear();
         }
 
@@ -266,8 +280,82 @@ namespace MemotraficoV2.Models
             dc.Departamento = 0;
             dc.Instituto = 0;
             dc.IdEstatusFk = ListaEstatus.CERRADO;
+
+            TipoNotificacion(ListaEstatus.CERRADO, s);
+
             return dc.Crear();
         }
 
+        public static void TipoNotificacion(int status, int s)
+        {
+            SASEntities db = new SASEntities();
+
+            var emailEscuela = getEmailEscuela(s);
+            var emailUsuarioAS = Usuarios.GetEmailAS();
+
+            var canalizacion = db.Canalizacion.FirstOrDefault(x => x.IdSolicitudFk == s).IdCanalizacion;
+            var dc = db.DetalleCanalizacion.OrderByDescending(x => x.FechaCanalizar).FirstOrDefault(x => x.IdCanalizarFk == canalizacion).UsuarioAtiende;
+
+
+            switch (status)
+            {
+                case ListaEstatus.INICIADO:
+
+                    Util.IngresarNotificacion(emailEscuela, "Nueva Solicitud", "NuevaSolicitud.html", Usuarios.GetUsuario(), "Solicitudes", s);
+                    foreach (var i in emailUsuarioAS) { 
+                        Util.IngresarNotificacion(i, "Nueva Solicitud", "NuevaSolicitud.html", Usuarios.GetUsuario(), "Solicitudes", s);
+                    }
+
+                    break;
+                case ListaEstatus.CANALIZADO:
+
+                    Util.IngresarNotificacion(emailEscuela, "Solicitud Canalizada", "CanalizacionSolicitud.html", Usuarios.GetUsuario(), "CanalizacionSolicitante", s);
+                    Util.IngresarNotificacion(Usuarios.GetEmail(dc), "Solicitud Canalizada", "CanalizacionSolicitud.html", Usuarios.GetUsuario(), "CanalizacionSistema", s);
+
+                    break;
+                case ListaEstatus.CANCELADO:
+
+                    Util.IngresarNotificacion(emailEscuela, "Solicitud Cancelada", "CancelarSolicitud.html", Usuarios.GetUsuario(), "CancelacionSolicitante", s);
+                    if(dc != null || dc != "") {
+                        Util.IngresarNotificacion(Usuarios.GetEmail(dc), "Solicitud Cancelada", "CancelarSolicitud.html", Usuarios.GetUsuario(), "CancelacionSistema", s);
+                    }
+                    else {
+                        Util.IngresarNotificacion(getEmailUsuario(), "Solicitud Cancelada", "CancelarSolicitud.html", Usuarios.GetUsuario(), "CancelacionSistema", s);
+                    }
+
+                    break;
+                case ListaEstatus.ATENDIDA:
+
+                    Util.IngresarNotificacion(emailEscuela, "Solicitud Atendida", "AtiendeSolicitud.html", Usuarios.GetUsuario(), "AtendidaSolicitante", s);
+                    Util.IngresarNotificacion(Usuarios.GetEmail(dc), "Solicitud Atendida", "AtiendeSolicitud.html", Usuarios.GetUsuario(), "AtendidaSistema", s);
+
+                    break;
+            }
+        }
+
+        public static string getEmailEscuela(int solicitud)
+        {
+            SASEntities db = new SASEntities();
+            var s = db.Solicitudes.FirstOrDefault(x => x.IdSolicitud == solicitud).IdEscuelaFk;
+            var c = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == s).Email;
+
+            return c;
+        }
+
+        public static string getEmailUsuario()
+        {
+            SASEntities db = new SASEntities();
+            var e = db.AspNetUsers.FirstOrDefault(x => x.Id == Usuarios.GetUsuario()).Email;
+
+            return e;
+        }
+
+        public static string getEmailUsuarioAS()
+        {
+            SASEntities db = new SASEntities();
+            var e = db.AspNetUsers.FirstOrDefault(x => x.Id == Usuarios.GetUsuario()).Email;
+
+            return e;
+        }
     }
 }

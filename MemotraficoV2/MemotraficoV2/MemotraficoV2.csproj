@@ -354,6 +354,9 @@
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\loader-style.css" />
     <Content Include="Content\Loader-style2.css" />
+    <Content Include="Content\PlantillasEmail\AtiendeSolicitud.html" />
+    <Content Include="Content\PlantillasEmail\CancelarSolicitud.html" />
+    <Content Include="Content\PlantillasEmail\CanalizacionSolicitud.html" />
     <Content Include="Content\PlantillasEmail\NuevaSolicitud.html" />
     <Content Include="Content\Proyecto\animate.css\animate.css" />
     <Content Include="Content\Proyecto\animate.css\animate.min.css" />

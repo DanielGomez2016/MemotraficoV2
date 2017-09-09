@@ -14,7 +14,7 @@ using System.Collections.Specialized;
 
 namespace MemotraficoV2.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    
     public class UntilController : Controller
     {
         public JsonResult CargarLocalidad(int id)
@@ -153,7 +153,8 @@ namespace MemotraficoV2.Controllers
                 return Json(new
                 {
                     tel = contacto.Telefono,
-                    email = contacto.Email
+                    email = contacto.Email,
+                    director = contacto.Nombre,
                 }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -165,11 +166,13 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult ImportarExcel()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult ImportExcelEscuelas(HttpPostedFileBase file)
         {
@@ -337,6 +340,7 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult ImportExcelML(HttpPostedFileBase file)
         {

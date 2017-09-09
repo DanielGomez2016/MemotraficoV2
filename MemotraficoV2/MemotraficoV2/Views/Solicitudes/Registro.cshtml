@@ -95,6 +95,12 @@
                                     @Html.TextBoxFor(m => m.telEscuela, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
                                 </div>
                             </div>
+                            <div class="item form-group escuela" hidden>
+                                @Html.Label("Director Instituto", new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(m => m.directorPlantel, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text" })
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-5">
@@ -192,6 +198,7 @@ $("#EscuelaElegida").on("change", function () {
         success: function (data) {
             $("#emailEscuela").val(data.email);
             $("#telEscuela").val(data.tel);
+            $("#directorPlantel").val(data.director);
         }
     })
 });

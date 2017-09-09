@@ -1,0 +1,139 @@
+﻿<html>
+<head>
+    <link rel="STYLESHEET" type="text/css" href="http://www.desarrolloweb.com/estilo.css">
+    <base target="_blank">
+</head>
+<body bgcolor="" topmargin=0 leftmargin=0 marginheight=0 marginwidth=0>
+    <!--titulo y logos-->
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="" background="">
+        <tr>
+            <td align="center" background=""></td>
+            <td align="center" background="">
+                <b>
+                    <font face="verdana,arial,helvetica" size="2" color=000000>{Titulo}</font>
+                </b>
+            </td>
+            <td align="center" background=""></td>
+        <tr style="height:50px;">
+            <td align="center" background="">
+                <img src="http://i67.tinypic.com/29zoa39.png" />
+            </td>
+            <td align="center" background="">
+                
+            </td>
+            <td align="center" background="">
+                <img src="http://oi64.tinypic.com/10h6cjm.jpg" />
+            </td>
+        </tr>
+        </tr>
+    </table>
+
+    <!--fecha, folio-->
+    <table width="100%" cellspacing="0" cellpadding="2" border="0">
+        <tr>
+            <td valign="top"></td>
+            <td valign="top"></td>
+            <td valign="top" style="width:200px;">
+                <font face="verdana,arial,helvetica" size="2">
+                    <br />
+                    <br />
+                    {Fecha}
+                </font>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"></td>
+            <td valign="top"></td>
+            <td valign="top" style="width:200px;">
+                <font face="verdana,arial,helvetica" size="2">
+                   Folio: {Folio}
+                </font>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <!--director, escuela-->
+    <table width="100%" cellspacing="0" cellpadding="2" border="0">
+        <tr>
+            <td valign="top" style="width:400px;">
+                <font face="verdana,arial,helvetica" size="2">
+                    <b>{Manager}</b>
+                </font>
+            </td>
+            <td valign="top"></td>
+            <td valign="top"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="width:400px;">
+                <font face="verdana,arial,helvetica" size="2">
+                    <b>{Instituto}</b>
+                </font>
+            </td>
+            <td valign="top"></td>
+            <td valign="top"></td>
+        </tr>
+    </table>
+
+
+    <!--texto del correo-->
+    <table border="1" height="50">
+        <thead>
+        <td valign="top">Unidad Administrativa</td>
+        <td valign="top">Responsable</td>
+        <td valign="top">Comentario</td>
+        <td valign="top">Fecha Inicio</td>
+        <td valign="top">Fecha Fin</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td valign="top">{UnidadAdmin}</td>
+                <td valign="top">{Responsable}</td>
+                <td valign="top">{Comentario}</td>
+                <td valign="top">{Inicio}</td>
+                <td valign="top">{Fin}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--texto del correo-->
+    <table>
+        <tr>
+            <td valign="top"></td>
+            <td valign="top">
+                <p>
+                    <font face="verdana,arial,helvetica" size="2">
+                        <br />
+                        <br />
+                        Se a canalizado la solicitud con el folio {Folio} a {UnidadAdmin},a la cual podra dar seguimiento a traves de la siguiente liga: <a href="{Url}">SAS</a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br> 
+                        <br> 
+                    </font>
+                </p>
+                <p>
+                    <br />
+                    <br />
+                    <br />
+                    <address>
+                        {UnidadAdmin}<br />
+                        {Direccion}
+                        <abbr title="Teléfono"></abbr>
+                        {Telefono} Ext. {Ext}
+                    </address>
+                    <br />
+                    <br />
+                    <br />
+                    Este correo es de caracter informativo, favor de no responder.
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

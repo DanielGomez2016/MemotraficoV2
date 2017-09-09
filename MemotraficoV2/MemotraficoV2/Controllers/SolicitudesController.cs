@@ -34,16 +34,12 @@ namespace MemotraficoV2.Controllers
                 Contacto c = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == solicitud.IdEscuelaFk);
                 c.Email = solicitud.emailEscuela;
                 c.Telefono = solicitud.telEscuela;
+                c.Nombre = solicitud.directorPlantel;
                 c.Editar();
                 
 
                 int v = solicitud.Crear();
                 var canalizacion = Canalizacion.Canalizar(v, 0, 0, "", "", ListaEstatus.INICIADO);
-
-                var esc = db.Solicitudes.FirstOrDefault(x => x.IdSolicitud == v).Escuela;
-                var con = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == esc.IdEscuela);
-
-                Util.IngresarNotificacion(con.Email,"Nueva Solicitud","NuevaSolicitud.html",Usuarios.GetUsuario(),"Solicitudes",v);
 
                 return Json(new
                 {
@@ -481,6 +477,7 @@ namespace MemotraficoV2.Controllers
             {
                 SASEntities db = new SASEntities();
                 Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud);
+
                 int canalizacion = 0;
                 switch (rol)
                 {
@@ -576,7 +573,7 @@ namespace MemotraficoV2.Controllers
             {
                 SASEntities db = new SASEntities();
                 Solicitudes s = db.Solicitudes.FirstOrDefault(i => i.IdSolicitud == IdSolicitud && i.IdEstatusFk == ListaEstatus.CANCELADO);
-
+                var u = Usuarios.CorreoDe(Usuarios.Roles(), "Open");
                 switch (Accion)
                 {
                     case "open":

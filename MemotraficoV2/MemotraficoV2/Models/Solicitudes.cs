@@ -45,6 +45,9 @@ namespace MemotraficoV2.Models
         public string telEscuela { get; set; }
         [Required]
         public string emailEscuela { get; set; }
+        [Required]
+        public string directorPlantel { get; set; }
+
 
         public int Crear()
         {
@@ -133,5 +136,7 @@ namespace MemotraficoV2.Models
                         .Take(15)
                         .ToArray();
         }
+
+        
     }
 }
