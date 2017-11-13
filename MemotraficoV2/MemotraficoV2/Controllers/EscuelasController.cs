@@ -81,10 +81,10 @@ namespace MemotraficoV2.Controllers
 
             Escuela e = db.Escuela.FirstOrDefault(i => i.IdEscuela == id);
 
-            e.NombreDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Nombre.ToString();
-            e.EmailDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Email.ToString();
-            e.Telefono = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Telefono.ToString();
-            e.Celular = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Celular.ToString();
+            e.NombreDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Nombre != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Nombre.ToString() : "";
+            e.EmailDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Email != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Email.ToString() : "";
+            e.Telefono = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Telefono != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Telefono.ToString() : "";
+            e.Celular = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Celular != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == e.IdEscuela).Celular.ToString() : "";
 
             ViewBag.Municipio = db.Municipios.Select(i => new { id = i.IdMunicipio, nombre = i.Nombre }).ToList();
             ViewBag.Localidad = db.Localidades.Where(i => i.IdMunicipioFk == e.IdMunicipioFk).Select(i => new { id = i.IdLocalidad, nombre = i.Nombre }).ToList();

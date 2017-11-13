@@ -45,7 +45,7 @@ namespace MemotraficoV2.Models
 
             SASEntities db = new SASEntities();
             Email email = db.Email.FirstOrDefault(i => i.IdEmail == IdEmail);
-            //email.Status = "Enviado";
+            email.Status = "Enviado";
 
             db.SaveChanges();
 

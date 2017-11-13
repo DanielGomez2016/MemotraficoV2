@@ -46,7 +46,30 @@ namespace MemotraficoV2.Models
             var str = Convert.ToInt32(claveloc);
 
             SASEntities db = new SASEntities();
-            return db.Localidades.FirstOrDefault(i => i.ClaveLocalidad.Contains(str.ToString()) && i.IdMunicipioFk == m).IdLocalidad;
+            var loc = 0;
+            loc = db.Localidades.FirstOrDefault(i => i.ClaveLocalidad.Contains(str.ToString()) && i.IdMunicipioFk == m) != null ?     db.Localidades.FirstOrDefault(i => i.ClaveLocalidad.Contains(str.ToString()) && i.IdMunicipioFk == m).IdLocalidad : 0;
+
+            return loc;
+        }
+
+        public static int CrearLocalidad(string nombre, int mun, string claveloc)
+        {
+
+            SASEntities db = new SASEntities();
+            Localidades l = new Localidades();
+            l.IdMunicipioFk = mun;
+            l.Nombre = nombre;
+            l.ClaveLocalidad = Convert.ToInt32(claveloc).ToString();
+            return l.CrearId();
+        }
+
+        public int CrearId()
+        {
+            SASEntities db = new SASEntities();
+            db.Localidades.AddObject(this);
+            db.SaveChanges();
+
+            return IdLocalidad;
         }
     }
 }
