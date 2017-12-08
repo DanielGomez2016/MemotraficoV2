@@ -17,12 +17,6 @@
     <title>Sistema de Atencion A Solicitudes! | </title>
     <link rel="shortcut icon" href="~/Content/Images/iconsas48x48.png" />
 
-    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-    <script type="text/javascript" src="~/Content/Mapas/chihuahua_municipios.js"></script>
-    <script type="text/javascript" src="~/Content/Mapas/mexico.js"></script>
-    <script src="https://d3js.org/d3.v4.js"></script>
-
     @RenderSection("styles", required: false)
     @Styles.Render("~/view")
     
@@ -90,11 +84,14 @@
             <!-- /footer content -->
         </div>
     </div>
-    @RenderSection("Scripts", required: false)
+    
     @Scripts.Render("~/bundles/custom")
     @Scripts.Render("~/bundles/tables")
     @Scripts.Render("~/bundles/modernizr")
+    
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.anexgrid.min.js")"></script>
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

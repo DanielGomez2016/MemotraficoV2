@@ -67,6 +67,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Model", "FK_Solicitudes_TipoProcedencia", "TipoProcedencia", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.TipoProcedencia), "Solicitudes", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Solicitudes), true)]
 [assembly: EdmRelationshipAttribute("Model", "AspNetUserRoles", "AspNetRoles", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetRoles), "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.AspNetUsers))]
 [assembly: EdmRelationshipAttribute("Model", "FK_Email_AspNetUsers", "AspNetUsers", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.One, typeof(MemotraficoV2.Models.AspNetUsers), "Email", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.Email), true)]
+[assembly: EdmRelationshipAttribute("Model", "FK_DetalleCanalizacion_TipoRespuesta", "TipoRespuesta", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MemotraficoV2.Models.TipoRespuesta), "DetalleCanalizacion", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MemotraficoV2.Models.DetalleCanalizacion), true)]
 
 #endregion
 
@@ -789,6 +790,22 @@ namespace MemotraficoV2.Models
             }
         }
         private ObjectSet<Email> _Email;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<TipoRespuesta> TipoRespuesta
+        {
+            get
+            {
+                if ((_TipoRespuesta == null))
+                {
+                    _TipoRespuesta = base.CreateObjectSet<TipoRespuesta>("TipoRespuesta");
+                }
+                return _TipoRespuesta;
+            }
+        }
+        private ObjectSet<TipoRespuesta> _TipoRespuesta;
 
         #endregion
 
@@ -1128,6 +1145,14 @@ namespace MemotraficoV2.Models
         public void AddToEmail(Email email)
         {
             base.AddObject("Email", email);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet TipoRespuesta. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToTipoRespuesta(TipoRespuesta tipoRespuesta)
+        {
+            base.AddObject("TipoRespuesta", tipoRespuesta);
         }
 
         #endregion
@@ -6757,6 +6782,30 @@ namespace MemotraficoV2.Models
         private Nullable<global::System.Int32> _IdEstatusFk;
         partial void OnIdEstatusFkChanging(Nullable<global::System.Int32> value);
         partial void OnIdEstatusFkChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdRespuestaFk
+        {
+            get
+            {
+                return _IdRespuestaFk;
+            }
+            set
+            {
+                OnIdRespuestaFkChanging(value);
+                ReportPropertyChanging("IdRespuestaFk");
+                _IdRespuestaFk = StructuralObject.SetValidValue(value, "IdRespuestaFk");
+                ReportPropertyChanged("IdRespuestaFk");
+                OnIdRespuestaFkChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdRespuestaFk;
+        partial void OnIdRespuestaFkChanging(Nullable<global::System.Int32> value);
+        partial void OnIdRespuestaFkChanged();
 
         #endregion
 
@@ -6856,6 +6905,44 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Documentos>("Model.FK_Documentos_DetalleCanalizacion", "Documentos", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DetalleCanalizacion_TipoRespuesta", "TipoRespuesta")]
+        public TipoRespuesta TipoRespuesta
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TipoRespuesta>("Model.FK_DetalleCanalizacion_TipoRespuesta", "TipoRespuesta").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TipoRespuesta>("Model.FK_DetalleCanalizacion_TipoRespuesta", "TipoRespuesta").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TipoRespuesta> TipoRespuestaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TipoRespuesta>("Model.FK_DetalleCanalizacion_TipoRespuesta", "TipoRespuesta");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TipoRespuesta>("Model.FK_DetalleCanalizacion_TipoRespuesta", "TipoRespuesta", value);
                 }
             }
         }
@@ -12746,6 +12833,112 @@ namespace MemotraficoV2.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Solicitudes>("Model.FK_Solicitudes_TipoProcedencia", "Solicitudes", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model", Name="TipoRespuesta")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TipoRespuesta : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto TipoRespuesta.
+        /// </summary>
+        /// <param name="idRespuesta">Valor inicial de la propiedad IdRespuesta.</param>
+        public static TipoRespuesta CreateTipoRespuesta(global::System.Int32 idRespuesta)
+        {
+            TipoRespuesta tipoRespuesta = new TipoRespuesta();
+            tipoRespuesta.IdRespuesta = idRespuesta;
+            return tipoRespuesta;
+        }
+
+        #endregion
+
+        #region Propiedades simples
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 IdRespuesta
+        {
+            get
+            {
+                return _IdRespuesta;
+            }
+            set
+            {
+                if (_IdRespuesta != value)
+                {
+                    OnIdRespuestaChanging(value);
+                    ReportPropertyChanging("IdRespuesta");
+                    _IdRespuesta = StructuralObject.SetValidValue(value, "IdRespuesta");
+                    ReportPropertyChanged("IdRespuesta");
+                    OnIdRespuestaChanged();
+                }
+            }
+        }
+        private global::System.Int32 _IdRespuesta;
+        partial void OnIdRespuestaChanging(global::System.Int32 value);
+        partial void OnIdRespuestaChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Respuesta
+        {
+            get
+            {
+                return _Respuesta;
+            }
+            set
+            {
+                OnRespuestaChanging(value);
+                ReportPropertyChanging("Respuesta");
+                _Respuesta = StructuralObject.SetValidValue(value, true, "Respuesta");
+                ReportPropertyChanged("Respuesta");
+                OnRespuestaChanged();
+            }
+        }
+        private global::System.String _Respuesta;
+        partial void OnRespuestaChanging(global::System.String value);
+        partial void OnRespuestaChanged();
+
+        #endregion
+
+        #region Propiedades de navegación
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Model", "FK_DetalleCanalizacion_TipoRespuesta", "DetalleCanalizacion")]
+        public EntityCollection<DetalleCanalizacion> DetalleCanalizacion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_TipoRespuesta", "DetalleCanalizacion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DetalleCanalizacion>("Model.FK_DetalleCanalizacion_TipoRespuesta", "DetalleCanalizacion", value);
                 }
             }
         }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4b1959711bb42b8b98d568dd4c51afd" Name="Diagram1" ZoomLevel="55" >
+        <EntityTypeShape EntityType="MemotraficosModel.Acuses" Width="1.5" PointX="10.5" PointY="14.875" />
+        <EntityTypeShape EntityType="MemotraficosModel.Beneficiarios" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="MemotraficosModel.Departamentos" Width="1.5" PointX="11.25" PointY="9.5" />
+        <EntityTypeShape EntityType="MemotraficosModel.EstatusMemos" Width="1.5" PointX="6" PointY="11.125" />
+        <EntityTypeShape EntityType="MemotraficosModel.Localidades" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="MemotraficosModel.Memotraficos" Width="1.5" PointX="8.25" PointY="4.75" />
+        <EntityTypeShape EntityType="MemotraficosModel.Memotraficos_Deptos" Width="1.5" PointX="13.5" PointY="6.125" />
+        <EntityTypeShape EntityType="MemotraficosModel.Memotraficos_DeptosDoctos" Width="1.5" PointX="15.75" PointY="7.5" />
+        <EntityTypeShape EntityType="MemotraficosModel.MemotraficosDoctos" Width="1.5" PointX="10.5" PointY="6.125" />
+        <EntityTypeShape EntityType="MemotraficosModel.Municipios" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MemotraficosModel.NivelesEducativos" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="MemotraficosModel.Procedencias" Width="1.5" PointX="6" PointY="13.5" />
+        <EntityTypeShape EntityType="MemotraficosModel.TelefonosBeneficiarios" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="MemotraficosModel.TelefonosProcedencias" Width="1.5" PointX="8.25" PointY="14" />
+        <EntityTypeShape EntityType="MemotraficosModel.TipoAsuntos" Width="1.5" PointX="6" PointY="4.875" />
+        <EntityTypeShape EntityType="MemotraficosModel.TipoProcedencias" Width="1.5" PointX="3.75" PointY="14.25" />
+        <EntityTypeShape EntityType="MemotraficosModel.TipoRespuestas" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="MemotraficosModel.TiposTelefono" Width="1.5" PointX="3" PointY="3.75" />
+        <AssociationConnector Association="MemotraficosModel.FK_Acuses_Memotraficos" />
+        <AssociationConnector Association="MemotraficosModel.FK_Beneficiarios_Municipios" />
+        <AssociationConnector Association="MemotraficosModel.FK_Beneficiarios_NivelesEducativos" />
+        <AssociationConnector Association="MemotraficosModel.FK_Beneficiarios_NivelesEducativos1" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_Beneficiarios" />
+        <AssociationConnector Association="MemotraficosModel.FK_TelefonosBeneficiarios_Beneficiarios" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_Deptos_Departamentos" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_EstatusMemos1" />
+        <AssociationConnector Association="MemotraficosModel.FK_Localidades_Municipios" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_Deptos_Memotraficos" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_Procedencias" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_TipoAsunto" />
+        <AssociationConnector Association="MemotraficosModel.FK_MemotraficosDoctos_Memotraficos" />
+        <AssociationConnector Association="MemotraficosModel.FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos" />
+        <AssociationConnector Association="MemotraficosModel.FK_Procedencias_TipoProcedencias" />
+        <AssociationConnector Association="MemotraficosModel.FK_TelefonosProcedencias_Procedencias" />
+        <AssociationConnector Association="MemotraficosModel.FK_TelefonosBeneficiarios_TiposTelefono" />
+        <AssociationConnector Association="MemotraficosModel.FK_TelefonosProcedencias_TiposTelefono" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

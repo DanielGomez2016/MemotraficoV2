@@ -63,6 +63,13 @@
                         <li>@Html.ActionLink("Validaciones por Escuela", "Index", "Validaciones")</li>
                     </ul>
                 </li>
+                <li>
+                    <a><i class="fa fa-plus-square-o"></i> Importaciones <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li>@Html.ActionLink("Importar Escuelas / Municipios", "ImportarExcel", "Until")</li>
+                        <li>@Html.ActionLink("Importar Memotraficos", "Index", "ImporteMemotraficos")</li>
+                    </ul>
+                </li>
             }
             else
             {
@@ -124,8 +131,8 @@
                 }
                 if (Model.Any(i => i.controlador == "Validaciones"))
                 {
-                    <li>fa fa-check-square-o
-                        <a><i class=""  aria-hidden="true"></i> Validaciones <span class="fa fa-chevron-down"></span></a>
+                    <li>
+                        <a><i class="fa fa-check-square-o"></i> Validaciones <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             @if (Model.Any(i => i.controlador == "Validaciones" && i.accion == "Index"))
                             {

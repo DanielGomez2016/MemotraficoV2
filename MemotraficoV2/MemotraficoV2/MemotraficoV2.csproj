@@ -246,6 +246,7 @@
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EscuelasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImporteMemotraficosController.cs" />
     <Compile Include="Controllers\InstitucionesController.cs" />
     <Compile Include="Controllers\LocalidadesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Models\AlmacenamientoDren.cs" />
     <Compile Include="Models\Beneficiario.cs" />
     <Compile Include="Models\Canalizacion.cs" />
+    <Compile Include="Models\Colecciones\Grid.cs" />
     <Compile Include="Models\Colecciones\ListaEstatus.cs" />
     <Compile Include="Models\Colecciones\ListaRoles.cs" />
     <Compile Include="Models\ComponenteI.cs" />
@@ -278,6 +280,11 @@
     <Compile Include="Models\ComponenteVI.cs" />
     <Compile Include="Models\ComponenteVII.cs" />
     <Compile Include="Models\ComponenteVIII.cs" />
+    <Compile Include="Models\ConexionesDb\DbMemotraficos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbMemotraficos.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Contacto.cs" />
     <Compile Include="Models\Croquis.cs" />
     <Compile Include="Models\Db.Designer.cs">
@@ -295,6 +302,7 @@
     <Compile Include="Models\EspacioEducativoDet.cs" />
     <Compile Include="Models\EspacioMultiple.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Importaciones\ImportaMemos.cs" />
     <Compile Include="Models\Institucion.cs" />
     <Compile Include="Models\Localidades.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -312,6 +320,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EscuelaValidacion.cs" />
+    <Compile Include="ViewModels\ImportesMemotraficosViewModel.cs" />
     <Compile Include="ViewModels\SeguimientoViewModel.cs" />
     <Compile Include="ViewModels\SolicitudDetalle.cs" />
     <Compile Include="ViewModels\SolicitudesEscuelasViewModel.cs" />
@@ -4644,6 +4653,13 @@
       <DependentUpon>Db.edmx</DependentUpon>
     </Content>
     <Content Include="Content\Mapas\chihuahua2.json" />
+    <EntityDeploy Include="Models\ConexionesDb\DbMemotraficos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbMemotraficos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ConexionesDb\DbMemotraficos.edmx.diagram">
+      <DependentUpon>DbMemotraficos.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\sas-ftp.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\alertify.js" />
@@ -4670,6 +4686,7 @@
     <Content Include="Scripts\jquery-ui-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.anexgrid.min.js" />
     <Content Include="Scripts\jquery.pnotify.js" />
     <Content Include="Scripts\jquery.pnotify.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -4875,6 +4892,7 @@
     <Content Include="Views\Validaciones\ValidacionEscolar.cshtml" />
     <Content Include="Views\Validaciones\Historial.cshtml" />
     <Content Include="Views\Seguimiento\Index.cshtml" />
+    <Content Include="Views\ImporteMemotraficos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4910,7 +4928,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58924</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58924/</IISUrl>
+          <IISUrl>http://localhost:4356/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,366 @@
+﻿
+@{
+    ViewBag.Title = "Importar Memotraficos";
+}
+
+<div class="" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title text-center">
+                        @* titulo *@
+                        <h2>Importar datos Memotraficos</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content text-center">
+                        <button id="btnmemotrafico" class="btn btn-lg btn-primary">Memotraficos</button>
+                        <button id="btnbeneficiario" class="btn btn-lg btn-primary">Beneficiarios</button>
+                        <button id="btnprocedencias" class="btn btn-lg btn-primary">Procedencia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divImporte" class="row hide">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        @* titulo *@
+                        <h2><label id="tituloImporte"> </label></h2>
+                        <label style="width:10px;"></label>
+                        <button id="btnm" value="" type="button" class="btn btn-primary btn-sm btnm hide"><i class="fa fa-plus"></i> Importar</button>
+                        <button id="btnb" value="" type="button" class="btn btn-primary btn-sm btnb hide"><i class="fa fa-plus"></i> Importar</button>
+                        <button id="btnp"value="" type="button" class="btn btn-primary btn-sm btnp hide"><i class="fa fa-plus"></i> Importar</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="tablaImporta"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts{
+    
+
+    <script>
+
+        //importar memotrafico seleccionado
+        $("#btnmemotrafico").click(function () {
+            $("#divImporte").removeClass('hide');
+            $(".btnm").removeClass('hide');
+            $("#tituloImporte").text('Memotraficos');
+            $("#tablaImporta").empty();
+
+            let config = {
+                class: 'table-striped table-bordered',
+                columnas: [
+                    { leyenda: 'Memotrafico', columna: 'memotrafico', ordenable: true, filtro: true, class: 'text-center col-md-2' },
+                    { leyenda: 'Lectura', columna: 'leido', class: 'text-center col-md-1' },
+                    { leyenda: 'Fecha Creado', columna: 'fechaCreado', ordenable: true, filtro: true, class: 'text-center col-md-2' },
+                    { leyenda: 'Asunto', columna: 'asunto', class: 'text-center col-md-3' },
+                    { leyenda: 'Estatus', columna: 'estatus', class: 'text-center col-md-1' },
+                    { leyenda: 'Beneficiario', columna: 'beneficiario', class: 'text-center col-md-2' },
+                    { leyenda: 'Acciones', class: 'text-center col-md-1' },
+                ],
+                modelo: [
+                    { propiedad: 'memotrafico' },
+                    { propiedad: 'leido' },
+                    {
+                        propiedad: 'fechaCreado', formato: function (tr, obj, value) {
+                            let element = '';
+
+                            element += value.toString("dd/MM/yyyy");
+
+                            return element;
+                        }
+                    },
+                    { propiedad: 'asunto' },
+                    { propiedad: 'estatus' },
+                    { propiedad: 'beneficiario' },
+                    {
+                        propiedad: 'memotrafico', formato: function (tr, obj, value) {
+                            let element = '';
+
+                            element += '<button value="' + value + '" type="button" class="btn btn-primary memo-import"><i class="fa fa-edit"></i></button>';
+
+                            return element;
+                        }
+                    },
+                ],
+                url: '@Url.Action("GetMemotraficos", "ImporteMemotraficos")',
+                limite: [10, 20, 30],
+                filtrable: true,
+                paginable: true,
+                columna: 'memotrafico',
+                columna_orden: 'ASC'
+            };
+
+            let grid = $("#tablaImporta").anexGrid(config);
+
+            grid.tabla().on('click', '.memo-import', function () {
+                let value = String($(this).val());
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ImporteMemotraficos/Importar',
+                    data: { memotrafico: value },
+                    beforeSend: function () {
+                        Loading("Cargando");
+                    },
+                    complete: function (data) {
+                    },
+                    success: function (data) {
+                        if (data) {
+                            AlertSuccess("Se ha Importado correctamente el registro.", "/ImporteMemotraficos");
+                        } else {
+                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                        }
+                    },
+                    error: function (xhr, status) {
+                        AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                    }
+                });
+            })
+        })
+
+        //importar todos los memotraficos
+        $("#btnm").click(function () {
+            $.ajax({
+                type: 'POST',
+                    url: '/ImporteMemotraficos/ImportarTodoMemotraficos',
+                    data: { memotrafico: value },
+                    beforeSend: function () {
+                        Loading("Cargando");
+                    },
+                    complete: function (data) {
+                    },
+                    success: function (data) {
+                        if (data) {
+                            AlertSuccess("Se ha Importado correctamente el registro.", "/ImporteMemotraficos");
+                        } else {
+                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                        }
+                    },
+                    error: function (xhr, status) {
+                        AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                    }
+                });
+
+        })
+
+        //importar beneficiarios
+        $("#btnbeneficiario").click(function () {
+            $("#divImporte").removeClass('hide');
+            $(".btnb").removeClass('hide');
+            $("#tituloImporte").text('Beneficiarios');
+            $("#tablaImporta").empty();
+
+            let config = {
+                class: 'table-striped table-bordered',
+                columnas: [
+                    { leyenda: 'Beneficiario', columna: 'beneficiario', ordenable: true, filtro: true, class: 'text-center col-md-3' },
+                    { leyenda: 'Clave', columna: 'clave', ordenable: true, filtro: true, class: 'text-center col-md-2' },
+                    { leyenda: 'Domicilio', columna: 'domicilio', class: 'text-center col-md-2' },
+                    { leyenda: 'Director', columna: 'director', class: 'text-center col-md-3' },
+                    { leyenda: 'Telefono', columna: 'telefono', class: 'text-center col-md-1' },
+                    { leyenda: 'Acciones', class: 'text-center col-md-1' },
+                ],
+                modelo: [
+                    { propiedad: 'beneficiario' },
+                    { propiedad: 'clave' },
+                    { propiedad: 'domicilio' },
+                    { propiedad: 'director' },
+                    { propiedad: 'telefono' },
+                    {
+                        propiedad: 'idbeneficiario', formato: function (tr, obj, value) {
+                            let element = '';
+
+                            element += '<button value="' + value + '" type="button" class="btn btn-primary ben-import"><i class="fa fa-edit"></i></button>';
+
+                            return element;
+                        }
+                    },
+                ],
+                url: '@Url.Action("GetBeneficiarios", "ImporteMemotraficos")',
+                limite: [10, 20, 30],
+                filtrable: true,
+                paginable: true,
+                columna: 'beneficiario',
+                columna_orden: 'ASC'
+            };
+
+            let grid = $("#tablaImporta").anexGrid(config);
+
+            grid.tabla().on('click', '.ben-import', function () {
+                let value = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ImporteMemotraficos/ImportarBeneficiario',
+                    data: { id: value },
+                    beforeSend: function () {
+                        Loading("Cargando");
+                    },
+                    complete: function (data) {
+                    },
+                    success: function (data) {
+                        if (data) {
+                            AlertSuccess("Se ha Importado correctamente el registro.", "/ImporteMemotraficos");
+                        } else {
+                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                        }
+                    },
+                    error: function (xhr, status) {
+                        AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                    }
+                });
+            })
+        })
+
+        //importar todos los beneficiarios
+        $("#btnb").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/ImporteMemotraficos/ImportarTodoBeneficiario',
+                beforeSend: function () {
+                    Loading("Cargando");
+                },
+                complete: function (data) {
+                },
+                success: function (data) {
+                    if (data.result) {
+                        AlertSuccess("Se han Importado correctamente " + data.contador + " registros.", "/ImporteMemotraficos");
+                    } else {
+                        AlertWarning("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                        AlertSuccess("Se han Importado correctamente " + data.contador + " registros.", "/ImporteMemotraficos");
+                    }
+                    if (data.actualizado) {
+                        AlertNotice("Se han modificado correctamente " + data.contadora + " registros.", "/ImporteMemotraficos");
+                    }
+                },
+                error: function (xhr, status) {
+                    AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                }
+            });
+
+        })
+
+        //importar procedencias
+        $("#btnprocedencias").click(function () {
+            $("#divImporte").removeClass('hide');
+            $(".btnp").removeClass('hide');
+            $("#tituloImporte").text('Procedencia');
+            $("#tablaImporta").empty();
+
+            let config = {
+                class: 'table-striped table-bordered',
+                columnas: [
+                    { leyenda: 'Procedencia', columna: 'nombre', ordenable: true, filtro: true, class: 'text-center col-md-3' },
+                    { leyenda: 'Domicilio', columna: 'domicilio', class: 'text-center col-md-3' },
+                    { leyenda: 'Contacto', columna: 'contacto', class: 'text-center col-md-2' },
+                    { leyenda: 'Tipo Procedencia', columna: 'tipoprocedencia', ordenable: true, filtro: true, class: 'text-center col-md-3' },
+                    { leyenda: 'Acciones', class: 'text-center col-md-1' },
+                ],
+                modelo: [
+                    { propiedad: 'nombre' },
+                    { propiedad: 'domicilio' },
+                    { propiedad: 'contacto' },
+                    { propiedad: 'tipoprocedencia' },
+                    {
+                        propiedad: 'idprocedencia', formato: function (tr, obj, value) {
+                            let element = '';
+
+                            element += '<button value="' + value + '" type="button" class="btn btn-primary prop-import"><i class="fa fa-edit"></i></button>';
+
+                            return element;
+                        }
+                    },
+                ],
+                url: '@Url.Action("GetProcedencia", "ImporteMemotraficos")',
+                limite: [10, 20, 30],
+                filtrable: true,
+                paginable: true,
+                columna: 'procedencia',
+                columna_orden: 'ASC'
+            };
+
+            let grid = $("#tablaImporta").anexGrid(config);
+
+            grid.tabla().on('click', '.prop-import', function () {
+                let value = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ImporteMemotraficos/ImportarProcedencia',
+                    data: { id: value },
+                    beforeSend: function () {
+                        Loading("Cargando");
+                    },
+                    complete: function (data) {
+                    },
+                    success: function (data) {
+                        if (data) {
+                            AlertSuccess("Se ha Importado correctamente el registro.", "/ImporteMemotraficos");
+                        } else {
+                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                        }
+                    },
+                    error: function (xhr, status) {
+                        AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                    }
+                });
+            })
+        })
+
+        //importar todos las procedencias
+        $("#btnp").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/ImporteMemotraficos/ImportarTodaProcedencia',
+                beforeSend: function () {
+                    Loading("Cargando");
+                },
+                complete: function (data) {
+                },
+                success: function (data) {
+                    if (data.result) {
+                        AlertSuccess("Se han Importado correctamente " + data.contador + " registros.", "/ImporteMemotraficos");
+                    } else {
+                        AlertWarning("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                        AlertSuccess("Se han Importado correctamente " + data.contador + " registros.", "/ImporteMemotraficos");
+                    }
+                },
+                error: function (xhr, status) {
+                    AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                }
+            });
+
+        })
+
+        $(document).ready(function () {
+            //al cambiar tamaño de la pagina
+            $(window).on("resize", resize);
+
+            // y al cargar la página
+            resize();
+        })
+
+        function resize() {
+            var size = ($(window).height() - 10) + 'px'
+            $(".size").attr("style","height:"+size+" !important");
+        }
+
+</script>
+    
+}

@@ -12,9 +12,9 @@ namespace MemotraficoV2.Controllers
     public class DepartamentosController : Controller
     {
         // GET: Departamentos
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            var x = Convert.ToInt32(id);
+            var x = Usuarios.GetInstitucion();
             SASEntities db = new SASEntities();
             List<Departamento> d = db.Departamento.Where(i => i.IdInstitucionFk == x).ToList();
             return View(d);

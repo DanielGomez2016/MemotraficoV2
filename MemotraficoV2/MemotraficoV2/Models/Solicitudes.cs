@@ -73,12 +73,41 @@ namespace MemotraficoV2.Models
             return s.IdSolicitud;
         }
 
+        public int CrearImporte()
+        {
+            SASEntities db = new SASEntities();
+
+            if (IdEscuelaFk > 0)
+            {
+                IdEscuelaFk = IdEscuelaFk;
+            }
+            if (IdBeneficiarioFk > 0)
+            {
+                IdBeneficiarioFk = IdBeneficiarioFk;
+            }
+            IdEstatusFk = ListaEstatus.INICIADO;
+            IdNivelImportanciaFk = ListaImportancia.NORMAL;//nivel de importancia normal
+            db.Solicitudes.AddObject(this);
+            db.SaveChanges();
+            return IdSolicitud;
+        }
+
         public void Editar()
         {
             SASEntities db = new SASEntities();
             Solicitudes s = db.Solicitudes.FirstOrDefault(j => j.IdSolicitud == IdSolicitud);
             s.Programa = Programa;
             s.FechaValidacion = FechaValidacion;
+
+            db.SaveChanges();
+
+        }
+
+        public void EditarEstatus()
+        {
+            SASEntities db = new SASEntities();
+            Solicitudes s = db.Solicitudes.FirstOrDefault(j => j.IdSolicitud == IdSolicitud);
+            s.IdEstatusFk = IdEstatusFk;
 
             db.SaveChanges();
 

@@ -275,6 +275,7 @@
           <Property Name="Departamento" Type="int" />
           <Property Name="UsuarioAtiende" Type="nvarchar" MaxLength="128" />
           <Property Name="IdEstatusFk" Type="int" />
+          <Property Name="IdRespuestaFk" Type="int" />
         </EntityType>
         <EntityType Name="Documentos">
           <Key>
@@ -539,6 +540,13 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </Key>
           <Property Name="IdTipoProcedencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TipoProcedencia" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TipoRespuesta">
+          <Key>
+            <PropertyRef Name="IdRespuesta" />
+          </Key>
+          <Property Name="IdRespuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Validacion">
           <Key>
@@ -843,6 +851,18 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Principal>
             <Dependent Role="DetalleCanalizacion">
               <PropertyRef Name="IdEstatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCanalizacion_TipoRespuesta">
+          <End Role="TipoRespuesta" Type="Self.TipoRespuesta" Multiplicity="0..1" />
+          <End Role="DetalleCanalizacion" Type="Self.DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRespuesta">
+              <PropertyRef Name="IdRespuesta" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdRespuestaFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1188,6 +1208,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoAsunto" EntityType="Self.TipoAsunto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProcedencia" EntityType="Self.TipoProcedencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRespuesta" EntityType="Self.TipoRespuesta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Validacion" EntityType="Self.Validacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EspacioEducativoDet" EntityType="Self.EspacioEducativoDet" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1298,6 +1319,10 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           </AssociationSet>
           <AssociationSet Name="FK_DetalleCanalizacion_Estatus" Association="Self.FK_DetalleCanalizacion_Estatus">
             <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCanalizacion_TipoRespuesta" Association="Self.FK_DetalleCanalizacion_TipoRespuesta">
+            <End Role="TipoRespuesta" EntitySet="TipoRespuesta" />
             <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Documentos_DetalleCanalizacion" Association="Self.FK_Documentos_DetalleCanalizacion">
@@ -1640,6 +1665,11 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Email" EntitySet="Email" />
           </AssociationSet>
+          <EntitySet Name="TipoRespuesta" EntityType="Model.TipoRespuesta" />
+          <AssociationSet Name="FK_DetalleCanalizacion_TipoRespuesta" Association="Model.FK_DetalleCanalizacion_TipoRespuesta">
+            <End Role="TipoRespuesta" EntitySet="TipoRespuesta" />
+            <End Role="DetalleCanalizacion" EntitySet="DetalleCanalizacion" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccesoSistema">
           <Key>
@@ -1939,6 +1969,8 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <NavigationProperty Name="Canalizacion" Relationship="Model.FK_DetalleCanalizacion_Canalizacion" FromRole="DetalleCanalizacion" ToRole="Canalizacion" />
           <NavigationProperty Name="Estatus" Relationship="Model.FK_DetalleCanalizacion_Estatus" FromRole="DetalleCanalizacion" ToRole="Estatus" />
           <NavigationProperty Name="Documentos" Relationship="Model.FK_Documentos_DetalleCanalizacion" FromRole="DetalleCanalizacion" ToRole="Documentos" />
+          <Property Name="IdRespuestaFk" Type="Int32" />
+          <NavigationProperty Name="TipoRespuesta" Relationship="Model.FK_DetalleCanalizacion_TipoRespuesta" FromRole="DetalleCanalizacion" ToRole="TipoRespuesta" />
         </EntityType>
         <EntityType Name="Documentos">
           <Key>
@@ -2844,6 +2876,26 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TipoRespuesta">
+          <Key>
+            <PropertyRef Name="IdRespuesta" />
+          </Key>
+          <Property Name="IdRespuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Respuesta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetalleCanalizacion" Relationship="Model.FK_DetalleCanalizacion_TipoRespuesta" FromRole="TipoRespuesta" ToRole="DetalleCanalizacion" />
+        </EntityType>
+        <Association Name="FK_DetalleCanalizacion_TipoRespuesta">
+          <End Type="Model.TipoRespuesta" Role="TipoRespuesta" Multiplicity="0..1" />
+          <End Type="Model.DetalleCanalizacion" Role="DetalleCanalizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRespuesta">
+              <PropertyRef Name="IdRespuesta" />
+            </Principal>
+            <Dependent Role="DetalleCanalizacion">
+              <PropertyRef Name="IdRespuestaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3120,6 +3172,7 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
           <EntitySetMapping Name="DetalleCanalizacion">
             <EntityTypeMapping TypeName="Model.DetalleCanalizacion">
               <MappingFragment StoreEntitySet="DetalleCanalizacion">
+                <ScalarProperty Name="IdRespuestaFk" ColumnName="IdRespuestaFk" />
                 <ScalarProperty Name="IdEstatusFk" ColumnName="IdEstatusFk" />
                 <ScalarProperty Name="UsuarioAtiende" ColumnName="UsuarioAtiende" />
                 <ScalarProperty Name="Departamento" ColumnName="Departamento" />
@@ -3430,6 +3483,14 @@ advertencia 6002: La tabla o vista 'AtencionSolicitudes.dbo.EspacioEducativoDet'
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
                 <ScalarProperty Name="IdEmail" ColumnName="IdEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRespuesta">
+            <EntityTypeMapping TypeName="Model.TipoRespuesta">
+              <MappingFragment StoreEntitySet="TipoRespuesta">
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="IdRespuesta" ColumnName="IdRespuesta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -84,6 +84,7 @@
                                             <td>@item.Folio</td>
                                             <td>@item.FechaEntrega.Value.ToString("dd/MM/yyyy")</td>
                                             <td>@item.Beneficiario.Localidades.Nombre, @item.Beneficiario.Municipios.Nombre</td>
+                                            <td class="text-center"><span class="nivel" style="background-color:@(item.NivelImportancia.Color)">N </span></td>
                                         }
                                         
                                         <td>
@@ -100,18 +101,15 @@
                                                 }
                                                 else
                                                 {
-                                                    if (item.IdBeneficiarioFk > 0)
-                                                    {
-                                                        <button name="Solicitud"
+                                                    
+                                                        @*<button name="Solicitud"
                                                                 type="button" class="btn btn-info btn-sm"
                                                                 data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
                                                                 data-value="@rol"
                                                                 data-evento="PasarADependenciaICHIFE">
-                                                            Canalizar ICHIFE
-                                                        </button>
-                                                    }
-                                                    else
-                                                    {
+                                                            Canalizar Asunto General
+                                                        </button>*@
+
                                                         <button name="Solicitud"
                                                                 type="button" class="btn btn-info btn-sm"
                                                                 data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
@@ -119,7 +117,6 @@
                                                                 data-evento="PasarADependencia">
                                                             Info Solicitud
                                                         </button>
-                                                    }
                                                 }
                                                     <button name="Solicitud"
                                                             type="button" class="btn btn-dark btn-sm"

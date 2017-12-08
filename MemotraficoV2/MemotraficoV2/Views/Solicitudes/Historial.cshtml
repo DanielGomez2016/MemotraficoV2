@@ -29,7 +29,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     @Html.Label("Escuela")
-                                    <div>@Model.solicitud.Escuela.Clave @Model.solicitud.Escuela.Nombre</div>
+                                    <div>@if (Model.solicitud.Escuela != null)
+                                    {
+                                        @Model.solicitud.Escuela.Clave 
+                                        @Model.solicitud.Escuela.Nombre
+                                    }
+                                    else
+                                    {
+                                        @Model.solicitud.Beneficiario.Nombre
+                                    }</div>
                                 </div>
                                 <div class="col-md-2">
                                     @Html.LabelFor(i => i.solicitud.FechaEntrega)

@@ -139,6 +139,27 @@ namespace MemotraficoV2.Models
             db.SaveChanges();
         }
 
+        public static int getEstatus(int idestatus, bool cerrado, bool cancelado, int nocanalizacion, int totalcanalizacion)
+        {
+            var result = 0;
+
+            try
+            {
+                if (nocanalizacion == totalcanalizacion)
+                {
+                    if (cerrado) { result = ListaEstatus.CERRADO; }
+                    if (cancelado) { result = ListaEstatus.CANCELADO; }
+                }
+                else { result = ListaEstatus.CANALIZADO; }
+
+            }
+            catch (Exception e) {
+
+            }
+
+            return result;
+        }
+
         #endregion
     }
 }

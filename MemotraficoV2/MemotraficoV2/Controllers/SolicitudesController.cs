@@ -371,6 +371,7 @@ namespace MemotraficoV2.Controllers
                 ViewBag.TipoAsunto = db.TipoAsunto.ToList().Select(i => new { nombre = i.TipoAsunto1, id = i.IdTipoAsunto });
                 ViewBag.Institucion = db.Institucion.ToList().Select(i => new { nombre = i.Siglas, id = i.IdInstitucion });
                 ViewBag.Departamento = db.Departamento.Where(i => i.IdInstitucionFk == institucion).ToList().Select(i => new { id = i.IdDepartamento, nombre = i.Nombre });
+                ViewBag.NivelImportancia = db.NivelImportancia.ToList().Select(i => new { nombre = i.Nivel, id = i.IdImportancia });
             }
 
 
@@ -488,7 +489,9 @@ namespace MemotraficoV2.Controllers
 
                         //parametros
                         //solicitud, institucion, departamento, comentario, usuarioasigna, estatus
-                        canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuarios.RolBajo(rol, Institucion), ListaEstatus.CANALIZADO);
+                        //canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuarios.RolBajo(rol, Institucion), ListaEstatus.CANALIZADO);
+
+                        canalizacion = Canalizacion.Canalizar(IdSolicitud, Institucion, Departamento, Comentario, Usuario, ListaEstatus.CANALIZADO);
 
                         break;
                     case "Administrador de Dependencia":
@@ -746,7 +749,7 @@ namespace MemotraficoV2.Controllers
                 s.IdEstatusFk = ListaEstatus.CANALIZADO;
                 db.SaveChanges();
 
-                var dcdoc = Canalizacion.Canalizar(IdSolicitud, 1, 0, ListaComentarios.CanalizadaIchife, Usuarios.RolIchife(), ListaEstatus.CANALIZADO);
+                var dcdoc = Canalizacion.Canalizar(IdSolicitud, 1, 14, ListaComentarios.CanalizadaIchife, Usuarios.RolIchife(), ListaEstatus.CANALIZADO);
 
                 return Json(new
                 {

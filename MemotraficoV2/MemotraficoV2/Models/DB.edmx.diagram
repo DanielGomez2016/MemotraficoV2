@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1de2611bde2449c88bdd371f89dcee62" Name="Diagram1" ZoomLevel="142">
+      <Diagram DiagramId="1de2611bde2449c88bdd371f89dcee62" Name="Diagram1" ZoomLevel="17">
         <EntityTypeShape EntityType="Model.AccesoSistema" Width="1.5" PointX="0.75" PointY="35.125" />
         <EntityTypeShape EntityType="Model.AccesoSistemaRol" Width="1.5" PointX="3" PointY="38.5" />
         <EntityTypeShape EntityType="Model.AlmacenamientoDren" Width="1.5" PointX="9.75" PointY="36.125" />
@@ -95,6 +95,8 @@
         <AssociationConnector Association="Model.AspNetUserRoles" />
         <EntityTypeShape EntityType="Model.Email" Width="1.5" PointX="7.5" PointY="38" />
         <AssociationConnector Association="Model.FK_Email_AspNetUsers" />
+        <EntityTypeShape EntityType="Model.TipoRespuesta" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_DetalleCanalizacion_TipoRespuesta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

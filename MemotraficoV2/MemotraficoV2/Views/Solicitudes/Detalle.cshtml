@@ -44,6 +44,8 @@
                                     </div>
                                 </div>
                                 <br />
+                                @if (Model.Escuela != null)
+                                {
                                 <div class="row">
                                     <div class="col-md-3">
                                         @Html.LabelFor(i => i.IdTipoProcedenciaFk)
@@ -69,6 +71,35 @@
                                     <div class="col-md-4">
                                     </div>
                                 </div>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(i => i.IdTipoProcedenciaFk)
+                                            <div>@Model.TipoProcedencia.TipoProcedencia1</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.LabelFor(i => i.Escuela.Turno)
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(i => i.Escuela.Clave)
+                                            <div></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.LabelFor(i => i.Beneficiario.Nombre)
+                                            <div>@Model.Beneficiario.Nombre</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        </div>
+                                    </div>
+                                }
                                 <br />
                                 <div class="row">
                                     <div class="col-md-12">
@@ -132,20 +163,20 @@
                                     <button class="btn btn-default cerrada" type="button" name="acciones" data-rol="@rol" data-accion="CerrarSol">Cerrar solicitud</button>
                                     <button class="btn btn-success hide" type="button" name="SaveClose" data-rol="@rol">Cerrar solicitud</button>
                                 }
-                                @if (Model.validacion == true)
-                                {
-                                    if ((Model.uactual == OPERADOR) || ((Model.UltimoRol == OPERADOR && Model.IdEstatusFk == ATENDIDA) && Model.uactual == ADMINISTRADOR_DEPENDENCIA))
+
+                                    @if ((Model.uactual == OPERADOR) || ((Model.UltimoRol == OPERADOR && Model.IdEstatusFk == ATENDIDA) && Model.uactual == ADMINISTRADOR_DEPENDENCIA))
                                     {
                                         <button class="btn btn-default atendida" type="button" name="acciones" data-rol="@rol" data-accion="Atendida">Solicitud Atendida</button>
                                         <button class="btn btn-success hide" type="button" name="SaveAtendida" data-rol="@rol">Guardar</button>
                                     }
-                                    if (Model.uactual == OPERADOR)
+                                    @if (Model.uactual == OPERADOR)
                                     {
                                         <button class="btn btn-default avance" type="button" name="acciones" data-rol="@rol" data-accion="SubirAvance">Subir Avance</button>
                                         <button class="btn btn-success hide" type="button" name="SaveAvance">Guardar</button>
                                     }
+                                @if (Model.Escuela != null) {
+                               @Html.ActionLink("Validacion ", "ValidacionEscolar", "Validaciones", new { escuela = Model.Escuela.IdEscuela, solicitud = Model.Folio, crear = 0 }, new { @class = "btn btn-default validacionBtn" })
                                 }
-                               @Html.ActionLink("Validacion ", "ValidacionEscolar", "Validaciones", new { escuela = Model.Escuela.IdEscuela, solicitud = Model.Folio, crear = 0 },new {  @class= "btn btn-default validacionBtn" })
                                 <button class="btn btn-default canalizar" type="button" name="acciones" data-rol="@rol" data-accion="canalizar">Canalizar Solicitud</button>
                                 <button class="btn btn-success hide" type="button" name="Save" data-rol="@rol" data-accion="canalizar">Guardar</button>
                                 @if (Model.IdEstatusFk != CANCELADO)
@@ -162,7 +193,6 @@
     </div>
 
 <script>
-    debugger
     $('[name="acciones"]').click(function () {
         var button = $(this);
         button.removeAttr('name');
@@ -233,7 +263,7 @@
 
         switch (rolusuario) {
             case "Administrador de Solicitudes":
-                data = { TipoAsunto: TipoAsunto, Institucion: Institucion, IdSolicitud: IdSolicitud, Comentario: Comentario, Departamento: 0, Usuario: "", rol: rolusuario };
+                data = { TipoAsunto: TipoAsunto, Institucion: 1, IdSolicitud: IdSolicitud, Comentario: Comentario, Departamento: Departamento, Usuario: Usuario, rol: rolusuario };
                 url = '/Solicitudes/Canalizar';
                 break;
             case "Administrador de Dependencia":
@@ -450,8 +480,10 @@
         switch (rol) {
             case "Administrador de Solicitudes":
                 $('[name=tipoasunto]').removeAttr('hidden');
-                $('[name=institucion]').removeAttr('hidden');
+                //$('[name=institucion]').removeAttr('hidden');
                 $('[name=comentario]').removeAttr('hidden');
+                $('[name=departamento]').removeAttr('hidden');
+                $('[name=usuario]').removeAttr('hidden');
                 break;
             case "Administrador de Dependencia":
                 $('[name=departamento]').removeAttr('hidden');

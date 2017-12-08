@@ -82,6 +82,23 @@ namespace MemotraficoV2.Models
                 throw e;
             }
         }
+
+        public int EditarNivel()
+        {
+            try
+            {
+                SASEntities db = new SASEntities();
+                Escuela e = db.Escuela.FirstOrDefault(i => i.Clave == this.Clave);
+                e.IdNivelEducativo = IdNivelEducativo != null ? IdNivelEducativo : e.IdNivelEducativo;
+                db.SaveChanges();
+
+                return IdEscuela;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 
 

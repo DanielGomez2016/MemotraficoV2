@@ -1,0 +1,1320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MemotraficosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acuses">
+          <Key>
+            <PropertyRef Name="Folio" />
+          </Key>
+          <Property Name="Folio" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="EnviaTitular" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="RecibeTitular" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="IdMemotrafico" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Beneficiarios">
+          <Key>
+            <PropertyRef Name="IdBeneficiario" />
+          </Key>
+          <Property Name="IdBeneficiario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Beneficiario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Domicilio" Type="text" />
+          <Property Name="IdLocalidad" Type="bigint" />
+          <Property Name="IdMunicipio" Type="bigint" />
+          <Property Name="Director" Type="varchar" MaxLength="70" />
+          <Property Name="IdNivelEducativo" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Departamento" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Titular" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="500" />
+          <Property Name="Email2" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="EstatusMemos">
+          <Key>
+            <PropertyRef Name="IdEstatusMemo" />
+          </Key>
+          <Property Name="IdEstatusMemo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Localidades">
+          <Key>
+            <PropertyRef Name="IdLocalidad" />
+            <PropertyRef Name="IdMunicipio" />
+          </Key>
+          <Property Name="IdLocalidad" Type="bigint" Nullable="false" />
+          <Property Name="Localidad" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdMunicipio" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Memotraficos">
+          <Key>
+            <PropertyRef Name="IdMemotrafico" />
+          </Key>
+          <Property Name="IdMemotrafico" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Leido" Type="bit" />
+          <Property Name="Memotrafico" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="DoctoOrigen" Type="varchar" MaxLength="25" />
+          <Property Name="FechaDoctoOrigen" Type="smalldatetime" />
+          <Property Name="FechaFinProb" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaFinReal" Type="smalldatetime" />
+          <Property Name="FechaCancelado" Type="smalldatetime" />
+          <Property Name="Asunto" Type="text" Nullable="false" />
+          <Property Name="IdEstatusMemo" Type="bigint" Nullable="false" />
+          <Property Name="Observacion" Type="text" />
+          <Property Name="Clave" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdDepartamento" Type="bigint" />
+          <Property Name="FechaRecibido" Type="smalldatetime" Nullable="false" />
+          <Property Name="IdProcedencia" Type="bigint" Nullable="false" />
+          <Property Name="IdTipoAsunto" Type="bigint" Nullable="false" />
+          <Property Name="IdBeneficiario" Type="bigint" Nullable="false" />
+          <Property Name="Cerrado" Type="bit" Nullable="false" />
+          <Property Name="Cancelado" Type="bit" Nullable="false" />
+          <Property Name="FechaCanalizada" Type="smalldatetime" />
+          <Property Name="Check1" Type="bit" />
+          <Property Name="Check2" Type="bit" />
+          <Property Name="Check3" Type="bit" />
+          <Property Name="Check4" Type="bit" />
+          <Property Name="Check5" Type="bit" />
+          <Property Name="Check6" Type="bit" />
+          <Property Name="Check7" Type="bit" />
+        </EntityType>
+        <EntityType Name="Memotraficos_Deptos">
+          <Key>
+            <PropertyRef Name="IdMemotraficoDepto" />
+          </Key>
+          <Property Name="IdMemotraficoDepto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDepartamento" Type="bigint" Nullable="false" />
+          <Property Name="IdDepartamento_Envia" Type="bigint" />
+          <Property Name="Titular" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Titular_Envia" Type="varchar" MaxLength="70" />
+          <Property Name="Comentario" Type="text" />
+          <Property Name="Documento" Type="binary" MaxLength="50" />
+          <Property Name="FechaInicio" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaFin" Type="smalldatetime" />
+          <Property Name="IdMemotrafico" Type="bigint" Nullable="false" />
+          <Property Name="FechaFinProb" Type="smalldatetime" />
+          <Property Name="Check1" Type="bit" />
+          <Property Name="Check2" Type="bit" />
+          <Property Name="Check3" Type="bit" />
+          <Property Name="Check4" Type="bit" />
+          <Property Name="Check5" Type="bit" />
+          <Property Name="Check6" Type="bit" />
+          <Property Name="Check7" Type="bit" />
+        </EntityType>
+        <EntityType Name="Memotraficos_DeptosDoctos">
+          <Key>
+            <PropertyRef Name="IdMemotrafico_DeptoDocto" />
+          </Key>
+          <Property Name="IdMemotrafico_DeptoDocto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMemotraficoDepto" Type="bigint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Docto" Type="image" />
+          <Property Name="NombreArchivo" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MemotraficosDoctos">
+          <Key>
+            <PropertyRef Name="IdMemotraficoDocto" />
+          </Key>
+          <Property Name="IdMemotraficoDocto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMemotrafico" Type="bigint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Docto" Type="image" />
+          <Property Name="NombreArchivo" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Municipios">
+          <Key>
+            <PropertyRef Name="IdMunicipio" />
+          </Key>
+          <Property Name="IdMunicipio" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NivelesEducativos">
+          <Key>
+            <PropertyRef Name="IdNivelEducativo" />
+          </Key>
+          <Property Name="IdNivelEducativo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NivelEducativo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Procedencias">
+          <Key>
+            <PropertyRef Name="IdProcedencia" />
+          </Key>
+          <Property Name="IdProcedencia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Procedencia" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Domicilio" Type="text" />
+          <Property Name="IdMunicipio" Type="bigint" Nullable="false" />
+          <Property Name="IdLocalidad" Type="bigint" Nullable="false" />
+          <Property Name="Contacto" Type="varchar" MaxLength="150" />
+          <Property Name="IdTipoProcedencia" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TelefonosBeneficiarios">
+          <Key>
+            <PropertyRef Name="IdTelefonoBeneficiario" />
+          </Key>
+          <Property Name="IdTelefonoBeneficiario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Telefono" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="IdTipoTelefono" Type="bigint" Nullable="false" />
+          <Property Name="IdBeneficiario" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TelefonosProcedencias">
+          <Key>
+            <PropertyRef Name="IdTelefonoProcedencia" />
+          </Key>
+          <Property Name="IdTelefonoProcedencia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Telefono" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="IdTipoTelefono" Type="bigint" Nullable="false" />
+          <Property Name="IdProcedencia" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoAsuntos">
+          <Key>
+            <PropertyRef Name="IdTipoAsunto" />
+          </Key>
+          <Property Name="IdTipoAsunto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asunto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoProcedencias">
+          <Key>
+            <PropertyRef Name="IdTipoProcedencia" />
+          </Key>
+          <Property Name="IdTipoProcedencia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoProcedencia" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoRespuestas">
+          <Key>
+            <PropertyRef Name="IdTipoRespuesta" />
+          </Key>
+          <Property Name="IdTipoRespuesta" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoRespuesta" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposTelefono">
+          <Key>
+            <PropertyRef Name="IdTipoTelefono" />
+          </Key>
+          <Property Name="IdTipoTelefono" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoTelefono" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Acuses_Memotraficos">
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="1" />
+          <End Role="Acuses" Type="Self.Acuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Principal>
+            <Dependent Role="Acuses">
+              <PropertyRef Name="IdMemotrafico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_Municipios">
+          <End Role="Municipios" Type="Self.Municipios" Multiplicity="0..1" />
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="IdMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_NivelesEducativos">
+          <End Role="NivelesEducativos" Type="Self.NivelesEducativos" Multiplicity="0..1" />
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelesEducativos">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_NivelesEducativos1">
+          <End Role="NivelesEducativos" Type="Self.NivelesEducativos" Multiplicity="0..1" />
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelesEducativos">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidades_Municipios">
+          <End Role="Municipios" Type="Self.Municipios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Localidades">
+              <PropertyRef Name="IdMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Beneficiarios">
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="1" />
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiarios">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdBeneficiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Deptos_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Memotraficos_Deptos" Type="Self.Memotraficos_Deptos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Memotraficos_Deptos">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Deptos_Memotraficos">
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="1" />
+          <End Role="Memotraficos_Deptos" Type="Self.Memotraficos_Deptos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Principal>
+            <Dependent Role="Memotraficos_Deptos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos">
+          <End Role="Memotraficos_Deptos" Type="Self.Memotraficos_Deptos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Memotraficos_DeptosDoctos" Type="Self.Memotraficos_DeptosDoctos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos_Deptos">
+              <PropertyRef Name="IdMemotraficoDepto" />
+            </Principal>
+            <Dependent Role="Memotraficos_DeptosDoctos">
+              <PropertyRef Name="IdMemotraficoDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_EstatusMemos1">
+          <End Role="EstatusMemos" Type="Self.EstatusMemos" Multiplicity="1" />
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatusMemos">
+              <PropertyRef Name="IdEstatusMemo" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdEstatusMemo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Procedencias">
+          <End Role="Procedencias" Type="Self.Procedencias" Multiplicity="1" />
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedencias">
+              <PropertyRef Name="IdProcedencia" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdProcedencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_TipoAsunto">
+          <End Role="TipoAsuntos" Type="Self.TipoAsuntos" Multiplicity="1" />
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAsuntos">
+              <PropertyRef Name="IdTipoAsunto" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdTipoAsunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemotraficosDoctos_Memotraficos">
+          <End Role="Memotraficos" Type="Self.Memotraficos" Multiplicity="1" />
+          <End Role="MemotraficosDoctos" Type="Self.MemotraficosDoctos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Principal>
+            <Dependent Role="MemotraficosDoctos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Procedencias_TipoProcedencias">
+          <End Role="TipoProcedencias" Type="Self.TipoProcedencias" Multiplicity="1" />
+          <End Role="Procedencias" Type="Self.Procedencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProcedencias">
+              <PropertyRef Name="IdTipoProcedencia" />
+            </Principal>
+            <Dependent Role="Procedencias">
+              <PropertyRef Name="IdTipoProcedencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosBeneficiarios_Beneficiarios">
+          <End Role="Beneficiarios" Type="Self.Beneficiarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TelefonosBeneficiarios" Type="Self.TelefonosBeneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiarios">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="TelefonosBeneficiarios">
+              <PropertyRef Name="IdBeneficiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosBeneficiarios_TiposTelefono">
+          <End Role="TiposTelefono" Type="Self.TiposTelefono" Multiplicity="1" />
+          <End Role="TelefonosBeneficiarios" Type="Self.TelefonosBeneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposTelefono">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Principal>
+            <Dependent Role="TelefonosBeneficiarios">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosProcedencias_Procedencias">
+          <End Role="Procedencias" Type="Self.Procedencias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TelefonosProcedencias" Type="Self.TelefonosProcedencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedencias">
+              <PropertyRef Name="IdProcedencia" />
+            </Principal>
+            <Dependent Role="TelefonosProcedencias">
+              <PropertyRef Name="IdProcedencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosProcedencias_TiposTelefono">
+          <End Role="TiposTelefono" Type="Self.TiposTelefono" Multiplicity="1" />
+          <End Role="TelefonosProcedencias" Type="Self.TelefonosProcedencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposTelefono">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Principal>
+            <Dependent Role="TelefonosProcedencias">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MemotraficosModelStoreContainer">
+          <EntitySet Name="Acuses" EntityType="Self.Acuses" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Beneficiarios" EntityType="Self.Beneficiarios" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="EstatusMemos" EntityType="Self.EstatusMemos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Memotraficos" EntityType="Self.Memotraficos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Memotraficos_Deptos" EntityType="Self.Memotraficos_Deptos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Memotraficos_DeptosDoctos" EntityType="Self.Memotraficos_DeptosDoctos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="MemotraficosDoctos" EntityType="Self.MemotraficosDoctos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Municipios" EntityType="Self.Municipios" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="NivelesEducativos" EntityType="Self.NivelesEducativos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="Procedencias" EntityType="Self.Procedencias" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="TelefonosBeneficiarios" EntityType="Self.TelefonosBeneficiarios" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="TelefonosProcedencias" EntityType="Self.TelefonosProcedencias" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="TipoAsuntos" EntityType="Self.TipoAsuntos" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="TipoProcedencias" EntityType="Self.TipoProcedencias" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="TipoRespuestas" EntityType="Self.TipoRespuestas" Schema="memotrafico" store:Type="Tables" />
+          <EntitySet Name="TiposTelefono" EntityType="Self.TiposTelefono" Schema="memotrafico" store:Type="Tables" />
+          <AssociationSet Name="FK_Acuses_Memotraficos" Association="Self.FK_Acuses_Memotraficos">
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+            <End Role="Acuses" EntitySet="Acuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_Municipios" Association="Self.FK_Beneficiarios_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_NivelesEducativos" Association="Self.FK_Beneficiarios_NivelesEducativos">
+            <End Role="NivelesEducativos" EntitySet="NivelesEducativos" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_NivelesEducativos1" Association="Self.FK_Beneficiarios_NivelesEducativos1">
+            <End Role="NivelesEducativos" EntitySet="NivelesEducativos" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidades_Municipios" Association="Self.FK_Localidades_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Beneficiarios" Association="Self.FK_Memotraficos_Beneficiarios">
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Deptos_Departamentos" Association="Self.FK_Memotraficos_Deptos_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Memotraficos_Deptos" EntitySet="Memotraficos_Deptos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Deptos_Memotraficos" Association="Self.FK_Memotraficos_Deptos_Memotraficos">
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+            <End Role="Memotraficos_Deptos" EntitySet="Memotraficos_Deptos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos" Association="Self.FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos">
+            <End Role="Memotraficos_Deptos" EntitySet="Memotraficos_Deptos" />
+            <End Role="Memotraficos_DeptosDoctos" EntitySet="Memotraficos_DeptosDoctos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_EstatusMemos1" Association="Self.FK_Memotraficos_EstatusMemos1">
+            <End Role="EstatusMemos" EntitySet="EstatusMemos" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Procedencias" Association="Self.FK_Memotraficos_Procedencias">
+            <End Role="Procedencias" EntitySet="Procedencias" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_TipoAsunto" Association="Self.FK_Memotraficos_TipoAsunto">
+            <End Role="TipoAsuntos" EntitySet="TipoAsuntos" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemotraficosDoctos_Memotraficos" Association="Self.FK_MemotraficosDoctos_Memotraficos">
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+            <End Role="MemotraficosDoctos" EntitySet="MemotraficosDoctos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Procedencias_TipoProcedencias" Association="Self.FK_Procedencias_TipoProcedencias">
+            <End Role="TipoProcedencias" EntitySet="TipoProcedencias" />
+            <End Role="Procedencias" EntitySet="Procedencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosBeneficiarios_Beneficiarios" Association="Self.FK_TelefonosBeneficiarios_Beneficiarios">
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+            <End Role="TelefonosBeneficiarios" EntitySet="TelefonosBeneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosBeneficiarios_TiposTelefono" Association="Self.FK_TelefonosBeneficiarios_TiposTelefono">
+            <End Role="TiposTelefono" EntitySet="TiposTelefono" />
+            <End Role="TelefonosBeneficiarios" EntitySet="TelefonosBeneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosProcedencias_Procedencias" Association="Self.FK_TelefonosProcedencias_Procedencias">
+            <End Role="Procedencias" EntitySet="Procedencias" />
+            <End Role="TelefonosProcedencias" EntitySet="TelefonosProcedencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosProcedencias_TiposTelefono" Association="Self.FK_TelefonosProcedencias_TiposTelefono">
+            <End Role="TiposTelefono" EntitySet="TiposTelefono" />
+            <End Role="TelefonosProcedencias" EntitySet="TelefonosProcedencias" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MemotraficosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MemotraficosEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Acuses" EntityType="MemotraficosModel.Acuses" />
+          <EntitySet Name="Beneficiarios" EntityType="MemotraficosModel.Beneficiarios" />
+          <EntitySet Name="Departamentos" EntityType="MemotraficosModel.Departamentos" />
+          <EntitySet Name="EstatusMemos" EntityType="MemotraficosModel.EstatusMemos" />
+          <EntitySet Name="Localidades" EntityType="MemotraficosModel.Localidades" />
+          <EntitySet Name="Memotraficos" EntityType="MemotraficosModel.Memotraficos" />
+          <EntitySet Name="Memotraficos_Deptos" EntityType="MemotraficosModel.Memotraficos_Deptos" />
+          <EntitySet Name="Memotraficos_DeptosDoctos" EntityType="MemotraficosModel.Memotraficos_DeptosDoctos" />
+          <EntitySet Name="MemotraficosDoctos" EntityType="MemotraficosModel.MemotraficosDoctos" />
+          <EntitySet Name="Municipios" EntityType="MemotraficosModel.Municipios" />
+          <EntitySet Name="NivelesEducativos" EntityType="MemotraficosModel.NivelesEducativos" />
+          <EntitySet Name="Procedencias" EntityType="MemotraficosModel.Procedencias" />
+          <EntitySet Name="TelefonosBeneficiarios" EntityType="MemotraficosModel.TelefonosBeneficiarios" />
+          <EntitySet Name="TelefonosProcedencias" EntityType="MemotraficosModel.TelefonosProcedencias" />
+          <EntitySet Name="TipoAsuntos" EntityType="MemotraficosModel.TipoAsuntos" />
+          <EntitySet Name="TipoProcedencias" EntityType="MemotraficosModel.TipoProcedencias" />
+          <EntitySet Name="TipoRespuestas" EntityType="MemotraficosModel.TipoRespuestas" />
+          <EntitySet Name="TiposTelefono" EntityType="MemotraficosModel.TiposTelefono" />
+          <AssociationSet Name="FK_Acuses_Memotraficos" Association="MemotraficosModel.FK_Acuses_Memotraficos">
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+            <End Role="Acuses" EntitySet="Acuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_Municipios" Association="MemotraficosModel.FK_Beneficiarios_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_NivelesEducativos" Association="MemotraficosModel.FK_Beneficiarios_NivelesEducativos">
+            <End Role="NivelesEducativos" EntitySet="NivelesEducativos" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiarios_NivelesEducativos1" Association="MemotraficosModel.FK_Beneficiarios_NivelesEducativos1">
+            <End Role="NivelesEducativos" EntitySet="NivelesEducativos" />
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Beneficiarios" Association="MemotraficosModel.FK_Memotraficos_Beneficiarios">
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosBeneficiarios_Beneficiarios" Association="MemotraficosModel.FK_TelefonosBeneficiarios_Beneficiarios">
+            <End Role="Beneficiarios" EntitySet="Beneficiarios" />
+            <End Role="TelefonosBeneficiarios" EntitySet="TelefonosBeneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Deptos_Departamentos" Association="MemotraficosModel.FK_Memotraficos_Deptos_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Memotraficos_Deptos" EntitySet="Memotraficos_Deptos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_EstatusMemos1" Association="MemotraficosModel.FK_Memotraficos_EstatusMemos1">
+            <End Role="EstatusMemos" EntitySet="EstatusMemos" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidades_Municipios" Association="MemotraficosModel.FK_Localidades_Municipios">
+            <End Role="Municipios" EntitySet="Municipios" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Deptos_Memotraficos" Association="MemotraficosModel.FK_Memotraficos_Deptos_Memotraficos">
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+            <End Role="Memotraficos_Deptos" EntitySet="Memotraficos_Deptos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_Procedencias" Association="MemotraficosModel.FK_Memotraficos_Procedencias">
+            <End Role="Procedencias" EntitySet="Procedencias" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_TipoAsunto" Association="MemotraficosModel.FK_Memotraficos_TipoAsunto">
+            <End Role="TipoAsuntos" EntitySet="TipoAsuntos" />
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemotraficosDoctos_Memotraficos" Association="MemotraficosModel.FK_MemotraficosDoctos_Memotraficos">
+            <End Role="Memotraficos" EntitySet="Memotraficos" />
+            <End Role="MemotraficosDoctos" EntitySet="MemotraficosDoctos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos" Association="MemotraficosModel.FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos">
+            <End Role="Memotraficos_Deptos" EntitySet="Memotraficos_Deptos" />
+            <End Role="Memotraficos_DeptosDoctos" EntitySet="Memotraficos_DeptosDoctos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Procedencias_TipoProcedencias" Association="MemotraficosModel.FK_Procedencias_TipoProcedencias">
+            <End Role="TipoProcedencias" EntitySet="TipoProcedencias" />
+            <End Role="Procedencias" EntitySet="Procedencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosProcedencias_Procedencias" Association="MemotraficosModel.FK_TelefonosProcedencias_Procedencias">
+            <End Role="Procedencias" EntitySet="Procedencias" />
+            <End Role="TelefonosProcedencias" EntitySet="TelefonosProcedencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosBeneficiarios_TiposTelefono" Association="MemotraficosModel.FK_TelefonosBeneficiarios_TiposTelefono">
+            <End Role="TiposTelefono" EntitySet="TiposTelefono" />
+            <End Role="TelefonosBeneficiarios" EntitySet="TelefonosBeneficiarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonosProcedencias_TiposTelefono" Association="MemotraficosModel.FK_TelefonosProcedencias_TiposTelefono">
+            <End Role="TiposTelefono" EntitySet="TiposTelefono" />
+            <End Role="TelefonosProcedencias" EntitySet="TelefonosProcedencias" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Acuses">
+          <Key>
+            <PropertyRef Name="Folio" />
+          </Key>
+          <Property Name="Folio" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EnviaTitular" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="RecibeTitular" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="IdMemotrafico" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_Acuses_Memotraficos" FromRole="Acuses" ToRole="Memotraficos" />
+        </EntityType>
+        <EntityType Name="Beneficiarios">
+          <Key>
+            <PropertyRef Name="IdBeneficiario" />
+          </Key>
+          <Property Name="IdBeneficiario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Beneficiario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdLocalidad" Type="Int64" />
+          <Property Name="IdMunicipio" Type="Int64" />
+          <Property Name="Director" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="IdNivelEducativo" Type="Int64" />
+          <NavigationProperty Name="Municipios" Relationship="MemotraficosModel.FK_Beneficiarios_Municipios" FromRole="Beneficiarios" ToRole="Municipios" />
+          <NavigationProperty Name="NivelesEducativos" Relationship="MemotraficosModel.FK_Beneficiarios_NivelesEducativos" FromRole="Beneficiarios" ToRole="NivelesEducativos" />
+          <NavigationProperty Name="NivelesEducativos1" Relationship="MemotraficosModel.FK_Beneficiarios_NivelesEducativos1" FromRole="Beneficiarios" ToRole="NivelesEducativos" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_Memotraficos_Beneficiarios" FromRole="Beneficiarios" ToRole="Memotraficos" />
+          <NavigationProperty Name="TelefonosBeneficiarios" Relationship="MemotraficosModel.FK_TelefonosBeneficiarios_Beneficiarios" FromRole="Beneficiarios" ToRole="TelefonosBeneficiarios" />
+        </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="IdDepartamento" />
+          </Key>
+          <Property Name="IdDepartamento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Departamento" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Titular" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Memotraficos_Deptos" Relationship="MemotraficosModel.FK_Memotraficos_Deptos_Departamentos" FromRole="Departamentos" ToRole="Memotraficos_Deptos" />
+        </EntityType>
+        <EntityType Name="EstatusMemos">
+          <Key>
+            <PropertyRef Name="IdEstatusMemo" />
+          </Key>
+          <Property Name="IdEstatusMemo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estatus" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_Memotraficos_EstatusMemos1" FromRole="EstatusMemos" ToRole="Memotraficos" />
+        </EntityType>
+        <EntityType Name="Localidades">
+          <Key>
+            <PropertyRef Name="IdLocalidad" />
+            <PropertyRef Name="IdMunicipio" />
+          </Key>
+          <Property Name="IdLocalidad" Type="Int64" Nullable="false" />
+          <Property Name="Localidad" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdMunicipio" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Municipios" Relationship="MemotraficosModel.FK_Localidades_Municipios" FromRole="Localidades" ToRole="Municipios" />
+        </EntityType>
+        <EntityType Name="Memotraficos">
+          <Key>
+            <PropertyRef Name="IdMemotrafico" />
+          </Key>
+          <Property Name="IdMemotrafico" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Leido" Type="Boolean" />
+          <Property Name="Memotrafico" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DoctoOrigen" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDoctoOrigen" Type="DateTime" Precision="0" />
+          <Property Name="FechaFinProb" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFinReal" Type="DateTime" Precision="0" />
+          <Property Name="FechaCancelado" Type="DateTime" Precision="0" />
+          <Property Name="Asunto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatusMemo" Type="Int64" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdDepartamento" Type="Int64" />
+          <Property Name="FechaRecibido" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdProcedencia" Type="Int64" Nullable="false" />
+          <Property Name="IdTipoAsunto" Type="Int64" Nullable="false" />
+          <Property Name="IdBeneficiario" Type="Int64" Nullable="false" />
+          <Property Name="Cerrado" Type="Boolean" Nullable="false" />
+          <Property Name="Cancelado" Type="Boolean" Nullable="false" />
+          <Property Name="FechaCanalizada" Type="DateTime" Precision="0" />
+          <Property Name="Check1" Type="Boolean" />
+          <Property Name="Check2" Type="Boolean" />
+          <Property Name="Check3" Type="Boolean" />
+          <Property Name="Check4" Type="Boolean" />
+          <Property Name="Check5" Type="Boolean" />
+          <Property Name="Check6" Type="Boolean" />
+          <Property Name="Check7" Type="Boolean" />
+          <NavigationProperty Name="Acuses" Relationship="MemotraficosModel.FK_Acuses_Memotraficos" FromRole="Memotraficos" ToRole="Acuses" />
+          <NavigationProperty Name="Beneficiarios" Relationship="MemotraficosModel.FK_Memotraficos_Beneficiarios" FromRole="Memotraficos" ToRole="Beneficiarios" />
+          <NavigationProperty Name="EstatusMemos" Relationship="MemotraficosModel.FK_Memotraficos_EstatusMemos1" FromRole="Memotraficos" ToRole="EstatusMemos" />
+          <NavigationProperty Name="Memotraficos_Deptos" Relationship="MemotraficosModel.FK_Memotraficos_Deptos_Memotraficos" FromRole="Memotraficos" ToRole="Memotraficos_Deptos" />
+          <NavigationProperty Name="Procedencias" Relationship="MemotraficosModel.FK_Memotraficos_Procedencias" FromRole="Memotraficos" ToRole="Procedencias" />
+          <NavigationProperty Name="TipoAsuntos" Relationship="MemotraficosModel.FK_Memotraficos_TipoAsunto" FromRole="Memotraficos" ToRole="TipoAsuntos" />
+          <NavigationProperty Name="MemotraficosDoctos" Relationship="MemotraficosModel.FK_MemotraficosDoctos_Memotraficos" FromRole="Memotraficos" ToRole="MemotraficosDoctos" />
+        </EntityType>
+        <EntityType Name="Memotraficos_Deptos">
+          <Key>
+            <PropertyRef Name="IdMemotraficoDepto" />
+          </Key>
+          <Property Name="IdMemotraficoDepto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDepartamento" Type="Int64" Nullable="false" />
+          <Property Name="IdDepartamento_Envia" Type="Int64" />
+          <Property Name="Titular" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Titular_Envia" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="IdMemotrafico" Type="Int64" Nullable="false" />
+          <Property Name="FechaFinProb" Type="DateTime" Precision="0" />
+          <Property Name="Check1" Type="Boolean" />
+          <Property Name="Check2" Type="Boolean" />
+          <Property Name="Check3" Type="Boolean" />
+          <Property Name="Check4" Type="Boolean" />
+          <Property Name="Check5" Type="Boolean" />
+          <Property Name="Check6" Type="Boolean" />
+          <Property Name="Check7" Type="Boolean" />
+          <NavigationProperty Name="Departamentos" Relationship="MemotraficosModel.FK_Memotraficos_Deptos_Departamentos" FromRole="Memotraficos_Deptos" ToRole="Departamentos" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_Memotraficos_Deptos_Memotraficos" FromRole="Memotraficos_Deptos" ToRole="Memotraficos" />
+          <NavigationProperty Name="Memotraficos_DeptosDoctos" Relationship="MemotraficosModel.FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos" FromRole="Memotraficos_Deptos" ToRole="Memotraficos_DeptosDoctos" />
+        </EntityType>
+        <EntityType Name="Memotraficos_DeptosDoctos">
+          <Key>
+            <PropertyRef Name="IdMemotrafico_DeptoDocto" />
+          </Key>
+          <Property Name="IdMemotrafico_DeptoDocto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMemotraficoDepto" Type="Int64" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Docto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NombreArchivo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Memotraficos_Deptos" Relationship="MemotraficosModel.FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos" FromRole="Memotraficos_DeptosDoctos" ToRole="Memotraficos_Deptos" />
+        </EntityType>
+        <EntityType Name="MemotraficosDoctos">
+          <Key>
+            <PropertyRef Name="IdMemotraficoDocto" />
+          </Key>
+          <Property Name="IdMemotraficoDocto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMemotrafico" Type="Int64" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Docto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NombreArchivo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_MemotraficosDoctos_Memotraficos" FromRole="MemotraficosDoctos" ToRole="Memotraficos" />
+        </EntityType>
+        <EntityType Name="Municipios">
+          <Key>
+            <PropertyRef Name="IdMunicipio" />
+          </Key>
+          <Property Name="IdMunicipio" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Municipio" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Beneficiarios" Relationship="MemotraficosModel.FK_Beneficiarios_Municipios" FromRole="Municipios" ToRole="Beneficiarios" />
+          <NavigationProperty Name="Localidades" Relationship="MemotraficosModel.FK_Localidades_Municipios" FromRole="Municipios" ToRole="Localidades" />
+        </EntityType>
+        <EntityType Name="NivelesEducativos">
+          <Key>
+            <PropertyRef Name="IdNivelEducativo" />
+          </Key>
+          <Property Name="IdNivelEducativo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NivelEducativo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Beneficiarios" Relationship="MemotraficosModel.FK_Beneficiarios_NivelesEducativos" FromRole="NivelesEducativos" ToRole="Beneficiarios" />
+          <NavigationProperty Name="Beneficiarios1" Relationship="MemotraficosModel.FK_Beneficiarios_NivelesEducativos1" FromRole="NivelesEducativos" ToRole="Beneficiarios" />
+        </EntityType>
+        <EntityType Name="Procedencias">
+          <Key>
+            <PropertyRef Name="IdProcedencia" />
+          </Key>
+          <Property Name="IdProcedencia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Procedencia" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdMunicipio" Type="Int64" Nullable="false" />
+          <Property Name="IdLocalidad" Type="Int64" Nullable="false" />
+          <Property Name="Contacto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoProcedencia" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_Memotraficos_Procedencias" FromRole="Procedencias" ToRole="Memotraficos" />
+          <NavigationProperty Name="TipoProcedencias" Relationship="MemotraficosModel.FK_Procedencias_TipoProcedencias" FromRole="Procedencias" ToRole="TipoProcedencias" />
+          <NavigationProperty Name="TelefonosProcedencias" Relationship="MemotraficosModel.FK_TelefonosProcedencias_Procedencias" FromRole="Procedencias" ToRole="TelefonosProcedencias" />
+        </EntityType>
+        <EntityType Name="TelefonosBeneficiarios">
+          <Key>
+            <PropertyRef Name="IdTelefonoBeneficiario" />
+          </Key>
+          <Property Name="IdTelefonoBeneficiario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IdTipoTelefono" Type="Int64" Nullable="false" />
+          <Property Name="IdBeneficiario" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Beneficiarios" Relationship="MemotraficosModel.FK_TelefonosBeneficiarios_Beneficiarios" FromRole="TelefonosBeneficiarios" ToRole="Beneficiarios" />
+          <NavigationProperty Name="TiposTelefono" Relationship="MemotraficosModel.FK_TelefonosBeneficiarios_TiposTelefono" FromRole="TelefonosBeneficiarios" ToRole="TiposTelefono" />
+        </EntityType>
+        <EntityType Name="TelefonosProcedencias">
+          <Key>
+            <PropertyRef Name="IdTelefonoProcedencia" />
+          </Key>
+          <Property Name="IdTelefonoProcedencia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IdTipoTelefono" Type="Int64" Nullable="false" />
+          <Property Name="IdProcedencia" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Procedencias" Relationship="MemotraficosModel.FK_TelefonosProcedencias_Procedencias" FromRole="TelefonosProcedencias" ToRole="Procedencias" />
+          <NavigationProperty Name="TiposTelefono" Relationship="MemotraficosModel.FK_TelefonosProcedencias_TiposTelefono" FromRole="TelefonosProcedencias" ToRole="TiposTelefono" />
+        </EntityType>
+        <EntityType Name="TipoAsuntos">
+          <Key>
+            <PropertyRef Name="IdTipoAsunto" />
+          </Key>
+          <Property Name="IdTipoAsunto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asunto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Memotraficos" Relationship="MemotraficosModel.FK_Memotraficos_TipoAsunto" FromRole="TipoAsuntos" ToRole="Memotraficos" />
+        </EntityType>
+        <EntityType Name="TipoProcedencias">
+          <Key>
+            <PropertyRef Name="IdTipoProcedencia" />
+          </Key>
+          <Property Name="IdTipoProcedencia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoProcedencia" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Procedencias" Relationship="MemotraficosModel.FK_Procedencias_TipoProcedencias" FromRole="TipoProcedencias" ToRole="Procedencias" />
+        </EntityType>
+        <EntityType Name="TipoRespuestas">
+          <Key>
+            <PropertyRef Name="IdTipoRespuesta" />
+          </Key>
+          <Property Name="IdTipoRespuesta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoRespuesta" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TiposTelefono">
+          <Key>
+            <PropertyRef Name="IdTipoTelefono" />
+          </Key>
+          <Property Name="IdTipoTelefono" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoTelefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TelefonosBeneficiarios" Relationship="MemotraficosModel.FK_TelefonosBeneficiarios_TiposTelefono" FromRole="TiposTelefono" ToRole="TelefonosBeneficiarios" />
+          <NavigationProperty Name="TelefonosProcedencias" Relationship="MemotraficosModel.FK_TelefonosProcedencias_TiposTelefono" FromRole="TiposTelefono" ToRole="TelefonosProcedencias" />
+        </EntityType>
+        <Association Name="FK_Acuses_Memotraficos">
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="1" />
+          <End Type="MemotraficosModel.Acuses" Role="Acuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Principal>
+            <Dependent Role="Acuses">
+              <PropertyRef Name="IdMemotrafico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_Municipios">
+          <End Type="MemotraficosModel.Municipios" Role="Municipios" Multiplicity="0..1" />
+          <End Type="MemotraficosModel.Beneficiarios" Role="Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="IdMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_NivelesEducativos">
+          <End Type="MemotraficosModel.NivelesEducativos" Role="NivelesEducativos" Multiplicity="0..1" />
+          <End Type="MemotraficosModel.Beneficiarios" Role="Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelesEducativos">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiarios_NivelesEducativos1">
+          <End Type="MemotraficosModel.NivelesEducativos" Role="NivelesEducativos" Multiplicity="0..1" />
+          <End Type="MemotraficosModel.Beneficiarios" Role="Beneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelesEducativos">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Principal>
+            <Dependent Role="Beneficiarios">
+              <PropertyRef Name="IdNivelEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Beneficiarios">
+          <End Type="MemotraficosModel.Beneficiarios" Role="Beneficiarios" Multiplicity="1" />
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiarios">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdBeneficiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosBeneficiarios_Beneficiarios">
+          <End Type="MemotraficosModel.Beneficiarios" Role="Beneficiarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MemotraficosModel.TelefonosBeneficiarios" Role="TelefonosBeneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiarios">
+              <PropertyRef Name="IdBeneficiario" />
+            </Principal>
+            <Dependent Role="TelefonosBeneficiarios">
+              <PropertyRef Name="IdBeneficiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Deptos_Departamentos">
+          <End Type="MemotraficosModel.Departamentos" Role="Departamentos" Multiplicity="1" />
+          <End Type="MemotraficosModel.Memotraficos_Deptos" Role="Memotraficos_Deptos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepartamento" />
+            </Principal>
+            <Dependent Role="Memotraficos_Deptos">
+              <PropertyRef Name="IdDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_EstatusMemos1">
+          <End Type="MemotraficosModel.EstatusMemos" Role="EstatusMemos" Multiplicity="1" />
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatusMemos">
+              <PropertyRef Name="IdEstatusMemo" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdEstatusMemo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidades_Municipios">
+          <End Type="MemotraficosModel.Municipios" Role="Municipios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MemotraficosModel.Localidades" Role="Localidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipios">
+              <PropertyRef Name="IdMunicipio" />
+            </Principal>
+            <Dependent Role="Localidades">
+              <PropertyRef Name="IdMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Deptos_Memotraficos">
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="1" />
+          <End Type="MemotraficosModel.Memotraficos_Deptos" Role="Memotraficos_Deptos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Principal>
+            <Dependent Role="Memotraficos_Deptos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_Procedencias">
+          <End Type="MemotraficosModel.Procedencias" Role="Procedencias" Multiplicity="1" />
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedencias">
+              <PropertyRef Name="IdProcedencia" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdProcedencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_TipoAsunto">
+          <End Type="MemotraficosModel.TipoAsuntos" Role="TipoAsuntos" Multiplicity="1" />
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoAsuntos">
+              <PropertyRef Name="IdTipoAsunto" />
+            </Principal>
+            <Dependent Role="Memotraficos">
+              <PropertyRef Name="IdTipoAsunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemotraficosDoctos_Memotraficos">
+          <End Type="MemotraficosModel.Memotraficos" Role="Memotraficos" Multiplicity="1" />
+          <End Type="MemotraficosModel.MemotraficosDoctos" Role="MemotraficosDoctos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Principal>
+            <Dependent Role="MemotraficosDoctos">
+              <PropertyRef Name="IdMemotrafico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memotraficos_DeptosDoctos_Memotraficos_Deptos">
+          <End Type="MemotraficosModel.Memotraficos_Deptos" Role="Memotraficos_Deptos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MemotraficosModel.Memotraficos_DeptosDoctos" Role="Memotraficos_DeptosDoctos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Memotraficos_Deptos">
+              <PropertyRef Name="IdMemotraficoDepto" />
+            </Principal>
+            <Dependent Role="Memotraficos_DeptosDoctos">
+              <PropertyRef Name="IdMemotraficoDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Procedencias_TipoProcedencias">
+          <End Type="MemotraficosModel.TipoProcedencias" Role="TipoProcedencias" Multiplicity="1" />
+          <End Type="MemotraficosModel.Procedencias" Role="Procedencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProcedencias">
+              <PropertyRef Name="IdTipoProcedencia" />
+            </Principal>
+            <Dependent Role="Procedencias">
+              <PropertyRef Name="IdTipoProcedencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosProcedencias_Procedencias">
+          <End Type="MemotraficosModel.Procedencias" Role="Procedencias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MemotraficosModel.TelefonosProcedencias" Role="TelefonosProcedencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedencias">
+              <PropertyRef Name="IdProcedencia" />
+            </Principal>
+            <Dependent Role="TelefonosProcedencias">
+              <PropertyRef Name="IdProcedencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosBeneficiarios_TiposTelefono">
+          <End Type="MemotraficosModel.TiposTelefono" Role="TiposTelefono" Multiplicity="1" />
+          <End Type="MemotraficosModel.TelefonosBeneficiarios" Role="TelefonosBeneficiarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposTelefono">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Principal>
+            <Dependent Role="TelefonosBeneficiarios">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonosProcedencias_TiposTelefono">
+          <End Type="MemotraficosModel.TiposTelefono" Role="TiposTelefono" Multiplicity="1" />
+          <End Type="MemotraficosModel.TelefonosProcedencias" Role="TelefonosProcedencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposTelefono">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Principal>
+            <Dependent Role="TelefonosProcedencias">
+              <PropertyRef Name="IdTipoTelefono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MemotraficosModelStoreContainer" CdmEntityContainer="MemotraficosEntities" >
+          <EntitySetMapping Name="Acuses">
+            <EntityTypeMapping TypeName="MemotraficosModel.Acuses">
+              <MappingFragment StoreEntitySet="Acuses">
+                <ScalarProperty Name="IdMemotrafico" ColumnName="IdMemotrafico" />
+                <ScalarProperty Name="RecibeTitular" ColumnName="RecibeTitular" />
+                <ScalarProperty Name="EnviaTitular" ColumnName="EnviaTitular" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beneficiarios">
+            <EntityTypeMapping TypeName="MemotraficosModel.Beneficiarios">
+              <MappingFragment StoreEntitySet="Beneficiarios">
+                <ScalarProperty Name="IdNivelEducativo" ColumnName="IdNivelEducativo" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="IdBeneficiario" ColumnName="IdBeneficiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="MemotraficosModel.Departamentos">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstatusMemos">
+            <EntityTypeMapping TypeName="MemotraficosModel.EstatusMemos">
+              <MappingFragment StoreEntitySet="EstatusMemos">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdEstatusMemo" ColumnName="IdEstatusMemo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Localidades">
+            <EntityTypeMapping TypeName="MemotraficosModel.Localidades">
+              <MappingFragment StoreEntitySet="Localidades">
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memotraficos">
+            <EntityTypeMapping TypeName="MemotraficosModel.Memotraficos">
+              <MappingFragment StoreEntitySet="Memotraficos">
+                <ScalarProperty Name="Check7" ColumnName="Check7" />
+                <ScalarProperty Name="Check6" ColumnName="Check6" />
+                <ScalarProperty Name="Check5" ColumnName="Check5" />
+                <ScalarProperty Name="Check4" ColumnName="Check4" />
+                <ScalarProperty Name="Check3" ColumnName="Check3" />
+                <ScalarProperty Name="Check2" ColumnName="Check2" />
+                <ScalarProperty Name="Check1" ColumnName="Check1" />
+                <ScalarProperty Name="FechaCanalizada" ColumnName="FechaCanalizada" />
+                <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
+                <ScalarProperty Name="Cerrado" ColumnName="Cerrado" />
+                <ScalarProperty Name="IdBeneficiario" ColumnName="IdBeneficiario" />
+                <ScalarProperty Name="IdTipoAsunto" ColumnName="IdTipoAsunto" />
+                <ScalarProperty Name="IdProcedencia" ColumnName="IdProcedencia" />
+                <ScalarProperty Name="FechaRecibido" ColumnName="FechaRecibido" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdEstatusMemo" ColumnName="IdEstatusMemo" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="FechaCancelado" ColumnName="FechaCancelado" />
+                <ScalarProperty Name="FechaFinReal" ColumnName="FechaFinReal" />
+                <ScalarProperty Name="FechaFinProb" ColumnName="FechaFinProb" />
+                <ScalarProperty Name="FechaDoctoOrigen" ColumnName="FechaDoctoOrigen" />
+                <ScalarProperty Name="DoctoOrigen" ColumnName="DoctoOrigen" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Memotrafico" ColumnName="Memotrafico" />
+                <ScalarProperty Name="Leido" ColumnName="Leido" />
+                <ScalarProperty Name="IdMemotrafico" ColumnName="IdMemotrafico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memotraficos_Deptos">
+            <EntityTypeMapping TypeName="MemotraficosModel.Memotraficos_Deptos">
+              <MappingFragment StoreEntitySet="Memotraficos_Deptos">
+                <ScalarProperty Name="Check7" ColumnName="Check7" />
+                <ScalarProperty Name="Check6" ColumnName="Check6" />
+                <ScalarProperty Name="Check5" ColumnName="Check5" />
+                <ScalarProperty Name="Check4" ColumnName="Check4" />
+                <ScalarProperty Name="Check3" ColumnName="Check3" />
+                <ScalarProperty Name="Check2" ColumnName="Check2" />
+                <ScalarProperty Name="Check1" ColumnName="Check1" />
+                <ScalarProperty Name="FechaFinProb" ColumnName="FechaFinProb" />
+                <ScalarProperty Name="IdMemotrafico" ColumnName="IdMemotrafico" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Titular_Envia" ColumnName="Titular_Envia" />
+                <ScalarProperty Name="Titular" ColumnName="Titular" />
+                <ScalarProperty Name="IdDepartamento_Envia" ColumnName="IdDepartamento_Envia" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdMemotraficoDepto" ColumnName="IdMemotraficoDepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memotraficos_DeptosDoctos">
+            <EntityTypeMapping TypeName="MemotraficosModel.Memotraficos_DeptosDoctos">
+              <MappingFragment StoreEntitySet="Memotraficos_DeptosDoctos">
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="Docto" ColumnName="Docto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMemotraficoDepto" ColumnName="IdMemotraficoDepto" />
+                <ScalarProperty Name="IdMemotrafico_DeptoDocto" ColumnName="IdMemotrafico_DeptoDocto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemotraficosDoctos">
+            <EntityTypeMapping TypeName="MemotraficosModel.MemotraficosDoctos">
+              <MappingFragment StoreEntitySet="MemotraficosDoctos">
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="Docto" ColumnName="Docto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMemotrafico" ColumnName="IdMemotrafico" />
+                <ScalarProperty Name="IdMemotraficoDocto" ColumnName="IdMemotraficoDocto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipios">
+            <EntityTypeMapping TypeName="MemotraficosModel.Municipios">
+              <MappingFragment StoreEntitySet="Municipios">
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NivelesEducativos">
+            <EntityTypeMapping TypeName="MemotraficosModel.NivelesEducativos">
+              <MappingFragment StoreEntitySet="NivelesEducativos">
+                <ScalarProperty Name="NivelEducativo" ColumnName="NivelEducativo" />
+                <ScalarProperty Name="IdNivelEducativo" ColumnName="IdNivelEducativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Procedencias">
+            <EntityTypeMapping TypeName="MemotraficosModel.Procedencias">
+              <MappingFragment StoreEntitySet="Procedencias">
+                <ScalarProperty Name="IdTipoProcedencia" ColumnName="IdTipoProcedencia" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Procedencia" ColumnName="Procedencia" />
+                <ScalarProperty Name="IdProcedencia" ColumnName="IdProcedencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelefonosBeneficiarios">
+            <EntityTypeMapping TypeName="MemotraficosModel.TelefonosBeneficiarios">
+              <MappingFragment StoreEntitySet="TelefonosBeneficiarios">
+                <ScalarProperty Name="IdBeneficiario" ColumnName="IdBeneficiario" />
+                <ScalarProperty Name="IdTipoTelefono" ColumnName="IdTipoTelefono" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdTelefonoBeneficiario" ColumnName="IdTelefonoBeneficiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelefonosProcedencias">
+            <EntityTypeMapping TypeName="MemotraficosModel.TelefonosProcedencias">
+              <MappingFragment StoreEntitySet="TelefonosProcedencias">
+                <ScalarProperty Name="IdProcedencia" ColumnName="IdProcedencia" />
+                <ScalarProperty Name="IdTipoTelefono" ColumnName="IdTipoTelefono" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdTelefonoProcedencia" ColumnName="IdTelefonoProcedencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAsuntos">
+            <EntityTypeMapping TypeName="MemotraficosModel.TipoAsuntos">
+              <MappingFragment StoreEntitySet="TipoAsuntos">
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="IdTipoAsunto" ColumnName="IdTipoAsunto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProcedencias">
+            <EntityTypeMapping TypeName="MemotraficosModel.TipoProcedencias">
+              <MappingFragment StoreEntitySet="TipoProcedencias">
+                <ScalarProperty Name="TipoProcedencia" ColumnName="TipoProcedencia" />
+                <ScalarProperty Name="IdTipoProcedencia" ColumnName="IdTipoProcedencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRespuestas">
+            <EntityTypeMapping TypeName="MemotraficosModel.TipoRespuestas">
+              <MappingFragment StoreEntitySet="TipoRespuestas">
+                <ScalarProperty Name="TipoRespuesta" ColumnName="TipoRespuesta" />
+                <ScalarProperty Name="IdTipoRespuesta" ColumnName="IdTipoRespuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposTelefono">
+            <EntityTypeMapping TypeName="MemotraficosModel.TiposTelefono">
+              <MappingFragment StoreEntitySet="TiposTelefono">
+                <ScalarProperty Name="TipoTelefono" ColumnName="TipoTelefono" />
+                <ScalarProperty Name="IdTipoTelefono" ColumnName="IdTipoTelefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Predeterminado" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

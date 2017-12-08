@@ -250,5 +250,90 @@ namespace MemotraficoV2.Models
 
         }
 
+        public static string GetUsuarioIdxNombre(string dep)
+        {
+            var result = "";
+            var d = 0;
+            var ii = 1;
+            try
+            {
+                switch (dep)
+                {
+                    case "DIRECCIÓN GENERAL":
+                        d = 5;
+                        break;
+                    case "DIRECCIÓN JURÍDICO":
+                        d = 3;
+                        break;
+                    case "DIRECCION ADMINISTRATIVA":
+                        d = 1;
+                        break;
+                    case "DIRECCIÓN TÉCNICA":
+                        d = 7;
+                        break;
+                    case "DIRECCION DE PLANEACIÓN":
+                        d = 14;
+                        break;
+                    case "DEPARTAMENTO DE PROYECTOS":
+                        d = 15;
+                        break;
+                    case "DEPARTAMENTO DE VINCULACION SOCIAL E INOVACION TECNOLOGICA":
+                        d = 9;
+                        break;
+                    case "DEPARTAMENTO DE COSTOS":
+                        d = 8;
+                        break;
+                    case "DEPARTAMENTO DE SUPERVISIÓN Y EJECUCION DE OBRA":
+                        d = 11;
+                        break;
+                    case "DEPARTAMENTO DE INFRAESTRUCTURA EDUCATIVA DE CD. JUÁREZ":
+                        d = 22;
+                        break;
+                    case "REHABILITACIÓN, MOBILIARIO Y EQUIPO":
+                        d = 13;
+                        break;
+                    case "DEPARTAMENTO DE LICITACIONES":
+                        d = 4;
+                        break;
+                    case "ESCUELAS AL 100":
+                        d = 18;
+                        break;
+                    case "INIFED":
+                        d = 20;
+                        ii = 4;
+                        break;
+                    case "DEPARTAMENTO DE CONTROL TECNICO Y LOGISTICA ":
+                        d = 21;
+                        break;
+                    case "DIRECCIÓN DE OPERACIONES":
+                        d = 12;
+                        break;
+                    case "ASUNTOS GENERALES":
+                        d = 14;
+                        break;
+                    case "INGENIERIA DE PROYECTOS":
+                        d = 11;
+                        break;
+                    case "DELEGACION PARRAL":
+                        d = 11;
+                        break;
+                    case "ESCUELAS AL 100 PLANEACIÓN":
+                        d = 18;
+                        break;
+                }
+                SASEntities db = new SASEntities();
+                AspNetUsers us = new AspNetUsers();
+
+                us = db.AspNetUsers.FirstOrDefault(i => i.IdDepartamento == d && i.IdInstitucion == ii);
+
+                result = us.Id;
+                return result;
+            }
+            catch (Exception e)
+            {
+
+            }
+            return result;
+        }
     }
 }
