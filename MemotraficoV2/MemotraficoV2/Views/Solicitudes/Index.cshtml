@@ -53,7 +53,10 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <table id="datatable" class="table table-solicitudes table-striped table-bordered dt-responsive nowrap">
+
+                        <div id="ListSolicitudes"></div>
+
+                        @*<table id="datatable" class="table table-solicitudes table-striped table-bordered dt-responsive nowrap">
                             <thead>
                                 <tr class="text-center">
                                     <th>Beneficiario</th>
@@ -100,7 +103,7 @@
                                                 </button>
                                                 }
                                                 else
-                                                {
+                                                {*@
                                                     
                                                         @*<button name="Solicitud"
                                                                 type="button" class="btn btn-info btn-sm"
@@ -110,7 +113,7 @@
                                                             Canalizar Asunto General
                                                         </button>*@
 
-                                                        <button name="Solicitud"
+                                                        @*<button name="Solicitud"
                                                                 type="button" class="btn btn-info btn-sm"
                                                                 data-toggle="modal" data-target=".bs-example-modal-lg" value="@item.IdSolicitud"
                                                                 data-value="@rol"
@@ -130,7 +133,7 @@
                                     </tr>
                                 }
                             </tbody>
-                        </table>
+                        </table>*@
                     </div>
                 </div>
             </div>
@@ -152,3 +155,163 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            let config = {
+                class: 'table-striped table-bordered',
+                columnas: [
+                    { leyenda: 'Beneficiario', columna: 'Name', ordenable: true, filtro: true, class: 'text-center col-md-3' },
+                    { leyenda: 'Folio', columna: 'folio', class: 'col-md-2', ordenable: true, filtro: true },
+                    { leyenda: 'Fecha Entrega', columna: 'fecha', class: 'text-center col-md-2', ordenable: true },
+                    { leyenda: 'Estatus', columna: 'estatus', class: 'col-md-2', ordenable: true, filtro: true },
+                    { leyenda: 'Nivel', columna: 'nivel', class: 'text-center col-md-1', ordenable: true },
+                    { leyenda: 'Acciones', class: 'text-center col-md-2'  },
+                ],
+                modelo: [
+                    { propiedad: 'Name' },
+                    { propiedad: 'folio', class: 'text-center' },
+                    { propiedad: 'fecha' },
+                    {
+                        propiedad: 'estatus', class: 'text-center', formato: function (tr, obj, valor) {
+                            let e = "";
+                            switch (obj.estatus) {
+                                case 1: e = "Iniciada";
+                                    break;
+                                case 2: e = "Canalizado";
+                                    break;
+                                case 3: e = "Cerrado";
+                                    break;
+                                case 4: e = "Cancelado";
+                                    break;
+                                case 5: e = "Atendido";
+                                    break;
+                            }
+                            return e;
+                        }
+                    },
+                    {
+                        propiedad: 'nivel', class: 'text-center', formato: function (tr, obj, valor) {
+                            let e = "";
+                            switch (obj.nivel) {
+                                case 1: e = '<span class="nivel" style="background-color:'+ obj.colornivel + '">N </span>';
+                                    break;
+                                case 2: e = '<span class="nivel" style="background-color:' + obj.colornivel + '">N </span>';
+                                    break;
+                                case 3: e = '<span class="nivel" style="background-color:' + obj.colornivel + '">N </span>';
+                                    break;
+                            }
+                            return e;
+                        }
+                    },
+                    {
+                        propiedad: 'Id', formato: function (tr, obj, value) {
+                            let element = '';
+
+                            switch (obj.estatus) {
+                                case 1: element += '<button name="Solicitud" type="button" class="btn btn-info btn-sm" value="'+ value +'"'+
+                                                   'data-value="@rol" data-evento="PasarADependencia"><i  data-toggle="tooltip" data-placement="top" title="Detalle Solicitud" class="fa fa-question-circle"></i></button>' +
+                                                   '<button name="Solicitud"' +
+                                                   'type="button" class="btn btn-dark btn-sm historial" value="' + value + '"' +
+                                                   'data-value="@rol"data-evento="HistorialSolicitud"><i  data-toggle="tooltip" data-placement="top" title="Historial" class="fa fa-list-ul" aria-hidden="true"></i></button>';
+                                    break;
+                                case 2: element += '<button name="Solicitud" type="button" class="btn btn-info btn-sm" value="'+ value +'"'+
+                                                   'data-value="@rol" data-evento="PasarADependencia"><i  data-toggle="tooltip" data-placement="top" title="Detalle Solicitud" class="fa fa-question-circle"></i></button>' +
+                                                    '<button name="Solicitud"' +
+                                                   'type="button" class="btn btn-dark btn-sm historial" value="' + value + '"' +
+                                                   'data-value="@rol"data-evento="HistorialSolicitud"><i  data-toggle="tooltip" data-placement="top" title="Historial" class="fa fa-list-ul" aria-hidden="true"></i></button>';
+                                    break;
+                                case 3: element += '<button name="Solicitud" type="button" class="btn btn-info btn-sm" value="'+ value +'"'+
+                                                   'data-value="@rol" data-evento="PasarADependencia"><i  data-toggle="tooltip" data-placement="top" title="Detalle Solicitud" class="fa fa-question-circle"></i></button>' +
+                                                   '<button name="Solicitud"' +
+                                                   'type="button" class="btn btn-dark btn-sm historial" value="' + value + '"' +
+                                                   'data-value="@rol"data-evento="HistorialSolicitud"><i  data-toggle="tooltip" data-placement="top" title="Historial" class="fa fa-list-ul" aria-hidden="true"></i></button>';
+                                    break;
+                                case 4: element += '<button name="Solicitud" type="button" class="btn btn-warning btn-sm"' +
+                                                   'value="' + value + '" data-value="@rol" data-evento="SolicitudCancelada">' +
+                                                   'Abrir o Cerrar Solicitud</button>'+
+                                                   '<button name="Solicitud"' +
+                                                   'type="button" class="btn btn-dark btn-sm historial" value="' + value + '"' +
+                                                   'data-value="@rol"data-evento="HistorialSolicitud"><i  data-toggle="tooltip" data-placement="top" title="Historial" class="fa fa-list-ul" aria-hidden="true"></i></button>';
+                                    break;
+                                case 5: element += '<button name="Solicitud" type="button" class="btn btn-info btn-sm" value="'+ value +'"'+
+                                                   'data-value="@rol" data-evento="PasarADependencia"><i  data-toggle="tooltip" data-placement="top" title="Detalle Solicitud" class="fa fa-question-circle"></i></button>' +
+                                                   '<button name="Solicitud"' +
+                                                   'type="button" class="btn btn-dark btn-sm historial" value="' + value + '"' +
+                                                   'data-value="@rol"data-evento="HistorialSolicitud"><i  data-toggle="tooltip" data-placement="top" title="Historial" class="fa fa-list-ul" aria-hidden="true"></i></button>';
+                                    break;
+                            }
+
+                            return element;
+                        }
+                    },
+                ],
+                url: '@Url.Action("GetSolicitudes", "Solicitudes")',
+                limite: [10, 20, 30],
+                filtrable: true,
+                paginable: true,
+                columna: 'Name',
+                columna_orden: 'ASC'
+            };
+
+            let grid = $("#ListSolicitudes").anexGrid(config);
+
+            grid.tabla().on('click', 'button[name="Solicitud"]', function (){
+                $(".bs-example-modal-lg").modal('show');
+
+                var titulo = "";
+                var url = "";
+                var even = $(this).data("evento");
+                var ejecuta = false;
+                switch (even) {
+
+                    case "PasarADependencia":
+                        titulo = "Detalle Solicitud";
+                        url = '/Solicitudes/Detalle';
+                        ejecuta = true;
+                        break;
+                    case "SolicitudCancelada":
+                        titulo = "Solicitud Cancelada";
+                        url = '/Solicitudes/OpenSolicitud';
+                        ejecuta = true;
+                        break;
+                    case "HistorialSolicitud":
+                        titulo = "Historial de Solicitud";
+                        url = '/Solicitudes/Historial';
+                        ejecuta = true;
+                        break;
+                    case "PasarADependenciaICHIFE":
+                        SolicitudICHIFE($(this).val());
+                        break;
+
+                }
+                if (ejecuta) {
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        data: { solicitud: $(this).val(), rol: $(this).data("value") },
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        },
+                        success: function (html) {
+                            $('.bs-example-modal-lg').find('.modal-body').empty();
+                            $('.bs-example-modal-lg').find('.modal-body').append(html);
+                            $('.bs-example-modal-lg').find('#Titulo').empty();
+                            $('.bs-example-modal-lg').find('#Titulo').append(titulo);
+
+                        },
+                        error: function () {
+                            AlertError('A ocurrido un error al cargar la informacion, intente nuevamente', null);
+                            $('.bs-example-modal-lg').modal('hide');
+                        }
+                    });
+                }
+
+            })
+
+        })
+    </script>
+}

@@ -5,6 +5,7 @@ using MemotraficoV2.Models;
 using MemotraficoV2.Models.Colecciones;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using MemotraficoV2.ViewModels;
 
 namespace MemotraficoV2.Models
 {
@@ -166,6 +167,292 @@ namespace MemotraficoV2.Models
                         .ToArray();
         }
 
-        
+        public static AnexGRIDResponde AllSolicitudes(AnexGRID grid)
+        {
+            grid.Inicializar();
+            
+            try
+            {
+                SASEntities db = new SASEntities();
+                var s = db.Solicitudes.AsQueryable();
+
+                //obtiene rol que tiene el usuario que esta en session
+                var roles = Usuarios.Roles();
+
+                //obtiene el id de usuario que esta en session
+                var usuario = Usuarios.GetUsuario();
+
+                //Obtiene el id de la institucion a la que pertenece
+                var instituto = Usuarios.GetInstitucion();
+
+                //Obtiene el id del departamento al que pertenece
+                var departamento = Usuarios.GetDepto();
+
+                //obtiene el usuario con rol que es uno mas bajo que al que esta en session y pertenece al mismo instituto
+                var RolBajo = Usuarios.RolBajo(roles, instituto);
+
+                //Obtiene el usuario con rol que es uno mas alto al que esta en session y pertenece al mismo instituto
+                var RolAlto = Usuarios.RolAlto(roles, instituto);
+
+                //Obtiene el usuario con rol que es igual a el al que esta en session y pertenece al mismo instituto, es para cuando se hace canalizacion de operador a poerador
+                var RolIgual = Usuarios.RolIgual(roles, instituto);
+
+                //si eres administrador total, te mostrara todas las solicitudes que existen, aun asi si estas estan canalizadas
+                if (roles == ListaRoles.ADMINISTRATOR)
+                {
+                   
+                }
+                else
+                {
+                    s = db.Solicitudes.AsQueryable();
+                    //el administrador de solicitudes solo puede ver aquellas solicitudes que han sido registradas, ademas de las canceladas por administrador de dependencia
+                    if (roles == ListaRoles.ADMINISTRADOR_SOLICITUDES)
+                    {
+
+                        s = s.OrderByDescending(m => m.Folio)
+                                     .Where(i => (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.INICIADO))))
+                                     ||
+                                     (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.CANCELADO)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                     ||
+                                     (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolIgual)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.UsuarioAtiende == null))))
+                                     ||
+                                     (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.ATENDIDA)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                     );
+
+                    }
+
+                    //el administrador de dependencia solo puede ver aquellas solicitudes que han sido canalizadas por el administrador de solicitudes, ademas de las canceladas por operador
+                    if (roles == ListaRoles.ADMINISTRADOR_DEPENDENCIA)
+                    {
+                        s = s.OrderByDescending(m => m.Folio)
+                                     .Where(i => (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolAlto))))
+                                     ||
+                                     (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.CANCELADO)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                     ||
+                                     (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.ATENDIDA)))
+                                     &&
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolBajo))))
+                                     );
+                    }
+
+                    //el operador solo puede ver aquellas solicitudes que han sido canalizadas por administrador de dependencia y que esten asignadas a el mismo
+                    if (roles == ListaRoles.OPERADOR)
+                    {
+
+                        s = s.OrderByDescending(m => m.Folio)
+                                     .Where(i => i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdEstatusFk == ListaEstatus.CANALIZADO)))
+                                     &&
+                                     (i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolAlto)))
+                                     ||
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.IdUsuarioFk == RolIgual))))
+                                     ||
+                                     i.Canalizacion
+                                     .Any(j => j.DetalleCanalizacion
+                                     .Where(a => a.IdDetalleCanalizar == db.DetalleCanalizacion
+                                                                           .OrderByDescending(n => n.IdCanalizarFk)
+                                                                           .OrderByDescending(x => x.FechaCanalizar)
+                                                                           .Where(n => n.IdCanalizarFk == a.IdCanalizarFk)
+                                                                           .Select(l => l.IdDetalleCanalizar)
+                                                                           .Max())
+                                     .Any(k => (k.UsuarioAtiende == usuario)))
+                                     );
+                    }
+                }
+
+                if (grid.columna == "Name")
+                {
+                    s = grid.columna_orden == "DESC" ? s.OrderBy(x => x.IdSolicitud) : s.OrderByDescending(x => x.IdSolicitud);
+                }
+
+                foreach (var f in grid.filtros)
+                {
+                    if (f.columna == "Name")
+                        s = s.Where(x => x.Escuela.Nombre.Contains(f.valor) || x.Beneficiario.Nombre.Contains(f.valor));
+                    if (f.columna == "folio")
+                        s = s.Where(x => x.Folio.Contains(f.valor));
+                    if (f.columna == "fecha")
+                        s = s.Where(x => x.FechaEntrega.ToString().Contains(f.valor));
+                    if (f.columna == "estatus")
+                        s = s.Where(x => x.Estatus.Estatus1.Contains(f.valor));
+                    if (f.columna == "nivel")
+                        s = s.Where(x => x.NivelImportancia.Nivel.Contains(f.valor));
+                }
+
+                var query = s.Select(x => new SolicitudGrid
+                {
+                    Id = x.IdSolicitud,
+                    Name = x.IdEscuelaFk > 0 || x.IdEscuelaFk != null ? x.Escuela.Nombre : x.Beneficiario.Nombre,
+                    folio = x.Folio,
+                    fecha = x.FechaEntrega.ToString().Substring(0, 11),
+                    estatus = x.IdEstatusFk,
+                    nivel = x.IdNivelImportanciaFk,
+                    colornivel = x.NivelImportancia.Color
+                }).ToList();
+
+                var data = query
+                           .Skip(grid.pagina)
+                           .Take(grid.limite)
+                           .ToList();
+
+                var total = query.Count();
+
+                grid.SetData(data, total);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return grid.responde();
+        }
+
     }
 }

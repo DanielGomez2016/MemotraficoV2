@@ -36,79 +36,86 @@ namespace MemotraficoV2.Controllers
             try
             {
                 MemotraficosEntities db = new MemotraficosEntities();
+                SASEntities dbb = new SASEntities();
                 //mandamos traer los datos del memotrafico
                 var query = db.Memotraficos.FirstOrDefault(x => x.Memotrafico.Contains(memotrafico));
 
-                //mandamos traer los datos del documento del memotrafico
-                var queryDoc = db.MemotraficosDoctos.FirstOrDefault(x => x.IdMemotrafico == query.IdMemotrafico);
 
-                //mandamos traer las canalizaciones que se ha hecho del memotrafico
-                var queryCan = db.Memotraficos_Deptos.Where(x => x.IdMemotrafico == query.IdMemotrafico).ToList();
+                var Existe = dbb.Solicitudes.Any(x => x.Folio.Contains(query.Memotrafico));
 
-                //llenamos las canalizaciones del memotrafico
-                List<canalizacionMemo> listcm = new List<canalizacionMemo>();
-                foreach (var n in queryCan)
+                if (!Existe)
                 {
-                    //llenamos cada canalizacion
-                    canalizacionMemo cm = new canalizacionMemo();
-                    cm.idCanalizacion = Convert.ToInt32(n.IdMemotraficoDepto);
-                    cm.deptoenvia = n.Departamentos.Departamento;
-                    cm.deptorecibe = n.Departamentos.Departamento;
-                    cm.fechaInicio = n.FechaInicio;
-                    cm.fechaFin = n.FechaFin;
-                    cm.comentario = n.Comentario;
+                    //mandamos traer los datos del documento del memotrafico
+                    var queryDoc = db.MemotraficosDoctos.FirstOrDefault(x => x.IdMemotrafico == query.IdMemotrafico);
 
+                    //mandamos traer las canalizaciones que se ha hecho del memotrafico
+                    var queryCan = db.Memotraficos_Deptos.Where(x => x.IdMemotrafico == query.IdMemotrafico).ToList();
 
-                    //nos traemos el documento de la canalizacion
-                    var querycandoc = db.Memotraficos_DeptosDoctos.Where(x => x.IdMemotraficoDepto == n.IdMemotraficoDepto).ToList();
-
-                    if (querycandoc.Count() > 0)
+                    //llenamos las canalizaciones del memotrafico
+                    List<canalizacionMemo> listcm = new List<canalizacionMemo>();
+                    foreach (var n in queryCan)
                     {
-                        cm.documentoCanalizacion = new List<documentoCanalizacion>();
-                        foreach (var x in querycandoc)
+                        //llenamos cada canalizacion
+                        canalizacionMemo cm = new canalizacionMemo();
+                        cm.idCanalizacion = Convert.ToInt32(n.IdMemotraficoDepto);
+                        cm.deptoenvia = db.Departamentos.FirstOrDefault(h => h.IdDepartamento == n.IdDepartamento_Envia).Departamento;
+                        cm.deptorecibe = db.Departamentos.FirstOrDefault(h => h.IdDepartamento == n.IdDepartamento).Departamento;
+                        cm.fechaInicio = n.FechaInicio;
+                        cm.fechaFin = n.FechaFin;
+                        cm.comentario = n.Comentario;
+
+
+                        //nos traemos el documento de la canalizacion
+                        var querycandoc = db.Memotraficos_DeptosDoctos.Where(x => x.IdMemotraficoDepto == n.IdMemotraficoDepto).ToList();
+
+                        if (querycandoc.Count() > 0)
                         {
-                            //llenamos el documento de la canalizacion
-                            documentoCanalizacion dc = new documentoCanalizacion();
-                            dc.descripcion = x.Descripcion;
-                            dc.nombre = x.NombreArchivo;
-                            dc.Documento = x.Docto;
+                            cm.documentoCanalizacion = new List<documentoCanalizacion>();
+                            foreach (var x in querycandoc)
+                            {
+                                //llenamos el documento de la canalizacion
+                                documentoCanalizacion dc = new documentoCanalizacion();
+                                dc.descripcion = x.Descripcion;
+                                dc.nombre = x.NombreArchivo;
+                                dc.Documento = x.Docto;
 
-                            cm.documentoCanalizacion.Add(dc);
+                                cm.documentoCanalizacion.Add(dc);
+                            }
                         }
+                        listcm.Add(cm);
                     }
-                    listcm.Add(cm);
+
+                    //llenamos el documento del memotrafico
+                    DocumentoMemo dm = new DocumentoMemo();
+                    if (queryDoc != null)
+                    {
+                        dm.descripcion = queryDoc.Descripcion;
+                        dm.nombre = queryDoc.NombreArchivo;
+                        dm.Documento = queryDoc.Docto;
+                    }
+
+                    //llenamos el memotrafico que se va a importar
+                    memotraficoImport m = new memotraficoImport();
+                    m.idmemotrafico = Convert.ToInt32(query.IdMemotrafico);
+                    m.folio = query.Memotrafico;
+                    m.fechaEntrega = query.Fecha;
+                    m.asunto = query.Asunto;
+                    m.idestatus = Convert.ToInt32(query.IdEstatusMemo);
+                    m.procedencia = ImportaMemos.Procedencia(query.Procedencias.Procedencia);
+                    m.idasunto = ImportaMemos.TipoAsunto(query.TipoAsuntos.Asunto);
+                    m.escuela = ImportaMemos.EsEscuela(query.Beneficiarios.clave, query.Beneficiarios.Beneficiario);
+                    m.idestatus = Convert.ToInt32(query.IdEstatusMemo);
+                    m.cerrado = query.Cerrado;
+                    m.cancelado = query.Cancelado;
+                    m.fechaCanalizado = query.FechaCanalizada;
+                    m.fechaCancelado = query.FechaCancelado;
+                    m.fechaDocumento = query.FechaDoctoOrigen;
+                    m.tiporespuesta = ImportaMemos.TipoRespuesta(query.Check1, query.Check2, query.Check3, query.Check4, query.Check5, query.Check6, query.Check7);
+                    m.documentomemo = dm;
+                    m.canalizaciones = listcm;
+
+                    result = ImportaMemos.Importar(m);
                 }
-
-                //llenamos el documento del memotrafico
-                DocumentoMemo dm = new DocumentoMemo();
-                if (queryDoc != null)
-                {
-                    dm.descripcion = queryDoc.Descripcion;
-                    dm.nombre = queryDoc.NombreArchivo;
-                    dm.Documento = queryDoc.Docto;
-                }
-
-                //llenamos el memotrafico que se va a importar
-                memotraficoImport m = new memotraficoImport();
-                m.idmemotrafico = Convert.ToInt32(query.IdMemotrafico);
-                m.folio = query.Memotrafico;
-                m.fechaEntrega = query.Fecha;
-                m.asunto = query.Asunto;
-                m.idestatus = Convert.ToInt32(query.IdEstatusMemo);
-                m.procedencia = ImportaMemos.Procedencia(query.Procedencias.Procedencia);
-                m.idasunto = ImportaMemos.TipoAsunto(query.TipoAsuntos.Asunto);
-                m.escuela = ImportaMemos.EsEscuela(query.Beneficiarios.clave, query.Beneficiarios.Beneficiario);
-                m.idestatus = Convert.ToInt32(query.IdEstatusMemo);
-                m.cerrado = query.Cerrado;
-                m.cancelado = query.Cancelado;
-                m.fechaCanalizado = query.FechaCanalizada;
-                m.fechaCancelado = query.FechaCancelado;
-                m.fechaDocumento = query.FechaDoctoOrigen;
-                m.tiporespuesta = ImportaMemos.TipoRespuesta(query.Check1, query.Check2, query.Check3, query.Check4, query.Check5, query.Check6, query.Check7);
-                m.documentomemo = dm;
-                m.canalizaciones = listcm;
-
-                result = ImportaMemos.Importar(m);
             }
             catch (Exception e)
             {
@@ -121,6 +128,8 @@ namespace MemotraficoV2.Controllers
         public JsonResult ImportarTodoMemotraficos()
         {
             var result = false;
+            var timp = 0;
+            var tnoimp = 0;
             try
             {
                 MemotraficosEntities db = new MemotraficosEntities();
@@ -130,12 +139,12 @@ namespace MemotraficoV2.Controllers
 
                 foreach (var i in querytotal)
                 {
-                    var Existe = dbb.Solicitudes.Any(x => x.Folio.Contains(i.Clave));
+                    var Existe = dbb.Solicitudes.Any(x => x.Folio.Contains(i.Memotrafico));
 
                     if (!Existe)
                     {
                         //mandamos traer los datos del memotrafico
-                        var query = db.Memotraficos.FirstOrDefault(x => x.Memotrafico.Contains(i.Clave));
+                        var query = db.Memotraficos.FirstOrDefault(x => x.Memotrafico.Contains(i.Memotrafico));
 
                         //mandamos traer los datos del documento del memotrafico
                         var queryDoc = db.MemotraficosDoctos.FirstOrDefault(x => x.IdMemotrafico == query.IdMemotrafico);
@@ -150,8 +159,8 @@ namespace MemotraficoV2.Controllers
                             //llenamos cada canalizacion
                             canalizacionMemo cm = new canalizacionMemo();
                             cm.idCanalizacion = Convert.ToInt32(n.IdMemotraficoDepto);
-                            cm.deptoenvia = n.Departamentos.Departamento;
-                            cm.deptorecibe = n.Departamentos.Departamento;
+                            cm.deptoenvia = db.Departamentos.FirstOrDefault(h => h.IdDepartamento == n.IdDepartamento_Envia).Departamento;
+                            cm.deptorecibe = db.Departamentos.FirstOrDefault(h => h.IdDepartamento == n.IdDepartamento).Departamento;
                             cm.fechaInicio = n.FechaInicio;
                             cm.fechaFin = n.FechaFin;
                             cm.comentario = n.Comentario;
@@ -208,6 +217,8 @@ namespace MemotraficoV2.Controllers
                         m.canalizaciones = listcm;
 
                         result = ImportaMemos.Importar(m);
+
+                        if (result) { timp++; }else { tnoimp++; }
                     }
                 }
             }
@@ -215,7 +226,11 @@ namespace MemotraficoV2.Controllers
             {
 
             }
-            return Json(result);
+            return Json(new {
+                result = result,
+                totalimp = timp,
+                totalnoimp = tnoimp
+            });
         }
 
         [HttpPost]

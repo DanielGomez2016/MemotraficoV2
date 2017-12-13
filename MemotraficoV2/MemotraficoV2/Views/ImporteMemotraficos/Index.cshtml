@@ -3,7 +3,7 @@
     ViewBag.Title = "Importar Memotraficos";
 }
 
-<div class="" role="main">
+<div class="main" role="main">
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -50,6 +50,12 @@
 
     </div>
 </div>
+<div id="loading">
+    <div id="loadingcont">
+        <p id="loadingspinr">
+        </p>
+    </div>
+</div>
 @section Scripts{
     
 
@@ -59,6 +65,8 @@
         $("#btnmemotrafico").click(function () {
             $("#divImporte").removeClass('hide');
             $(".btnm").removeClass('hide');
+            $(".btnb").addClass('hide');
+            $(".btnp").addClass('hide');
             $("#tituloImporte").text('Memotraficos');
             $("#tablaImporta").empty();
 
@@ -99,7 +107,7 @@
                     },
                 ],
                 url: '@Url.Action("GetMemotraficos", "ImporteMemotraficos")',
-                limite: [10, 20, 30],
+                limite: [5,10,15,25,50],
                 filtrable: true,
                 paginable: true,
                 columna: 'memotrafico',
@@ -116,19 +124,23 @@
                     url: '/ImporteMemotraficos/Importar',
                     data: { memotrafico: value },
                     beforeSend: function () {
-                        Loading("Cargando");
+                        Loading(true)
+                        $('body.footer_fixed').block({ message: null });
+
                     },
-                    complete: function (data) {
+                    complete: function () {
+                        Loading(false);
+                        $('body.footer_fixed').unblock();
                     },
                     success: function (data) {
                         if (data) {
-                            AlertSuccess("Se ha Importado correctamente el registro.", "/ImporteMemotraficos");
+                            AlertSuccess("Se ha Importado correctamente el registro.", null);
                         } else {
-                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", null)
                         }
                     },
                     error: function (xhr, status) {
-                        AlertError('A ocurrido un error al importar la informacion, intente nuevamente', '/ImporteMemotraficos');
+                        AlertError('A ocurrido un error al importar la informacion, intente nuevamente', null);
                     }
                 });
             })
@@ -139,17 +151,21 @@
             $.ajax({
                 type: 'POST',
                     url: '/ImporteMemotraficos/ImportarTodoMemotraficos',
-                    data: { memotrafico: value },
+                    
                     beforeSend: function () {
-                        Loading("Cargando");
+                        Loading(true)
+                        $('body.footer_fixed').block({ message: null });
+
                     },
-                    complete: function (data) {
+                    complete: function () {
+                        Loading(false);
+                        $('body.footer_fixed').unblock();
                     },
                     success: function (data) {
-                        if (data) {
-                            AlertSuccess("Se ha Importado correctamente el registro.", "/ImporteMemotraficos");
+                        if (data.result) {
+                            AlertSuccess("Se ha Importado correctamente " + data.timp + " registros.", "/ImporteMemotraficos");
                         } else {
-                            AlertNotice("El registro que quiere importar ya existe en la base de datos.", "/ImporteMemotraficos")
+                            AlertNotice("Ya existen " + data.tnoimp + " registros en el sistema. Se importaron correctamente " + data.timp + "", "/ImporteMemotraficos")
                         }
                     },
                     error: function (xhr, status) {
@@ -163,6 +179,8 @@
         $("#btnbeneficiario").click(function () {
             $("#divImporte").removeClass('hide');
             $(".btnb").removeClass('hide');
+            $(".btnm").addClass('hide');
+            $(".btnp").addClass('hide');
             $("#tituloImporte").text('Beneficiarios');
             $("#tablaImporta").empty();
 
@@ -210,9 +228,13 @@
                     url: '/ImporteMemotraficos/ImportarBeneficiario',
                     data: { id: value },
                     beforeSend: function () {
-                        Loading("Cargando");
+                        Loading(true)
+                        $('body.footer_fixed').block({ message: null });
+
                     },
-                    complete: function (data) {
+                    complete: function () {
+                        Loading(false);
+                        $('body.footer_fixed').unblock();
                     },
                     success: function (data) {
                         if (data) {
@@ -234,9 +256,13 @@
                 type: 'POST',
                 url: '/ImporteMemotraficos/ImportarTodoBeneficiario',
                 beforeSend: function () {
-                    Loading("Cargando");
+                    Loading(true)
+                    $('body.footer_fixed').block({ message: null });
+
                 },
-                complete: function (data) {
+                complete: function () {
+                    Loading(false);
+                    $('body.footer_fixed').unblock();
                 },
                 success: function (data) {
                     if (data.result) {
@@ -260,6 +286,8 @@
         $("#btnprocedencias").click(function () {
             $("#divImporte").removeClass('hide');
             $(".btnp").removeClass('hide');
+            $(".btnm").addClass('hide');
+            $(".btnb").addClass('hide');
             $("#tituloImporte").text('Procedencia');
             $("#tablaImporta").empty();
 
@@ -305,9 +333,13 @@
                     url: '/ImporteMemotraficos/ImportarProcedencia',
                     data: { id: value },
                     beforeSend: function () {
-                        Loading("Cargando");
+                        Loading(true)
+                        $('body.footer_fixed').block({ message: null });
+
                     },
-                    complete: function (data) {
+                    complete: function () {
+                        Loading(false);
+                        $('body.footer_fixed').unblock();
                     },
                     success: function (data) {
                         if (data) {
@@ -329,9 +361,13 @@
                 type: 'POST',
                 url: '/ImporteMemotraficos/ImportarTodaProcedencia',
                 beforeSend: function () {
-                    Loading("Cargando");
+                    Loading(true)
+                    $('body.footer_fixed').block({ message: null });
+
                 },
-                complete: function (data) {
+                complete: function () {
+                    Loading(false);
+                    $('body.footer_fixed').unblock();
                 },
                 success: function (data) {
                     if (data.result) {
@@ -359,6 +395,40 @@
         function resize() {
             var size = ($(window).height() - 10) + 'px'
             $(".size").attr("style","height:"+size+" !important");
+        }
+
+        var Loading = function (start) {
+
+            $("#loading").fadeIn();
+            var opts = {
+                lines: 17 // The number of lines to draw
+        , length: 30 // The length of each line
+        , width: 20 // The line thickness
+        , radius: 28 // The radius of the inner circle
+        , scale: 0.75 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.3 // Opacity of the lines
+        , rotate: 60 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1.7 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '55%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+            };
+            var trget = document.getElementById('loading');
+            if (start) {
+                var spnr = new Spinner(opts).spin(trget);
+                $(trget).data('spinner', spnr);
+            } else {
+                $(trget).data('spinner').stop();
+            }
         }
 
 </script>

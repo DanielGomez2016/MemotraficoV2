@@ -4684,3 +4684,37 @@ ul.notifications {
 .dataTables_wrapper > .row {
     overflow: auto !important;
 }
+
+
+#modal_loading{
+    color:#fff;
+    display:none;
+    font-size:16px;
+    position:fixed;
+    text-align:center;
+    z-index:2000;
+}
+
+    #modal_loading .block-loading
+    {
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.4)), color-stop(100%,rgba(0,0,0,0.9)));
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.9) 100%);
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.9) 100%);
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.9) 100%);
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.9) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66000000', endColorstr='#e6000000',GradientType=0 );
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
+
+#modal_loading .content{
+    left:50%;
+    margin-left:-150px;
+    position:fixed;
+    top:45%;
+    width:300px;
+}

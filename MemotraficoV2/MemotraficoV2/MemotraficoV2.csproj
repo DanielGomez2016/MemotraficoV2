@@ -324,6 +324,7 @@
     <Compile Include="ViewModels\SeguimientoViewModel.cs" />
     <Compile Include="ViewModels\SolicitudDetalle.cs" />
     <Compile Include="ViewModels\SolicitudesEscuelasViewModel.cs" />
+    <Compile Include="ViewModels\SolicitudViewModel.cs" />
     <Compile Include="ViewModels\Validacion_Requerimientos.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4687,6 +4688,7 @@
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery.anexgrid.min.js" />
+    <Content Include="Scripts\Jquery.BlockUI.js" />
     <Content Include="Scripts\jquery.pnotify.js" />
     <Content Include="Scripts\jquery.pnotify.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
