@@ -1,6 +1,4 @@
-﻿@model IEnumerable<MemotraficoV2.Models.Escuela>
-
-@{
+﻿@{
     ViewBag.Title = "Escuelas";
 }
 
@@ -22,50 +20,179 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Clave</th>
-                                    <th>Domicilio</th>
-                                    <th>Localidad</th>
-                                    <th>Municipio</th>
-                                    <th>Nivel Educativo</th>
-                                    <th>Turno</th>
-                                    <th>Nombre Director</th>
-                                    <th>Email</th>
-                                    <th>Telefonos</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.Nombre</td>
-                                        <td>@item.Clave</td>
-                                        <td>@item.Domicilio</td>
-                                        <td>@item.Localidades.Nombre</td>
-                                        <td>@item.Municipios.Nombre</td>
-                                        <td>@item.NivelEducativo.Nivel</td>
-                                        <td>@item.Turno</td>
-                                        <td>@item.NombreDirector</td>
-                                        <td>@item.EmailDirector</td>
-                                        <td> Tel: @item.Telefono Cel: @item.Celular</td>
-
-                                        <td>
-                                            <div class="btn-group">
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdEscuela }, new { @class = "btn btn-primary btn-sm" })
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                        <div id="tablaEscuelas">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@*model para detalle*@
+<div id="modeldet"class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title text-center" id="Titulo">Informacion Institucion</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*bloqueo y spinner*@
+<div id="loading">
+    <div id="loadingcont">
+        <p id="loadingspinr">
+        </p>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            let config = {
+                class: 'table-striped table-bordered',
+                columnas: [
+                    { leyenda: 'Clave', columna: 'clave', filtro: true, class: 'text-center col-md-2' },
+                    { leyenda: 'Nombre', columna: 'nombre', filtro: true, class: 'text-center col-md-4' },
+                    { leyenda: 'Nivel Educativo', columna: 'nivel', class: 'text-center col-md-2' },
+                    { leyenda: 'Localidad', columna: 'localidad', filtro: true, class: 'text-center col-md-2' },
+                    { leyenda: 'Acciones', class: 'text-center col-md-2' },
+                ],
+                modelo: [
+                    { propiedad: 'clave' },
+                    { propiedad: 'nombre' },
+                    { propiedad: 'nivel' },
+                    { propiedad: 'localidad' },
+                    {
+                        propiedad: 'id', formato: function (tr, obj, value) {
+                            let element = '';
+
+                            element += '<button value="' + value + '" type="button" class="btn btn-dark edit-escuela"><i  data-toggle="tooltip" data-placement="top" title="Edicion Escuela" class="fa fa-edit"></i></button><button value="' + value + '" type="button" class="btn btn-info det-escuela"><i  data-toggle="tooltip" data-placement="top" title="Detalle Escuela" class="fa fa-question-circle"></i></i></button>';
+
+                            return element;
+                        }
+                    },
+                ],
+                url: '@Url.Action("GetEscuela", "Escuelas")',
+                limite: [5, 10, 15, 25, 50],
+                filtrable: true,
+                paginable: true,
+                columna: 'id',
+                columna_orden: 'ASC'
+            };
+
+            let grid = $("#tablaEscuelas").anexGrid(config);
+
+            grid.tabla().on('click', '.edit-escuela', function () {
+                let value = String($(this).val());
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/Escuelas/Edit',
+                    data: { id: value },
+                    beforeSend: function () {
+                        Loading(true)
+                        $('body.footer_fixed').block({ message: null });
+
+                    },
+                    complete: function () {
+                        Loading(false);
+                        $('body.footer_fixed').unblock();
+                    },
+                    success: function (data) {
+                        $(".x_content").empty();
+                        $(".x_content").html(data);
+                    },
+                    error: function (xhr, status) {
+                        AlertError('A ocurrido un error al cargar la informacion, intente nuevamente', null);
+                    }
+                });
+            })
+
+            grid.tabla().on('click', '.det-escuela', function () {
+                let value = String($(this).val());
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/Escuelas/DetEscuela',
+                    data: { id: value },
+                    beforeSend: function () {
+                        Loading(true)
+                        $('body.footer_fixed').block({ message: null });
+
+                    },
+                    complete: function () {
+                        Loading(false);
+                        $('body.footer_fixed').unblock();
+                    },
+                    success: function (data) {
+
+                        $("#modeldet").modal("show");
+
+                        $("#modeldet").find('.modal-body').empty();
+                        $("#modeldet").find('.modal-body').append(data);
+                    },
+                    error: function (xhr, status) {
+                        AlertError('A ocurrido un error al cargar la informacion, intente nuevamente', null);
+                    }
+                });
+            })
+
+            //al cambiar tamaño de la pagina
+            $(window).on("resize", resize);
+
+            // y al cargar la página
+            resize();
+        });
+
+        function resize() {
+            var size = ($(window).height() - 10) + 'px'
+            $(".size").attr("style","height:"+size+" !important");
+        }
+
+        var Loading = function (start) {
+
+            $("#loading").fadeIn();
+            var opts = {
+                lines: 17 // The number of lines to draw
+                , length: 30 // The length of each line
+                , width: 20 // The line thickness
+                , radius: 28 // The radius of the inner circle
+                , scale: 0.75 // Scales overall size of the spinner
+                , corners: 1 // Corner roundness (0..1)
+                , color: '#000' // #rgb or #rrggbb or array of colors
+                , opacity: 0.3 // Opacity of the lines
+                , rotate: 60 // The rotation offset
+                , direction: 1 // 1: clockwise, -1: counterclockwise
+                , speed: 1.7 // Rounds per second
+                , trail: 60 // Afterglow percentage
+                , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+                , zIndex: 2e9 // The z-index (defaults to 2000000000)
+                , className: 'spinner' // The CSS class to assign to the spinner
+                , top: '50%' // Top position relative to parent
+                , left: '55%' // Left position relative to parent
+                , shadow: false // Whether to render a shadow
+                , hwaccel: false // Whether to use hardware acceleration
+                , position: 'absolute' // Element positioning
+            };
+            var trget = document.getElementById('loading');
+            if (start) {
+                var spnr = new Spinner(opts).spin(trget);
+                $(trget).data('spinner', spnr);
+            }
+            else {
+                $(trget).data('spinner').stop();
+            }
+        }
+    </script>
+
+}

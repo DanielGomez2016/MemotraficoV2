@@ -1,5 +1,7 @@
 ﻿@model MemotraficoV2.Models.Escuela
 @{
+    Layout = null;
+
     ViewBag.Title = "Edicion";
 
     var options = new AjaxOptions()
@@ -13,35 +15,18 @@
 }
 
 
-<div class="" role="main">
-    <div class="">
-        <div class="page-title">
-            <div class="title_left">
-            </div>
+
+@using (Ajax.BeginForm("Edit", "Escuelas", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.IdEscuela)
+    @Html.ValidationSummary("", new { @class = "text-error" })
+    <div class="item form-group">
+        @Html.LabelFor(m => m.Nombre, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @placeholder = "Nombre(s) Ej. JN Juan Escutia" })
         </div>
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Edicion de Escuela</h2>
-                        <div class="clearfix"></div>
-                        @* opciones modal cerrar encojer y opciones *@
-                        <ul class="nav navbar-right panel_toolbox"></ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        @using (Ajax.BeginForm("Edit", "Escuelas", options, new { @class = "form-horizontal  form-label-left", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(m => m.IdEscuela)
-                            @Html.ValidationSummary("", new { @class = "text-error" })
-                            <div class="item form-group">
-                                @Html.LabelFor(m => m.Nombre, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control col-md-7 col-xs-12", @required = "required", @type = "text", @placeholder = "Nombre(s) Ej. JN Juan Escutia" })
-                                </div>
-                            </div>
+    </div>
                             <div class="item form-group">
                                 @Html.LabelFor(m => m.Clave, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })<span class="required">*</span>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -121,10 +106,4 @@
                                     <button id="send" class="btn btn-success">Guardar</button>
                                 </div>
                             </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+}

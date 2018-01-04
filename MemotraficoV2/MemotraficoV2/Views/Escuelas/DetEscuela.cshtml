@@ -1,0 +1,70 @@
+﻿@model MemotraficoV2.Models.Escuela
+@{
+    Layout = null;
+}
+<div class="" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div>
+                    <div class="x_panel">
+                        @Html.HiddenFor(model => model.IdEscuela)
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.Clave)
+                                    <div>@Model.Clave</div>
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.LabelFor(i => i.Nombre)
+                                    <div>@Model.Nombre</div>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.Turno)
+                                    <div>@Model.Turno</div>
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(i => i.NivelEducativo.Nivel)
+                                    <div>@Model.NivelEducativo.Nivel</div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Localidad</label>
+                                    <div>@Model.Localidades.Nombre, @Model.Municipios.Nombre </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(i => i.NombreDirector)
+                                    <div>@Model.NombreDirector</div>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.LabelFor(i => i.EmailDirector)
+                                    <div>@Model.EmailDirector</div>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.LabelFor(i => i.Telefono)
+                                    <div>@Model.Telefono</div>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.LabelFor(i => i.Celular)
+                                    <div>@Model.Celular</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-dark" data-dismiss="modal" type="button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

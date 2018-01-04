@@ -320,6 +320,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EscuelaValidacion.cs" />
+    <Compile Include="ViewModels\EscuelaViewModel.cs" />
     <Compile Include="ViewModels\ImportesMemotraficosViewModel.cs" />
     <Compile Include="ViewModels\SeguimientoViewModel.cs" />
     <Compile Include="ViewModels\SolicitudDetalle.cs" />
@@ -4895,6 +4896,7 @@
     <Content Include="Views\Validaciones\Historial.cshtml" />
     <Content Include="Views\Seguimiento\Index.cshtml" />
     <Content Include="Views\ImporteMemotraficos\Index.cshtml" />
+    <Content Include="Views\Escuelas\DetEscuela.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

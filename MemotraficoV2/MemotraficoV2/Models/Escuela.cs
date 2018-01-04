@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using MemotraficoV2.Models.Colecciones;
+using MemotraficoV2.ViewModels;
 
 namespace MemotraficoV2.Models
 {
@@ -81,6 +83,61 @@ namespace MemotraficoV2.Models
             {
                 throw e;
             }
+        }
+
+        public static object AllEsceulas(AnexGRID grid)
+        {
+            grid.Inicializar();
+
+            try
+            {
+                SASEntities db = new SASEntities();
+
+                var e = db.Escuela.AsQueryable();
+
+                if (grid.columna == "memotrafico")
+                {
+                    e = grid.columna_orden == "DESC" ? e.OrderBy(x => x.IdEscuela)
+                                                        : e.OrderByDescending(x => x.IdEscuela);
+                }
+
+                foreach (var f in grid.filtros)
+                {
+                    if (f.columna == "clave")
+                        e = e.Where(x => x.Clave.Contains(f.valor));
+                    if (f.columna == "nombre")
+                        e = e.Where(x => x.Nombre.Contains(f.valor));
+                    if (f.columna == "localidad")
+                        e = e.Where(x => x.Localidades.Nombre.Contains(f.valor) || x.Municipios.Nombre.Contains(f.valor));
+                }
+
+                var query = e.Select(x => new escuelas
+                {
+                    id = x.IdEscuela,
+                    nombre = x.Nombre,
+                    clave = x.Clave,
+                    nivel = x.NivelEducativo.Nivel,
+                    localidad = x.Localidades.Nombre + ", " + x.Municipios.Nombre,
+                    director = x.Contacto.FirstOrDefault(y => y.IdEscuelaFk == x.IdEscuela).Nombre,
+                    telefono = x.Contacto.FirstOrDefault(y => y.IdEscuelaFk == x.IdEscuela).Telefono,
+                    email = x.Contacto.FirstOrDefault(y => y.IdEscuelaFk == x.IdEscuela).Email,
+                }).ToList();
+
+                var data = query
+                           .Skip(grid.pagina)
+                           .Take(grid.limite)
+                           .ToList();
+
+                var total = query.Count();
+
+                grid.SetData(data, total);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return grid.responde();
         }
 
         public int EditarNivel()

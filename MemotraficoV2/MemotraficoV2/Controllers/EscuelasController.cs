@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MemotraficoV2.Models;
 using MemotraficoV2.Filters;
+using MemotraficoV2.Models.Colecciones;
 
 namespace MemotraficoV2.Controllers
 {
@@ -14,21 +15,28 @@ namespace MemotraficoV2.Controllers
         // GET: Escuelas
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetEscuela(AnexGRID grid)
+        {
+            return Json(
+               Escuela.AllEsceulas(grid)
+            );
+        }
+
+        [HttpGet]
+        public ActionResult DetEscuela(int id)
+        {
             SASEntities db = new SASEntities();
-            List<Escuela> e = db.Escuela.ToList();
-            List<Escuela> ec = new List<Escuela>();
+            Escuela e = db.Escuela.FirstOrDefault(x => x.IdEscuela == id);
+            e.NombreDirector = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == id).Nombre;
+            e.Celular = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == id).Celular;
+            e.Telefono = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == id).Telefono;
+            e.EmailDirector = db.Contacto.FirstOrDefault(x => x.IdEscuelaFk == id).Email;
 
-            foreach(var x in e)
-            {
-                x.NombreDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Nombre != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Nombre.ToString() : "";
-                x.EmailDirector = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Email != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Email.ToString() : "";
-                x.Telefono = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Telefono != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Telefono.ToString() : "";
-                x.Celular = db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Celular != null ? db.Contacto.FirstOrDefault(i => i.IdEscuelaFk == x.IdEscuela).Celular.ToString() : "";
-
-                ec.Add(x);
-            }
-
-            return View(ec);
+            return View(e);
         }
 
         public ActionResult Create()
@@ -75,6 +83,7 @@ namespace MemotraficoV2.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             SASEntities db = new SASEntities();
